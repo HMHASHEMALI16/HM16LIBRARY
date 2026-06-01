@@ -1,6 +1,6 @@
-## 📚 HM 16 LIBRARY – OPDS Catalog
+## 📚 HM 16 LIBRARY
 
-Add the following OPDS link to your E-Book Reader app:
+OPDS Catalog Link
 ```
 https://hmhashemali16.github.io/OPDS/catalog.xml
 ```
