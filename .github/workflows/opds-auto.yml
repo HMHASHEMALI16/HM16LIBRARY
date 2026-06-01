@@ -1,4 +1,4 @@
-name: Update OPDS Catalog
+name: Update OPDS Catalog and JSON API
 
 on:
   push:
@@ -20,14 +20,16 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run OPDS Generator Script
-        run: python generate_opds.py
+      - name: Run Generator Scripts
+        run: |
+          python generate_opds.py
+          python generate_api.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog.xml
-          git commit -m "Auto-updated OPDS catalog" || echo "No changes to commit"
+          git add .
+          git commit -m "Auto-updated OPDS catalog and JSON API" || echo "No changes to commit"
           git push
           
