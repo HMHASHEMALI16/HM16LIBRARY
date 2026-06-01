@@ -3,264 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HM 16 Library - Advanced</title>
+    <title>HM 16 Library</title>
     <style>
+        /* স্মার্ট ও মডার্ন কালার প্যালেট */
         :root {
-            --primary: #2c3e50;
-            --secondary: #1abc9c;
-            --accent: #16a085;
-            --bg: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-dark: #333;
-            --text-light: #7f8c8d;
+            --primary: #1e293b;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text-dark: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             background-color: var(--bg);
+            color: var(--text-dark);
             margin: 0;
             padding: 0;
-            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* হেডার স্টাইল */
+        /* স্লিক স্টিকি হেডার */
         header {
-            background-color: var(--primary);
-            color: #ffffff;
-            text-align: center;
-            padding: 3rem 1rem 4rem 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        header h1 { margin: 0; font-size: 2.5rem; letter-spacing: 1px; }
-        header p { margin: 0.5rem 0 0 0; color: #bdc3c7; font-size: 1.1rem; }
-
-        /* অ্যাডভান্সড ফিল্টার সেকশন */
-        .controls-container {
-            max-width: 900px;
-            margin: -2.5rem auto 2rem auto;
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-color: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 5%;
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
-            box-sizing: border-box;
-            width: 90%;
-        }
-
-        .search-box {
-            flex: 2;
-            padding: 0.8rem 1.2rem;
-            font-size: 1rem;
-            border: 2px solid #eef2f5;
-            border-radius: 8px;
-            outline: none;
-            transition: all 0.3s;
-            min-width: 200px;
-        }
-
-        .search-box:focus { border-color: var(--secondary); }
-
-        .filter-select {
-            flex: 1;
-            padding: 0.8rem 1.2rem;
-            font-size: 1rem;
-            border: 2px solid #eef2f5;
-            border-radius: 8px;
-            outline: none;
-            background-color: #fff;
-            cursor: pointer;
-            min-width: 150px;
-        }
-
-        /* স্ট্যাটিস্টিকস বার */
-        .stats-bar {
-            max-width: 1200px;
-            margin: 0 auto 1.5rem auto;
-            padding: 0 1.5rem;
-            display: flex;
+            align-items: center;
             justify-content: space-between;
-            color: var(--text-light);
-            font-weight: 600;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
-        /* মেইন গ্রিড */
-        .main-content {
+        .brand h1 { margin: 0; font-size: 1.3rem; color: var(--primary); font-weight: 700; }
+        .brand p { margin: 0; font-size: 0.75rem; color: var(--text-muted); }
+
+        /* কমপ্যাক্ট সার্চ ও ফিল্টার */
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .smart-input {
+            flex: 1;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            outline: none;
+            background: var(--bg);
+            transition: all 0.2s ease;
+        }
+
+        .smart-input:focus {
+            border-color: var(--accent);
+            background: var(--card);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* মেইন কন্টেন্ট ও গ্রিড */
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem 3rem 1.5rem;
+            padding: 1.5rem 5%;
         }
 
-        .books-grid {
+        .stats {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+        }
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
-        /* বুক কার্ড */
-        .book-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        /* মিনিমাল বুক কার্ড */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid #eef2f5;
-            transition: transform 0.3s, box-shadow 0.3s;
+            gap: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border-color: #cbd5e1;
         }
 
-        .book-details { padding: 1.5rem; }
-        .book-title { font-size: 1.3rem; margin: 0 0 0.5rem 0; color: var(--primary); line-height: 1.4; }
-        .book-author { font-size: 1.05rem; color: var(--accent); margin: 0 0 1rem 0; font-weight: 600; }
+        .book-title { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--primary); line-height: 1.3; }
+        .book-author { font-size: 0.8rem; color: var(--accent); margin: 0; font-weight: 500; }
         
         .badge {
-            background-color: #e8f8f5;
-            color: #1e8449;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .download-btn {
-            display: block;
-            background-color: var(--secondary);
-            color: #ffffff;
-            text-align: center;
-            padding: 1rem;
-            text-decoration: none;
-            font-weight: bold;
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 0.65rem;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
             letter-spacing: 0.5px;
-            transition: background-color 0.2s;
         }
 
-        .download-btn:hover { background-color: var(--accent); }
-        .status-message { text-align: center; font-size: 1.2rem; color: var(--text-light); margin-top: 3rem; grid-column: 1 / -1; }
+        /* স্লিক বাটন */
+        .btn {
+            margin-top: auto;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .empty-state { text-align: center; grid-column: 1 / -1; padding: 3rem 1rem; color: var(--text-muted); font-size: 0.9rem; }
 
         @media (max-width: 600px) {
-            .controls-container { flex-direction: column; padding: 1rem; margin-top: -1.5rem; }
+            .controls { flex-direction: column; max-width: 100%; }
+            header { padding: 1rem 5%; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>HM 16 Library</h1>
-        <p>আপনার প্রিয় ই-বুকগুলোর ডিজিটাল সংগ্রহশালা</p>
+        <div class="brand">
+            <h1>HM 16 Library</h1>
+            <p>ডিজিটাল ই-বুক সংগ্রহশালা</p>
+        </div>
+        <div class="controls">
+            <input type="text" id="searchBox" class="smart-input" placeholder="বই বা লেখকের নাম খুঁজুন...">
+            <select id="authorFilter" class="smart-input">
+                <option value="all">সব লেখক</option>
+            </select>
+        </div>
     </header>
 
-    <div class="controls-container">
-        <input type="text" id="searchBox" class="search-box" placeholder="বইয়ের নাম দিয়ে খুঁজুন...">
-        <select id="authorFilter" class="filter-select">
-            <option value="all">সব লেখক (All Authors)</option>
-            </select>
-    </div>
-
-    <div class="stats-bar">
-        <span id="totalBooks">মোট বই: ০</span>
-        <span>সাজানো: এ-জেড (A-Z)</span>
-    </div>
-
-    <main class="main-content">
-        <div id="booksGrid" class="books-grid">
-            <div class="status-message">বইয়ের তালিকা লোড হচ্ছে...</div>
+    <div class="container">
+        <div class="stats">
+            <span id="bookCount">লোড হচ্ছে...</span>
+            <span>A-Z সর্টেড</span>
         </div>
-    </main>
+        <div id="grid" class="grid"></div>
+    </div>
 
     <script>
         let allBooks = [];
 
-        async function fetchBooks() {
-            const booksGrid = document.getElementById('booksGrid');
+        async function init() {
             try {
-                const response = await fetch('./api/books.json');
-                allBooks = await response.json();
+                const res = await fetch('./api/books.json');
+                allBooks = await res.json();
                 
                 if (allBooks.length > 0) {
-                    // ১. বইগুলোকে বাংলা অ্যালফাবেটিক্যালি (A-Z) সাজানো হচ্ছে
+                    // স্পেস মুছে ফেলার জন্য trim() ব্যবহার করা হলো
+                    allBooks.forEach(book => {
+                        book.title = book.title.trim();
+                        book.author = book.author.trim();
+                    });
+
+                    // বই অ্যালফাবেটিক্যালি সাজানো
                     allBooks.sort((a, b) => a.title.localeCompare(b.title, 'bn-BD'));
-                    
-                    setupAuthorFilter();
-                    displayBooks(allBooks);
+                    setupFilters();
+                    render(allBooks);
                 } else {
-                    booksGrid.innerHTML = '<div class="status-message">কোনো বই পাওয়া যায়নি।</div>';
+                    document.getElementById('grid').innerHTML = '<div class="empty-state">কোনো বই পাওয়া যায়নি।</div>';
                 }
-            } catch (error) {
-                booksGrid.innerHTML = '<div class="status-message" style="color: #e74c3c;">লোড করতে সমস্যা হয়েছে।</div>';
+            } catch (err) {
+                document.getElementById('grid').innerHTML = '<div class="empty-state" style="color: red;">ডেটা লোড করতে সমস্যা হচ্ছে।</div>';
             }
         }
 
-        // ২. লেখকদের নাম বের করে অ্যালফাবেটিক্যালি সাজানো এবং ড্রপডাউনে যুক্ত করা
-        function setupAuthorFilter() {
-            const authorFilter = document.getElementById('authorFilter');
+        function setupFilters() {
+            // ডুপ্লিকেট নাম এবং এক্সট্রা স্পেস ফিল্টার করা
+            const authors = [...new Set(allBooks.map(b => b.author))].sort((a, b) => a.localeCompare(b, 'bn-BD'));
             
-            // সব বই থেকে ডুপ্লিকেট ছাড়া লেখকদের নাম সংগ্রহ করা
-            const authors = [...new Set(allBooks.map(book => book.author))];
-            
-            // লেখকদের নাম বাংলা বর্ণমালা অনুযায়ী সাজানো
-            authors.sort((a, b) => a.localeCompare(b, 'bn-BD'));
-
-            // ড্রপডাউনে অপশন যুক্ত করা
+            const select = document.getElementById('authorFilter');
             authors.forEach(author => {
-                const option = document.createElement('option');
-                option.value = author;
-                option.textContent = author;
-                authorFilter.appendChild(option);
+                const opt = document.createElement('option');
+                opt.value = author;
+                opt.textContent = author;
+                select.appendChild(opt);
             });
         }
 
-        function displayBooks(books) {
-            const booksGrid = document.getElementById('booksGrid');
-            document.getElementById('totalBooks').textContent = `মোট বই: ${books.length}`;
-            booksGrid.innerHTML = ''; 
+        function render(books) {
+            const grid = document.getElementById('grid');
+            document.getElementById('bookCount').textContent = `মোট বই: ${books.length}`;
+            grid.innerHTML = '';
 
             if (books.length === 0) {
-                booksGrid.innerHTML = '<div class="status-message">আপনার খোঁজা বইটি পাওয়া যায়নি।</div>';
+                grid.innerHTML = '<div class="empty-state">আপনার খোঁজা বইটি নেই।</div>';
                 return;
             }
 
             books.forEach(book => {
-                const card = document.createElement('div');
-                card.className = 'book-card';
-                card.innerHTML = `
-                    <div class="book-details">
-                        <h2 class="book-title">${book.title}</h2>
-                        <p class="book-author">লেখক: ${book.author}</p>
+                grid.innerHTML += `
+                    <div class="card">
                         <span class="badge">${book.format.toUpperCase()}</span>
+                        <h2 class="book-title">${book.title}</h2>
+                        <p class="book-author">${book.author}</p>
+                        <a href="${book.download_link}" class="btn" download>ডাউনলোড</a>
                     </div>
-                    <a href="${book.download_link}" class="download-btn" download>ডাউনলোড করুন</a>
                 `;
-                booksGrid.appendChild(card);
             });
         }
 
-        // সার্চ এবং ফিল্টার একসাথে কাজ করার লজিক
-        function filterBooks() {
-            const searchTerm = document.getElementById('searchBox').value.toLowerCase().trim();
-            const selectedAuthor = document.getElementById('authorFilter').value;
+        function handleSearch() {
+            const term = document.getElementById('searchBox').value.toLowerCase();
+            const author = document.getElementById('authorFilter').value;
 
-            const filteredBooks = allBooks.filter(book => {
-                const matchSearch = book.title.toLowerCase().includes(searchTerm);
-                const matchAuthor = selectedAuthor === 'all' || book.author === selectedAuthor;
-                return matchSearch && matchAuthor;
+            const filtered = allBooks.filter(b => {
+                const matchTerm = b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term);
+                const matchAuthor = author === 'all' || b.author === author;
+                return matchTerm && matchAuthor;
             });
-
-            displayBooks(filteredBooks);
+            render(filtered);
         }
 
-        // ইভেন্ট লিসেনার যুক্ত করা
-        document.getElementById('searchBox').addEventListener('input', filterBooks);
-        document.getElementById('authorFilter').addEventListener('change', filterBooks);
+        document.getElementById('searchBox').addEventListener('input', handleSearch);
+        document.getElementById('authorFilter').addEventListener('change', handleSearch);
 
-        window.addEventListener('DOMContentLoaded', fetchBooks);
+        init();
     </script>
 </body>
 </html>
