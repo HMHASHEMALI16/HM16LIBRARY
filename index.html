@@ -17,7 +17,7 @@
     </script>  
   
     <style>  
-        /* --- গ্লোবাল রিসেট --- */
+        /* --- গলোবাল রিসেট --- */
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -58,6 +58,7 @@
             transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);  
             overflow-x: hidden; 
             line-height: 1.6;
+            width: 100%;
         }  
   
         /* --- ড্রয়ার ও ব্যাকড্রপ অ্যানিমেশন --- */  
@@ -118,11 +119,11 @@
             box-shadow: var(--card-shadow); padding: 0; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }  
         .menu-btn:hover { border-color: var(--text-light); transform: translateY(-1px); }
-        .menu-btn:active { transform: translateY(1px); }
+        .menu-btn:active { transform: translateY(1px); }  
           
         .main-heading { font-family: var(--font-serif); font-size: 1.75rem; margin: 0; font-weight: 700; letter-spacing: -0.3px; }  
   
-        .nav-right { display: flex; gap: 1rem; flex: 1; justify-content: flex-end; align-items: center; }  
+        .nav-right { display: flex; gap: 1rem; flex: 1; justify-content: flex-end; align-items: center; max-width: 100%; }  
         
         .search-wrapper { flex: 1; max-width: 380px; position: relative; }  
         .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.1rem; }  
@@ -163,7 +164,7 @@
         }  
         .book-card:hover .book-cover-wrapper {
             transform: scale(1.03);
-        }
+        }  
   
         /* --- বইয়ের কভার --- */  
         .book-cover-wrapper {  
@@ -205,7 +206,7 @@
             .top-nav { flex-direction: column; align-items: stretch; gap: 1rem; margin-bottom: 2rem; }  
             .nav-left { justify-content: space-between; width: 100%; }  
             .nav-right { width: 100%; justify-content: space-between; gap: 10px; }  
-            .search-wrapper { max-width: 100%; }  
+            .search-wrapper { max-width: calc(100% - 54px); flex-grow: 1; }  
               
             .main-heading { font-size: 1.45rem; }  
               
