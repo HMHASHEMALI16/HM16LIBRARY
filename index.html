@@ -25,43 +25,28 @@
         }
 
         body {
-            margin: 0; padding: 0;
-            font-family: var(--font-sans);
-            background-color: var(--bg-main);
-            color: var(--text-dark);
+            margin: 0; padding: 0; font-family: var(--font-sans);
+            background-color: var(--bg-main); color: var(--text-dark);
             display: flex; min-height: 100vh; overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- ক্লিন সাইডবার (বাজে অপশন আউট!) --- */
+        /* --- সাইডবার --- */
         .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
+            width: 260px; background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
-            display: flex; flex-direction: column;
-            padding: 2.5rem 1.5rem;
-            position: fixed; height: 100vh;
-            box-sizing: border-box; z-index: 50;
+            display: flex; flex-direction: column; padding: 2.5rem 1.5rem;
+            position: fixed; height: 100vh; box-sizing: border-box; z-index: 50;
         }
 
-        .logo {
-            font-family: var(--font-serif);
-            font-size: 1.8rem; font-weight: 700;
-            color: var(--text-dark);
-            display: flex; align-items: center; gap: 10px;
-            margin-bottom: 3rem;
-        }
+        .logo { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 3rem; }
         .logo i { color: var(--accent); }
 
         .nav-menu { list-style: none; padding: 0; margin: 0; }
         .nav-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 1rem 1.2rem; border-radius: 12px;
-            font-weight: 500; font-size: 1.05rem;
-            background-color: var(--text-dark);
-            color: #FFFFFF;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            cursor: pointer;
+            display: flex; align-items: center; gap: 12px; padding: 1rem 1.2rem; border-radius: 12px;
+            font-weight: 500; font-size: 1.05rem; background-color: var(--text-dark); color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: pointer;
         }
         .nav-item i { font-size: 1.3rem; }
 
@@ -72,23 +57,14 @@
         .search-bar { position: relative; width: 350px; }
         .search-bar i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }
         .search-input {
-            width: 100%; padding: 1rem 1rem 1rem 3.5rem;
-            border: none; border-radius: 50px;
-            background-color: var(--sidebar-bg);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            font-family: var(--font-sans); font-size: 0.95rem;
-            outline: none; transition: box-shadow 0.3s ease;
-            box-sizing: border-box;
+            width: 100%; padding: 1rem 1rem 1rem 3.5rem; border: none; border-radius: 50px;
+            background-color: var(--sidebar-bg); box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            font-family: var(--font-sans); font-size: 0.95rem; outline: none; transition: box-shadow 0.3s ease; box-sizing: border-box;
         }
         .search-input:focus { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
 
         .user-profile { display: flex; align-items: center; gap: 15px; font-weight: 600; }
-        .avatar {
-            width: 45px; height: 45px; border-radius: 50%;
-            background-color: var(--accent); color: white;
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-serif); font-size: 1.2rem;
-        }
+        .avatar { width: 45px; height: 45px; border-radius: 50%; background-color: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.2rem; }
 
         .content-area { padding: 0 4rem 4rem 4rem; }
         .hero-title { font-family: var(--font-serif); font-size: 3rem; font-weight: 700; margin: 0 0 10px 0; }
@@ -108,19 +84,22 @@
             box-shadow: -3px 0 5px rgba(0,0,0,0.1) inset, 8px 10px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 1rem; text-align: center; box-sizing: border-box;
+            padding: 1rem; text-align: center; box-sizing: border-box; background-color: #ddd;
         }
 
         .book-cover-wrapper::after {
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 15px;
             background: linear-gradient(to right, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 20%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.2) 100%);
-            z-index: 5; /* স্পাইন ইফেক্ট ছবির উপরে থাকবে */
+            z-index: 5; pointer-events: none;
         }
 
         .book-card:hover .book-cover-wrapper { transform: translateY(-10px) rotateY(-5deg); box-shadow: -3px 0 5px rgba(0,0,0,0.1) inset, 15px 20px 30px rgba(0,0,0,0.15); }
 
+        .gradient-text { position:relative; z-index:1; padding: 10px; width: 100%; box-sizing: border-box; }
         .cover-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); margin: 0 0 0.5rem 0; }
         .cover-author { font-size: 0.8rem; color: rgba(255,255,255,0.9); text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+
+        .real-cover-img { display: none; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 2; }
 
         .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem; color: var(--text-dark); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .info-author { color: var(--text-light); font-size: 0.9rem; margin: 0 0 5px 0; }
@@ -164,7 +143,7 @@
 
         <div class="content-area">
             <h1 class="hero-title">শুভ পঠন, পাঠক!</h1>
-            <p class="hero-subtitle">আপনার প্রিয় ই-বুকগুলোর স্মার্ট সংগ্রহশালা। এখন গুগল থেকে স্বয়ংক্রিয়ভাবে বইয়ের কভার খোঁজার চেষ্টা করা হচ্ছে।</p>
+            <p class="hero-subtitle">আপনার প্রিয় ই-বুকগুলোর স্মার্ট সংগ্রহশালা। ম্যানুয়াল কভার এবং অটোমেটিক গুগল কভার সিস্টেম চালু আছে।</p>
 
             <div class="section-header">
                 <h2 class="section-title">বইয়ের তালিকা (<span id="bookCount">০</span>)</h2>
@@ -224,21 +203,30 @@
 
             books.forEach((book, index) => {
                 const gradient = aestheticGradients[index % aestheticGradients.length];
-                const imgId = `cover-img-${index}`;
+                
+                // কভারের লোকাল লিংক তৈরি করা (covers ফোল্ডারের ভেতরে বইয়ের নামের .jpg ফাইল খুঁজবে)
+                const safeTitle = encodeURIComponent(book.title);
+                const localCoverUrl = `./covers/${safeTitle}.jpg`;
                 
                 const card = document.createElement('a');
                 card.href = book.download_link;
                 card.className = 'book-card';
                 card.setAttribute('download', '');
                 
-                // HTML স্ট্রাকচারে কভার ইমেজের জন্য একটি <img> ট্যাগ রাখা হলো, যা শুরুতে লুকানো থাকবে
                 card.innerHTML = `
                     <div class="book-cover-wrapper" style="background: ${gradient};">
-                        <img id="${imgId}" src="" alt="Cover" style="display:none; width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; z-index:2;">
-                        <div style="position:relative; z-index:1; padding: 10px;">
+                        
+                        <img src="${localCoverUrl}" 
+                             alt="${book.title}" 
+                             class="real-cover-img"
+                             onload="this.style.display='block'"
+                             onerror="handleCoverError(this, '${book.title}', '${book.author}')">
+                        
+                        <div class="gradient-text">
                             <div class="cover-title">${book.title}</div>
                             <div class="cover-author">${book.author}</div>
                         </div>
+
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 4px;">
                         <h3 class="info-title" title="${book.title}">${book.title}</h3>
@@ -246,34 +234,31 @@
                     </div>
                 `;
                 grid.appendChild(card);
-
-                // অ্যাসিনক্রোনাসভাবে গুগল বুকস থেকে ছবি আনার কল
-                fetchCoverFromGoogle(book.title, book.author, imgId);
             });
         }
 
-        // --- গুগল বুকস এপিআই ম্যাজিক ---
-        async function fetchCoverFromGoogle(title, author, imgId) {
+        // --- ৩-স্তরের ফলব্যাক সিস্টেম (Local -> Google -> Color) ---
+        async function handleCoverError(imgElement, title, author) {
+            // লোকাল ফোল্ডারে ছবি না পেলে এই ফাংশন রান করবে
+            imgElement.onerror = null; // লুপ ঠেকানোর জন্য 
+
             try {
-                // বই এবং লেখকের নাম দিয়ে গুগলে সার্চ করা হচ্ছে
+                // গুগলে খুঁজবে
                 const query = encodeURIComponent(`${title} ${author !== 'অজানা' ? author : ''}`);
                 const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=1`);
                 const data = await response.json();
                 
-                // গুগল যদি ছবি পায়, তবে সেটা বসিয়ে দেওয়া হবে
                 if (data.items && data.items[0].volumeInfo && data.items[0].volumeInfo.imageLinks) {
-                    // http কে https এ কনভার্ট করা (নিরাপত্তার জন্য)
+                    // ছবি পেলে সেটা লোড করাবে
                     const imgUrl = data.items[0].volumeInfo.imageLinks.thumbnail.replace('http:', 'https:');
-                    
-                    const imgElement = document.getElementById(imgId);
-                    if (imgElement) {
-                        imgElement.src = imgUrl;
-                        imgElement.style.display = 'block'; // ছবি পেয়ে গেলে সেটা শো করাবে, পেছনের টেক্সট ঢাকা পড়ে যাবে
-                    }
+                    imgElement.src = imgUrl;
+                    imgElement.onload = function() { this.style.display = 'block'; };
+                } else {
+                    // গুগলেও না পেলে ছবিটা লুকানোই থাকবে (ভেতরের কালার আর টেক্সট শো করবে)
+                    imgElement.style.display = 'none';
                 }
             } catch (error) {
-                // যদি ছবি না পায় বা ইন্টারনেট সমস্যা থাকে, কিছুই করবে না। আগের সুন্দর ডিজাইনটাই থেকে যাবে।
-                console.log(`Cover not found for: ${title}`);
+                imgElement.style.display = 'none';
             }
         }
 
