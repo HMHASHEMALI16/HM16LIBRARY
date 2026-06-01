@@ -46,9 +46,10 @@
             background-color: var(--bg-main); color: var(--text-dark);
             -webkit-font-smoothing: antialiased;
             transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden; /* স্ক্রিনের বাইরে যাওয়া বন্ধ */
         }
 
-        /* --- ড্রয়ার (সাইড মেনু) --- */
+        /* --- ড্রয়ার (সাইড মেনু) ফিক্সড --- */
         .backdrop {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
@@ -68,7 +69,7 @@
             border-bottom: 1px solid var(--border-color);
         }
         .drawer-header h2 { margin: 0; font-family: var(--font-serif); font-size: 1.2rem; }
-        .close-btn { background: none; border: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer; }
+        .close-btn { background: none; border: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer; padding: 0; }
 
         .drawer-content { flex: 1; overflow-y: auto; padding: 1rem 0; }
         .drawer-item {
@@ -81,12 +82,18 @@
         
         .drawer-title { padding: 1rem 1.5rem 0.5rem; font-size: 0.8rem; color: var(--text-light); font-weight: 700; text-transform: uppercase; }
 
-        /* --- মেইন কন্টেইনার ও হেডার --- */
-        .container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; }
+        /* --- মেইন কন্টেইনার --- */
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 1.5rem; 
+            box-sizing: border-box;
+            width: 100%;
+        }
 
         .top-nav {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 1.5rem; gap: 1rem; flex-wrap: wrap;
+            margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap;
         }
 
         .nav-left { display: flex; align-items: center; gap: 1rem; }
@@ -94,12 +101,13 @@
             background: var(--card-bg); border: 1px solid var(--border-color);
             width: 42px; height: 42px; border-radius: 10px; font-size: 1.4rem;
             color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--card-shadow); padding: 0;
         }
         
-        .main-heading { font-family: var(--font-serif); font-size: 1.8rem; margin: 0; font-weight: 700; letter-spacing: 0.5px; }
+        .main-heading { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; font-weight: 700; letter-spacing: 0.5px; }
 
-        .search-wrapper { flex: 1; min-width: 250px; position: relative; }
+        .nav-right { display: flex; gap: 10px; flex: 1; justify-content: flex-end; align-items: center; }
+        .search-wrapper { flex: 1; max-width: 350px; position: relative; }
         .search-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }
         .search-input {
             width: 100%; padding: 0.8rem 1rem 0.8rem 3rem; border: 1px solid var(--border-color); border-radius: 50px;
@@ -108,38 +116,39 @@
         }
         .search-input:focus { border-color: var(--accent); }
 
-        /* --- সেকশন হেডার ফিক্স --- */
+        /* --- সেকশন হেডার --- */
         .section-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.8rem;
         }
         .section-title { font-family: var(--font-serif); font-size: 1.3rem; margin: 0; font-weight: 700; display: flex; gap: 6px; align-items: baseline; }
-        .book-count { font-family: var(--font-sans); color: var(--accent); font-size: 1rem; }
+        .book-count { font-family: var(--font-sans); color: var(--text-light); font-size: 1rem; font-weight: normal; }
 
-        /* --- বইয়ের গ্রিড (সবসময় ৩টা পাশাপাশি) --- */
+        /* --- বইয়ের গ্রিড (ডিফল্ট ডেস্কটপে ৪টা বা ৩টা) --- */
         .books-grid { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
             gap: 1.5rem; 
         }
 
         .book-card { 
             background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px;
-            padding: 1rem; display: flex; flex-direction: column; align-items: center;
+            padding: 1.2rem; display: flex; flex-direction: column; align-items: center;
             text-decoration: none; box-shadow: var(--card-shadow);
-            transition: transform 0.2s;
+            transition: transform 0.2s, border-color 0.2s;
+            box-sizing: border-box; width: 100%;
         }
         .book-card:hover { transform: translateY(-4px); border-color: var(--text-light); }
 
-        /* --- ফ্লেক্সিবল ও ছোট বইয়ের কভার --- */
+        /* --- ফ্লেক্সিবল বইয়ের কভার --- */
         .book-cover-wrapper {
             position: relative; 
-            width: 100%; max-width: 110px; /* কভারের সাইজ কন্ট্রোল করা হলো */
+            width: 100%; max-width: 130px;
             aspect-ratio: 2 / 3;
             border-radius: 3px 6px 6px 3px;
             box-shadow: -2px 0 4px rgba(0,0,0,0.2) inset, 4px 6px 10px rgba(0,0,0,0.15);
             margin-bottom: 1rem; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 0.5rem; text-align: center; box-sizing: border-box;
+            padding: 0.8rem; text-align: center; box-sizing: border-box;
         }
         .book-cover-wrapper::after {
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px;
@@ -147,44 +156,40 @@
             z-index: 5;
         }
 
-        .cover-title { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 700; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); margin: 0 0 4px 0; line-height: 1.2; }
-        .cover-author { font-size: 0.65rem; color: rgba(255,255,255,0.9); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); }
+        .cover-title { font-family: var(--font-serif); font-size: 0.9rem; font-weight: 700; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); margin: 0 0 4px 0; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .cover-author { font-size: 0.7rem; color: rgba(255,255,255,0.9); text-shadow: 1px 1px 2px rgba(0,0,0,0.7); }
 
         .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .info-author { color: var(--text-light); font-size: 0.8rem; margin: 0 0 1rem 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-        .download-btn {
-            background: var(--bg-main); color: var(--text-dark); border: 1px solid var(--border-color);
-            width: 100%; padding: 0.5rem 0; border-radius: 30px;
-            font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px;
-            transition: all 0.2s; white-space: nowrap;
-        }
-        .book-card:hover .download-btn { background: var(--text-dark); color: var(--card-bg); border-color: var(--text-dark); }
+        .info-author { color: var(--text-light); font-size: 0.85rem; margin: 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .empty-state { grid-column: 1 / -1; padding: 3rem; text-align: center; color: var(--text-light); font-family: var(--font-serif); font-size: 1.1rem; }
 
-        /* --- মোবাইল রেস্পন্সিভনেস (৩টা কভারের জন্য ফাইন-টিউন) --- */
+        /* --- ফিক্সড মোবাইল রেস্পন্সিভনেস (১০০% ২ কলাম) --- */
         @media (max-width: 600px) {
             .container { padding: 1rem; }
+            .top-nav { flex-direction: column; align-items: stretch; gap: 1.2rem; }
+            .nav-right { width: 100%; justify-content: space-between; }
+            .search-wrapper { max-width: none; }
+            
             .main-heading { font-size: 1.4rem; }
-            .menu-btn { width: 38px; height: 38px; font-size: 1.2rem; }
+            .menu-btn { width: 40px; height: 40px; font-size: 1.2rem; }
             
             .section-header { flex-direction: row; gap: 0.5rem; align-items: center; }
             .section-title { font-size: 1.1rem; }
             
-            /* গ্রিড গ্যাপ ও প্যাডিং কমানো হলো যাতে ৩টা ফিট হয় */
-            .books-grid { gap: 0.5rem; }
-            .book-card { padding: 0.6rem; border-radius: 8px; }
-            .book-cover-wrapper { margin-bottom: 0.6rem; padding: 0.3rem; border-radius: 2px 4px 4px 2px; }
+            /* একদম ফিক্সড ২ কলাম লেআউট */
+            .books-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 0.8rem; 
+            }
+            .book-card { padding: 0.8rem; border-radius: 10px; }
+            .book-cover-wrapper { max-width: 100%; margin-bottom: 0.8rem; padding: 0.5rem; border-radius: 2px 5px 5px 2px; }
             .book-cover-wrapper::after { width: 5px; }
             
-            /* ফন্ট সাইজ ছোট করা হলো */
-            .cover-title { font-size: 0.65rem; }
-            .cover-author { font-size: 0.5rem; }
-            .info-title { font-size: 0.75rem; }
-            .info-author { font-size: 0.65rem; margin-bottom: 0.6rem; }
-            .download-btn { font-size: 0.65rem; padding: 0.4rem 0; gap: 3px; }
-            .download-btn i { font-size: 0.8rem; }
+            .cover-title { font-size: 0.75rem; }
+            .cover-author { font-size: 0.6rem; }
+            .info-title { font-size: 0.85rem; }
+            .info-author { font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -216,7 +221,7 @@
                 <h1 class="main-heading">HM 16 LIBRARY</h1>
             </div>
             
-            <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end;">
+            <div class="nav-right">
                 <div class="search-wrapper">
                     <i class="ph ph-magnifying-glass"></i>
                     <input type="text" id="searchBox" class="search-input" placeholder="বইয়ের নাম বা লেখক খুঁজুন...">
@@ -313,7 +318,7 @@
             else { document.getElementById('allBooksBtn').classList.add('active'); }
             
             document.getElementById('currentFilterText').textContent = author === 'all' ? 'সব লেখক' : author;
-            document.getElementById('searchBox').value = ''; // ফিল্টার করলে সার্চ বক্স ক্লিয়ার হবে
+            document.getElementById('searchBox').value = ''; 
             handleSearch();
             toggleDrawer();
         }
@@ -342,13 +347,8 @@
                         <div class="cover-title">${book.title}</div>
                         <div class="cover-author">${book.author}</div>
                     </div>
-                    
                     <h3 class="info-title" title="${book.title}">${book.title}</h3>
                     <p class="info-author">${book.author}</p>
-                    
-                    <div class="download-btn">
-                        <i class="ph-bold ph-download-simple"></i> Click to Download
-                    </div>
                 `;
                 grid.appendChild(card);
             });
