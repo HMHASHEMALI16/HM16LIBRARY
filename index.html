@@ -22,7 +22,7 @@
             box-sizing: border-box;
         }
 
-        /* --- থিম ভ্যারিয়েবল --- */  
+        /* --- থিম ভ্যারিয়েবল (ব্যালান্সড কালার প্যালেট) --- */  
         :root {  
             --bg-main: #FAFAFA;        
             --card-bg: #FFFFFF;  
@@ -55,12 +55,12 @@
             background-color: var(--bg-main); 
             color: var(--text-dark);  
             -webkit-font-smoothing: antialiased;  
-            transition: background-color 0.3s ease, color 0.3s ease;  
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);  
             overflow-x: hidden; 
             line-height: 1.6;
         }  
   
-        /* --- ড্রয়ার ও ব্যাকড্রপ --- */  
+        /* --- ড্রয়ার ও ব্যাকড্রপ অ্যানিমেশন --- */  
         .backdrop {  
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;  
             background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);  
@@ -68,14 +68,13 @@
             transition: opacity 0.3s ease, visibility 0.3s ease;  
         }  
         .drawer {  
-            position: fixed; top: 0; left: 0; width: 300px; height: 100vh;  
+            position: fixed; top: 0; left: -300px; width: 300px; height: 100vh;  
             background: var(--card-bg); z-index: 1000;  
-            box-shadow: 5px 0 25px rgba(0,0,0,0.1);  
-            transform: translateX(-100%);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.05);  
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
             display: flex; flex-direction: column;  
         }  
-        .drawer.open { transform: translateX(0); }  
+        .drawer.open { transform: translateX(300px); }  
         .backdrop.open { opacity: 1; visibility: visible; }  
   
         .drawer-header {  
@@ -83,7 +82,7 @@
             border-bottom: 1px solid var(--border-color);  
         }  
         .drawer-header h2 { margin: 0; font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; color: var(--accent); }  
-        .close-btn { background: none; border: none; font-size: 1.4rem; color: var(--text-dark); cursor: pointer; padding: 0; display: flex; align-items: center;}  
+        .close-btn { background: none; border: none; font-size: 1.4rem; color: var(--text-dark); cursor: pointer; padding: 0; transition: color 0.2s; display: flex; align-items: center;}  
         .close-btn:hover { color: var(--accent); }
 
         .drawer-content { flex: 1; overflow-y: auto; padding: 1rem 0; }  
@@ -116,9 +115,10 @@
             background: var(--card-bg); border: 1px solid var(--border-color);  
             width: 44px; height: 44px; border-radius: 12px; font-size: 1.3rem;  
             color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;  
-            box-shadow: var(--card-shadow); padding: 0; transition: all 0.2s ease;
+            box-shadow: var(--card-shadow); padding: 0; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }  
         .menu-btn:hover { border-color: var(--text-light); transform: translateY(-1px); }
+        .menu-btn:active { transform: translateY(1px); }
           
         .main-heading { font-family: var(--font-serif); font-size: 1.75rem; margin: 0; font-weight: 700; letter-spacing: -0.3px; }  
   
@@ -143,7 +143,7 @@
         #currentFilterText { font-size: 0.9rem; color: var(--accent); font-weight: 600; background: rgba(224, 83, 43, 0.08); padding: 4px 12px; border-radius: 20px; }
         [data-theme="dark"] #currentFilterText { background: rgba(240, 106, 66, 0.15); }
 
-        /* --- বইয়ের গ্রিড --- */  
+        /* --- বইয়ের গ্রিড ব্যালান্সিং --- */  
         .books-grid {   
             display: grid;   
             grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));   
@@ -154,7 +154,7 @@
             background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;  
             padding: 1.25rem; display: flex; flex-direction: column; align-items: center;  
             text-decoration: none; box-shadow: var(--card-shadow);  
-            transition: all 0.3s ease; height: 100%; min-width: 0; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); height: 100%;
         }  
         .book-card:hover { 
             transform: translateY(-6px); 
@@ -174,7 +174,7 @@
             box-shadow: -3px 0 6px rgba(0,0,0,0.2) inset, 4px 8px 16px rgba(0,0,0,0.12);  
             margin-bottom: 1.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center;  
             padding: 1rem; text-align: center; overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }  
         .book-cover-wrapper::after {  
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px;  
@@ -185,63 +185,46 @@
         .cover-title { font-family: var(--font-serif); font-size: 0.9rem; font-weight: 700; color: #FFFFFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.6); margin: 0 0 6px 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; z-index: 2;}  
         .cover-author { font-size: 0.7rem; color: rgba(255,255,255,0.85); text-shadow: 1px 1px 2px rgba(0,0,0,0.6); z-index: 2;}  
   
+        /* কন্টেন্ট এরিয়া পুশ ডাউন করার জন্য flex-grow */
         .card-info {
             width: 100%;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
             justify-content: center;
-            overflow: hidden; 
         }
         .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
         .info-author { color: var(--text-light); font-size: 0.85rem; margin: 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
   
         .empty-state { grid-column: 1 / -1; padding: 5rem 1rem; text-align: center; color: var(--text-light); font-family: var(--font-serif); font-size: 1.2rem; }  
   
-        /* --- মোবাইল ভিউ অপ্টিমাইজেশন (Strict Adjustment) --- */  
+        /* --- মোবাইল রেস্পন্সিভনেস --- */  
         @media (max-width: 600px) {  
-            .container { padding: 1.2rem 0.8rem; }  
+            .container { padding: 1.5rem 1rem; }  
             
-            .top-nav { flex-direction: column; align-items: stretch; gap: 0.85rem; margin-bottom: 1.8rem; }  
+            .top-nav { flex-direction: column; align-items: stretch; gap: 1rem; margin-bottom: 2rem; }  
             .nav-left { justify-content: space-between; width: 100%; }  
-            .nav-right { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; }  
-            
-            .search-wrapper { flex: 1; max-width: calc(100% - 52px); }  
-            .search-input { height: 42px; border-radius: 10px; padding: 0 1rem 0 2.5rem; font-size: 0.9rem; }
-            .search-wrapper i { left: 14px; font-size: 1rem; }
-            
-            .menu-btn { width: 42px; height: 42px; border-radius: 10px; font-size: 1.2rem; }
-            .main-heading { font-size: 1.4rem; }  
+            .nav-right { width: 100%; justify-content: space-between; gap: 10px; }  
+            .search-wrapper { max-width: 100%; }  
               
-            .section-header { align-items: center; padding-bottom: 0.5rem; margin-bottom: 1.2rem;}  
-            .section-title { font-size: 1.1rem; }  
-            .book-count { font-size: 0.85rem; }
-            #currentFilterText { font-size: 0.75rem; padding: 3px 10px; }
+            .main-heading { font-size: 1.45rem; }  
               
+            .section-header { align-items: center; padding-bottom: 0.6rem; margin-bottom: 1.5rem;}  
+            .section-title { font-size: 1.15rem; }  
+              
+            /* ফিক্সড ২ কলাম গ্রিড ব্যালান্সিং */  
             .books-grid {   
-                grid-template-columns: repeat(2, minmax(0, 1fr));   
-                gap: 0.85rem; 
+                grid-template-columns: repeat(2, 1fr);   
+                gap: 1rem; 
             }  
-            .book-card { padding: 0.85rem 0.6rem; border-radius: 10px; }  
-            
-            .book-cover-wrapper { 
-                width: 100%;
-                max-width: 100px; 
-                max-height: 150px;
-                margin-bottom: 0.75rem; 
-                padding: 0.5rem 0.3rem; 
-                border-radius: 3px 6px 6px 3px; 
-            }  
-            .book-cover-wrapper::after { width: 5px; }  
+            .book-card { padding: 1rem 0.75rem; border-radius: 12px; }  
+            .book-cover-wrapper { max-width: 95px; margin-bottom: 0.8rem; padding: 0.5rem; border-radius: 3px 6px 6px 3px; }  
+            .book-cover-wrapper::after { width: 6px; }  
               
-            .cover-title { font-size: 0.75rem; -webkit-line-clamp: 3; margin-bottom: 4px; }  
-            .cover-author { font-size: 0.6rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }  
-            
-            .info-title { font-size: 0.85rem; margin-bottom: 2px; }  
+            .cover-title { font-size: 0.75rem; }  
+            .cover-author { font-size: 0.65rem; }  
+            .info-title { font-size: 0.9rem; }  
             .info-author { font-size: 0.75rem; }  
-
-            .drawer { width: 260px; }
-            .drawer.open { transform: translateX(0); }
         }  
     </style>  
 </head>  
@@ -258,7 +241,8 @@
                 <i class="ph ph-books"></i> সব বই  
             </div>  
             <div class="drawer-title">লেখকদের তালিকা</div>  
-            <div id="drawerAuthorList"></div>  
+            <div id="drawerAuthorList">  
+                </div>  
         </div>  
     </aside>  
   
@@ -325,7 +309,6 @@
             'linear-gradient(135deg, #116979 0%, #05c46b 100%)'    
         ];  
   
-        // অ্যাপ ইনিশিয়ালাইজেশন
         async function init() {  
             try {  
                 const res = await fetch('./api/books.json');  
@@ -344,7 +327,6 @@
             }  
         }  
   
-        // ড্রয়ারে লেখক তালিকা তৈরি
         function setupDrawer() {  
             const authors = [...new Set(allBooks.map(b => b.author))].sort((a, b) => a.localeCompare(b, 'bn-BD'));  
             const drawerList = document.getElementById('drawerAuthorList');  
@@ -359,7 +341,6 @@
             });  
         }  
   
-        // লেখক ফিল্টারিং
         function selectAuthor(author, element = null) {  
             selectedAuthor = author;  
             document.querySelectorAll('.drawer-item').forEach(el => el.classList.remove('active'));  
@@ -372,7 +353,6 @@
             toggleDrawer();  
         }  
   
-        // বই রেন্ডার ও UI জেনারেট
         function render(books) {  
             const grid = document.getElementById('grid');  
             document.getElementById('bookCount').textContent = `(${books.length})`;  
@@ -406,8 +386,18 @@
             });  
         }  
   
-        // সার্চ ও কম্বাইন্ড ফিল্টার হ্যান্ডলার (বাগ ফিক্সড)
         function handleSearch() {  
             const term = document.getElementById('searchBox').value.toLowerCase();  
             const filtered = allBooks.filter(b => {  
-                const matchesSearch = b.title.toLowerCase().includes(term) || b.author.toLowerCase().incl
+                return (b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)) &&  
+                       (selectedAuthor === 'all' || b.author === selectedAuthor);  
+            });  
+            render(filtered);  
+        }  
+  
+        document.getElementById('searchBox').addEventListener('input', handleSearch);  
+  
+        init();  
+    </script>  
+</body>  
+</html>
