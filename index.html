@@ -3,24 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HM 16 Library</title>
+    <title>HM 16 Library - Advanced</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; color: #333; }
-        header { background-color: #1a252f; color: #ffffff; text-align: center; padding: 2.5rem 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        header h1 { margin: 0; font-size: 2.2rem; }
-        header p { margin: 0.5rem 0 0 0; color: #bdc3c7; }
-        .search-container { max-width: 600px; margin: -1.5rem auto 2rem auto; padding: 0 1rem; }
-        .search-box { width: 100%; padding: 1rem 1.5rem; font-size: 1.1rem; border: none; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); outline: none; box-sizing: border-box; }
-        .main-content { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 3rem 1.5rem; }
-        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-        .book-card { background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #eef2f5; }
+        :root {
+            --primary: #2c3e50;
+            --secondary: #1abc9c;
+            --accent: #16a085;
+            --bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-dark: #333;
+            --text-light: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        /* হেডার স্টাইল */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            text-align: center;
+            padding: 3rem 1rem 4rem 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 { margin: 0; font-size: 2.5rem; letter-spacing: 1px; }
+        header p { margin: 0.5rem 0 0 0; color: #bdc3c7; font-size: 1.1rem; }
+
+        /* অ্যাডভান্সড ফিল্টার সেকশন */
+        .controls-container {
+            max-width: 900px;
+            margin: -2.5rem auto 2rem auto;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            width: 90%;
+        }
+
+        .search-box {
+            flex: 2;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: 2px solid #eef2f5;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s;
+            min-width: 200px;
+        }
+
+        .search-box:focus { border-color: var(--secondary); }
+
+        .filter-select {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: 2px solid #eef2f5;
+            border-radius: 8px;
+            outline: none;
+            background-color: #fff;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        /* স্ট্যাটিস্টিকস বার */
+        .stats-bar {
+            max-width: 1200px;
+            margin: 0 auto 1.5rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* মেইন গ্রিড */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem 1.5rem;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* বুক কার্ড */
+        .book-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #eef2f5;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
         .book-details { padding: 1.5rem; }
-        .book-title { font-size: 1.25rem; margin: 0 0 0.5rem 0; color: #2c3e50; }
-        .book-author { font-size: 1rem; color: #16a085; margin: 0 0 1rem 0; font-weight: 600; }
-        .badge { background-color: #e8f8f5; color: #1e8449; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        .download-btn { display: block; background-color: #1abc9c; color: #ffffff; text-align: center; padding: 1rem; text-decoration: none; font-weight: 600; }
-        .download-btn:hover { background-color: #16a085; }
-        .status-message { text-align: center; font-size: 1.2rem; color: #7f8c8d; margin-top: 3rem; grid-column: 1 / -1; }
+        .book-title { font-size: 1.3rem; margin: 0 0 0.5rem 0; color: var(--primary); line-height: 1.4; }
+        .book-author { font-size: 1.05rem; color: var(--accent); margin: 0 0 1rem 0; font-weight: 600; }
+        
+        .badge {
+            background-color: #e8f8f5;
+            color: #1e8449;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .download-btn {
+            display: block;
+            background-color: var(--secondary);
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
+        }
+
+        .download-btn:hover { background-color: var(--accent); }
+        .status-message { text-align: center; font-size: 1.2rem; color: var(--text-light); margin-top: 3rem; grid-column: 1 / -1; }
+
+        @media (max-width: 600px) {
+            .controls-container { flex-direction: column; padding: 1rem; margin-top: -1.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -30,8 +157,16 @@
         <p>আপনার প্রিয় ই-বুকগুলোর ডিজিটাল সংগ্রহশালা</p>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="searchBox" class="search-box" placeholder="বইয়ের নাম অথবা লেখকের নাম দিয়ে খুঁজুন...">
+    <div class="controls-container">
+        <input type="text" id="searchBox" class="search-box" placeholder="বইয়ের নাম দিয়ে খুঁজুন...">
+        <select id="authorFilter" class="filter-select">
+            <option value="all">সব লেখক (All Authors)</option>
+            </select>
+    </div>
+
+    <div class="stats-bar">
+        <span id="totalBooks">মোট বই: ০</span>
+        <span>সাজানো: এ-জেড (A-Z)</span>
     </div>
 
     <main class="main-content">
@@ -43,30 +178,52 @@
     <script>
         let allBooks = [];
 
-        // API থেকে ডেটা আনা
         async function fetchBooks() {
             const booksGrid = document.getElementById('booksGrid');
             try {
                 const response = await fetch('./api/books.json');
                 allBooks = await response.json();
                 
-                if (allBooks.length === 0) {
-                    booksGrid.innerHTML = '<div class="status-message">কোনো বই পাওয়া যায়নি।</div>';
-                } else {
+                if (allBooks.length > 0) {
+                    // ১. বইগুলোকে বাংলা অ্যালফাবেটিক্যালি (A-Z) সাজানো হচ্ছে
+                    allBooks.sort((a, b) => a.title.localeCompare(b.title, 'bn-BD'));
+                    
+                    setupAuthorFilter();
                     displayBooks(allBooks);
+                } else {
+                    booksGrid.innerHTML = '<div class="status-message">কোনো বই পাওয়া যায়নি।</div>';
                 }
             } catch (error) {
                 booksGrid.innerHTML = '<div class="status-message" style="color: #e74c3c;">লোড করতে সমস্যা হয়েছে।</div>';
             }
         }
 
-        // বইগুলো কার্ড আকারে দেখানো
+        // ২. লেখকদের নাম বের করে অ্যালফাবেটিক্যালি সাজানো এবং ড্রপডাউনে যুক্ত করা
+        function setupAuthorFilter() {
+            const authorFilter = document.getElementById('authorFilter');
+            
+            // সব বই থেকে ডুপ্লিকেট ছাড়া লেখকদের নাম সংগ্রহ করা
+            const authors = [...new Set(allBooks.map(book => book.author))];
+            
+            // লেখকদের নাম বাংলা বর্ণমালা অনুযায়ী সাজানো
+            authors.sort((a, b) => a.localeCompare(b, 'bn-BD'));
+
+            // ড্রপডাউনে অপশন যুক্ত করা
+            authors.forEach(author => {
+                const option = document.createElement('option');
+                option.value = author;
+                option.textContent = author;
+                authorFilter.appendChild(option);
+            });
+        }
+
         function displayBooks(books) {
             const booksGrid = document.getElementById('booksGrid');
+            document.getElementById('totalBooks').textContent = `মোট বই: ${books.length}`;
             booksGrid.innerHTML = ''; 
 
             if (books.length === 0) {
-                booksGrid.innerHTML = '<div class="status-message">আপনার খোঁজা বইটি লাইব্রেরিতে নেই।</div>';
+                booksGrid.innerHTML = '<div class="status-message">আপনার খোঁজা বইটি পাওয়া যায়নি।</div>';
                 return;
             }
 
@@ -77,7 +234,7 @@
                     <div class="book-details">
                         <h2 class="book-title">${book.title}</h2>
                         <p class="book-author">লেখক: ${book.author}</p>
-                        <span class="badge">${book.format}</span>
+                        <span class="badge">${book.format.toUpperCase()}</span>
                     </div>
                     <a href="${book.download_link}" class="download-btn" download>ডাউনলোড করুন</a>
                 `;
@@ -85,18 +242,25 @@
             });
         }
 
-        // বইয়ের নাম বা লেখকের নাম দিয়ে সার্চ করা
-        document.getElementById('searchBox').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            const filteredBooks = allBooks.filter(book => 
-                book.title.toLowerCase().includes(searchTerm) || 
-                book.author.toLowerCase().includes(searchTerm)
-            );
+        // সার্চ এবং ফিল্টার একসাথে কাজ করার লজিক
+        function filterBooks() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase().trim();
+            const selectedAuthor = document.getElementById('authorFilter').value;
+
+            const filteredBooks = allBooks.filter(book => {
+                const matchSearch = book.title.toLowerCase().includes(searchTerm);
+                const matchAuthor = selectedAuthor === 'all' || book.author === selectedAuthor;
+                return matchSearch && matchAuthor;
+            });
+
             displayBooks(filteredBooks);
-        });
+        }
+
+        // ইভেন্ট লিসেনার যুক্ত করা
+        document.getElementById('searchBox').addEventListener('input', filterBooks);
+        document.getElementById('authorFilter').addEventListener('change', filterBooks);
 
         window.addEventListener('DOMContentLoaded', fetchBooks);
     </script>
 </body>
 </html>
-
