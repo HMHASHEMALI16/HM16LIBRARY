@@ -6,7 +6,7 @@ https://hmhashemali16.github.io/OPDS/catalog.xml
 ```
 2. Static API Link
 ```
-https://hmhashemali16.github.io/OPDS/
+https://hmhashemali16.github.io/OPDS/api/books.json
 ```
 3. Digital Library Website
 
