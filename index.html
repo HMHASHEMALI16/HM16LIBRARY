@@ -9,25 +9,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">  
       
-    <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>  
     
-    <!-- ePub.js Library for Web Reading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
   
     <script>  
+        // Initialize Theme  
         const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');  
         document.documentElement.setAttribute('data-theme', savedTheme);  
     </script>  
   
     <style>  
-        /* --- গলোবাল রিসেট --- */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+        /* --- Global Reset & Variables --- */
+        *, *::before, *::after { box-sizing: border-box; }
 
-        /* --- থিম ভ্যারিয়েবল --- */  
         :root {  
             --bg-main: #FAFAFA;        
             --card-bg: #FFFFFF;  
@@ -35,11 +31,11 @@
             --text-light: #75716B;     
             --accent: #E0532B;         
             --border-color: #E6E4E0;  
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);  
-            --hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-              
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);  
+            --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             --font-serif: 'Noto Serif Bengali', serif;  
             --font-sans: 'Noto Sans Bengali', sans-serif;  
+            --border-radius: 14px;
         }  
   
         [data-theme="dark"] {  
@@ -49,222 +45,156 @@
             --text-light: #949088;     
             --accent: #F06A42;         
             --border-color: #292724;  
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
-            --hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  
+            --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }  
   
         body {  
-            margin: 0; 
-            padding: 0; 
+            margin: 0; padding: 0; 
             font-family: var(--font-sans);  
             background-color: var(--bg-main); 
             color: var(--text-dark);  
             -webkit-font-smoothing: antialiased;  
             transition: background-color 0.3s ease, color 0.3s ease;  
-            overflow-x: hidden; 
             line-height: 1.6;
-            width: 100%;
         }  
   
-        /* --- মেইন কন্টেইনার --- */  
+        /* --- Layout --- */  
         .container {   
-            max-width: 1200px;   
-            margin: 0 auto;   
-            padding: 2.5rem 1.5rem;   
-            width: 100%;  
+            max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%;  
         }  
   
-        /* --- টপ নেভিগেশন --- */
+        /* --- Top Navigation --- */
         .top-nav {  
             display: flex; justify-content: space-between; align-items: center;  
-            margin-bottom: 3rem; gap: 1.5rem; flex-wrap: wrap;  
+            margin-bottom: 2.5rem; gap: 1.5rem; flex-wrap: wrap;  
         }  
-  
-        .nav-left { display: flex; align-items: center; gap: 1.2rem; }  
+        .main-heading { font-family: var(--font-serif); font-size: 1.8rem; margin: 0; font-weight: 700; color: var(--text-dark); }  
+        .nav-right { display: flex; gap: 1rem; flex: 1; justify-content: flex-end; align-items: center; }  
         
-        .main-heading { font-family: var(--font-serif); font-size: 1.75rem; margin: 0; font-weight: 700; letter-spacing: -0.3px; }  
-  
-        .nav-right { display: flex; gap: 1rem; flex: 1; justify-content: flex-end; align-items: center; max-width: 100%; }  
-        
-        .search-wrapper { flex: 1; max-width: 380px; position: relative; }  
-        .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.1rem; }  
+        /* Search Box */
+        .search-wrapper { flex: 1; max-width: 400px; position: relative; }  
+        .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }  
         .search-input {  
-            width: 100%; height: 44px; padding: 0 1.2rem 0 2.8rem; border: 1px solid var(--border-color); border-radius: 12px;  
-            background: var(--card-bg); color: var(--text-dark); font-family: var(--font-sans); font-size: 0.95rem;  
+            width: 100%; height: 46px; padding: 0 1.2rem 0 2.8rem; 
+            border: 1px solid var(--border-color); border-radius: 12px;  
+            background: var(--card-bg); color: var(--text-dark); 
+            font-family: var(--font-sans); font-size: 0.95rem;  
             outline: none; box-shadow: var(--card-shadow); transition: all 0.2s ease;  
         }  
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(224, 83, 43, 0.15); }  
         
-        .menu-btn {  
+        /* Buttons */
+        .icon-btn {  
             background: var(--card-bg); border: 1px solid var(--border-color);  
-            width: 44px; height: 44px; border-radius: 12px; font-size: 1.3rem;  
+            width: 46px; height: 46px; border-radius: 12px; font-size: 1.4rem;  
             color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;  
-            box-shadow: var(--card-shadow); padding: 0; transition: all 0.2s ease;
+            box-shadow: var(--card-shadow); transition: all 0.2s ease;
         }  
-        .menu-btn:hover { border-color: var(--text-light); transform: translateY(-1px); }
+        .icon-btn:hover { border-color: var(--text-light); transform: translateY(-2px); }
   
-        /* --- সেকশন হেডার --- */  
+        /* --- Section Header --- */  
         .section-header {  
             display: flex; justify-content: space-between; align-items: flex-end;  
-            margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem;  
+            margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem;  
         }  
         .section-title { font-family: var(--font-serif); font-size: 1.35rem; margin: 0; font-weight: 700; display: flex; gap: 8px; align-items: center; }  
         .book-count { font-family: var(--font-sans); color: var(--text-light); font-size: 1rem; font-weight: normal; margin-left: 4px; }  
 
-        /* --- বইয়ের গ্রিড --- */  
+        /* --- Books Grid --- */  
         .books-grid {   
-            display: grid;   
-            grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));   
-            gap: 1.75rem;   
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.5rem;   
         }  
   
         .book-card {   
-            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;  
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius);  
             padding: 1.25rem; display: flex; flex-direction: column; align-items: center;  
-            box-shadow: var(--card-shadow);  
-            transition: all 0.3s ease; height: 100%;
+            box-shadow: var(--card-shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;
         }  
-        .book-card:hover { 
-            transform: translateY(-6px); 
-            border-color: transparent; 
-            box-shadow: var(--hover-shadow); 
-        }  
-        .book-card:hover .book-cover-wrapper {
-            transform: scale(1.03);
-        }  
+        .book-card:hover { transform: translateY(-5px); border-color: transparent; box-shadow: var(--hover-shadow); }  
+        .book-card:hover .book-cover-wrapper { transform: scale(1.04); }  
   
-        /* --- বইয়ের কভার --- */  
+        /* Book Cover */  
         .book-cover-wrapper {  
-            position: relative;   
-            width: 100%; max-width: 100px; 
-            aspect-ratio: 2 / 3;  
+            position: relative; width: 100%; max-width: 100px; aspect-ratio: 2 / 3;  
             border-radius: 4px 10px 10px 4px;  
-            box-shadow: -3px 0 6px rgba(0,0,0,0.2) inset, 4px 8px 16px rgba(0,0,0,0.12);  
-            margin-bottom: 1.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center;  
-            padding: 1rem; text-align: center; overflow: hidden;
-            transition: transform 0.3s ease;
+            box-shadow: -3px 0 6px rgba(0,0,0,0.2) inset, 4px 8px 12px rgba(0,0,0,0.1);  
+            margin-bottom: 1rem; display: flex; flex-direction: column; justify-content: center; align-items: center;  
+            padding: 1rem; text-align: center; overflow: hidden; transition: transform 0.3s ease;
         }  
         .book-cover-wrapper::after {  
-            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px;  
-            background: linear-gradient(to right, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 20%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.15) 100%);  
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;  
+            background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.1) 20%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.15));  
             z-index: 5;  
         }  
+        .cover-title { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 700; color: #FFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.6); margin: 0 0 6px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; z-index: 2;}  
+        .cover-author { font-size: 0.65rem; color: rgba(255,255,255,0.85); z-index: 2;}  
   
-        .cover-title { font-family: var(--font-serif); font-size: 0.8rem; font-weight: 700; color: #FFFFFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.6); margin: 0 0 6px 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; z-index: 2;}  
-        .cover-author { font-size: 0.65rem; color: rgba(255,255,255,0.85); text-shadow: 1px 1px 2px rgba(0,0,0,0.6); z-index: 2;}  
+        /* Card Info */
+        .card-info { width: 100%; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+        .info-author { color: var(--text-light); font-size: 0.8rem; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
   
-        .card-info {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-        .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
-        .info-author { color: var(--text-light); font-size: 0.85rem; margin: 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
-  
-        /* --- ডাউনলোড ও রিড বাটনস --- */
-        .card-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 14px;
-            width: 100%;
-        }
+        /* Action Buttons */
+        .card-actions { display: flex; gap: 8px; margin-top: 15px; width: 100%; }
         .btn-action {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 0;
-            border-radius: 8px;
-            font-family: var(--font-sans);
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            text-decoration: none;
-            border: 1px solid transparent;
-            transition: all 0.2s ease;
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px;
+            padding: 8px 0; border-radius: 8px; font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; text-decoration: none; border: 1px solid transparent; transition: all 0.2s ease;
         }
-        .btn-download {
-            background: rgba(224, 83, 43, 0.1);
-            color: var(--accent);
-        }
-        .btn-download:hover {
-            background: var(--accent);
-            color: #FFFFFF;
-        }
-        .btn-read {
-            background: transparent;
-            border-color: var(--border-color);
-            color: var(--text-dark);
-        }
-        .btn-read:hover {
-            border-color: var(--text-dark);
-            background: var(--bg-main);
-        }
+        .btn-download { background: rgba(224, 83, 43, 0.1); color: var(--accent); }
+        .btn-download:hover { background: var(--accent); color: #FFF; }
+        .btn-read { background: transparent; border-color: var(--border-color); color: var(--text-dark); }
+        .btn-read:hover { border-color: var(--text-dark); background: var(--bg-main); }
 
-        .empty-state { grid-column: 1 / -1; padding: 5rem 1rem; text-align: center; color: var(--text-light); font-family: var(--font-serif); font-size: 1.2rem; }  
+        .empty-state { grid-column: 1 / -1; padding: 4rem 1rem; text-align: center; color: var(--text-light); font-size: 1.1rem; }  
   
-        /* --- ePub Reader Modal --- */
+        /* --- Web ePub Reader Modal (Vertical Scroll Optimized) --- */
         .reader-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: var(--bg-main); z-index: 2000;
-            display: none; flex-direction: column;
+            background: var(--bg-main); z-index: 2000; display: none; flex-direction: column;
+            opacity: 0; transition: opacity 0.3s ease;
         }
+        .reader-modal.show { opacity: 1; }
+        
         .reader-header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1rem 1.5rem; background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 10;
         }
-        .reader-title { font-family: var(--font-serif); font-weight: 700; margin: 0; font-size: 1.1rem; }
+        .reader-title { font-family: var(--font-serif); font-weight: 700; margin: 0; font-size: 1.1rem; color: var(--text-dark); }
         .reader-close {
-            background: none; border: none; font-size: 1.5rem; color: var(--text-dark);
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            background: rgba(224, 83, 43, 0.1); border: none; font-size: 1.2rem; color: var(--accent);
+            cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-weight: 600; font-family: var(--font-sans); transition: all 0.2s;
         }
-        .reader-close:hover { color: var(--accent); }
+        .reader-close:hover { background: var(--accent); color: #FFF; }
+        
         .reader-content {
-            flex: 1; position: relative; overflow: hidden; display: flex; justify-content: center;
+            flex: 1; position: relative; width: 100%; display: flex; justify-content: center;
+            background: var(--bg-main);
         }
         #viewer {
             width: 100%; height: 100%; max-width: 800px;
+            /* ইপাব আইফ্রেম নিজেই স্ক্রল হ্যান্ডেল করবে */
         }
-        .nav-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            color: var(--text-dark); width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 10; font-size: 1.2rem; box-shadow: var(--card-shadow);
-        }
-        .nav-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
-        .prev-btn { left: 1rem; }
-        .next-btn { right: 1rem; }
 
-        /* --- মোবাইল রেস্পন্সিভনেস --- */  
+        /* --- Mobile Responsiveness --- */  
         @media (max-width: 600px) {  
             .container { padding: 1.5rem 1rem; }  
             .top-nav { flex-direction: column; align-items: stretch; gap: 1rem; margin-bottom: 2rem; }  
-            .nav-left { justify-content: space-between; width: 100%; }  
-            .nav-right { width: 100%; justify-content: space-between; gap: 10px; }  
-            .search-wrapper { max-width: calc(100% - 54px); flex-grow: 1; }  
-            .main-heading { font-size: 1.45rem; }  
-            .section-header { align-items: center; padding-bottom: 0.6rem; margin-bottom: 1.5rem;}  
-            .section-title { font-size: 1.15rem; }  
+            .nav-right { width: 100%; gap: 10px; }  
+            .search-wrapper { max-width: 100%; }  
+            .main-heading { font-size: 1.5rem; text-align: center;}  
               
             .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }  
-            .book-card { padding: 1rem 0.75rem; border-radius: 12px; }  
-            .book-cover-wrapper { max-width: 80px; margin-bottom: 0.8rem; padding: 0.5rem; border-radius: 3px 6px 6px 3px; }  
+            .book-card { padding: 1rem 0.75rem; }  
+            .book-cover-wrapper { max-width: 85px; margin-bottom: 0.8rem; padding: 0.5rem; }  
             
-            .cover-title { font-size: 0.7rem; }  
-            .cover-author { font-size: 0.6rem; }  
             .info-title { font-size: 0.9rem; }  
-            .info-author { font-size: 0.75rem; }  
             .btn-action { font-size: 0.75rem; padding: 6px 0; }
-            
-            .nav-btn { width: 36px; height: 36px; font-size: 1rem; }
-            .prev-btn { left: 0.5rem; }
-            .next-btn { right: 0.5rem; }
+            .reader-header { padding: 0.8rem 1rem; }
+            .reader-title { font-size: 1rem; }
         }  
     </style>  
 </head>  
@@ -272,16 +202,13 @@
   
     <div class="container">  
         <header class="top-nav">  
-            <div class="nav-left">  
-                <h1 class="main-heading">HM 16 LIBRARY</h1>  
-            </div>  
-              
+            <h1 class="main-heading">HM 16 LIBRARY</h1>  
             <div class="nav-right">  
                 <div class="search-wrapper">  
                     <i class="ph ph-magnifying-glass"></i>  
                     <input type="text" id="searchBox" class="search-input" placeholder="বইয়ের নাম বা লেখক খুঁজুন...">  
                 </div>  
-                <button class="menu-btn" onclick="toggleTheme()"><i class="ph ph-moon" id="themeIcon"></i></button>  
+                <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
             </div>  
         </header>  
   
@@ -294,40 +221,41 @@
         </div>  
     </div>  
 
-    <!-- Web ePub Reader Modal -->
     <div class="reader-modal" id="readerModal">
         <div class="reader-header">
             <h3 class="reader-title" id="readerTitle">বই পড়া হচ্ছে...</h3>
-            <button class="reader-close" onclick="closeReader()"><i class="ph ph-x"></i></button>
+            <button class="reader-close" onclick="closeReader()"><i class="ph ph-arrow-left"></i> ফিরে যান</button>
         </div>
         <div class="reader-content">
-            <button class="nav-btn prev-btn" onclick="prevPage()"><i class="ph ph-caret-left"></i></button>
             <div id="viewer"></div>
-            <button class="nav-btn next-btn" onclick="nextPage()"><i class="ph ph-caret-right"></i></button>
         </div>
     </div>
   
     <script>  
-        // থিম টগল  
+        /* --- Theme Management --- */
         function updateThemeIcon() {  
             const theme = document.documentElement.getAttribute('data-theme');  
             const icon = document.getElementById('themeIcon');  
-            if (theme === 'dark') { icon.classList.replace('ph-moon', 'ph-sun'); }   
-            else { icon.classList.replace('ph-sun', 'ph-moon'); }  
+            icon.className = theme === 'dark' ? 'ph ph-sun' : 'ph ph-moon'; 
         }  
+        
         function toggleTheme() {  
-            const current = document.documentElement.getAttribute('data-theme');  
-            const newTheme = current === 'dark' ? 'light' : 'dark';  
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';  
+            const newTheme = isDark ? 'light' : 'dark';  
             document.documentElement.setAttribute('data-theme', newTheme);  
             localStorage.setItem('theme', newTheme);  
             updateThemeIcon();  
+            
+            // Update ePub Reader theme dynamically if open
+            if(currentRendition) {
+                applyReaderTheme(newTheme);
+            }
         }  
         updateThemeIcon();  
   
+        /* --- App State & Data Fetching --- */
         let allBooks = [];  
-  
-        // ৭টি প্রিমিয়াম গ্রেডিয়েন্ট কালার  
-        const coverStyles = [  
+        const coverGradients = [  
             'linear-gradient(135deg, #1f4037 0%, #439a86 100%)',   
             'linear-gradient(135deg, #4b134f 0%, #a53b3b 100%)',   
             'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',   
@@ -337,37 +265,41 @@
             'linear-gradient(135deg, #116979 0%, #05c46b 100%)'    
         ];  
   
-        async function init() {  
+        async function fetchBooks() {  
             try {  
                 const res = await fetch('./api/books.json');  
                 allBooks = await res.json();  
                   
                 if (allBooks.length > 0) {  
-                    allBooks.forEach(book => { book.title = book.title.trim(); book.author = book.author.trim(); });  
+                    allBooks.forEach(b => { b.title = b.title.trim(); b.author = b.author.trim(); });  
                     allBooks.sort((a, b) => a.title.localeCompare(b.title, 'bn-BD'));  
-                    render(allBooks);  
+                    renderGrid(allBooks);  
                 } else {  
-                    document.getElementById('grid').innerHTML = '<div class="empty-state">কোনো বই পাওয়া যায়নি।</div>';  
+                    showEmptyState('কোনো বই পাওয়া যায়নি।');  
                 }  
             } catch (err) {  
-                document.getElementById('grid').innerHTML = '<div class="empty-state">ডেটা লোড করতে সমস্যা হচ্ছে।</div>';  
+                showEmptyState('ডেটা লোড করতে সমস্যা হচ্ছে। ইন্টারনেট কানেকশন চেক করুন।');  
             }  
         }  
+
+        function showEmptyState(msg) {
+            document.getElementById('grid').innerHTML = `<div class="empty-state">${msg}</div>`;
+            document.getElementById('bookCount').textContent = `(০)`;
+        }
   
-        function render(books) {  
+        /* --- UI Rendering --- */
+        function renderGrid(books) {  
             const grid = document.getElementById('grid');  
             document.getElementById('bookCount').textContent = `(${books.length})`;  
             grid.innerHTML = '';  
   
-            if(books.length === 0) {  
-                grid.innerHTML = '<div class="empty-state">বই পাওয়া যায়নি।</div>';  
-                return;  
-            }  
+            if(books.length === 0) return showEmptyState('আপনার খোঁজা বইটি পাওয়া যায়নি।');  
   
+            // Document Fragment for better performance
+            const fragment = document.createDocumentFragment();
+
             books.forEach((book, index) => {  
-                const colorIndex = (index * 3 + 7) % coverStyles.length;  
-                const gradient = coverStyles[colorIndex];  
-                  
+                const gradient = coverGradients[(index * 3 + 7) % coverGradients.length];  
                 const card = document.createElement('div');  
                 card.className = 'book-card';  
                   
@@ -383,87 +315,99 @@
                         </div>
                         <div class="card-actions">
                             <a href="${book.download_link}" download class="btn-action btn-download" title="Download">
-                                <i class="ph ph-download-simple"></i> Download
+                                <i class="ph ph-download-simple"></i>
                             </a>
-                            <button onclick="openReader('${book.download_link}', '${book.title}')" class="btn-action btn-read" title="Read">
+                            <button onclick="openReader('${book.download_link}', '${book.title}')" class="btn-action btn-read" title="Read Online">
                                 <i class="ph ph-book-open"></i> Read
                             </button>
                         </div>
                     </div>
                 `;  
-                grid.appendChild(card);  
+                fragment.appendChild(card);  
             });  
+            
+            grid.appendChild(fragment);
         }  
 
-        // --- ePub Reader Logic ---
+        /* --- ePub Reader Logic (Vertical Scroll) --- */
         let currentBook = null;
         let currentRendition = null;
 
         function openReader(url, title) {
+            const modal = document.getElementById('readerModal');
             document.getElementById('readerTitle').textContent = title;
-            document.getElementById('readerModal').style.display = 'flex';
-            document.getElementById('viewer').innerHTML = ''; // ক্লিয়ার পুরনো কন্টেন্ট
+            document.getElementById('viewer').innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-light);">বই লোড হচ্ছে...</div>'; 
             
-            // ePub.js ইনিশিয়ালাইজ করা
+            modal.style.display = 'flex';
+            // slight delay for CSS transition
+            setTimeout(() => modal.classList.add('show'), 10);
+            
             currentBook = ePub(url);
             currentRendition = currentBook.renderTo("viewer", {
                 width: "100%",
                 height: "100%",
-                spread: "none", // মোবাইলে এবং ছোট স্ক্রিনে পড়ার সুবিধার জন্য
-                manager: "continuous",
-                flow: "paginated"
+                flow: "scrolled-doc", // Enable Vertical Scrolling
+                manager: "continuous"
             });
             
-            // কাস্টম থিম স্টাইল (বিকল্প)
-            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
-            if(isDarkMode) {
-                currentRendition.themes.register("dark", {
-                    "body": { "background": "#1A1917", "color": "#E6E4E0" }
-                });
-                currentRendition.themes.select("dark");
-            }
-
+            applyReaderTheme(document.documentElement.getAttribute('data-theme'));
             currentRendition.display();
+
+            // Error handling if book fails to load
+            currentBook.ready.catch(() => {
+                document.getElementById('viewer').innerHTML = '<div style="padding: 2rem; text-align: center; color: red;">বইটি লোড করতে সমস্যা হয়েছে। দয়া করে ডাউনলোড করে পড়ুন।</div>';
+            });
+        }
+
+        function applyReaderTheme(theme) {
+            if(!currentRendition) return;
+            
+            const isDark = theme === 'dark';
+            currentRendition.themes.register("customTheme", {
+                "body": { 
+                    "background": isDark ? "#121110" : "#FAFAFA", 
+                    "color": isDark ? "#E6E4E0" : "#1E1B18",
+                    "padding": "20px 10px",
+                    "font-family": "sans-serif",
+                    "line-height": "1.8"
+                },
+                "p": { "font-size": "1.1rem" },
+                "h1, h2, h3": { "color": isDark ? "#F06A42" : "#E0532B" }
+            });
+            currentRendition.themes.select("customTheme");
         }
 
         function closeReader() {
-            document.getElementById('readerModal').style.display = 'none';
-            if (currentBook) {
-                currentBook.destroy();
-                currentBook = null;
-                currentRendition = null;
-            }
-            document.getElementById('viewer').innerHTML = '';
+            const modal = document.getElementById('readerModal');
+            modal.classList.remove('show');
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                if (currentBook) {
+                    currentBook.destroy();
+                    currentBook = null;
+                    currentRendition = null;
+                }
+                document.getElementById('viewer').innerHTML = '';
+            }, 300); // Wait for transition
         }
 
-        function nextPage() {
-            if (currentRendition) currentRendition.next();
-        }
-
-        function prevPage() {
-            if (currentRendition) currentRendition.prev();
-        }
-
-        // কীবোর্ড দিয়ে পেজ চেঞ্জ করার সুবিধা
-        document.addEventListener('keyup', function(e) {
-            if (document.getElementById('readerModal').style.display === 'flex') {
-                if (e.key === 'ArrowLeft') prevPage();
-                if (e.key === 'ArrowRight') nextPage();
-                if (e.key === 'Escape') closeReader();
-            }
-        });
+        /* --- Search Debounce Logic --- */
+        let debounceTimer;
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                const term = e.target.value.toLowerCase();  
+                const filtered = allBooks.filter(b => 
+                    b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)
+                );  
+                renderGrid(filtered);  
+            }, 250); // 250ms delay for better performance
+        });  
   
-        function handleSearch() {  
-            const term = document.getElementById('searchBox').value.toLowerCase();  
-            const filtered = allBooks.filter(b => {  
-                return (b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term));  
-            });  
-            render(filtered);  
-        }  
-  
-        document.getElementById('searchBox').addEventListener('input', handleSearch);  
-  
-        init();  
+        // Start App
+        fetchBooks();  
     </script>  
 </body>  
-</html>
+    </html>
+                                                                       
