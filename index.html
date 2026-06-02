@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>HM 16 LIBRARY</title>  
       
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">  
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">  
       
+    <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>  
     
+    <!-- ePub.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
   
@@ -72,7 +75,7 @@
   
         /* --- Layout --- */  
         .container {   
-            max-width: 1200px; margin: 0 auto; padding: 6.5rem 1.5rem 3rem; width: 100%;  
+            max-width: 1200px; margin: 0 auto; padding: 7rem 1.5rem 3rem; width: 100%;  
         }  
   
         /* --- Sticky Glassmorphism Header --- */
@@ -89,14 +92,12 @@
             display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; 
         }  
 
-        .brand-area { display: flex; flex-direction: column; line-height: 1.1; }
+        .brand-area { display: flex; flex-direction: column; line-height: 1.1; margin-right: auto; order: 1; }
         .main-heading { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; font-weight: 700; color: var(--accent); letter-spacing: -0.5px;}  
         .sub-heading { font-size: 0.8rem; color: var(--text-light); font-weight: 600; letter-spacing: 0.5px; margin-top: 2px;}
 
-        .nav-right { display: flex; gap: 1rem; flex: 1; justify-content: flex-end; align-items: center; }  
-        
-        /* Search Box */
-        .search-wrapper { flex: 1; max-width: 420px; position: relative; }  
+        /* Search Box Desktop Layout */
+        .search-wrapper { flex: 1; max-width: 420px; position: relative; order: 2; }  
         .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }  
         .search-input {  
             width: 100%; height: 44px; padding: 0 1.2rem 0 3rem; 
@@ -107,12 +108,13 @@
         }  
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224, 83, 43, 0.12); }  
         
-        /* Theme Button */
+        /* Theme Button Desktop Layout */
         .icon-btn {  
             background: var(--card-bg); border: 1px solid var(--border-color);  
             width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem;  
             color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;  
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            order: 3;
         }  
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(15deg) scale(1.05); }
   
@@ -161,7 +163,7 @@
         .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
         .info-author { color: var(--text-light); font-size: 0.8rem; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
   
-        /* Action Buttons (Padding & Gap Reduced) */
+        /* Action Buttons */
         .card-actions { display: flex; gap: 6px; margin-top: 15px; width: 100%; }
         .btn-action {
             flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px;
@@ -209,12 +211,19 @@
 
         /* --- Mobile Responsiveness --- */  
         @media (max-width: 768px) {  
-            .container { padding-top: 9rem; } /* ফিক্স: হেডার ওভারল্যাপ রোধ করতে প্যাডিং বাড়ানো হয়েছে */
-            .top-nav { padding: 0.8rem 1rem; }  
-            .brand-area { flex-grow: 1; }
-            .nav-right { width: 100%; order: 3; margin-top: 0.5rem; gap: 8px; }  
-            .search-wrapper { max-width: 100%; }  
+            .container { padding-top: 10rem; } /* ফিক্স: হেডার দুই লাইন হওয়ার কারণে প্যাডিং বাড়ানো হয়েছে */
+            
+            .top-nav { padding: 1rem; flex-wrap: wrap; gap: 1rem; }  
+            
+            /* ব্র্যান্ডিং লাইন ১ এ বামে */
+            .brand-area { flex: 1; order: 1; margin-right: 0; }
+            
+            /* টগল বাটন লাইন ১ এ ডানে */
             .icon-btn { order: 2; margin-left: auto; }
+            
+            /* সার্চ বক্স লাইন ২ এ সম্পূর্ণ জায়গা জুড়ে */
+            .search-wrapper { order: 3; width: 100%; max-width: 100%; margin-top: 0.2rem; }  
+
             .main-heading { font-size: 1.4rem;}  
             .sub-heading { font-size: 0.75rem; }
             
@@ -224,7 +233,6 @@
             .info-title { font-size: 0.95rem; }  
             .info-author { font-size: 0.75rem; }
             
-            /* ফিক্স: বাটন প্যাডিং কমানো হয়েছে */
             .card-actions { gap: 4px; margin-top: 12px;}
             .btn-action { font-size: 0.75rem; padding: 6px 0; border-radius: 6px;}
             
@@ -238,17 +246,20 @@
   
     <div class="top-nav-wrapper">
         <header class="top-nav">  
+            <!-- 1. Brand -->
             <div class="brand-area">
                 <h1 class="main-heading">HM 16 LIBRARY</h1>  
                 <span class="sub-heading">ডিজিটাল লাইব্রেরী</span>
             </div>
-            <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
-            <div class="nav-right">  
-                <div class="search-wrapper">  
-                    <i class="ph ph-magnifying-glass"></i>  
-                    <input type="text" id="searchBox" class="search-input" placeholder="বইয়ের নাম বা লেখক খুঁজুন...">  
-                </div>  
+            
+            <!-- 2. Search -->
+            <div class="search-wrapper">  
+                <i class="ph ph-magnifying-glass"></i>  
+                <input type="text" id="searchBox" class="search-input" placeholder="বইয়ের নাম বা লেখক খুঁজুন...">  
             </div>  
+
+            <!-- 3. Theme Toggle -->
+            <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
         </header>  
     </div>
 
@@ -265,6 +276,7 @@
         </div>  
     </div>  
 
+    <!-- Web ePub Reader Modal -->
     <div class="reader-modal" id="readerModal">
         <div class="reader-header">
             <h3 class="reader-title" id="readerTitle">বই পড়া হচ্ছে...</h3>
