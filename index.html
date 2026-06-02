@@ -72,7 +72,7 @@
   
         /* --- Layout --- */  
         .container {   
-            max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem 3rem; width: 100%;  
+            max-width: 1200px; margin: 0 auto; padding: 6.5rem 1.5rem 3rem; width: 100%;  
         }  
   
         /* --- Sticky Glassmorphism Header --- */
@@ -86,17 +86,20 @@
 
         .top-nav {  
             max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
-            display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;  
+            display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; 
         }  
 
+        .brand-area { display: flex; flex-direction: column; line-height: 1.1; }
         .main-heading { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; font-weight: 700; color: var(--accent); letter-spacing: -0.5px;}  
+        .sub-heading { font-size: 0.8rem; color: var(--text-light); font-weight: 600; letter-spacing: 0.5px; margin-top: 2px;}
+
         .nav-right { display: flex; gap: 1rem; flex: 1; justify-content: flex-end; align-items: center; }  
         
         /* Search Box */
         .search-wrapper { flex: 1; max-width: 420px; position: relative; }  
         .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }  
         .search-input {  
-            width: 100%; height: 46px; padding: 0 1.2rem 0 3rem; 
+            width: 100%; height: 44px; padding: 0 1.2rem 0 3rem; 
             border: 1px solid var(--border-color); border-radius: 24px;  
             background: var(--card-bg); color: var(--text-dark); 
             font-family: var(--font-sans); font-size: 0.95rem;  
@@ -107,7 +110,7 @@
         /* Theme Button */
         .icon-btn {  
             background: var(--card-bg); border: 1px solid var(--border-color);  
-            width: 46px; height: 46px; border-radius: 50%; font-size: 1.4rem;  
+            width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem;  
             color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;  
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }  
@@ -123,46 +126,46 @@
 
         /* --- Books Grid --- */  
         .books-grid {   
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.8rem;   
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem;   
         }  
   
         /* Modern Card Design */
         .book-card {   
-            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 18px;  
-            padding: 1.5rem; display: flex; flex-direction: column; align-items: center;  
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px;  
+            padding: 1.25rem; display: flex; flex-direction: column; align-items: center;  
             box-shadow: var(--card-shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); height: 100%;
             position: relative; overflow: hidden;
         }  
-        .book-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--hover-shadow); }  
+        .book-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--hover-shadow); }  
   
         /* Book Cover */  
         .book-cover-wrapper {  
-            position: relative; width: 100%; max-width: 110px; aspect-ratio: 2 / 3;  
+            position: relative; width: 100%; max-width: 100px; aspect-ratio: 2 / 3;  
             border-radius: 4px 12px 12px 4px;  
             box-shadow: -4px 0 8px rgba(0,0,0,0.2) inset, 4px 10px 20px rgba(0,0,0,0.15);  
-            margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center;  
+            margin-bottom: 1.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center;  
             padding: 1rem; text-align: center; overflow: hidden; transition: transform 0.4s ease;
         }  
-        .book-card:hover .book-cover-wrapper { transform: scale(1.05) rotate(2deg); }  
+        .book-card:hover .book-cover-wrapper { transform: scale(1.04) rotate(2deg); }  
         
         .book-cover-wrapper::after {  
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;  
             background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0.1) 20%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.2));  
             z-index: 5;  
         }  
-        .cover-title { font-family: var(--font-serif); font-size: 0.9rem; font-weight: 700; color: #FFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.8); margin: 0 0 6px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; z-index: 2;}  
-        .cover-author { font-size: 0.7rem; color: rgba(255,255,255,0.9); z-index: 2;}  
+        .cover-title { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 700; color: #FFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.8); margin: 0 0 6px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; z-index: 2;}  
+        .cover-author { font-size: 0.65rem; color: rgba(255,255,255,0.9); z-index: 2;}  
   
         /* Card Info */
         .card-info { width: 100%; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-        .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem; color: var(--text-dark); margin: 0 0 6px 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
-        .info-author { color: var(--text-light); font-size: 0.85rem; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+        .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+        .info-author { color: var(--text-light); font-size: 0.8rem; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
   
-        /* Action Buttons */
-        .card-actions { display: flex; gap: 10px; margin-top: 20px; width: 100%; }
+        /* Action Buttons (Padding & Gap Reduced) */
+        .card-actions { display: flex; gap: 6px; margin-top: 15px; width: 100%; }
         .btn-action {
-            flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-            padding: 10px 0; border-radius: 12px; font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem;
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px;
+            padding: 7px 0; border-radius: 8px; font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem;
             cursor: pointer; text-decoration: none; border: 1px solid transparent; transition: all 0.2s ease;
         }
         .btn-download { background: rgba(224, 83, 43, 0.1); color: var(--accent); }
@@ -206,21 +209,28 @@
 
         /* --- Mobile Responsiveness --- */  
         @media (max-width: 768px) {  
-            .container { padding: 5.5rem 1rem 2rem; }  
-            .top-nav { flex-direction: column; gap: 1rem; padding: 1rem;}  
-            .nav-right { width: 100%; gap: 10px; }  
+            .container { padding-top: 9rem; } /* ফিক্স: হেডার ওভারল্যাপ রোধ করতে প্যাডিং বাড়ানো হয়েছে */
+            .top-nav { padding: 0.8rem 1rem; }  
+            .brand-area { flex-grow: 1; }
+            .nav-right { width: 100%; order: 3; margin-top: 0.5rem; gap: 8px; }  
             .search-wrapper { max-width: 100%; }  
-            .main-heading { font-size: 1.5rem;}  
+            .icon-btn { order: 2; margin-left: auto; }
+            .main-heading { font-size: 1.4rem;}  
+            .sub-heading { font-size: 0.75rem; }
+            
             .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }  
-            .book-card { padding: 1rem; border-radius: 14px;}  
-            .book-cover-wrapper { max-width: 85px; margin-bottom: 1rem; padding: 0.5rem; }  
+            .book-card { padding: 1rem 0.75rem; border-radius: 12px;}  
+            .book-cover-wrapper { max-width: 85px; margin-bottom: 0.8rem; padding: 0.5rem; }  
             .info-title { font-size: 0.95rem; }  
             .info-author { font-size: 0.75rem; }
-            .card-actions { gap: 6px; margin-top: 12px;}
-            .btn-action { font-size: 0.8rem; padding: 8px 0; border-radius: 8px;}
-            .reader-header { padding: 1rem; }
+            
+            /* ফিক্স: বাটন প্যাডিং কমানো হয়েছে */
+            .card-actions { gap: 4px; margin-top: 12px;}
+            .btn-action { font-size: 0.75rem; padding: 6px 0; border-radius: 6px;}
+            
+            .reader-header { padding: 0.8rem 1rem; }
             .reader-title { font-size: 1.1rem; }
-            .reader-close { padding: 6px 12px; font-size: 0.9rem;}
+            .reader-close { padding: 6px 12px; font-size: 0.85rem;}
         }  
     </style>  
 </head>  
@@ -228,13 +238,16 @@
   
     <div class="top-nav-wrapper">
         <header class="top-nav">  
-            <h1 class="main-heading">HM 16 LIBRARY</h1>  
+            <div class="brand-area">
+                <h1 class="main-heading">HM 16 LIBRARY</h1>  
+                <span class="sub-heading">ডিজিটাল লাইব্রেরী</span>
+            </div>
+            <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
             <div class="nav-right">  
                 <div class="search-wrapper">  
                     <i class="ph ph-magnifying-glass"></i>  
                     <input type="text" id="searchBox" class="search-input" placeholder="বইয়ের নাম বা লেখক খুঁজুন...">  
                 </div>  
-                <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
             </div>  
         </header>  
     </div>
@@ -349,10 +362,10 @@
                         </div>
                         <div class="card-actions">
                             <a href="${book.download_link}" download class="btn-action btn-download" title="ডাউনলোড করুন">
-                                <i class="ph ph-download-simple"></i> Download
+                                <i class="ph ph-download-simple"></i> ডাউনলোড
                             </a>
                             <button onclick="openReader('${book.download_link}', '${book.title}')" class="btn-action btn-read" title="পড়ুন">
-                                <i class="ph ph-book-open"></i> Read
+                                <i class="ph ph-book-open"></i> পড়ুন
                             </button>
                         </div>
                     </div>
