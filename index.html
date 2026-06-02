@@ -93,8 +93,13 @@
         .main-heading { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; font-weight: 700; color: var(--accent); letter-spacing: -0.5px;}  
         .sub-heading { font-size: 0.8rem; color: var(--text-light); font-weight: 600; letter-spacing: 0.5px; margin-top: 2px;}
 
-        /* Search Box Desktop Layout */
-        .search-wrapper { flex: 1; max-width: 420px; position: relative; order: 2; }  
+        /* Controls Group (Search Only now) */
+        .controls-group {
+            display: flex; gap: 10px; flex: 1; justify-content: flex-end; align-items: center; order: 2;
+        }
+
+        /* Search Box */
+        .search-wrapper { width: 100%; max-width: 380px; position: relative; }  
         .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }  
         .search-input {  
             width: 100%; height: 44px; padding: 0 1.2rem 0 3rem; 
@@ -104,24 +109,49 @@
             outline: none; transition: all 0.3s ease;  
         }  
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224, 83, 43, 0.12); }  
-        
-        /* Theme Button Desktop Layout */
+
+        /* Theme Button */
         .icon-btn {  
             background: var(--card-bg); border: 1px solid var(--border-color);  
             width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem;  
             color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;  
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            order: 3;
+            order: 3; flex-shrink: 0;
         }  
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(15deg) scale(1.05); }
   
         /* --- Section Header --- */  
         .section-header {  
-            display: flex; justify-content: space-between; align-items: flex-end;  
+            display: flex; justify-content: space-between; align-items: center;  
             margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.8rem;  
+            flex-wrap: wrap; gap: 1rem;
         }  
         .section-title { font-family: var(--font-serif); font-size: 1.4rem; margin: 0; font-weight: 700; display: flex; gap: 8px; align-items: center; }  
         .book-count { font-family: var(--font-sans); background: var(--accent); color: white; font-size: 0.85rem; font-weight: 600; padding: 2px 10px; border-radius: 20px; margin-left: 6px; }  
+
+        /* --- Sort Box in Section Header --- */
+        .sort-wrapper {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .sort-label {
+            font-size: 0.9rem; color: var(--text-light); font-weight: 500; font-family: var(--font-sans);
+        }
+        .sort-select {
+            height: 38px; padding: 0 2.2rem 0 1rem;
+            border: 1px solid var(--border-color); border-radius: 12px;
+            background: var(--card-bg); color: var(--text-dark);
+            font-family: var(--font-sans); font-size: 0.9rem; font-weight: 600;
+            outline: none; cursor: pointer; transition: all 0.3s ease;
+            appearance: none; -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            background-size: 1em;
+        }
+        .sort-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(224, 83, 43, 0.1); }
+        [data-theme="dark"] .sort-select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F3F4F6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        }
 
         /* --- Books Grid --- */  
         .books-grid {   
@@ -212,22 +242,25 @@
             
             .top-nav { padding: 1rem; flex-wrap: wrap; gap: 1rem; }  
             
-            /* ব্র্যান্ডিং লাইন ১ এ বামে */
             .brand-area { flex: 1 1 auto; order: 1; margin-right: 0; }
-            
-            /* টগল বাটন লাইন ১ এ ডানে */
             .icon-btn { order: 2; margin-left: auto; }
             
-            /* ফিক্স: সার্চ বক্স ১০০% জায়গা নিয়ে সম্পূর্ণ আলাদা লাইন তৈরি করবে */
-            .search-wrapper { 
-                flex: 1 1 100%; /* ১০০% বেস দিয়ে এটিকে নিচে নামানো হলো */
+            .controls-group { 
+                flex: 1 1 100%; 
                 order: 3; 
-                max-width: 100%; 
                 margin-top: 0.2rem; 
+                flex-direction: row; 
             }  
+            .search-wrapper { flex: 1; max-width: none; }
 
             .main-heading { font-size: 1.4rem;}  
             .sub-heading { font-size: 0.75rem; }
+            
+            /* ফিক্স: মোবাইল ভিউতে সেকশন হেডার এবং সাজান অপশন দৃশ্যমান রাখা হয়েছে */
+            .section-header { flex-wrap: wrap; justify-content: space-between; padding-bottom: 1rem; gap: 10px;}
+            .section-title { font-size: 1.2rem; }
+            .sort-label { display: inline-block; font-size: 0.85rem; } /* লেখাটি দৃশ্যমান করা হয়েছে */
+            .sort-select { font-size: 0.8rem; padding: 0 1.8rem 0 0.8rem; height: 34px; background-position: right 0.5rem center; }
             
             .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }  
             .book-card { padding: 1rem 0.75rem; border-radius: 12px;}  
@@ -253,9 +286,11 @@
                 <span class="sub-heading">ডিজিটাল লাইব্রেরী</span>
             </div>
             
-            <div class="search-wrapper">  
-                <i class="ph ph-magnifying-glass"></i>  
-                <input type="text" id="searchBox" class="search-input" placeholder="বইয়ের নাম বা লেখক খুঁজুন...">  
+            <div class="controls-group">  
+                <div class="search-wrapper">  
+                    <i class="ph ph-magnifying-glass"></i>  
+                    <input type="text" id="searchBox" class="search-input" placeholder="বই বা লেখক খুঁজুন...">  
+                </div>  
             </div>  
 
             <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
@@ -265,6 +300,13 @@
     <div class="container">  
         <div class="section-header">  
             <h2 class="section-title">বইয়ের তালিকা <span class="book-count" id="bookCount">০</span></h2>  
+            <div class="sort-wrapper">
+                <span class="sort-label">সাজান:</span>
+                <select id="sortBox" class="sort-select">
+                    <option value="title">বই অনুযায়ী</option>
+                    <option value="author">লেখক অনুযায়ী</option>
+                </select>
+            </div>
         </div>  
           
         <div class="books-grid" id="grid">  
@@ -326,8 +368,7 @@
                   
                 if (allBooks.length > 0) {  
                     allBooks.forEach(b => { b.title = b.title.trim(); b.author = b.author.trim(); });  
-                    allBooks.sort((a, b) => a.title.localeCompare(b.title, 'bn-BD'));  
-                    renderGrid(allBooks);  
+                    handleSearchAndSort(); // Load defaults using sorting logic
                 } else {  
                     showEmptyState('কোনো বই পাওয়া যায়নি।', 'ph-books');  
                 }  
@@ -386,6 +427,39 @@
             grid.appendChild(fragment);
         }  
 
+        /* --- Search and Sort Combined Logic --- */
+        function handleSearchAndSort() {
+            const term = document.getElementById('searchBox').value.toLowerCase();
+            const sortVal = document.getElementById('sortBox').value;
+
+            // 1. Filter
+            let filteredBooks = allBooks.filter(b => 
+                b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)
+            );
+
+            // 2. Sort using Bengali Locale (bn-BD)
+            filteredBooks.sort((a, b) => {
+                if (sortVal === 'title') return a.title.localeCompare(b.title, 'bn-BD');
+                if (sortVal === 'author') return a.author.localeCompare(b.author, 'bn-BD');
+                return 0;
+            });
+
+            renderGrid(filteredBooks);
+        }
+
+        /* --- Events Handling --- */
+        let debounceTimer;
+        document.getElementById('searchBox').addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                handleSearchAndSort();
+            }, 300); 
+        });  
+
+        document.getElementById('sortBox').addEventListener('change', () => {
+            handleSearchAndSort();
+        });
+  
         /* --- ePub Reader with Custom Font Injection --- */
         let currentBook = null;
         let currentRendition = null;
@@ -413,7 +487,6 @@
                 manager: "continuous"
             });
             
-            // Injecting Custom Font 'July_Regular.ttf' into the iframe
             currentRendition.hooks.content.register((contents) => {
                 const fontUrl = new URL('July_Regular.ttf', window.location.href).href;
                 
@@ -477,19 +550,6 @@
             }, 300); 
         }
 
-        /* --- Search System --- */
-        let debounceTimer;
-        document.getElementById('searchBox').addEventListener('input', (e) => {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(() => {
-                const term = e.target.value.toLowerCase();  
-                const filtered = allBooks.filter(b => 
-                    b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)
-                );  
-                renderGrid(filtered);  
-            }, 300); 
-        });  
-  
         // Init
         fetchBooks();  
     </script>  
