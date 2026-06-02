@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>HM 16 LIBRARY</title>  
       
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">  
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">  
       
+    <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>  
     
+    <!-- ePub.js Library for Web Reading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
   
@@ -149,7 +152,7 @@
 
         .empty-state { grid-column: 1 / -1; padding: 4rem 1rem; text-align: center; color: var(--text-light); font-size: 1.1rem; }  
   
-        /* --- Web ePub Reader Modal (Vertical Scroll Optimized) --- */
+        /* --- Web ePub Reader Modal (Vertical Scroll Optimized Fix) --- */
         .reader-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: var(--bg-main); z-index: 2000; display: none; flex-direction: column;
@@ -172,12 +175,18 @@
         
         .reader-content {
             flex: 1; position: relative; width: 100%; display: flex; justify-content: center;
-            background: var(--bg-main);
+            background: var(--bg-main); overflow-y: auto; /* Fix for vertical scroll */
         }
         #viewer {
-            width: 100%; height: 100%; max-width: 800px;
-            /* ইপাব আইফ্রেম নিজেই স্ক্রল হ্যান্ডেল করবে */
+            width: 100%; min-height: 100%; max-width: 800px;
         }
+
+        /* --- Error Message Styling --- */
+        .error-message {
+            padding: 2rem; text-align: center; color: #e74c3c; font-family: var(--font-sans);
+            display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 2rem;
+        }
+        .error-message i { font-size: 2.5rem; }
 
         /* --- Mobile Responsiveness --- */  
         @media (max-width: 600px) {  
@@ -221,6 +230,7 @@
         </div>  
     </div>  
 
+    <!-- Web ePub Reader Modal -->
     <div class="reader-modal" id="readerModal">
         <div class="reader-header">
             <h3 class="reader-title" id="readerTitle">বই পড়া হচ্ছে...</h3>
@@ -246,7 +256,6 @@
             localStorage.setItem('theme', newTheme);  
             updateThemeIcon();  
             
-            // Update ePub Reader theme dynamically if open
             if(currentRendition) {
                 applyReaderTheme(newTheme);
             }
@@ -268,6 +277,7 @@
         async function fetchBooks() {  
             try {  
                 const res = await fetch('./api/books.json');  
+                if (!res.ok) throw new Error('Network response was not ok');
                 allBooks = await res.json();  
                   
                 if (allBooks.length > 0) {  
@@ -278,7 +288,8 @@
                     showEmptyState('কোনো বই পাওয়া যায়নি।');  
                 }  
             } catch (err) {  
-                showEmptyState('ডেটা লোড করতে সমস্যা হচ্ছে। ইন্টারনেট কানেকশন চেক করুন।');  
+                console.error(err);
+                showEmptyState('ডেটা লোড করতে সমস্যা হচ্ছে। ফাইল ডিরেক্টরি এবং ইন্টারনেট কানেকশন চেক করুন।');  
             }  
         }  
 
@@ -295,7 +306,6 @@
   
             if(books.length === 0) return showEmptyState('আপনার খোঁজা বইটি পাওয়া যায়নি।');  
   
-            // Document Fragment for better performance
             const fragment = document.createDocumentFragment();
 
             books.forEach((book, index) => {  
@@ -329,33 +339,43 @@
             grid.appendChild(fragment);
         }  
 
-        /* --- ePub Reader Logic (Vertical Scroll) --- */
+        /* --- ePub Reader Logic (Bug Fixes applied) --- */
         let currentBook = null;
         let currentRendition = null;
 
         function openReader(url, title) {
             const modal = document.getElementById('readerModal');
+            const viewer = document.getElementById('viewer');
+            
             document.getElementById('readerTitle').textContent = title;
-            document.getElementById('viewer').innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-light);">বই লোড হচ্ছে...</div>'; 
+            viewer.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-light); margin-top: 2rem;"><i class="ph ph-spinner-gap ph-spin" style="font-size: 2rem; margin-bottom: 10px;"></i><br>বই লোড হচ্ছে, দয়া করে অপেক্ষা করুন...</div>'; 
             
             modal.style.display = 'flex';
-            // slight delay for CSS transition
             setTimeout(() => modal.classList.add('show'), 10);
             
             currentBook = ePub(url);
+            
+            // Render setup
             currentRendition = currentBook.renderTo("viewer", {
                 width: "100%",
                 height: "100%",
-                flow: "scrolled-doc", // Enable Vertical Scrolling
+                flow: "scrolled-doc", // Vertical Scroll
                 manager: "continuous"
             });
             
             applyReaderTheme(document.documentElement.getAttribute('data-theme'));
-            currentRendition.display();
-
-            // Error handling if book fails to load
-            currentBook.ready.catch(() => {
-                document.getElementById('viewer').innerHTML = '<div style="padding: 2rem; text-align: center; color: red;">বইটি লোড করতে সমস্যা হয়েছে। দয়া করে ডাউনলোড করে পড়ুন।</div>';
+            
+            // Error handling if file fails to load (e.g. CORS issue or invalid epub)
+            currentBook.ready.then(() => {
+                currentRendition.display();
+            }).catch((err) => {
+                console.error("ePub Loading Error:", err);
+                viewer.innerHTML = `
+                    <div class="error-message">
+                        <i class="ph ph-warning-circle"></i>
+                        <strong>বইটি লোড করা যাচ্ছে না!</strong>
+                        <span style="font-size: 0.9rem; color: var(--text-light);">সম্ভবত ফাইলের লিংকে CORS পলিসি ব্লক করা আছে অথবা এটি ডিরেক্ট ePub ফাইল নয়। দয়া করে ডাউনলোড বাটনে ক্লিক করে পড়ুন।</span>
+                    </div>`;
             });
         }
 
@@ -369,7 +389,8 @@
                     "color": isDark ? "#E6E4E0" : "#1E1B18",
                     "padding": "20px 10px",
                     "font-family": "sans-serif",
-                    "line-height": "1.8"
+                    "line-height": "1.8",
+                    "overflow-x": "hidden"
                 },
                 "p": { "font-size": "1.1rem" },
                 "h1, h2, h3": { "color": isDark ? "#F06A42" : "#E0532B" }
@@ -389,7 +410,7 @@
                     currentRendition = null;
                 }
                 document.getElementById('viewer').innerHTML = '';
-            }, 300); // Wait for transition
+            }, 300); 
         }
 
         /* --- Search Debounce Logic --- */
@@ -402,12 +423,11 @@
                     b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)
                 );  
                 renderGrid(filtered);  
-            }, 250); // 250ms delay for better performance
+            }, 250); 
         });  
   
         // Start App
         fetchBooks();  
     </script>  
 </body>  
-    </html>
-                                                                       
+</html>
