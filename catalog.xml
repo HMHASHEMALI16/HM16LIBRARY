@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:opds="http://opds-spec.org/2010/catalog">
   <id>urn:uuid:hmhashemali-opds-library</id>
   <title>My eBook Collection</title>
-  <updated>2026-06-01T14:45:47.579323Z</updated>
+  <updated>2026-06-02T16:29:44.541476Z</updated>
   <author><name>HM Hashem Ali</name></author>
 
   <entry>
@@ -11,7 +11,7 @@
       <name>বনফুল</name>
     </author>
     <id>urn:uuid:%E0%A6%85%E0%A6%97%E0%A7%8D%E0%A6%A8%E0%A6%BF_-_%E0%A6%AC%E0%A6%A8%E0%A6%AB%E0%A7%81%E0%A6%B2.epub</id>
-    <updated>2026-06-01T14:45:47.579959Z</updated>
+    <updated>2026-06-02T16:29:44.541935Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%97%E0%A7%8D%E0%A6%A8%E0%A6%BF_-_%E0%A6%AC%E0%A6%A8%E0%A6%AB%E0%A7%81%E0%A6%B2.epub" type="application/epub+zip" />
@@ -22,7 +22,7 @@
       <name>নজরুল রচনাবলী (কাজী নজরুল ইসলাম)</name>
     </author>
     <id>urn:uuid:%E0%A6%85%E0%A6%97%E0%A7%8D%E0%A6%A8%E0%A6%BF%E0%A6%AC%E0%A7%80%E0%A6%A3%E0%A6%BE_%28%E0%A7%A7%E0%A7%AF%E0%A7%A8%E0%A7%A8%29_-_%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%81%E0%A6%B2_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80_%28%E0%A6%95%E0%A6%BE%E0%A6%9C%E0%A7%80_%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%81%E0%A6%B2_%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%29.epub</id>
-    <updated>2026-06-01T14:45:47.579993Z</updated>
+    <updated>2026-06-02T16:29:44.541966Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%97%E0%A7%8D%E0%A6%A8%E0%A6%BF%E0%A6%AC%E0%A7%80%E0%A6%A3%E0%A6%BE_%28%E0%A7%A7%E0%A7%AF%E0%A7%A8%E0%A7%A8%29_-_%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%81%E0%A6%B2_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80_%28%E0%A6%95%E0%A6%BE%E0%A6%9C%E0%A7%80_%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%81%E0%A6%B2_%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%29.epub" type="application/epub+zip" />
@@ -33,7 +33,7 @@
       <name>শরৎ রচনাবলী</name>
     </author>
     <id>urn:uuid:%E0%A6%85%E0%A6%9C%E0%A7%8D%E0%A6%9E%E0%A6%BE%E0%A6%A4_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub</id>
-    <updated>2026-06-01T14:45:47.580008Z</updated>
+    <updated>2026-06-02T16:29:44.541981Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%9C%E0%A7%8D%E0%A6%9E%E0%A6%BE%E0%A6%A4_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub" type="application/epub+zip" />
@@ -44,7 +44,7 @@
       <name>মাহমুদুল হক</name>
     </author>
     <id>urn:uuid:%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%B0_%E0%A6%AA%E0%A6%BE%E0%A6%A0%E0%A6%B6%E0%A6%BE%E0%A6%B2%E0%A6%BE_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_-_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%B9%E0%A6%95.epub</id>
-    <updated>2026-06-01T14:45:47.580022Z</updated>
+    <updated>2026-06-02T16:29:44.541994Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%B0_%E0%A6%AA%E0%A6%BE%E0%A6%A0%E0%A6%B6%E0%A6%BE%E0%A6%B2%E0%A6%BE_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_-_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%B9%E0%A6%95.epub" type="application/epub+zip" />
@@ -55,7 +55,7 @@
       <name>অনুবাদ সাহিত্য</name>
     </author>
     <id>urn:uuid:%E0%A6%85%E0%A6%B0%E0%A6%BF%E0%A6%9C%E0%A6%BF%E0%A6%A8_%E2%80%93_%E0%A6%A1%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8_%E0%A6%AC%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%89%E0%A6%A8_-_%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%AC%E0%A6%BE%E0%A6%A6_%E0%A6%B8%E0%A6%BE%E0%A6%B9%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%AF.epub</id>
-    <updated>2026-06-01T14:45:47.580034Z</updated>
+    <updated>2026-06-02T16:29:44.542007Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%B0%E0%A6%BF%E0%A6%9C%E0%A6%BF%E0%A6%A8_%E2%80%93_%E0%A6%A1%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8_%E0%A6%AC%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%89%E0%A6%A8_-_%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%AC%E0%A6%BE%E0%A6%A6_%E0%A6%B8%E0%A6%BE%E0%A6%B9%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%AF.epub" type="application/epub+zip" />
@@ -66,10 +66,21 @@
       <name>আবদুল জব্বার</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A6%AC%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%9C%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%AC%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%9C%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B0.epub</id>
-    <updated>2026-06-01T14:45:47.580045Z</updated>
+    <updated>2026-06-02T16:29:44.542018Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AC%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%9C%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%AC%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%9C%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B0.epub" type="application/epub+zip" />
+  </entry>
+  <entry>
+    <title>আবোল তাবোল</title>
+    <author>
+      <name>সুকুমার রায়</name>
+    </author>
+    <id>urn:uuid:%E0%A6%86%E0%A6%AC%E0%A7%8B%E0%A6%B2_%E0%A6%A4%E0%A6%BE%E0%A6%AC%E0%A7%8B%E0%A6%B2_-_%E0%A6%B8%E0%A7%81%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F.epub</id>
+    <updated>2026-06-02T16:29:44.542027Z</updated>
+    <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
+    <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
+    <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AC%E0%A7%8B%E0%A6%B2_%E0%A6%A4%E0%A6%BE%E0%A6%AC%E0%A7%8B%E0%A6%B2_-_%E0%A6%B8%E0%A7%81%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F.epub" type="application/epub+zip" />
   </entry>
   <entry>
     <title>আমাদের চিঠিযুগ কুউউ ঝিকঝিক</title>
@@ -77,7 +88,7 @@
       <name>ইমতিয়ার শামীম</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%9A%E0%A6%BF%E0%A6%A0%E0%A6%BF%E0%A6%AF%E0%A7%81%E0%A6%97_%E0%A6%95%E0%A7%81%E0%A6%89%E0%A6%89_%E0%A6%9D%E0%A6%BF%E0%A6%95%E0%A6%9D%E0%A6%BF%E0%A6%95_-_%E0%A6%87%E0%A6%AE%E0%A6%A4%E0%A6%BF%E0%A7%9F%E0%A6%BE%E0%A6%B0_%E0%A6%B6%E0%A6%BE%E0%A6%AE%E0%A7%80%E0%A6%AE.epub</id>
-    <updated>2026-06-01T14:45:47.580057Z</updated>
+    <updated>2026-06-02T16:29:44.542039Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%9A%E0%A6%BF%E0%A6%A0%E0%A6%BF%E0%A6%AF%E0%A7%81%E0%A6%97_%E0%A6%95%E0%A7%81%E0%A6%89%E0%A6%89_%E0%A6%9D%E0%A6%BF%E0%A6%95%E0%A6%9D%E0%A6%BF%E0%A6%95_-_%E0%A6%87%E0%A6%AE%E0%A6%A4%E0%A6%BF%E0%A7%9F%E0%A6%BE%E0%A6%B0_%E0%A6%B6%E0%A6%BE%E0%A6%AE%E0%A7%80%E0%A6%AE.epub" type="application/epub+zip" />
@@ -88,7 +99,7 @@
       <name>জহির রায়হান</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A6%B0_%E0%A6%95%E0%A6%A4_%E0%A6%A6%E0%A6%BF%E0%A6%A8_-_%E0%A6%9C%E0%A6%B9%E0%A6%BF%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8.epub</id>
-    <updated>2026-06-01T14:45:47.580065Z</updated>
+    <updated>2026-06-02T16:29:44.542047Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B0_%E0%A6%95%E0%A6%A4_%E0%A6%A6%E0%A6%BF%E0%A6%A8_-_%E0%A6%9C%E0%A6%B9%E0%A6%BF%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8.epub" type="application/epub+zip" />
@@ -99,7 +110,7 @@
       <name>জহির রায়হান</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A6%B0%E0%A7%87%E0%A6%95_%E0%A6%AB%E0%A6%BE%E0%A6%B2%E0%A7%8D%E0%A6%97%E0%A7%81%E0%A6%A8_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_%28%E0%A7%A7%E0%A7%AF%E0%A7%AC%E0%A7%AF%29_-_%E0%A6%9C%E0%A6%B9%E0%A6%BF%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8.epub</id>
-    <updated>2026-06-01T14:45:47.580075Z</updated>
+    <updated>2026-06-02T16:29:44.542058Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B0%E0%A7%87%E0%A6%95_%E0%A6%AB%E0%A6%BE%E0%A6%B2%E0%A7%8D%E0%A6%97%E0%A7%81%E0%A6%A8_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_%28%E0%A7%A7%E0%A7%AF%E0%A7%AC%E0%A7%AF%29_-_%E0%A6%9C%E0%A6%B9%E0%A6%BF%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8.epub" type="application/epub+zip" />
@@ -110,7 +121,7 @@
       <name>আল মাহমুদ</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A6%B2_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE_-_%E0%A6%86%E0%A6%B2_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6.epub</id>
-    <updated>2026-06-01T14:45:47.580084Z</updated>
+    <updated>2026-06-02T16:29:44.542067Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B2_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE_-_%E0%A6%86%E0%A6%B2_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6.epub" type="application/epub+zip" />
@@ -121,7 +132,7 @@
       <name>আশাপূর্ণা দেবী</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80.epub</id>
-    <updated>2026-06-01T14:45:47.580094Z</updated>
+    <updated>2026-06-02T16:29:44.542077Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80.epub" type="application/epub+zip" />
@@ -132,7 +143,7 @@
       <name>আশুতোষ মুখোপাধ্যায়</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%A4%E0%A7%8B%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%A4%E0%A7%8B%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub</id>
-    <updated>2026-06-01T14:45:47.580107Z</updated>
+    <updated>2026-06-02T16:29:44.542089Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%A4%E0%A7%8B%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%A4%E0%A7%8B%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub" type="application/epub+zip" />
@@ -143,7 +154,7 @@
       <name>আবুল মনসুর আহমেদ</name>
     </author>
     <id>urn:uuid:%E0%A6%86%E0%A7%9F%E0%A6%A8%E0%A6%BE_%28%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%29_-_%E0%A6%86%E0%A6%AC%E0%A7%81%E0%A6%B2_%E0%A6%AE%E0%A6%A8%E0%A6%B8%E0%A7%81%E0%A6%B0_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6.epub</id>
-    <updated>2026-06-01T14:45:47.580117Z</updated>
+    <updated>2026-06-02T16:29:44.542101Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A7%9F%E0%A6%A8%E0%A6%BE_%28%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%29_-_%E0%A6%86%E0%A6%AC%E0%A7%81%E0%A6%B2_%E0%A6%AE%E0%A6%A8%E0%A6%B8%E0%A7%81%E0%A6%B0_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6.epub" type="application/epub+zip" />
@@ -154,7 +165,7 @@
       <name>লুৎফর রহমান</name>
     </author>
     <id>urn:uuid:%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A_%E0%A6%9C%E0%A7%80%E0%A6%AC%E0%A6%A8_-_%E0%A6%B2%E0%A7%81%E0%A7%8E%E0%A6%AB%E0%A6%B0_%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%BE%E0%A6%A8.epub</id>
-    <updated>2026-06-01T14:45:47.580126Z</updated>
+    <updated>2026-06-02T16:29:44.542111Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A_%E0%A6%9C%E0%A7%80%E0%A6%AC%E0%A6%A8_-_%E0%A6%B2%E0%A7%81%E0%A7%8E%E0%A6%AB%E0%A6%B0_%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%BE%E0%A6%A8.epub" type="application/epub+zip" />
@@ -165,7 +176,7 @@
       <name>লুৎফর রহমান</name>
     </author>
     <id>urn:uuid:%E0%A6%89%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A6%A4_%E0%A6%9C%E0%A7%80%E0%A6%AC%E0%A6%A8_-_%E0%A6%B2%E0%A7%81%E0%A7%8E%E0%A6%AB%E0%A6%B0_%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%BE%E0%A6%A8.epub</id>
-    <updated>2026-06-01T14:45:47.580138Z</updated>
+    <updated>2026-06-02T16:29:44.542119Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A6%A4_%E0%A6%9C%E0%A7%80%E0%A6%AC%E0%A6%A8_-_%E0%A6%B2%E0%A7%81%E0%A7%8E%E0%A6%AB%E0%A6%B0_%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%BE%E0%A6%A8.epub" type="application/epub+zip" />
@@ -176,7 +187,7 @@
       <name>শরৎচন্দ্র চট্টোপাধ্যায়</name>
     </author>
     <id>urn:uuid:%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%28%E0%A6%B6%E0%A6%B0%E0%A7%8E%29_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub</id>
-    <updated>2026-06-01T14:45:47.580148Z</updated>
+    <updated>2026-06-02T16:29:44.542129Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%28%E0%A6%B6%E0%A6%B0%E0%A7%8E%29_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub" type="application/epub+zip" />
@@ -187,7 +198,7 @@
       <name>উপন্যাস শরদিন্দু বন্দ্যোপাধ্যায়</name>
     </author>
     <id>urn:uuid:%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%E0%A6%B8%E0%A6%AE%E0%A6%97%E0%A7%8D%E0%A6%B0_%E2%80%93_%E0%A6%B6%E0%A6%B0%E0%A6%A6_-_%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%E0%A6%B6%E0%A6%B0%E0%A6%A6%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%81_%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub</id>
-    <updated>2026-06-01T14:45:47.580162Z</updated>
+    <updated>2026-06-02T16:29:44.542144Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%E0%A6%B8%E0%A6%AE%E0%A6%97%E0%A7%8D%E0%A6%B0_%E2%80%93_%E0%A6%B6%E0%A6%B0%E0%A6%A6_-_%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%E0%A6%B6%E0%A6%B0%E0%A6%A6%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%81_%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub" type="application/epub+zip" />
@@ -198,7 +209,7 @@
       <name>মহাদেব সাহা</name>
     </author>
     <id>urn:uuid:%E0%A6%8F%E0%A6%87_%E0%A6%97%E0%A7%83%E0%A6%B9_%E0%A6%8F%E0%A6%87_%E0%A6%B8%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_-_%E0%A6%AE%E0%A6%B9%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%AC_%E0%A6%B8%E0%A6%BE%E0%A6%B9%E0%A6%BE.epub</id>
-    <updated>2026-06-01T14:45:47.580172Z</updated>
+    <updated>2026-06-02T16:29:44.542176Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%87_%E0%A6%97%E0%A7%83%E0%A6%B9_%E0%A6%8F%E0%A6%87_%E0%A6%B8%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_-_%E0%A6%AE%E0%A6%B9%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%AC_%E0%A6%B8%E0%A6%BE%E0%A6%B9%E0%A6%BE.epub" type="application/epub+zip" />
@@ -209,7 +220,7 @@
       <name>শক্তি চট্টোপাধ্যায়</name>
     </author>
     <id>urn:uuid:%E0%A6%8F%E0%A6%87_%E0%A6%A4%E0%A7%8B_%E0%A6%AE%E0%A6%B0%E0%A7%8D%E0%A6%AE%E0%A6%B0_%E0%A6%AE%E0%A7%81%E0%A6%B0%E0%A7%8D%E0%A6%A4%E0%A6%BF_%28%E0%A7%A7%E0%A7%AF%E0%A7%AE%E0%A7%AD%29_-_%E0%A6%B6%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub</id>
-    <updated>2026-06-01T14:45:47.580201Z</updated>
+    <updated>2026-06-02T16:29:44.542190Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%87_%E0%A6%A4%E0%A7%8B_%E0%A6%AE%E0%A6%B0%E0%A7%8D%E0%A6%AE%E0%A6%B0_%E0%A6%AE%E0%A7%81%E0%A6%B0%E0%A7%8D%E0%A6%A4%E0%A6%BF_%28%E0%A7%A7%E0%A7%AF%E0%A7%AE%E0%A7%AD%29_-_%E0%A6%B6%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub" type="application/epub+zip" />
@@ -220,7 +231,7 @@
       <name>বঙ্কিমচন্দ্র চট্টোপাধ্যায় (বঙ্কিম রচনাবলী)</name>
     </author>
     <id>urn:uuid:%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%A3%E0%A6%95%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A7%87%E0%A6%B0_%E0%A6%89%E0%A6%87%E0%A6%B2_-_%E0%A6%AC%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%AE%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC_%28%E0%A6%AC%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%AE_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80%29.epub</id>
-    <updated>2026-06-01T14:45:47.580216Z</updated>
+    <updated>2026-06-02T16:29:44.542204Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%A3%E0%A6%95%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A7%87%E0%A6%B0_%E0%A6%89%E0%A6%87%E0%A6%B2_-_%E0%A6%AC%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%AE%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC_%28%E0%A6%AC%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%AE_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80%29.epub" type="application/epub+zip" />
@@ -231,7 +242,7 @@
       <name>রবীন্দ্র রচনাবলী – রবীন্দ্রনাথ ঠাকুর</name>
     </author>
     <id>urn:uuid:%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%A3%E0%A6%BF%E0%A6%95%E0%A6%BE_-_%E0%A6%B0%E0%A6%AC%E0%A7%80%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80_%E2%80%93_%E0%A6%B0%E0%A6%AC%E0%A7%80%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%A8%E0%A6%BE%E0%A6%A5_%E0%A6%A0%E0%A6%BE%E0%A6%95%E0%A7%81%E0%A6%B0.epub</id>
-    <updated>2026-06-01T14:45:47.580229Z</updated>
+    <updated>2026-06-02T16:29:44.542218Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%A3%E0%A6%BF%E0%A6%95%E0%A6%BE_-_%E0%A6%B0%E0%A6%AC%E0%A7%80%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80_%E2%80%93_%E0%A6%B0%E0%A6%AC%E0%A7%80%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%A8%E0%A6%BE%E0%A6%A5_%E0%A6%A0%E0%A6%BE%E0%A6%95%E0%A7%81%E0%A6%B0.epub" type="application/epub+zip" />
@@ -242,7 +253,7 @@
       <name>শরৎচন্দ্র চট্টোপাধ্যায়</name>
     </author>
     <id>urn:uuid:%E0%A6%AC%E0%A6%A1%E0%A6%BC%E0%A6%A6%E0%A6%BF%E0%A6%A6%E0%A6%BF_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub</id>
-    <updated>2026-06-01T14:45:47.580239Z</updated>
+    <updated>2026-06-02T16:29:44.542230Z</updated>
     <link rel="http://opds-spec.org/image/thumbnail" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/image" href="https://hmhashemali16.github.io/OPDS/Bookicon.png" type="image/png" />
     <link rel="http://opds-spec.org/acquisition" href="https://hmhashemali16.github.io/OPDS/%E0%A6%AC%E0%A6%A1%E0%A6%BC%E0%A6%A6%E0%A6%BF%E0%A6%A6%E0%A6%BF_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub" type="application/epub+zip" />
