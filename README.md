@@ -4,7 +4,7 @@
 ```
 https://hmhashemali16.github.io/OPDS/catalog.xml
 ```
-2. Static API Link
+2. Static JSON API Link
 ```
 https://hmhashemali16.github.io/OPDS/api/books.json
 ```
