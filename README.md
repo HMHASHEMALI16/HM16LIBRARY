@@ -10,7 +10,7 @@ https://hmhashemali16.github.io/OPDS/
 ```
 Digital Library Website
 
-*   🌐 **[Digital Library Website](https://hmhashemali16.github.io/OPDS)**
+*   **[https://hmhashemali16.github.io/OPDS](https://hmhashemali16.github.io/OPDS)**
 
 ### ✅ Supported Apps:
 - Moon+ Reader
