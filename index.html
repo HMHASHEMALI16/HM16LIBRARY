@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>HM 16 LIBRARY</title>  
       
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">  
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">  
       
-    <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>  
     
-    <!-- ePub.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
   
@@ -75,7 +72,7 @@
   
         /* --- Layout --- */  
         .container {   
-            max-width: 1200px; margin: 0 auto; padding: 7rem 1.5rem 3rem; width: 100%;  
+            max-width: 1200px; margin: 0 auto; padding: 6.5rem 1.5rem 3rem; width: 100%;  
         }  
   
         /* --- Sticky Glassmorphism Header --- */
@@ -211,18 +208,23 @@
 
         /* --- Mobile Responsiveness --- */  
         @media (max-width: 768px) {  
-            .container { padding-top: 10rem; } /* ফিক্স: হেডার দুই লাইন হওয়ার কারণে প্যাডিং বাড়ানো হয়েছে */
+            .container { padding-top: 10rem; } 
             
             .top-nav { padding: 1rem; flex-wrap: wrap; gap: 1rem; }  
             
             /* ব্র্যান্ডিং লাইন ১ এ বামে */
-            .brand-area { flex: 1; order: 1; margin-right: 0; }
+            .brand-area { flex: 1 1 auto; order: 1; margin-right: 0; }
             
             /* টগল বাটন লাইন ১ এ ডানে */
             .icon-btn { order: 2; margin-left: auto; }
             
-            /* সার্চ বক্স লাইন ২ এ সম্পূর্ণ জায়গা জুড়ে */
-            .search-wrapper { order: 3; width: 100%; max-width: 100%; margin-top: 0.2rem; }  
+            /* ফিক্স: সার্চ বক্স ১০০% জায়গা নিয়ে সম্পূর্ণ আলাদা লাইন তৈরি করবে */
+            .search-wrapper { 
+                flex: 1 1 100%; /* ১০০% বেস দিয়ে এটিকে নিচে নামানো হলো */
+                order: 3; 
+                max-width: 100%; 
+                margin-top: 0.2rem; 
+            }  
 
             .main-heading { font-size: 1.4rem;}  
             .sub-heading { font-size: 0.75rem; }
@@ -246,19 +248,16 @@
   
     <div class="top-nav-wrapper">
         <header class="top-nav">  
-            <!-- 1. Brand -->
             <div class="brand-area">
                 <h1 class="main-heading">HM 16 LIBRARY</h1>  
                 <span class="sub-heading">ডিজিটাল লাইব্রেরী</span>
             </div>
             
-            <!-- 2. Search -->
             <div class="search-wrapper">  
                 <i class="ph ph-magnifying-glass"></i>  
                 <input type="text" id="searchBox" class="search-input" placeholder="বইয়ের নাম বা লেখক খুঁজুন...">  
             </div>  
 
-            <!-- 3. Theme Toggle -->
             <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
         </header>  
     </div>
@@ -276,7 +275,6 @@
         </div>  
     </div>  
 
-    <!-- Web ePub Reader Modal -->
     <div class="reader-modal" id="readerModal">
         <div class="reader-header">
             <h3 class="reader-title" id="readerTitle">বই পড়া হচ্ছে...</h3>
