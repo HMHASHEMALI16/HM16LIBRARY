@@ -154,7 +154,7 @@
         .book-card {   
             background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 14px;  
             padding: 1.25rem; display: flex; flex-direction: column; align-items: center;  
-            text-decoration: none; box-shadow: var(--card-shadow);  
+            box-shadow: var(--card-shadow);  
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); height: 100%;
         }  
         .book-card:hover { 
@@ -166,10 +166,10 @@
             transform: scale(1.03);
         }  
   
-        /* --- বইয়ের কভার --- */  
+        /* --- বইয়ের কভার (প্রস্থ কমানো হয়েছে) --- */  
         .book-cover-wrapper {  
             position: relative;   
-            width: 100%; max-width: 130px;  
+            width: 100%; max-width: 100px;  /* ১৩০ থেকে ১০০ করা হয়েছে */
             aspect-ratio: 2 / 3;  
             border-radius: 4px 10px 10px 4px;  
             box-shadow: -3px 0 6px rgba(0,0,0,0.2) inset, 4px 8px 16px rgba(0,0,0,0.12);  
@@ -183,8 +183,8 @@
             z-index: 5;  
         }  
   
-        .cover-title { font-family: var(--font-serif); font-size: 0.9rem; font-weight: 700; color: #FFFFFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.6); margin: 0 0 6px 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; z-index: 2;}  
-        .cover-author { font-size: 0.7rem; color: rgba(255,255,255,0.85); text-shadow: 1px 1px 2px rgba(0,0,0,0.6); z-index: 2;}  
+        .cover-title { font-family: var(--font-serif); font-size: 0.8rem; font-weight: 700; color: #FFFFFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.6); margin: 0 0 6px 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; z-index: 2;}  
+        .cover-author { font-size: 0.65rem; color: rgba(255,255,255,0.85); text-shadow: 1px 1px 2px rgba(0,0,0,0.6); z-index: 2;}  
   
         /* কন্টেন্ট এরিয়া পুশ ডাউন করার জন্য flex-grow */
         .card-info {
@@ -192,11 +192,52 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            justify-content: center;
+            justify-content: space-between;
         }
         .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
         .info-author { color: var(--text-light); font-size: 0.85rem; margin: 0; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
   
+        /* --- ডাউনলোড ও রিড বাটনস --- */
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+            width: 100%;
+        }
+        .btn-action {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 0;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .btn-download {
+            background: rgba(224, 83, 43, 0.1);
+            color: var(--accent);
+        }
+        .btn-download:hover {
+            background: var(--accent);
+            color: #FFFFFF;
+        }
+        .btn-read {
+            background: transparent;
+            border-color: var(--border-color);
+            color: var(--text-dark);
+        }
+        .btn-read:hover {
+            border-color: var(--text-dark);
+            background: var(--bg-main);
+        }
+
         .empty-state { grid-column: 1 / -1; padding: 5rem 1rem; text-align: center; color: var(--text-light); font-family: var(--font-serif); font-size: 1.2rem; }  
   
         /* --- মোবাইল রেস্পন্সিভনেস --- */  
@@ -219,13 +260,14 @@
                 gap: 1rem; 
             }  
             .book-card { padding: 1rem 0.75rem; border-radius: 12px; }  
-            .book-cover-wrapper { max-width: 95px; margin-bottom: 0.8rem; padding: 0.5rem; border-radius: 3px 6px 6px 3px; }  
+            .book-cover-wrapper { max-width: 80px; margin-bottom: 0.8rem; padding: 0.5rem; border-radius: 3px 6px 6px 3px; }  /* ৯৫ থেকে ৮০ করা হয়েছে */
             .book-cover-wrapper::after { width: 6px; }  
               
-            .cover-title { font-size: 0.75rem; }  
-            .cover-author { font-size: 0.65rem; }  
+            .cover-title { font-size: 0.7rem; }  
+            .cover-author { font-size: 0.6rem; }  
             .info-title { font-size: 0.9rem; }  
             .info-author { font-size: 0.75rem; }  
+            .btn-action { font-size: 0.75rem; padding: 6px 0; }
         }  
     </style>  
 </head>  
@@ -368,24 +410,38 @@
                 const colorIndex = (index * 3 + 7) % coverStyles.length;  
                 const gradient = coverStyles[colorIndex];  
                   
-                const card = document.createElement('a');  
-                card.href = book.download_link;  
+                const card = document.createElement('div');  // 'a' ট্যাগ পরিবর্তন করে 'div' করা হয়েছে
                 card.className = 'book-card';  
-                card.setAttribute('download', '');  
-                  
-                card.innerHTML = `  
+            card.innerHTML = `  
                     <div class="book-cover-wrapper" style="background: ${gradient};">  
                         <div class="cover-title">${book.title}</div>  
                         <div class="cover-author">${book.author}</div>  
                     </div>  
                     <div class="card-info">
-                        <h3 class="info-title" title="${book.title}">${book.title}</h3>  
-                        <p class="info-author">${book.author}</p>  
+                        <div>
+                            <h3 class="info-title" title="${book.title}">${book.title}</h3>  
+                            <p class="info-author">${book.author}</p>  
+                        </div>
+                        <div class="card-actions">
+                            <a href="${book.download_link}" download class="btn-action btn-download" title="Download">
+                                <i class="ph ph-download-simple"></i> Download
+                            </a>
+                            <button onclick="readEpub('${book.download_link}')" class="btn-action btn-read" title="Read">
+                                <i class="ph ph-book-open"></i> Read
+                            </button>
+                        </div>
                     </div>
                 `;  
                 grid.appendChild(card);  
             });  
         }  
+
+        // ePub Read ফাংশন
+        function readEpub(link) {
+            // আপাতত নতুন ট্যাবে লিংকটি ওপেন হবে। 
+            // আপনি চাইলে এখানে epub.js রিডার বা আপনার ওয়েব রিডারের URL যুক্ত করতে পারেন।
+            window.open(link, '_blank');
+        }
   
         function handleSearch() {  
             const term = document.getElementById('searchBox').value.toLowerCase();  
@@ -402,3 +458,5 @@
     </script>  
 </body>  
 </html>
+
+                
