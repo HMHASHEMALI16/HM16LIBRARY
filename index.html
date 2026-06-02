@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>HM 16 LIBRARY</title>  
       
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">  
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">  
       
-    <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>  
     
-    <!-- ePub.js Library for Web Reading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
   
@@ -27,29 +24,40 @@
         /* --- Global Reset & Variables --- */
         *, *::before, *::after { box-sizing: border-box; }
 
+        @font-face {
+            font-family: 'July Regular';
+            src: url('./July_Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {  
-            --bg-main: #FAFAFA;        
+            --bg-main: #F4F6F8;        
             --card-bg: #FFFFFF;  
-            --text-dark: #1E1B18;      
-            --text-light: #75716B;     
+            --text-dark: #1A1C1E;      
+            --text-light: #6C737F;     
             --accent: #E0532B;         
-            --border-color: #E6E4E0;  
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);  
-            --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --accent-hover: #C64623;
+            --border-color: #E5E7EB;  
+            --card-shadow: 0 8px 24px rgba(149, 157, 165, 0.08);  
+            --hover-shadow: 0 16px 32px rgba(149, 157, 165, 0.15);
             --font-serif: 'Noto Serif Bengali', serif;  
             --font-sans: 'Noto Sans Bengali', sans-serif;  
-            --border-radius: 14px;
+            --nav-bg: rgba(255, 255, 255, 0.85);
         }  
   
         [data-theme="dark"] {  
-            --bg-main: #121110;        
-            --card-bg: #1A1917;  
-            --text-dark: #E6E4E0;      
-            --text-light: #949088;     
+            --bg-main: #0D0F11;        
+            --card-bg: #16181A;  
+            --text-dark: #F3F4F6;      
+            --text-light: #9CA3AF;     
             --accent: #F06A42;         
-            --border-color: #292724;  
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);  
-            --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            --accent-hover: #FF8562;
+            --border-color: #2D3035;  
+            --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);  
+            --hover-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+            --nav-bg: rgba(22, 24, 26, 0.85);
         }  
   
         body {  
@@ -58,101 +66,114 @@
             background-color: var(--bg-main); 
             color: var(--text-dark);  
             -webkit-font-smoothing: antialiased;  
-            transition: background-color 0.3s ease, color 0.3s ease;  
+            transition: background-color 0.4s ease, color 0.4s ease;  
             line-height: 1.6;
         }  
   
         /* --- Layout --- */  
         .container {   
-            max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; width: 100%;  
+            max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem 3rem; width: 100%;  
         }  
   
-        /* --- Top Navigation --- */
+        /* --- Sticky Glassmorphism Header --- */
+        .top-nav-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000; transition: background 0.4s ease;
+        }
+
         .top-nav {  
-            display: flex; justify-content: space-between; align-items: center;  
-            margin-bottom: 2.5rem; gap: 1.5rem; flex-wrap: wrap;  
+            max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
+            display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;  
         }  
-        .main-heading { font-family: var(--font-serif); font-size: 1.8rem; margin: 0; font-weight: 700; color: var(--text-dark); }  
+
+        .main-heading { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; font-weight: 700; color: var(--accent); letter-spacing: -0.5px;}  
         .nav-right { display: flex; gap: 1rem; flex: 1; justify-content: flex-end; align-items: center; }  
         
         /* Search Box */
-        .search-wrapper { flex: 1; max-width: 400px; position: relative; }  
+        .search-wrapper { flex: 1; max-width: 420px; position: relative; }  
         .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }  
         .search-input {  
-            width: 100%; height: 46px; padding: 0 1.2rem 0 2.8rem; 
-            border: 1px solid var(--border-color); border-radius: 12px;  
+            width: 100%; height: 46px; padding: 0 1.2rem 0 3rem; 
+            border: 1px solid var(--border-color); border-radius: 24px;  
             background: var(--card-bg); color: var(--text-dark); 
             font-family: var(--font-sans); font-size: 0.95rem;  
-            outline: none; box-shadow: var(--card-shadow); transition: all 0.2s ease;  
+            outline: none; transition: all 0.3s ease;  
         }  
-        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(224, 83, 43, 0.15); }  
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(224, 83, 43, 0.12); }  
         
-        /* Buttons */
+        /* Theme Button */
         .icon-btn {  
             background: var(--card-bg); border: 1px solid var(--border-color);  
-            width: 46px; height: 46px; border-radius: 12px; font-size: 1.4rem;  
+            width: 46px; height: 46px; border-radius: 50%; font-size: 1.4rem;  
             color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;  
-            box-shadow: var(--card-shadow); transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }  
-        .icon-btn:hover { border-color: var(--text-light); transform: translateY(-2px); }
+        .icon-btn:hover { border-color: var(--accent); color: var(--accent); transform: rotate(15deg) scale(1.05); }
   
         /* --- Section Header --- */  
         .section-header {  
             display: flex; justify-content: space-between; align-items: flex-end;  
-            margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem;  
+            margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.8rem;  
         }  
-        .section-title { font-family: var(--font-serif); font-size: 1.35rem; margin: 0; font-weight: 700; display: flex; gap: 8px; align-items: center; }  
-        .book-count { font-family: var(--font-sans); color: var(--text-light); font-size: 1rem; font-weight: normal; margin-left: 4px; }  
+        .section-title { font-family: var(--font-serif); font-size: 1.4rem; margin: 0; font-weight: 700; display: flex; gap: 8px; align-items: center; }  
+        .book-count { font-family: var(--font-sans); background: var(--accent); color: white; font-size: 0.85rem; font-weight: 600; padding: 2px 10px; border-radius: 20px; margin-left: 6px; }  
 
         /* --- Books Grid --- */  
         .books-grid {   
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.5rem;   
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.8rem;   
         }  
   
+        /* Modern Card Design */
         .book-card {   
-            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius);  
-            padding: 1.25rem; display: flex; flex-direction: column; align-items: center;  
-            box-shadow: var(--card-shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 18px;  
+            padding: 1.5rem; display: flex; flex-direction: column; align-items: center;  
+            box-shadow: var(--card-shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); height: 100%;
+            position: relative; overflow: hidden;
         }  
-        .book-card:hover { transform: translateY(-5px); border-color: transparent; box-shadow: var(--hover-shadow); }  
-        .book-card:hover .book-cover-wrapper { transform: scale(1.04); }  
+        .book-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--hover-shadow); }  
   
         /* Book Cover */  
         .book-cover-wrapper {  
-            position: relative; width: 100%; max-width: 100px; aspect-ratio: 2 / 3;  
-            border-radius: 4px 10px 10px 4px;  
-            box-shadow: -3px 0 6px rgba(0,0,0,0.2) inset, 4px 8px 12px rgba(0,0,0,0.1);  
-            margin-bottom: 1rem; display: flex; flex-direction: column; justify-content: center; align-items: center;  
-            padding: 1rem; text-align: center; overflow: hidden; transition: transform 0.3s ease;
+            position: relative; width: 100%; max-width: 110px; aspect-ratio: 2 / 3;  
+            border-radius: 4px 12px 12px 4px;  
+            box-shadow: -4px 0 8px rgba(0,0,0,0.2) inset, 4px 10px 20px rgba(0,0,0,0.15);  
+            margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center;  
+            padding: 1rem; text-align: center; overflow: hidden; transition: transform 0.4s ease;
         }  
+        .book-card:hover .book-cover-wrapper { transform: scale(1.05) rotate(2deg); }  
+        
         .book-cover-wrapper::after {  
             content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;  
-            background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.1) 20%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.15));  
+            background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0.1) 20%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.2));  
             z-index: 5;  
         }  
-        .cover-title { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 700; color: #FFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.6); margin: 0 0 6px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; z-index: 2;}  
-        .cover-author { font-size: 0.65rem; color: rgba(255,255,255,0.85); z-index: 2;}  
+        .cover-title { font-family: var(--font-serif); font-size: 0.9rem; font-weight: 700; color: #FFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.8); margin: 0 0 6px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; z-index: 2;}  
+        .cover-author { font-size: 0.7rem; color: rgba(255,255,255,0.9); z-index: 2;}  
   
         /* Card Info */
         .card-info { width: 100%; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-        .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
-        .info-author { color: var(--text-light); font-size: 0.8rem; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+        .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem; color: var(--text-dark); margin: 0 0 6px 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+        .info-author { color: var(--text-light); font-size: 0.85rem; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
   
         /* Action Buttons */
-        .card-actions { display: flex; gap: 8px; margin-top: 15px; width: 100%; }
+        .card-actions { display: flex; gap: 10px; margin-top: 20px; width: 100%; }
         .btn-action {
-            flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px;
-            padding: 8px 0; border-radius: 8px; font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem;
+            flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 10px 0; border-radius: 12px; font-family: var(--font-sans); font-weight: 600; font-size: 0.9rem;
             cursor: pointer; text-decoration: none; border: 1px solid transparent; transition: all 0.2s ease;
         }
         .btn-download { background: rgba(224, 83, 43, 0.1); color: var(--accent); }
         .btn-download:hover { background: var(--accent); color: #FFF; }
         .btn-read { background: transparent; border-color: var(--border-color); color: var(--text-dark); }
-        .btn-read:hover { border-color: var(--text-dark); background: var(--bg-main); }
+        .btn-read:hover { border-color: var(--text-dark); background: var(--text-dark); color: var(--bg-main); }
 
-        .empty-state { grid-column: 1 / -1; padding: 4rem 1rem; text-align: center; color: var(--text-light); font-size: 1.1rem; }  
-  
-        /* --- Web ePub Reader Modal (Vertical Scroll Optimized Fix) --- */
+        .empty-state { grid-column: 1 / -1; padding: 6rem 1rem; text-align: center; color: var(--text-light); font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 1rem;}  
+        .empty-state i { font-size: 3rem; color: var(--border-color); }
+
+        /* --- Web ePub Reader Modal --- */
         .reader-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: var(--bg-main); z-index: 2000; display: none; flex-direction: column;
@@ -162,54 +183,50 @@
         
         .reader-header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 1.5rem; background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 2rem; background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             z-index: 10;
         }
-        .reader-title { font-family: var(--font-serif); font-weight: 700; margin: 0; font-size: 1.1rem; color: var(--text-dark); }
+        .reader-title { font-family: 'July Regular', var(--font-serif); font-weight: bold; margin: 0; font-size: 1.3rem; color: var(--text-dark); }
         .reader-close {
-            background: rgba(224, 83, 43, 0.1); border: none; font-size: 1.2rem; color: var(--accent);
-            cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-weight: 600; font-family: var(--font-sans); transition: all 0.2s;
+            background: var(--bg-main); border: 1px solid var(--border-color); font-size: 1rem; color: var(--text-dark);
+            cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 20px; font-weight: 600; transition: all 0.2s;
         }
-        .reader-close:hover { background: var(--accent); color: #FFF; }
+        .reader-close:hover { background: var(--accent); color: #FFF; border-color: var(--accent); }
         
         .reader-content {
             flex: 1; position: relative; width: 100%; display: flex; justify-content: center;
-            background: var(--bg-main); overflow-y: auto; /* Fix for vertical scroll */
+            background: var(--bg-main); overflow-y: auto;
         }
-        #viewer {
-            width: 100%; min-height: 100%; max-width: 800px;
-        }
+        #viewer { width: 100%; min-height: 100%; max-width: 750px; background: var(--card-bg); box-shadow: 0 0 20px rgba(0,0,0,0.05);}
+        [data-theme="dark"] #viewer { background: var(--bg-main); box-shadow: none; }
 
-        /* --- Error Message Styling --- */
-        .error-message {
-            padding: 2rem; text-align: center; color: #e74c3c; font-family: var(--font-sans);
-            display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 2rem;
-        }
-        .error-message i { font-size: 2.5rem; }
+        .loading-screen { padding: 4rem; text-align: center; color: var(--text-light); }
+        .error-message { padding: 3rem; text-align: center; color: #e74c3c; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 
         /* --- Mobile Responsiveness --- */  
-        @media (max-width: 600px) {  
-            .container { padding: 1.5rem 1rem; }  
-            .top-nav { flex-direction: column; align-items: stretch; gap: 1rem; margin-bottom: 2rem; }  
+        @media (max-width: 768px) {  
+            .container { padding: 5.5rem 1rem 2rem; }  
+            .top-nav { flex-direction: column; gap: 1rem; padding: 1rem;}  
             .nav-right { width: 100%; gap: 10px; }  
             .search-wrapper { max-width: 100%; }  
-            .main-heading { font-size: 1.5rem; text-align: center;}  
-              
+            .main-heading { font-size: 1.5rem;}  
             .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }  
-            .book-card { padding: 1rem 0.75rem; }  
-            .book-cover-wrapper { max-width: 85px; margin-bottom: 0.8rem; padding: 0.5rem; }  
-            
-            .info-title { font-size: 0.9rem; }  
-            .btn-action { font-size: 0.75rem; padding: 6px 0; }
-            .reader-header { padding: 0.8rem 1rem; }
-            .reader-title { font-size: 1rem; }
+            .book-card { padding: 1rem; border-radius: 14px;}  
+            .book-cover-wrapper { max-width: 85px; margin-bottom: 1rem; padding: 0.5rem; }  
+            .info-title { font-size: 0.95rem; }  
+            .info-author { font-size: 0.75rem; }
+            .card-actions { gap: 6px; margin-top: 12px;}
+            .btn-action { font-size: 0.8rem; padding: 8px 0; border-radius: 8px;}
+            .reader-header { padding: 1rem; }
+            .reader-title { font-size: 1.1rem; }
+            .reader-close { padding: 6px 12px; font-size: 0.9rem;}
         }  
     </style>  
 </head>  
 <body>  
   
-    <div class="container">  
+    <div class="top-nav-wrapper">
         <header class="top-nav">  
             <h1 class="main-heading">HM 16 LIBRARY</h1>  
             <div class="nav-right">  
@@ -220,21 +237,25 @@
                 <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>  
             </div>  
         </header>  
-  
+    </div>
+
+    <div class="container">  
         <div class="section-header">  
-            <h2 class="section-title">বইয়ের তালিকা <span class="book-count" id="bookCount">(০)</span></h2>  
+            <h2 class="section-title">বইয়ের তালিকা <span class="book-count" id="bookCount">০</span></h2>  
         </div>  
           
         <div class="books-grid" id="grid">  
-            <div class="empty-state">বই লোড হচ্ছে...</div>  
+            <div class="empty-state">
+                <i class="ph ph-spinner-gap ph-spin"></i>
+                বই লোড হচ্ছে...
+            </div>  
         </div>  
     </div>  
 
-    <!-- Web ePub Reader Modal -->
     <div class="reader-modal" id="readerModal">
         <div class="reader-header">
             <h3 class="reader-title" id="readerTitle">বই পড়া হচ্ছে...</h3>
-            <button class="reader-close" onclick="closeReader()"><i class="ph ph-arrow-left"></i> ফিরে যান</button>
+            <button class="reader-close" onclick="closeReader()"><i class="ph ph-x"></i> বন্ধ করুন</button>
         </div>
         <div class="reader-content">
             <div id="viewer"></div>
@@ -262,22 +283,22 @@
         }  
         updateThemeIcon();  
   
-        /* --- App State & Data Fetching --- */
+        /* --- Data Fetching --- */
         let allBooks = [];  
         const coverGradients = [  
+            'linear-gradient(135deg, #2b5876 0%, #4e4376 100%)',   
             'linear-gradient(135deg, #1f4037 0%, #439a86 100%)',   
-            'linear-gradient(135deg, #4b134f 0%, #a53b3b 100%)',   
-            'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',   
-            'linear-gradient(135deg, #6b0000 0%, #190a05 100%)',   
-            'linear-gradient(135deg, #2c3e50 0%, #3498db 100%)',   
-            'linear-gradient(135deg, #6c3483 0%, #c0392b 100%)',   
-            'linear-gradient(135deg, #116979 0%, #05c46b 100%)'    
+            'linear-gradient(135deg, #f12711 0%, #f5af19 100%)',   
+            'linear-gradient(135deg, #654ea3 0%, #eaafc8 100%)',   
+            'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',   
+            'linear-gradient(135deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%)',   
+            'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)'    
         ];  
   
         async function fetchBooks() {  
             try {  
                 const res = await fetch('./api/books.json');  
-                if (!res.ok) throw new Error('Network response was not ok');
+                if (!res.ok) throw new Error('Network Issue');
                 allBooks = await res.json();  
                   
                 if (allBooks.length > 0) {  
@@ -285,31 +306,34 @@
                     allBooks.sort((a, b) => a.title.localeCompare(b.title, 'bn-BD'));  
                     renderGrid(allBooks);  
                 } else {  
-                    showEmptyState('কোনো বই পাওয়া যায়নি।');  
+                    showEmptyState('কোনো বই পাওয়া যায়নি।', 'ph-books');  
                 }  
             } catch (err) {  
-                console.error(err);
-                showEmptyState('ডেটা লোড করতে সমস্যা হচ্ছে। ফাইল ডিরেক্টরি এবং ইন্টারনেট কানেকশন চেক করুন।');  
+                showEmptyState('ডেটা লোড করতে সমস্যা হচ্ছে।', 'ph-warning-circle');  
             }  
         }  
 
-        function showEmptyState(msg) {
-            document.getElementById('grid').innerHTML = `<div class="empty-state">${msg}</div>`;
-            document.getElementById('bookCount').textContent = `(০)`;
+        function showEmptyState(msg, icon) {
+            document.getElementById('grid').innerHTML = `
+                <div class="empty-state">
+                    <i class="ph ${icon}"></i>
+                    <span>${msg}</span>
+                </div>`;
+            document.getElementById('bookCount').textContent = `০`;
         }
   
-        /* --- UI Rendering --- */
+        /* --- Rendering Grid --- */
         function renderGrid(books) {  
             const grid = document.getElementById('grid');  
-            document.getElementById('bookCount').textContent = `(${books.length})`;  
+            document.getElementById('bookCount').textContent = books.length;  
             grid.innerHTML = '';  
   
-            if(books.length === 0) return showEmptyState('আপনার খোঁজা বইটি পাওয়া যায়নি।');  
+            if(books.length === 0) return showEmptyState('আপনার খোঁজা বইটি পাওয়া যায়নি।', 'ph-magnifying-glass');  
   
             const fragment = document.createDocumentFragment();
 
             books.forEach((book, index) => {  
-                const gradient = coverGradients[(index * 3 + 7) % coverGradients.length];  
+                const gradient = coverGradients[(index * 5 + 3) % coverGradients.length];  
                 const card = document.createElement('div');  
                 card.className = 'book-card';  
                   
@@ -324,10 +348,10 @@
                             <p class="info-author">${book.author}</p>  
                         </div>
                         <div class="card-actions">
-                            <a href="${book.download_link}" download class="btn-action btn-download" title="Download">
-                                <i class="ph ph-download-simple"></i>
+                            <a href="${book.download_link}" download class="btn-action btn-download" title="ডাউনলোড করুন">
+                                <i class="ph ph-download-simple"></i> Download
                             </a>
-                            <button onclick="openReader('${book.download_link}', '${book.title}')" class="btn-action btn-read" title="Read Online">
+                            <button onclick="openReader('${book.download_link}', '${book.title}')" class="btn-action btn-read" title="পড়ুন">
                                 <i class="ph ph-book-open"></i> Read
                             </button>
                         </div>
@@ -339,7 +363,7 @@
             grid.appendChild(fragment);
         }  
 
-        /* --- ePub Reader Logic (Bug Fixes applied) --- */
+        /* --- ePub Reader with Custom Font Injection --- */
         let currentBook = null;
         let currentRendition = null;
 
@@ -348,33 +372,52 @@
             const viewer = document.getElementById('viewer');
             
             document.getElementById('readerTitle').textContent = title;
-            viewer.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-light); margin-top: 2rem;"><i class="ph ph-spinner-gap ph-spin" style="font-size: 2rem; margin-bottom: 10px;"></i><br>বই লোড হচ্ছে, দয়া করে অপেক্ষা করুন...</div>'; 
+            viewer.innerHTML = `
+                <div class="loading-screen">
+                    <i class="ph ph-spinner-gap ph-spin" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h3>বই প্রস্তুত করা হচ্ছে...</h3>
+                </div>`; 
             
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('show'), 10);
             
             currentBook = ePub(url);
             
-            // Render setup
             currentRendition = currentBook.renderTo("viewer", {
                 width: "100%",
                 height: "100%",
-                flow: "scrolled-doc", // Vertical Scroll
+                flow: "scrolled-doc",
                 manager: "continuous"
+            });
+            
+            // Injecting Custom Font 'July_Regular.ttf' into the iframe
+            currentRendition.hooks.content.register((contents) => {
+                const fontUrl = new URL('July_Regular.ttf', window.location.href).href;
+                
+                contents.addStylesheetRules({
+                    "@font-face": {
+                        "font-family": "'July Regular'",
+                        "src": `url('${fontUrl}') format('truetype')`,
+                        "font-weight": "normal",
+                        "font-style": "normal"
+                    },
+                    "body, p, h1, h2, h3, h4, span, div, a": {
+                        "font-family": "'July Regular', sans-serif !important",
+                        "line-height": "1.8 !important"
+                    }
+                });
             });
             
             applyReaderTheme(document.documentElement.getAttribute('data-theme'));
             
-            // Error handling if file fails to load (e.g. CORS issue or invalid epub)
             currentBook.ready.then(() => {
                 currentRendition.display();
             }).catch((err) => {
-                console.error("ePub Loading Error:", err);
                 viewer.innerHTML = `
                     <div class="error-message">
-                        <i class="ph ph-warning-circle"></i>
-                        <strong>বইটি লোড করা যাচ্ছে না!</strong>
-                        <span style="font-size: 0.9rem; color: var(--text-light);">সম্ভবত ফাইলের লিংকে CORS পলিসি ব্লক করা আছে অথবা এটি ডিরেক্ট ePub ফাইল নয়। দয়া করে ডাউনলোড বাটনে ক্লিক করে পড়ুন।</span>
+                        <i class="ph ph-warning-circle" style="font-size: 3rem;"></i>
+                        <h2>বইটি লোড করা যাচ্ছে না!</h2>
+                        <p>সম্ভবত ফাইলের লিংকে সমস্যা আছে অথবা এটি ePub ফাইল নয়।</p>
                     </div>`;
             });
         }
@@ -385,15 +428,13 @@
             const isDark = theme === 'dark';
             currentRendition.themes.register("customTheme", {
                 "body": { 
-                    "background": isDark ? "#121110" : "#FAFAFA", 
-                    "color": isDark ? "#E6E4E0" : "#1E1B18",
-                    "padding": "20px 10px",
-                    "font-family": "sans-serif",
-                    "line-height": "1.8",
+                    "background": isDark ? "#0D0F11" : "#FFFFFF", 
+                    "color": isDark ? "#E6E4E0" : "#2C3137",
+                    "padding": "30px 20px",
                     "overflow-x": "hidden"
                 },
-                "p": { "font-size": "1.1rem" },
-                "h1, h2, h3": { "color": isDark ? "#F06A42" : "#E0532B" }
+                "p": { "font-size": "1.15rem", "text-align": "justify" },
+                "h1, h2": { "color": isDark ? "#F06A42" : "#E0532B", "text-align": "center" }
             });
             currentRendition.themes.select("customTheme");
         }
@@ -413,7 +454,7 @@
             }, 300); 
         }
 
-        /* --- Search Debounce Logic --- */
+        /* --- Search System --- */
         let debounceTimer;
         document.getElementById('searchBox').addEventListener('input', (e) => {
             clearTimeout(debounceTimer);
@@ -423,10 +464,10 @@
                     b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)
                 );  
                 renderGrid(filtered);  
-            }, 250); 
+            }, 300); 
         });  
   
-        // Start App
+        // Init
         fetchBooks();  
     </script>  
 </body>  
