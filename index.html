@@ -93,7 +93,7 @@
         .main-heading { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; font-weight: 700; color: var(--accent); letter-spacing: -0.5px;}  
         .sub-heading { font-size: 0.8rem; color: var(--text-light); font-weight: 600; letter-spacing: 0.5px; margin-top: 2px;}
 
-        /* Controls Group (Search Only now) */
+        /* Controls Group */
         .controls-group {
             display: flex; gap: 10px; flex: 1; justify-content: flex-end; align-items: center; order: 2;
         }
@@ -256,10 +256,9 @@
             .main-heading { font-size: 1.4rem;}  
             .sub-heading { font-size: 0.75rem; }
             
-            /* ফিক্স: মোবাইল ভিউতে সেকশন হেডার এবং সাজান অপশন দৃশ্যমান রাখা হয়েছে */
             .section-header { flex-wrap: wrap; justify-content: space-between; padding-bottom: 1rem; gap: 10px;}
             .section-title { font-size: 1.2rem; }
-            .sort-label { display: inline-block; font-size: 0.85rem; } /* লেখাটি দৃশ্যমান করা হয়েছে */
+            .sort-label { display: inline-block; font-size: 0.85rem; } 
             .sort-select { font-size: 0.8rem; padding: 0 1.8rem 0 0.8rem; height: 34px; background-position: right 0.5rem center; }
             
             .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }  
@@ -368,7 +367,7 @@
                   
                 if (allBooks.length > 0) {  
                     allBooks.forEach(b => { b.title = b.title.trim(); b.author = b.author.trim(); });  
-                    handleSearchAndSort(); // Load defaults using sorting logic
+                    handleSearchAndSort(); 
                 } else {  
                     showEmptyState('কোনো বই পাওয়া যায়নি।', 'ph-books');  
                 }  
@@ -460,7 +459,7 @@
             handleSearchAndSort();
         });
   
-        /* --- ePub Reader with Custom Font Injection --- */
+        /* --- ePub Reader with Custom Font Injection & Color Override --- */
         let currentBook = null;
         let currentRendition = null;
 
@@ -518,19 +517,27 @@
             });
         }
 
+        // --- Fix for Dark Mode Embedded Texts ---
         function applyReaderTheme(theme) {
             if(!currentRendition) return;
             
             const isDark = theme === 'dark';
             currentRendition.themes.register("customTheme", {
                 "body": { 
-                    "background": isDark ? "#0D0F11" : "#FFFFFF", 
-                    "color": isDark ? "#E6E4E0" : "#2C3137",
+                    "background": isDark ? "#0D0F11 !important" : "#FFFFFF !important", 
+                    "color": isDark ? "#E6E4E0 !important" : "#2C3137 !important",
                     "padding": "30px 20px",
                     "overflow-x": "hidden"
                 },
-                "p": { "font-size": "1.15rem", "text-align": "justify" },
-                "h1, h2": { "color": isDark ? "#F06A42" : "#E0532B", "text-align": "center" }
+                "p, span, div, li": { 
+                    "color": isDark ? "#E6E4E0 !important" : "#2C3137 !important",
+                    "font-size": "1.15rem", 
+                    "text-align": "justify" 
+                },
+                "h1, h2, h3, h4, h5, h6": { 
+                    "color": isDark ? "#F06A42 !important" : "#E0532B !important", 
+                    "text-align": "center" 
+                }
             });
             currentRendition.themes.select("customTheme");
         }
