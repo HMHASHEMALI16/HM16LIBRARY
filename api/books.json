@@ -1,5 +1,12 @@
 [
     {
+        "title": "কোনি",
+        "author": "মতি নন্দী",
+        "file_name": "কোনি_-_মতি_নন্দী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%8B%E0%A6%A8%E0%A6%BF_-_%E0%A6%AE%E0%A6%A4%E0%A6%BF_%E0%A6%A8%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%80.epub"
+    },
+    {
         "title": "আমাদের চিঠিযুগ কুউউ ঝিকঝিক",
         "author": "ইমতিয়ার শামীম",
         "file_name": "আমাদের_চিঠিযুগ_কুউউ_ঝিকঝিক_-_ইমতিয়ার_শামীম.epub",
@@ -14,11 +21,53 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%9A%E0%A7%8D%E0%A6%9A_%E0%A6%9C%E0%A7%80%E0%A6%AC%E0%A6%A8_-_%E0%A6%B2%E0%A7%81%E0%A7%8E%E0%A6%AB%E0%A6%B0_%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%BE%E0%A6%A8.epub"
     },
     {
+        "title": "আমার সাইন্টিস মামা",
+        "author": "মুহম্মদ জাফর ইকবাল",
+        "file_name": "আমার_সাইন্টিস_মামা_-_মুহম্মদ_জাফর_ইকবাল.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%A8%E0%A7%8D%E0%A6%9F%E0%A6%BF%E0%A6%B8_%E0%A6%AE%E0%A6%BE%E0%A6%AE%E0%A6%BE_-_%E0%A6%AE%E0%A7%81%E0%A6%B9%E0%A6%AE%E0%A7%8D%E0%A6%AE%E0%A6%A6_%E0%A6%9C%E0%A6%BE%E0%A6%AB%E0%A6%B0_%E0%A6%87%E0%A6%95%E0%A6%AC%E0%A6%BE%E0%A6%B2.epub"
+    },
+    {
         "title": "এই গৃহ এই সন্ন্যাস",
         "author": "মহাদেব সাহা",
         "file_name": "এই_গৃহ_এই_সন্ন্যাস_-_মহাদেব_সাহা.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%87_%E0%A6%97%E0%A7%83%E0%A6%B9_%E0%A6%8F%E0%A6%87_%E0%A6%B8%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_-_%E0%A6%AE%E0%A6%B9%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%AC_%E0%A6%B8%E0%A6%BE%E0%A6%B9%E0%A6%BE.epub"
+    },
+    {
+        "title": "গোচারণের মাঠ",
+        "author": "অক্ষয়চন্দ্র সরকার",
+        "file_name": "গোচারণের_মাঠ_-_অক্ষয়চন্দ্র_সরকার.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%97%E0%A7%8B%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A6%A3%E0%A7%87%E0%A6%B0_%E0%A6%AE%E0%A6%BE%E0%A6%A0_-_%E0%A6%85%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%B8%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0.epub"
+    },
+    {
+        "title": "আবুদের এ্যাডভেঞ্চার",
+        "author": "শাহরিয়ার কবির",
+        "file_name": "আবুদের_এ্যাডভেঞ্চার_-_শাহরিয়ার_কবির.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AC%E0%A7%81%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%8F%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A1%E0%A6%AD%E0%A7%87%E0%A6%9E%E0%A7%8D%E0%A6%9A%E0%A6%BE%E0%A6%B0_-_%E0%A6%B6%E0%A6%BE%E0%A6%B9%E0%A6%B0%E0%A6%BF%E0%A7%9F%E0%A6%BE%E0%A6%B0_%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%B0.epub"
+    },
+    {
+        "title": "আয়নাঘর (১৯৯২)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আয়নাঘর_(১৯৯২)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A7%9F%E0%A6%A8%E0%A6%BE%E0%A6%98%E0%A6%B0_%28%E0%A7%A7%E0%A7%AF%E0%A7%AF%E0%A7%A8%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "আমাদের জাতীয়ভাব",
+        "author": "রজনীকান্ত গুপ্ত",
+        "file_name": "আমাদের_জাতীয়ভাব_-_রজনীকান্ত_গুপ্ত.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A7%80%E0%A6%AF%E0%A6%BC%E0%A6%AD%E0%A6%BE%E0%A6%AC_-_%E0%A6%B0%E0%A6%9C%E0%A6%A8%E0%A7%80%E0%A6%95%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4_%E0%A6%97%E0%A7%81%E0%A6%AA%E0%A7%8D%E0%A6%A4.epub"
+    },
+    {
+        "title": "অচেনা মানুষ",
+        "author": "সুনীল গঙ্গোপাধ্যায়",
+        "file_name": "অচেনা_মানুষ_-_সুনীল_গঙ্গোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%9A%E0%A7%87%E0%A6%A8%E0%A6%BE_%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A7%81%E0%A6%B7_-_%E0%A6%B8%E0%A7%81%E0%A6%A8%E0%A7%80%E0%A6%B2_%E0%A6%97%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
     },
     {
         "title": "উপন্যাস সমগ্র – শরদ",
@@ -28,6 +77,41 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%E0%A6%B8%E0%A6%AE%E0%A6%97%E0%A7%8D%E0%A6%B0_%E2%80%93_%E0%A6%B6%E0%A6%B0%E0%A6%A6_-_%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%E0%A6%B6%E0%A6%B0%E0%A6%A6%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%81_%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub"
     },
     {
+        "title": "কামসূত্র (সংক্ষিপ্ত)",
+        "author": "মল্লনাগ বাৎস্যায়ন",
+        "file_name": "কামসূত্র_(সংক্ষিপ্ত)_-_মল্লনাগ_বাৎস্যায়ন.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A6%BE%E0%A6%AE%E0%A6%B8%E0%A7%82%E0%A6%A4%E0%A7%8D%E0%A6%B0_%28%E0%A6%B8%E0%A6%82%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BF%E0%A6%AA%E0%A7%8D%E0%A6%A4%29_-_%E0%A6%AE%E0%A6%B2%E0%A7%8D%E0%A6%B2%E0%A6%A8%E0%A6%BE%E0%A6%97_%E0%A6%AC%E0%A6%BE%E0%A7%8E%E0%A6%B8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC%E0%A6%A8.epub"
+    },
+    {
+        "title": "একঘরে",
+        "author": "দ্বিজেন্দ্রলাল রায়",
+        "file_name": "একঘরে_-_দ্বিজেন্দ্রলাল_রায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%98%E0%A6%B0%E0%A7%87_-_%E0%A6%A6%E0%A7%8D%E0%A6%AC%E0%A6%BF%E0%A6%9C%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%B2%E0%A6%BE%E0%A6%B2_%E0%A6%B0%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub"
+    },
+    {
+        "title": "কবিতাবলী",
+        "author": "হেমচন্দ্র বন্দ্যোপাধ্যায়",
+        "file_name": "কবিতাবলী_-_হেমচন্দ্র_বন্দ্যোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80_-_%E0%A6%B9%E0%A7%87%E0%A6%AE%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub"
+    },
+    {
+        "title": "এক জীবনে",
+        "author": "সুনীল গঙ্গোপাধ্যায়",
+        "file_name": "এক_জীবনে_-_সুনীল_গঙ্গোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95_%E0%A6%9C%E0%A7%80%E0%A6%AC%E0%A6%A8%E0%A7%87_-_%E0%A6%B8%E0%A7%81%E0%A6%A8%E0%A7%80%E0%A6%B2_%E0%A6%97%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "আরেকবার ক্ষুধিত পাষাণ",
+        "author": "মলয় রায়চৌধুরী",
+        "file_name": "আরেকবার_ক্ষুধিত_পাষাণ_-_মলয়_রায়চৌধুরী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B0%E0%A7%87%E0%A6%95%E0%A6%AC%E0%A6%BE%E0%A6%B0_%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A7%81%E0%A6%A7%E0%A6%BF%E0%A6%A4_%E0%A6%AA%E0%A6%BE%E0%A6%B7%E0%A6%BE%E0%A6%A3_-_%E0%A6%AE%E0%A6%B2%E0%A7%9F_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%9A%E0%A7%8C%E0%A6%A7%E0%A7%81%E0%A6%B0%E0%A7%80.epub"
+    },
+    {
         "title": "অগ্নিবীণা (১৯২২)",
         "author": "নজরুল রচনাবলী (কাজী নজরুল ইসলাম)",
         "file_name": "অগ্নিবীণা_(১৯২২)_-_নজরুল_রচনাবলী_(কাজী_নজরুল_ইসলাম).epub",
@@ -35,11 +119,137 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%97%E0%A7%8D%E0%A6%A8%E0%A6%BF%E0%A6%AC%E0%A7%80%E0%A6%A3%E0%A6%BE_%28%E0%A7%A7%E0%A7%AF%E0%A7%A8%E0%A7%A8%29_-_%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%81%E0%A6%B2_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80_%28%E0%A6%95%E0%A6%BE%E0%A6%9C%E0%A7%80_%E0%A6%A8%E0%A6%9C%E0%A6%B0%E0%A7%81%E0%A6%B2_%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE%29.epub"
     },
     {
+        "title": "একটি নারীর পুনর্জন্ম",
+        "author": "সুনীল গঙ্গোপাধ্যায়",
+        "file_name": "একটি_নারীর_পুনর্জন্ম_-_সুনীল_গঙ্গোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF_%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%80%E0%A6%B0_%E0%A6%AA%E0%A7%81%E0%A6%A8%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%A8%E0%A7%8D%E0%A6%AE_-_%E0%A6%B8%E0%A7%81%E0%A6%A8%E0%A7%80%E0%A6%B2_%E0%A6%97%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "কৃত্তিবাস স্মৃতিচিহ্ন স্থাপন",
+        "author": "আশুতোষ মুখোপাধ্যায় (শিক্ষাবিদ)",
+        "file_name": "কৃত্তিবাস_স্মৃতিচিহ্ন_স্থাপন_-_আশুতোষ_মুখোপাধ্যায়_(শিক্ষাবিদ).epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%83%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%BF%E0%A6%AC%E0%A6%BE%E0%A6%B8_%E0%A6%B8%E0%A7%8D%E0%A6%AE%E0%A7%83%E0%A6%A4%E0%A6%BF%E0%A6%9A%E0%A6%BF%E0%A6%B9%E0%A7%8D%E0%A6%A8_%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE%E0%A6%AA%E0%A6%A8_-_%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%A4%E0%A7%8B%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC_%28%E0%A6%B6%E0%A6%BF%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%BE%E0%A6%AC%E0%A6%BF%E0%A6%A6%29.epub"
+    },
+    {
+        "title": "অমানুষ",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "অমানুষ_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A7%81%E0%A6%B7_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "এই শুভ্র এই (২০০৩)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "এই_শুভ্র_এই_(২০০৩)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%87_%E0%A6%B6%E0%A7%81%E0%A6%AD%E0%A7%8D%E0%A6%B0_%E0%A6%8F%E0%A6%87_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A9%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "ক্লোরোপ্লাস্টিক মেসেজ",
+        "author": "সাইফুল ইসলাম (শান্তির দেবদূত)",
+        "file_name": "ক্লোরোপ্লাস্টিক_মেসেজ_-_সাইফুল_ইসলাম_(শান্তির_দেবদূত).epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%8D%E0%A6%B2%E0%A7%8B%E0%A6%B0%E0%A7%8B%E0%A6%AA%E0%A7%8D%E0%A6%B2%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BF%E0%A6%95_%E0%A6%AE%E0%A7%87%E0%A6%B8%E0%A7%87%E0%A6%9C_-_%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%AB%E0%A7%81%E0%A6%B2_%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%AE_%28%E0%A6%B6%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%BF%E0%A6%B0_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A6%A6%E0%A7%82%E0%A6%A4%29.epub"
+    },
+    {
+        "title": "খনার বচন – খনা (লীলাবতী)",
+        "author": "খনা (লীলাবতী)",
+        "file_name": "খনার_বচন_–_খনা_(লীলাবতী)_-_খনা_(লীলাবতী).epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%96%E0%A6%A8%E0%A6%BE%E0%A6%B0_%E0%A6%AC%E0%A6%9A%E0%A6%A8_%E2%80%93_%E0%A6%96%E0%A6%A8%E0%A6%BE_%28%E0%A6%B2%E0%A7%80%E0%A6%B2%E0%A6%BE%E0%A6%AC%E0%A6%A4%E0%A7%80%29_-_%E0%A6%96%E0%A6%A8%E0%A6%BE_%28%E0%A6%B2%E0%A7%80%E0%A6%B2%E0%A6%BE%E0%A6%AC%E0%A6%A4%E0%A7%80%29.epub"
+    },
+    {
+        "title": "কেন আমি নাস্তিক – ভগৎ সিং",
+        "author": "ভগৎ সিং",
+        "file_name": "কেন_আমি_নাস্তিক_–_ভগৎ_সিং_-_ভগৎ_সিং.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%87%E0%A6%A8_%E0%A6%86%E0%A6%AE%E0%A6%BF_%E0%A6%A8%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BF%E0%A6%95_%E2%80%93_%E0%A6%AD%E0%A6%97%E0%A7%8E_%E0%A6%B8%E0%A6%BF%E0%A6%82_-_%E0%A6%AD%E0%A6%97%E0%A7%8E_%E0%A6%B8%E0%A6%BF%E0%A6%82.epub"
+    },
+    {
+        "title": "একটি অসমাপ্ত কাব্য",
+        "author": "সনৎ কুমার ব্যানার্জ্জী",
+        "file_name": "একটি_অসমাপ্ত_কাব্য_-_সনৎ_কুমার_ব্যানার্জ্জী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF_%E0%A6%85%E0%A6%B8%E0%A6%AE%E0%A6%BE%E0%A6%AA%E0%A7%8D%E0%A6%A4_%E0%A6%95%E0%A6%BE%E0%A6%AC%E0%A7%8D%E0%A6%AF_-_%E0%A6%B8%E0%A6%A8%E0%A7%8E_%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A7%8D%E0%A6%9C%E0%A7%80.epub"
+    },
+    {
+        "title": "গুপিনাথ",
+        "author": "বাপ্পাদিত্য চট্টোপাধ্যায়",
+        "file_name": "গুপিনাথ_-_বাপ্পাদিত্য_চট্টোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%97%E0%A7%81%E0%A6%AA%E0%A6%BF%E0%A6%A8%E0%A6%BE%E0%A6%A5_-_%E0%A6%AC%E0%A6%BE%E0%A6%AA%E0%A7%8D%E0%A6%AA%E0%A6%BE%E0%A6%A6%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%AF_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "এই কি ব্রাহ্ম বিবাহ",
+        "author": "শিবনাথ শাস্ত্রী",
+        "file_name": "এই_কি_ব্রাহ্ম_বিবাহ_-_শিবনাথ_শাস্ত্রী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%87_%E0%A6%95%E0%A6%BF_%E0%A6%AC%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B9%E0%A7%8D%E0%A6%AE_%E0%A6%AC%E0%A6%BF%E0%A6%AC%E0%A6%BE%E0%A6%B9_-_%E0%A6%B6%E0%A6%BF%E0%A6%AC%E0%A6%A8%E0%A6%BE%E0%A6%A5_%E0%A6%B6%E0%A6%BE%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A7%80.epub"
+    },
+    {
+        "title": "একটি সাইকেল এবং কয়েকটি ডাহুক পাখি (২০১১)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "একটি_সাইকেল_এবং_কয়েকটি_ডাহুক_পাখি_(২০১১)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF_%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%87%E0%A6%B2_%E0%A6%8F%E0%A6%AC%E0%A6%82_%E0%A6%95%E0%A7%9F%E0%A7%87%E0%A6%95%E0%A6%9F%E0%A6%BF_%E0%A6%A1%E0%A6%BE%E0%A6%B9%E0%A7%81%E0%A6%95_%E0%A6%AA%E0%A6%BE%E0%A6%96%E0%A6%BF_%28%E0%A7%A8%E0%A7%A6%E0%A7%A7%E0%A7%A7%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "আম্রপালী",
+        "author": "নারায়ণ সান্যাল",
+        "file_name": "আম্রপালী_-_নারায়ণ_সান্যাল.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A7%8D%E0%A6%B0%E0%A6%AA%E0%A6%BE%E0%A6%B2%E0%A7%80_-_%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%A3_%E0%A6%B8%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B2.epub"
+    },
+    {
+        "title": "কুড়িয়ে পাওয়া পেনড্রাইভ",
+        "author": "সুচিত্রা ভট্টাচার্য",
+        "file_name": "কুড়িয়ে_পাওয়া_পেনড্রাইভ_-_সুচিত্রা_ভট্টাচার্য.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%81%E0%A7%9C%E0%A6%BF%E0%A7%9F%E0%A7%87_%E0%A6%AA%E0%A6%BE%E0%A6%93%E0%A7%9F%E0%A6%BE_%E0%A6%AA%E0%A7%87%E0%A6%A8%E0%A6%A1%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%87%E0%A6%AD_-_%E0%A6%B8%E0%A7%81%E0%A6%9A%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A6%BE_%E0%A6%AD%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AF.epub"
+    },
+    {
+        "title": "অ্যানিমেল ফার্ম – জর্জ অরওয়েল",
+        "author": "সেবা প্রকাশনী",
+        "file_name": "অ্যানিমেল_ফার্ম_–_জর্জ_অরওয়েল_-_সেবা_প্রকাশনী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A6%BF%E0%A6%AE%E0%A7%87%E0%A6%B2_%E0%A6%AB%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AE_%E2%80%93_%E0%A6%9C%E0%A6%B0%E0%A7%8D%E0%A6%9C_%E0%A6%85%E0%A6%B0%E0%A6%93%E0%A7%9F%E0%A7%87%E0%A6%B2_-_%E0%A6%B8%E0%A7%87%E0%A6%AC%E0%A6%BE_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B6%E0%A6%A8%E0%A7%80.epub"
+    },
+    {
+        "title": "আসমানীরা তিন বোন (২০০২)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আসমানীরা_তিন_বোন_(২০০২)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B8%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A7%80%E0%A6%B0%E0%A6%BE_%E0%A6%A4%E0%A6%BF%E0%A6%A8_%E0%A6%AC%E0%A7%8B%E0%A6%A8_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A8%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "আশাবরী (১৯৯১)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আশাবরী_(১৯৯১)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AC%E0%A6%B0%E0%A7%80_%28%E0%A7%A7%E0%A7%AF%E0%A7%AF%E0%A7%A7%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "ক্যাপ্টেন ব্লাড",
+        "author": "রাফায়েল সাবাতিনি (রূপান্তর কাজী শাহনূর হোসেন)",
+        "file_name": "ক্যাপ্টেন_ব্লাড_-_রাফায়েল_সাবাতিনি_(রূপান্তর_কাজী_শাহনূর_হোসেন).epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%E0%A7%8D%E0%A6%9F%E0%A7%87%E0%A6%A8_%E0%A6%AC%E0%A7%8D%E0%A6%B2%E0%A6%BE%E0%A6%A1_-_%E0%A6%B0%E0%A6%BE%E0%A6%AB%E0%A6%BE%E0%A7%9F%E0%A7%87%E0%A6%B2_%E0%A6%B8%E0%A6%BE%E0%A6%AC%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%A8%E0%A6%BF_%28%E0%A6%B0%E0%A7%82%E0%A6%AA%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0_%E0%A6%95%E0%A6%BE%E0%A6%9C%E0%A7%80_%E0%A6%B6%E0%A6%BE%E0%A6%B9%E0%A6%A8%E0%A7%82%E0%A6%B0_%E0%A6%B9%E0%A7%8B%E0%A6%B8%E0%A7%87%E0%A6%A8%29.epub"
+    },
+    {
         "title": "আবদুল জব্বারের গল্প",
         "author": "আবদুল জব্বার",
         "file_name": "আবদুল_জব্বারের_গল্প_-_আবদুল_জব্বার.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AC%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%9C%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%AC%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%9C%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%B0.epub"
+    },
+    {
+        "title": "এখনও বৃষ্টি হয়!",
+        "author": "দিগন্ত ভট্টাচার্য",
+        "file_name": "এখনও_বৃষ্টি_হয়!_-_দিগন্ত_ভট্টাচার্য.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%96%E0%A6%A8%E0%A6%93_%E0%A6%AC%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%9F%E0%A6%BF_%E0%A6%B9%E0%A7%9F%21_-_%E0%A6%A6%E0%A6%BF%E0%A6%97%E0%A6%A8%E0%A7%8D%E0%A6%A4_%E0%A6%AD%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AF.epub"
     },
     {
         "title": "ক্ষণিকা",
@@ -56,6 +266,41 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B2_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE_-_%E0%A6%86%E0%A6%B2_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6.epub"
     },
     {
+        "title": "কাগজের বউ",
+        "author": "শীর্ষেন্দু মুখোপাধ্যায়",
+        "file_name": "কাগজের_বউ_-_শীর্ষেন্দু_মুখোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A6%BE%E0%A6%97%E0%A6%9C%E0%A7%87%E0%A6%B0_%E0%A6%AC%E0%A6%89_-_%E0%A6%B6%E0%A7%80%E0%A6%B0%E0%A7%8D%E0%A6%B7%E0%A7%87%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%81_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "অন্তর্যামী",
+        "author": "চিত্তরঞ্জন দাশ",
+        "file_name": "অন্তর্যামী_-_চিত্তরঞ্জন_দাশ.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AE%E0%A7%80_-_%E0%A6%9A%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A6%9E%E0%A7%8D%E0%A6%9C%E0%A6%A8_%E0%A6%A6%E0%A6%BE%E0%A6%B6.epub"
+    },
+    {
+        "title": "আশাপূর্ণা দেবীর প্রবন্ধ",
+        "author": "আশাপূর্ণা দেবী",
+        "file_name": "আশাপূর্ণা_দেবীর_প্রবন্ধ_-_আশাপূর্ণা_দেবী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80%E0%A6%B0_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A7_-_%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80.epub"
+    },
+    {
+        "title": "ঋণমুক্তি",
+        "author": "উজ্জ্বল রায়",
+        "file_name": "ঋণমুক্তি_-_উজ্জ্বল_রায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8B%E0%A6%A3%E0%A6%AE%E0%A7%81%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF_-_%E0%A6%89%E0%A6%9C%E0%A7%8D%E0%A6%9C%E0%A7%8D%E0%A6%AC%E0%A6%B2_%E0%A6%B0%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "খিদে",
+        "author": "আবুল বাশার",
+        "file_name": "খিদে_-_আবুল_বাশার.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%96%E0%A6%BF%E0%A6%A6%E0%A7%87_-_%E0%A6%86%E0%A6%AC%E0%A7%81%E0%A6%B2_%E0%A6%AC%E0%A6%BE%E0%A6%B6%E0%A6%BE%E0%A6%B0.epub"
+    },
+    {
         "title": "কৃষ্ণকান্তের উইল",
         "author": "বঙ্কিমচন্দ্র চট্টোপাধ্যায় (বঙ্কিম রচনাবলী)",
         "file_name": "কৃষ্ণকান্তের_উইল_-_বঙ্কিমচন্দ্র_চট্টোপাধ্যায়_(বঙ্কিম_রচনাবলী).epub",
@@ -63,11 +308,88 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%A3%E0%A6%95%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A7%87%E0%A6%B0_%E0%A6%89%E0%A6%87%E0%A6%B2_-_%E0%A6%AC%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%AE%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC_%28%E0%A6%AC%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%AE_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80%29.epub"
     },
     {
+        "title": "কালো যাদুকর (১৯৯৮)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "কালো_যাদুকর_(১৯৯৮)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%8B_%E0%A6%AF%E0%A6%BE%E0%A6%A6%E0%A7%81%E0%A6%95%E0%A6%B0_%28%E0%A7%A7%E0%A7%AF%E0%A7%AF%E0%A7%AE%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "কী করে বেস্টসেলার লিখতে হয়",
+        "author": "চন্দ্রিল ভট্টাচার্য",
+        "file_name": "কী_করে_বেস্টসেলার_লিখতে_হয়_-_চন্দ্রিল_ভট্টাচার্য.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%80_%E0%A6%95%E0%A6%B0%E0%A7%87_%E0%A6%AC%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%B8%E0%A7%87%E0%A6%B2%E0%A6%BE%E0%A6%B0_%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%A4%E0%A7%87_%E0%A6%B9%E0%A7%9F_-_%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B2_%E0%A6%AD%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AF.epub"
+    },
+    {
+        "title": "একজন মায়াবতী",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "একজন_মায়াবতী_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%9C%E0%A6%A8_%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A6%BE%E0%A6%AC%E0%A6%A4%E0%A7%80_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "১৯৭১",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "১৯৭১_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A7%A7%E0%A7%AF%E0%A7%AD%E0%A7%A7_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
         "title": "আবোল তাবোল",
         "author": "সুকুমার রায়",
         "file_name": "আবোল_তাবোল_-_সুকুমার_রায়.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AC%E0%A7%8B%E0%A6%B2_%E0%A6%A4%E0%A6%BE%E0%A6%AC%E0%A7%8B%E0%A6%B2_-_%E0%A6%B8%E0%A7%81%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "আকাশ জোড়া মেঘ",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আকাশ_জোড়া_মেঘ_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%95%E0%A6%BE%E0%A6%B6_%E0%A6%9C%E0%A7%8B%E0%A7%9C%E0%A6%BE_%E0%A6%AE%E0%A7%87%E0%A6%98_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "কবিতাকুসুমাঞ্জলি",
+        "author": "কৃষ্ণকিশোর বন্দ্যোপাধ্যায়",
+        "file_name": "কবিতাকুসুমাঞ্জলি_-_কৃষ্ণকিশোর_বন্দ্যোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE%E0%A6%95%E0%A7%81%E0%A6%B8%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%9E%E0%A7%8D%E0%A6%9C%E0%A6%B2%E0%A6%BF_-_%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%A3%E0%A6%95%E0%A6%BF%E0%A6%B6%E0%A7%8B%E0%A6%B0_%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub"
+    },
+    {
+        "title": "আবার তারানাথ",
+        "author": "ত্রিজিৎ কর",
+        "file_name": "আবার_তারানাথ_-_ত্রিজিৎ_কর.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AC%E0%A6%BE%E0%A6%B0_%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%A5_-_%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%9C%E0%A6%BF%E0%A7%8E_%E0%A6%95%E0%A6%B0.epub"
+    },
+    {
+        "title": "ঈশপের গল্প",
+        "author": "ইন্দ্রনীল সান্যাল",
+        "file_name": "ঈশপের_গল্প_-_ইন্দ্রনীল_সান্যাল.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%88%E0%A6%B6%E0%A6%AA%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%87%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A6%A8%E0%A7%80%E0%A6%B2_%E0%A6%B8%E0%A6%BE%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B2.epub"
+    },
+    {
+        "title": "অর্থনৈতিক, সামাজিক ও সাংস্কৃতিক অধিকার বিষয়ক আন্তর্জাতিক চুক্তি",
+        "author": "জাতিসংঘ ",
+        "file_name": "অর্থনৈতিক,_সামাজিক_ও_সাংস্কৃতিক_অধিকার_বিষয়ক_আন্তর্জাতিক_চুক্তি_-_জাতিসংঘ_.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A5%E0%A6%A8%E0%A7%88%E0%A6%A4%E0%A6%BF%E0%A6%95%2C_%E0%A6%B8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%9C%E0%A6%BF%E0%A6%95_%E0%A6%93_%E0%A6%B8%E0%A6%BE%E0%A6%82%E0%A6%B8%E0%A7%8D%E0%A6%95%E0%A7%83%E0%A6%A4%E0%A6%BF%E0%A6%95_%E0%A6%85%E0%A6%A7%E0%A6%BF%E0%A6%95%E0%A6%BE%E0%A6%B0_%E0%A6%AC%E0%A6%BF%E0%A6%B7%E0%A6%AF%E0%A6%BC%E0%A6%95_%E0%A6%86%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%8D%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%95_%E0%A6%9A%E0%A7%81%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF_-_%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%B8%E0%A6%82%E0%A6%98_.epub"
+    },
+    {
+        "title": "কুহকিনী কিন্নরী",
+        "author": "অদ্রীশ বর্ধন",
+        "file_name": "কুহকিনী_কিন্নরী_-_অদ্রীশ_বর্ধন.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%81%E0%A6%B9%E0%A6%95%E0%A6%BF%E0%A6%A8%E0%A7%80_%E0%A6%95%E0%A6%BF%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A6%B0%E0%A7%80_-_%E0%A6%85%E0%A6%A6%E0%A7%8D%E0%A6%B0%E0%A7%80%E0%A6%B6_%E0%A6%AC%E0%A6%B0%E0%A7%8D%E0%A6%A7%E0%A6%A8.epub"
+    },
+    {
+        "title": "আমি এবং কয়েকটি প্রজাপতি (২০০৩)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আমি_এবং_কয়েকটি_প্রজাপতি_(২০০৩)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A6%BF_%E0%A6%8F%E0%A6%AC%E0%A6%82_%E0%A6%95%E0%A7%9F%E0%A7%87%E0%A6%95%E0%A6%9F%E0%A6%BF_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%9C%E0%A6%BE%E0%A6%AA%E0%A6%A4%E0%A6%BF_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A9%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
     },
     {
         "title": "আর কত দিন",
@@ -84,11 +406,109 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%B0_%E0%A6%AA%E0%A6%BE%E0%A6%A0%E0%A6%B6%E0%A6%BE%E0%A6%B2%E0%A6%BE_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_-_%E0%A6%AE%E0%A6%BE%E0%A6%B9%E0%A6%AE%E0%A7%81%E0%A6%A6%E0%A7%81%E0%A6%B2_%E0%A6%B9%E0%A6%95.epub"
     },
     {
+        "title": "ইসকুল বাড়ি",
+        "author": "কাজী আনোয়ার হোসেন",
+        "file_name": "ইসকুল_বাড়ি_-_কাজী_আনোয়ার_হোসেন.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%87%E0%A6%B8%E0%A6%95%E0%A7%81%E0%A6%B2_%E0%A6%AC%E0%A6%BE%E0%A7%9C%E0%A6%BF_-_%E0%A6%95%E0%A6%BE%E0%A6%9C%E0%A7%80_%E0%A6%86%E0%A6%A8%E0%A7%8B%E0%A7%9F%E0%A6%BE%E0%A6%B0_%E0%A6%B9%E0%A7%8B%E0%A6%B8%E0%A7%87%E0%A6%A8.epub"
+    },
+    {
+        "title": "কৃষ্ণপক্ষ",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "কৃষ্ণপক্ষ_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%A3%E0%A6%AA%E0%A6%95%E0%A7%8D%E0%A6%B7_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "এপিটাফ",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "এপিটাফ_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%AA%E0%A6%BF%E0%A6%9F%E0%A6%BE%E0%A6%AB_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "কুটু মিয়া (২০০১)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "কুটু_মিয়া_(২০০১)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%81%E0%A6%9F%E0%A7%81_%E0%A6%AE%E0%A6%BF%E0%A7%9F%E0%A6%BE_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A7%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "আরাকিয়েলের হিরে",
+        "author": "সুচিত্রা ভট্টাচার্য",
+        "file_name": "আরাকিয়েলের_হিরে_-_সুচিত্রা_ভট্টাচার্য.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B0%E0%A6%BE%E0%A6%95%E0%A6%BF%E0%A7%9F%E0%A7%87%E0%A6%B2%E0%A7%87%E0%A6%B0_%E0%A6%B9%E0%A6%BF%E0%A6%B0%E0%A7%87_-_%E0%A6%B8%E0%A7%81%E0%A6%9A%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A6%BE_%E0%A6%AD%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AF.epub"
+    },
+    {
+        "title": "উড়ালপঙ্খী (২০০২)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "উড়ালপঙ্খী_(২০০২)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A7%9C%E0%A6%BE%E0%A6%B2%E0%A6%AA%E0%A6%99%E0%A7%8D%E0%A6%96%E0%A7%80_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A8%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
         "title": "আয়না (ব্যঙ্গরচনা)",
         "author": "আবুল মনসুর আহমেদ",
         "file_name": "আয়না_(ব্যঙ্গরচনা)_-_আবুল_মনসুর_আহমেদ.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A7%9F%E0%A6%A8%E0%A6%BE_%28%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%29_-_%E0%A6%86%E0%A6%AC%E0%A7%81%E0%A6%B2_%E0%A6%AE%E0%A6%A8%E0%A6%B8%E0%A7%81%E0%A6%B0_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6.epub"
+    },
+    {
+        "title": "আরণ্য",
+        "author": "বুদ্ধদেব গুহ",
+        "file_name": "আরণ্য_-_বুদ্ধদেব_গুহ.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B0%E0%A6%A3%E0%A7%8D%E0%A6%AF_-_%E0%A6%AC%E0%A7%81%E0%A6%A6%E0%A7%8D%E0%A6%A7%E0%A6%A6%E0%A7%87%E0%A6%AC_%E0%A6%97%E0%A7%81%E0%A6%B9.epub"
+    },
+    {
+        "title": "আজ আমি কোথাও যাব না (২০০২)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আজ_আমি_কোথাও_যাব_না_(২০০২)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%9C_%E0%A6%86%E0%A6%AE%E0%A6%BF_%E0%A6%95%E0%A7%8B%E0%A6%A5%E0%A6%BE%E0%A6%93_%E0%A6%AF%E0%A6%BE%E0%A6%AC_%E0%A6%A8%E0%A6%BE_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A8%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "এই বসন্তে",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "এই_বসন্তে_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%87_%E0%A6%AC%E0%A6%B8%E0%A6%A8%E0%A7%8D%E0%A6%A4%E0%A7%87_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "উত্তরণ",
+        "author": "আশাপূর্ণা দেবী",
+        "file_name": "উত্তরণ_-_আশাপূর্ণা_দেবী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A6%A3_-_%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80.epub"
+    },
+    {
+        "title": "ক্লিওপেট্রা",
+        "author": "নবীনচন্দ্র সেন",
+        "file_name": "ক্লিওপেট্রা_-_নবীনচন্দ্র_সেন.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%8D%E0%A6%B2%E0%A6%BF%E0%A6%93%E0%A6%AA%E0%A7%87%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BE_-_%E0%A6%A8%E0%A6%AC%E0%A7%80%E0%A6%A8%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%B8%E0%A7%87%E0%A6%A8.epub"
+    },
+    {
+        "title": "অচিনপুর",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "অচিনপুর_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%9A%E0%A6%BF%E0%A6%A8%E0%A6%AA%E0%A7%81%E0%A6%B0_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "কবিতাবলী",
+        "author": "হেমচন্দ্র বন্দ্যোপাধ্যায় (1)",
+        "file_name": "কবিতাবলী_-_হেমচন্দ্র_বন্দ্যোপাধ্যায়_(1).epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%A4%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80_-_%E0%A6%B9%E0%A7%87%E0%A6%AE%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC_%281%29.epub"
+    },
+    {
+        "title": "এ পকেট ফুল অফ রাই",
+        "author": "আগাথা ক্রিস্টি",
+        "file_name": "এ_পকেট_ফুল_অফ_রাই_-_আগাথা_ক্রিস্টি.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F_%E0%A6%AA%E0%A6%95%E0%A7%87%E0%A6%9F_%E0%A6%AB%E0%A7%81%E0%A6%B2_%E0%A6%85%E0%A6%AB_%E0%A6%B0%E0%A6%BE%E0%A6%87_-_%E0%A6%86%E0%A6%97%E0%A6%BE%E0%A6%A5%E0%A6%BE_%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BF.epub"
     },
     {
         "title": "আশাপূর্ণা দেবীর গল্প",
@@ -98,11 +518,39 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%AA%E0%A7%82%E0%A6%B0%E0%A7%8D%E0%A6%A3%E0%A6%BE_%E0%A6%A6%E0%A7%87%E0%A6%AC%E0%A7%80.epub"
     },
     {
+        "title": "আশাকানন",
+        "author": "হেমচন্দ্র বন্দ্যোপাধ্যায়",
+        "file_name": "আশাকানন_-_হেমচন্দ্র_বন্দ্যোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B6%E0%A6%BE%E0%A6%95%E0%A6%BE%E0%A6%A8%E0%A6%A8_-_%E0%A6%B9%E0%A7%87%E0%A6%AE%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub"
+    },
+    {
+        "title": "এ মার্ডার ইজ অ্যানাউনসড",
+        "author": "আগাথা ক্রিস্টি",
+        "file_name": "এ_মার্ডার_ইজ_অ্যানাউনসড_-_আগাথা_ক্রিস্টি.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F_%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%E0%A6%BE%E0%A6%B0_%E0%A6%87%E0%A6%9C_%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%89%E0%A6%A8%E0%A6%B8%E0%A6%A1_-_%E0%A6%86%E0%A6%97%E0%A6%BE%E0%A6%A5%E0%A6%BE_%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BF.epub"
+    },
+    {
         "title": "অরিজিন – ড্যান ব্রাউন",
         "author": "অনুবাদ সাহিত্য",
         "file_name": "অরিজিন_–_ড্যান_ব্রাউন_-_অনুবাদ_সাহিত্য.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%B0%E0%A6%BF%E0%A6%9C%E0%A6%BF%E0%A6%A8_%E2%80%93_%E0%A6%A1%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8_%E0%A6%AC%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%89%E0%A6%A8_-_%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%AC%E0%A6%BE%E0%A6%A6_%E0%A6%B8%E0%A6%BE%E0%A6%B9%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%AF.epub"
+    },
+    {
+        "title": "ওঙ্কার (উপন্যাস)",
+        "author": "আহমেদ ছফা",
+        "file_name": "ওঙ্কার_(উপন্যাস)_-_আহমেদ_ছফা.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%93%E0%A6%99%E0%A7%8D%E0%A6%95%E0%A6%BE%E0%A6%B0_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_-_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%9B%E0%A6%AB%E0%A6%BE.epub"
+    },
+    {
+        "title": "অপরাহ্ন",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "অপরাহ্ন_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%AA%E0%A6%B0%E0%A6%BE%E0%A6%B9%E0%A7%8D%E0%A6%A8_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
     },
     {
         "title": "অগ্নি",
@@ -112,11 +560,39 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%97%E0%A7%8D%E0%A6%A8%E0%A6%BF_-_%E0%A6%AC%E0%A6%A8%E0%A6%AB%E0%A7%81%E0%A6%B2.epub"
     },
     {
+        "title": "অরণ্যের দিনরাত্রি – সুনীল গঙ্গোপাধ্যায়",
+        "author": "সুনীল গঙ্গোপাধ্যায়",
+        "file_name": "অরণ্যের_দিনরাত্রি_–_সুনীল_গঙ্গোপাধ্যায়_-_সুনীল_গঙ্গোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%B0%E0%A6%A3%E0%A7%8D%E0%A6%AF%E0%A7%87%E0%A6%B0_%E0%A6%A6%E0%A6%BF%E0%A6%A8%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A6%BF_%E2%80%93_%E0%A6%B8%E0%A7%81%E0%A6%A8%E0%A7%80%E0%A6%B2_%E0%A6%97%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F_-_%E0%A6%B8%E0%A7%81%E0%A6%A8%E0%A7%80%E0%A6%B2_%E0%A6%97%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "একাত্তরের যীশু",
+        "author": "শাহরিয়ার কবির",
+        "file_name": "একাত্তরের_যীশু_-_শাহরিয়ার_কবির.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%BE%E0%A6%A4%E0%A7%8D%E0%A6%A4%E0%A6%B0%E0%A7%87%E0%A6%B0_%E0%A6%AF%E0%A7%80%E0%A6%B6%E0%A7%81_-_%E0%A6%B6%E0%A6%BE%E0%A6%B9%E0%A6%B0%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B0_%E0%A6%95%E0%A6%AC%E0%A6%BF%E0%A6%B0.epub"
+    },
+    {
         "title": "আরেক ফাল্গুন (উপন্যাস) (১৯৬৯)",
         "author": "জহির রায়হান",
         "file_name": "আরেক_ফাল্গুন_(উপন্যাস)_(১৯৬৯)_-_জহির_রায়হান.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B0%E0%A7%87%E0%A6%95_%E0%A6%AB%E0%A6%BE%E0%A6%B2%E0%A7%8D%E0%A6%97%E0%A7%81%E0%A6%A8_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_%28%E0%A7%A7%E0%A7%AF%E0%A7%AC%E0%A7%AF%29_-_%E0%A6%9C%E0%A6%B9%E0%A6%BF%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%B9%E0%A6%BE%E0%A6%A8.epub"
+    },
+    {
+        "title": "একা একা (২০০৩)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "একা_একা_(২০০৩)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%BE_%E0%A6%8F%E0%A6%95%E0%A6%BE_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%A9%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "আঁস্তাকুড়ের এলেকট্রা (গল্পকাব্য)",
+        "author": "মলয় রায়চৌধুরী",
+        "file_name": "আঁস্তাকুড়ের_এলেকট্রা_(গল্পকাব্য)_-_মলয়_রায়চৌধুরী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%81%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%95%E0%A7%81%E0%A7%9C%E0%A7%87%E0%A6%B0_%E0%A6%8F%E0%A6%B2%E0%A7%87%E0%A6%95%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BE_%28%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA%E0%A6%95%E0%A6%BE%E0%A6%AC%E0%A7%8D%E0%A6%AF%29_-_%E0%A6%AE%E0%A6%B2%E0%A7%9F_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%9A%E0%A7%8C%E0%A6%A7%E0%A7%81%E0%A6%B0%E0%A7%80.epub"
     },
     {
         "title": "বড়দিদি",
@@ -126,11 +602,74 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%AC%E0%A6%A1%E0%A6%BC%E0%A6%A6%E0%A6%BF%E0%A6%A6%E0%A6%BF_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub"
     },
     {
+        "title": "আমার আছে জল",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আমার_আছে_জল_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%86%E0%A6%9B%E0%A7%87_%E0%A6%9C%E0%A6%B2_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "কুর্চিবনে গান",
+        "author": "বুদ্ধদেব গুহ",
+        "file_name": "কুর্চিবনে_গান_-_বুদ্ধদেব_গুহ.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%81%E0%A6%B0%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%AC%E0%A6%A8%E0%A7%87_%E0%A6%97%E0%A6%BE%E0%A6%A8_-_%E0%A6%AC%E0%A7%81%E0%A6%A6%E0%A7%8D%E0%A6%A7%E0%A6%A6%E0%A7%87%E0%A6%AC_%E0%A6%97%E0%A7%81%E0%A6%B9.epub"
+    },
+    {
+        "title": "একটু পা চালিয়ে ভাই (১৯৭৯)",
+        "author": "সুভাষ মুখোপাধ্যায়",
+        "file_name": "একটু_পা_চালিয়ে_ভাই_(১৯৭৯)_-_সুভাষ_মুখোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A7%81_%E0%A6%AA%E0%A6%BE_%E0%A6%9A%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87_%E0%A6%AD%E0%A6%BE%E0%A6%87_%28%E0%A7%A7%E0%A7%AF%E0%A7%AD%E0%A7%AF%29_-_%E0%A6%B8%E0%A7%81%E0%A6%AD%E0%A6%BE%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AF%E0%A6%BC.epub"
+    },
+    {
         "title": "অজ্ঞাত রচনা",
         "author": "শরৎ রচনাবলী",
         "file_name": "অজ্ঞাত_রচনা_-_শরৎ_রচনাবলী.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%9C%E0%A7%8D%E0%A6%9E%E0%A6%BE%E0%A6%A4_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "খোঁড়া ভৈরবীর মাঠ",
+        "author": "অভীক সরকার",
+        "file_name": "খোঁড়া_ভৈরবীর_মাঠ_-_অভীক_সরকার.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%96%E0%A7%8B%E0%A6%81%E0%A6%A1%E0%A6%BC%E0%A6%BE_%E0%A6%AD%E0%A7%88%E0%A6%B0%E0%A6%AC%E0%A7%80%E0%A6%B0_%E0%A6%AE%E0%A6%BE%E0%A6%A0_-_%E0%A6%85%E0%A6%AD%E0%A7%80%E0%A6%95_%E0%A6%B8%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0.epub"
+    },
+    {
+        "title": "আনন্দী বাঈ",
+        "author": "সখারাম গণেশ দেউস্কর",
+        "file_name": "আনন্দী_বাঈ_-_সখারাম_গণেশ_দেউস্কর.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%A8%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%80_%E0%A6%AC%E0%A6%BE%E0%A6%88_-_%E0%A6%B8%E0%A6%96%E0%A6%BE%E0%A6%B0%E0%A6%BE%E0%A6%AE_%E0%A6%97%E0%A6%A3%E0%A7%87%E0%A6%B6_%E0%A6%A6%E0%A7%87%E0%A6%89%E0%A6%B8%E0%A7%8D%E0%A6%95%E0%A6%B0.epub"
+    },
+    {
+        "title": "আজ চিত্রার বিয়ে",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আজ_চিত্রার_বিয়ে_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%9C_%E0%A6%9A%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%B0_%E0%A6%AC%E0%A6%BF%E0%A7%9F%E0%A7%87_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "আরব জাতির ইতিহাস – ফিলিপ কে. হিট্টি",
+        "author": "ফিলিপ কে. হিট্টি",
+        "file_name": "আরব_জাতির_ইতিহাস_–_ফিলিপ_কে._হিট্টি_-_ফিলিপ_কে._হিট্টি.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B0%E0%A6%AC_%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A6%BF%E0%A6%B0_%E0%A6%87%E0%A6%A4%E0%A6%BF%E0%A6%B9%E0%A6%BE%E0%A6%B8_%E2%80%93_%E0%A6%AB%E0%A6%BF%E0%A6%B2%E0%A6%BF%E0%A6%AA_%E0%A6%95%E0%A7%87._%E0%A6%B9%E0%A6%BF%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BF_-_%E0%A6%AB%E0%A6%BF%E0%A6%B2%E0%A6%BF%E0%A6%AA_%E0%A6%95%E0%A7%87._%E0%A6%B9%E0%A6%BF%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BF.epub"
+    },
+    {
+        "title": "এন্ডলেস নাইট",
+        "author": "আগাথা ক্রিস্টি",
+        "file_name": "এন্ডলেস_নাইট_-_আগাথা_ক্রিস্টি.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%A8%E0%A7%8D%E0%A6%A1%E0%A6%B2%E0%A7%87%E0%A6%B8_%E0%A6%A8%E0%A6%BE%E0%A6%87%E0%A6%9F_-_%E0%A6%86%E0%A6%97%E0%A6%BE%E0%A6%A5%E0%A6%BE_%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BF.epub"
+    },
+    {
+        "title": "ঔরস (উপন্যাস)",
+        "author": "মলয় রায়চৌধুরী",
+        "file_name": "ঔরস_(উপন্যাস)_-_মলয়_রায়চৌধুরী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%94%E0%A6%B0%E0%A6%B8_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_-_%E0%A6%AE%E0%A6%B2%E0%A7%9F_%E0%A6%B0%E0%A6%BE%E0%A7%9F%E0%A6%9A%E0%A7%8C%E0%A6%A7%E0%A7%81%E0%A6%B0%E0%A7%80.epub"
     },
     {
         "title": "উন্নত জীবন",
@@ -140,11 +679,102 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A6%A4_%E0%A6%9C%E0%A7%80%E0%A6%AC%E0%A6%A8_-_%E0%A6%B2%E0%A7%81%E0%A7%8E%E0%A6%AB%E0%A6%B0_%E0%A6%B0%E0%A6%B9%E0%A6%AE%E0%A6%BE%E0%A6%A8.epub"
     },
     {
+        "title": "এসো বিজ্ঞানের রাজ্যে",
+        "author": "আবদুল্লাহ আল-মুতী",
+        "file_name": "এসো_বিজ্ঞানের_রাজ্যে_-_আবদুল্লাহ_আল-মুতী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%B8%E0%A7%8B_%E0%A6%AC%E0%A6%BF%E0%A6%9C%E0%A7%8D%E0%A6%9E%E0%A6%BE%E0%A6%A8%E0%A7%87%E0%A6%B0_%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A7%8D%E0%A6%AF%E0%A7%87_-_%E0%A6%86%E0%A6%AC%E0%A6%A6%E0%A7%81%E0%A6%B2%E0%A7%8D%E0%A6%B2%E0%A6%BE%E0%A6%B9_%E0%A6%86%E0%A6%B2-%E0%A6%AE%E0%A7%81%E0%A6%A4%E0%A7%80.epub"
+    },
+    {
+        "title": "খোয়াই",
+        "author": "বিমল কর",
+        "file_name": "খোয়াই_-_বিমল_কর.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%96%E0%A7%8B%E0%A7%9F%E0%A6%BE%E0%A6%87_-_%E0%A6%AC%E0%A6%BF%E0%A6%AE%E0%A6%B2_%E0%A6%95%E0%A6%B0.epub"
+    },
+    {
+        "title": "অনিল বাগচির একদিন",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "অনিল_বাগচির_একদিন_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A8%E0%A6%BF%E0%A6%B2_%E0%A6%AC%E0%A6%BE%E0%A6%97%E0%A6%9A%E0%A6%BF%E0%A6%B0_%E0%A6%8F%E0%A6%95%E0%A6%A6%E0%A6%BF%E0%A6%A8_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "ইস্তাহার",
+        "author": "অজ্ঞাত",
+        "file_name": "ইস্তাহার_-_অজ্ঞাত.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%87%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%B9%E0%A6%BE%E0%A6%B0_-_%E0%A6%85%E0%A6%9C%E0%A7%8D%E0%A6%9E%E0%A6%BE%E0%A6%A4.epub"
+    },
+    {
+        "title": "গহনগোপন (উপন্যাস)",
+        "author": "প্রফুল্ল রায়",
+        "file_name": "গহনগোপন_(উপন্যাস)_-_প্রফুল্ল_রায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%97%E0%A6%B9%E0%A6%A8%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%A8_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_-_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%AB%E0%A7%81%E0%A6%B2%E0%A7%8D%E0%A6%B2_%E0%A6%B0%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "আগুনের পরশমণি",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আগুনের_পরশমণি_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%97%E0%A7%81%E0%A6%A8%E0%A7%87%E0%A6%B0_%E0%A6%AA%E0%A6%B0%E0%A6%B6%E0%A6%AE%E0%A6%A3%E0%A6%BF_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "অন্দরমহল",
+        "author": "সুনীল গঙ্গোপাধ্যায়",
+        "file_name": "অন্দরমহল_-_সুনীল_গঙ্গোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A6%B0%E0%A6%AE%E0%A6%B9%E0%A6%B2_-_%E0%A6%B8%E0%A7%81%E0%A6%A8%E0%A7%80%E0%A6%B2_%E0%A6%97%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "অন্যদিন",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "অন্যদিন_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%A6%E0%A6%BF%E0%A6%A8_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "অরণ্য",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "অরণ্য_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%B0%E0%A6%A3%E0%A7%8D%E0%A6%AF_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "ইঙ্গিত — প্রচ্ছদ",
+        "author": "কৃষ্ণদাস আচার্য্য চৌধুরী",
+        "file_name": "ইঙ্গিত_—_প্রচ্ছদ_-_কৃষ্ণদাস_আচার্য্য_চৌধুরী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%87%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BF%E0%A6%A4_%E2%80%94_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%9A%E0%A7%8D%E0%A6%9B%E0%A6%A6_-_%E0%A6%95%E0%A7%83%E0%A6%B7%E0%A7%8D%E0%A6%A3%E0%A6%A6%E0%A6%BE%E0%A6%B8_%E0%A6%86%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AF%E0%A7%8D%E0%A6%AF_%E0%A6%9A%E0%A7%8C%E0%A6%A7%E0%A7%81%E0%A6%B0%E0%A7%80.epub"
+    },
+    {
+        "title": "অজানা কুয়াশায়",
+        "author": "প্রফুল্ল কুমার পাত্র",
+        "file_name": "অজানা_কুয়াশায়_-_প্রফুল্ল_কুমার_পাত্র.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE_%E0%A6%95%E0%A7%81%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B6%E0%A6%BE%E0%A6%AF%E0%A6%BC_-_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%AB%E0%A7%81%E0%A6%B2%E0%A7%8D%E0%A6%B2_%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%AA%E0%A6%BE%E0%A6%A4%E0%A7%8D%E0%A6%B0.epub"
+    },
+    {
+        "title": "আমরা কেউ বাসায় নেই",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আমরা_কেউ_বাসায়_নেই_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A6%B0%E0%A6%BE_%E0%A6%95%E0%A7%87%E0%A6%89_%E0%A6%AC%E0%A6%BE%E0%A6%B8%E0%A6%BE%E0%A7%9F_%E0%A6%A8%E0%A7%87%E0%A6%87_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
         "title": "আশুতোষ মুখোপাধ্যায়ের গল্প",
         "author": "আশুতোষ মুখোপাধ্যায়",
         "file_name": "আশুতোষ_মুখোপাধ্যায়ের_গল্প_-_আশুতোষ_মুখোপাধ্যায়.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%A4%E0%A7%8B%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%B2%E0%A7%8D%E0%A6%AA_-_%E0%A6%86%E0%A6%B6%E0%A7%81%E0%A6%A4%E0%A7%8B%E0%A6%B7_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "ক্যারিবিয়ান মিস্ট্রি",
+        "author": "আগাথা ক্রিস্টি",
+        "file_name": "ক্যারিবিয়ান_মিস্ট্রি_-_আগাথা_ক্রিস্টি.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%AC%E0%A6%BF%E0%A7%9F%E0%A6%BE%E0%A6%A8_%E0%A6%AE%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A7%8D%E0%A6%B0%E0%A6%BF_-_%E0%A6%86%E0%A6%97%E0%A6%BE%E0%A6%A5%E0%A6%BE_%E0%A6%95%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BF.epub"
     },
     {
         "title": "উপন্যাস (শরৎ)",
@@ -154,11 +784,74 @@
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8_%28%E0%A6%B6%E0%A6%B0%E0%A7%8E%29_-_%E0%A6%B6%E0%A6%B0%E0%A7%8E%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
     },
     {
+        "title": "অদৃত ও জিকাসন",
+        "author": "অয়ন মুখোপাধ্যায়",
+        "file_name": "অদৃত_ও_জিকাসন_-_অয়ন_মুখোপাধ্যায়.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A6%E0%A7%83%E0%A6%A4_%E0%A6%93_%E0%A6%9C%E0%A6%BF%E0%A6%95%E0%A6%BE%E0%A6%B8%E0%A6%A8_-_%E0%A6%85%E0%A7%9F%E0%A6%A8_%E0%A6%AE%E0%A7%81%E0%A6%96%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "অন্ধকারের গান (১৯৯৭)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "অন্ধকারের_গান_(১৯৯৭)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%A8%E0%A7%8D%E0%A6%A7%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%87%E0%A6%B0_%E0%A6%97%E0%A6%BE%E0%A6%A8_%28%E0%A7%A7%E0%A7%AF%E0%A7%AF%E0%A7%AD%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "গাব্বু",
+        "author": "মুহম্মদ জাফর ইকবাল",
+        "file_name": "গাব্বু_-_মুহম্মদ_জাফর_ইকবাল.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%97%E0%A6%BE%E0%A6%AC%E0%A7%8D%E0%A6%AC%E0%A7%81_-_%E0%A6%AE%E0%A7%81%E0%A6%B9%E0%A6%AE%E0%A7%8D%E0%A6%AE%E0%A6%A6_%E0%A6%9C%E0%A6%BE%E0%A6%AB%E0%A6%B0_%E0%A6%87%E0%A6%95%E0%A6%AC%E0%A6%BE%E0%A6%B2.epub"
+    },
+    {
+        "title": "আমাদের সাদা বাড়ি (১৯৯৬)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "আমাদের_সাদা_বাড়ি_(১৯৯৬)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%86%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B0_%E0%A6%B8%E0%A6%BE%E0%A6%A6%E0%A6%BE_%E0%A6%AC%E0%A6%BE%E0%A6%A1%E0%A6%BC%E0%A6%BF_%28%E0%A7%A7%E0%A7%AF%E0%A7%AF%E0%A7%AC%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "ইস্টিশন (১৯৯৯)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "ইস্টিশন_(১৯৯৯)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BF%E0%A6%B6%E0%A6%A8_%28%E0%A7%A7%E0%A7%AF%E0%A7%AF%E0%A7%AF%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "কিছুক্ষণ (২০০৭)",
+        "author": "হুমায়ূন আহমেদ রচনাবলী",
+        "file_name": "কিছুক্ষণ_(২০০৭)_-_হুমায়ূন_আহমেদ_রচনাবলী.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A6%BF%E0%A6%9B%E0%A7%81%E0%A6%95%E0%A7%8D%E0%A6%B7%E0%A6%A3_%28%E0%A7%A8%E0%A7%A6%E0%A7%A6%E0%A7%AD%29_-_%E0%A6%B9%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A7%9F%E0%A7%82%E0%A6%A8_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A7%87%E0%A6%A6_%E0%A6%B0%E0%A6%9A%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A6%B2%E0%A7%80.epub"
+    },
+    {
+        "title": "অচল প্রেমের পদ্য",
+        "author": "হেলাল হাফিজ",
+        "file_name": "অচল_প্রেমের_পদ্য_-_হেলাল_হাফিজ.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%85%E0%A6%9A%E0%A6%B2_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A7%87%E0%A6%AE%E0%A7%87%E0%A6%B0_%E0%A6%AA%E0%A6%A6%E0%A7%8D%E0%A6%AF_-_%E0%A6%B9%E0%A7%87%E0%A6%B2%E0%A6%BE%E0%A6%B2_%E0%A6%B9%E0%A6%BE%E0%A6%AB%E0%A6%BF%E0%A6%9C.epub"
+    },
+    {
         "title": "এই তো মর্মর মুর্তি (১৯৮৭)",
         "author": "শক্তি চট্টোপাধ্যায়",
         "file_name": "এই_তো_মর্মর_মুর্তি_(১৯৮৭)_-_শক্তি_চট্টোপাধ্যায়.epub",
         "format": "epub",
         "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%87_%E0%A6%A4%E0%A7%8B_%E0%A6%AE%E0%A6%B0%E0%A7%8D%E0%A6%AE%E0%A6%B0_%E0%A6%AE%E0%A7%81%E0%A6%B0%E0%A7%8D%E0%A6%A4%E0%A6%BF_%28%E0%A7%A7%E0%A7%AF%E0%A7%AE%E0%A7%AD%29_-_%E0%A6%B6%E0%A6%95%E0%A7%8D%E0%A6%A4%E0%A6%BF_%E0%A6%9A%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A7%8B%E0%A6%AA%E0%A6%BE%E0%A6%A7%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A7%9F.epub"
+    },
+    {
+        "title": "একজন আলি কেনানের উত্থান-পতন (উপন্যাস)",
+        "author": "আহমদ ছফা",
+        "file_name": "একজন_আলি_কেনানের_উত্থান-পতন_(উপন্যাস)_-_আহমদ_ছফা.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%8F%E0%A6%95%E0%A6%9C%E0%A6%A8_%E0%A6%86%E0%A6%B2%E0%A6%BF_%E0%A6%95%E0%A7%87%E0%A6%A8%E0%A6%BE%E0%A6%A8%E0%A7%87%E0%A6%B0_%E0%A6%89%E0%A6%A4%E0%A7%8D%E0%A6%A5%E0%A6%BE%E0%A6%A8-%E0%A6%AA%E0%A6%A4%E0%A6%A8_%28%E0%A6%89%E0%A6%AA%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%B8%29_-_%E0%A6%86%E0%A6%B9%E0%A6%AE%E0%A6%A6_%E0%A6%9B%E0%A6%AB%E0%A6%BE.epub"
+    },
+    {
+        "title": "কুমার সম্ভব",
+        "author": "কালিদাস",
+        "file_name": "কুমার_সম্ভব_-_কালিদাস.epub",
+        "format": "epub",
+        "download_link": "https://hmhashemali16.github.io/OPDS/%E0%A6%95%E0%A7%81%E0%A6%AE%E0%A6%BE%E0%A6%B0_%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AD%E0%A6%AC_-_%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A6%BF%E0%A6%A6%E0%A6%BE%E0%A6%B8.epub"
     },
     {
         "title": "একশ বছরের সেরা গল্প (সম্পাদিত)",
