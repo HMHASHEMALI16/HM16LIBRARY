@@ -1,6 +1,6 @@
 {
   "name": "HM 16 LIBRARY",
-  "short_name": "HM 16 LIBRARY",
+  "short_name": "HM 16 Library",
   "description": "ডিজিটাল লাইব্রেরী",
   "start_url": "./",
   "display": "standalone",
