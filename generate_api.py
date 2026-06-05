@@ -18,7 +18,9 @@ for filename in os.listdir('.'):
         
         # বাংলা নামের কারণে লিংক যেন ভেঙে না যায়, তাই URL Encode করা
         encoded_filename = urllib.parse.quote(filename)
-        download_url = f"https://hmhashemali16.github.io/OPDS/{encoded_filename}"
+        
+        # OPDS এর বদলে HM16LIBRARY ব্যবহার করা হয়েছে
+        download_url = f"https://hmhashemali16.github.io/HM16LIBRARY/{encoded_filename}"
         
         book_info = {
             "title": title,
