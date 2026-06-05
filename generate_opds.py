@@ -6,8 +6,8 @@ import urllib.parse
 folder_path = '.' 
 xml_path = 'catalog.xml'
 
-# আপনার গিটহাব পেজেস এর মূল লিংক
-base_url = "https://hmhashemali16.github.io/OPDS"
+# আপনার গিটহাব পেজেস এর মূল লিংক (OPDS থেকে HM16LIBRARY তে পরিবর্তন করা হয়েছে)
+base_url = "https://hmhashemali16.github.io/HM16LIBRARY"
 icon_url = f"{base_url}/Bookicon.png"
 
 xml_content = f"""<?xml version="1.0" encoding="utf-8"?>
