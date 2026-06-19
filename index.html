@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM 16 LIBRARY — ডিজিটাল লাইব্রেরী ও রিডার</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&family=Inter:wght@300;400;500;600&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+  // Initialize Theme on startup to prevent flash
+  const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', savedTheme);
+</script>
+
+<style>
+  /* --- Global Reset & Variables --- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @font-face {
+    font-family: 'July Regular';
+    src: url('./July_Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-main: #F4F6F8;
+    --card-bg: #FFFFFF;
+    --text-dark: #1A1C1E;
+    --text-light: #6C737F;
+    --accent: #E0532B;
+    --accent-hover: #C64623;
+    --accent-glow: rgba(224, 83, 43, 0.12);
+    --border-color: #E5E7EB;
+    --card-shadow: 0 8px 24px rgba(149, 157, 165, 0.08);
+    --hover-shadow: 0 16px 32px rgba(149, 157, 165, 0.15);
+    --font-serif: 'Noto Serif Bengali', 'July Regular', serif;
+    --font-sans: 'Noto Sans Bengali', sans-serif;
+    --nav-bg: rgba(255, 255, 255, 0.85);
+    
+    /* Reader Engine Styling Hooks */
+    --reader-bg: #FCFAF2;
+    --reader-text: #2B2118;
+    --reader-line: 1.8;
+    --reader-font: 'July Regular', 'Noto Serif Bengali', serif;
+    --reader-size: 19px;
+    --sidebar-w: 300px;
+    --header-h: 60px;
+    --bar-h: 48px;
+    --radius: 12px;
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --danger: #EF4444;
+    --success: #10B981;
+  }
+
+  [data-theme="dark"] {
+    --bg-main: #0D0F11;
+    --card-bg: #16181A;
+    --text-dark: #F3F4F6;
+    --text-light: #9CA3AF;
+    --accent: #F06A42;
+    --accent-hover: #FF8562;
+    --accent-glow: rgba(240, 106, 66, 0.15);
+    --border-color: #2D3035;
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --hover-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+    --nav-bg: rgba(22, 24, 26, 0.85);
+
+    /* Reader Engine Dark Hooks */
+    --reader-bg: #0D0F11;
+    --reader-text: #E5E0D8;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    line-height: 1.6;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  /* --- DASHBOARD / SHELF --- */
+  #dashboard {
+    height: 100vh;
+    overflow-y: auto;
+    display: block;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 7.5rem 1.5rem 3rem;
+    width: 100%;
+  }
+
+  /* --- Sticky Glassmorphism Header --- */
+  .top-nav-wrapper {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000; transition: background 0.4s ease;
+  }
+
+  .top-nav {
+    max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+
+  .brand-area { display: flex; flex-direction: column; line-height: 1.1; margin-right: auto; order: 1; cursor: pointer; }
+  .main-heading { font-family: var(--font-serif); font-size: 1.6rem; margin: 0; font-weight: 700; color: var(--accent); letter-spacing: -0.5px;}
+  .sub-heading { font-size: 0.8rem; color: var(--text-light); font-weight: 600; letter-spacing: 0.5px; margin-top: 2px;}
+
+  /* Dashboard Controls Group */
+  .controls-group {
+    display: flex; gap: 12px; flex: 1; justify-content: flex-end; align-items: center; order: 2;
+  }
+
+  .search-wrapper { width: 100%; max-width: 380px; position: relative; }
+  .search-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 1.2rem; }
+  .search-input {
+    width: 100%; height: 44px; padding: 0 1.2rem 0 3rem;
+    border: 1px solid var(--border-color); border-radius: 24px;
+    background: var(--card-bg); color: var(--text-dark);
+    font-family: var(--font-sans); font-size: 0.95rem;
+    outline: none; transition: all 0.3s ease;
+  }
+  .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
+
+  .icon-btn {
+    background: var(--card-bg); border: 1px solid var(--border-color);
+    width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem;
+    color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    order: 3; flex-shrink: 0; position: relative;
+  }
+  .icon-btn:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.05); }
+
+  /* Import Custom Files Drag & Drop Card */
+  .upload-shelf-card {
+    background: var(--card-bg);
+    border: 2px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .upload-shelf-card:hover {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+    transform: translateY(-2px);
+  }
+  .upload-icon { font-size: 2rem; color: var(--accent); }
+  .upload-title { font-size: 1.1rem; font-weight: 600; font-family: var(--font-serif); }
+  .upload-sub { font-size: 0.85rem; color: var(--text-light); }
+
+  /* --- Section Header --- */
+  .section-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.8rem;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .section-title { font-family: var(--font-serif); font-size: 1.4rem; margin: 0; font-weight: 700; display: flex; gap: 8px; align-items: center; }
+  .book-count { font-family: var(--font-sans); background: var(--accent); color: white; font-size: 0.85rem; font-weight: 600; padding: 2px 10px; border-radius: 20px; margin-left: 6px; }
+
+  .sort-wrapper { display: flex; align-items: center; gap: 8px; }
+  .sort-label { font-size: 0.9rem; color: var(--text-light); font-weight: 500; font-family: var(--font-sans); }
+  .sort-select {
+    height: 38px; padding: 0 2.2rem 0 1rem;
+    border: 1px solid var(--border-color); border-radius: 12px;
+    background: var(--card-bg); color: var(--text-dark);
+    font-family: var(--font-sans); font-size: 0.9rem; font-weight: 600;
+    outline: none; cursor: pointer; transition: all 0.3s ease;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat; background-position: right 0.8rem center; background-size: 1em;
+  }
+  .sort-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  [data-theme="dark"] .sort-select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F3F4F6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  }
+
+  /* --- Books Grid --- */
+  .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+
+  /* Modern Card Design */
+  .book-card {
+    background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px;
+    padding: 1.25rem; display: flex; flex-direction: column; align-items: center;
+    box-shadow: var(--card-shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); height: 100%;
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .book-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--hover-shadow); }
+
+  /* Card progress tracker on Dashboard bookshelf */
+  .book-progress-wrapper {
+    width: 100%; height: 5px; background: var(--bg-main); border-radius: 4px;
+    overflow: hidden; margin-top: 10px; margin-bottom: 2px;
+  }
+  .book-progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+  .book-progress-text { font-size: 0.75rem; color: var(--text-light); margin-bottom: 8px; font-weight: 500; }
+
+  .book-card-delete {
+    position: absolute; top: 10px; right: 10px;
+    width: 28px; height: 28px; background: rgba(0,0,0,0.7);
+    border: 1px solid var(--border-color); color: #FFF;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all var(--transition); opacity: 0; z-index: 10;
+  }
+  .book-card:hover .book-card-delete { opacity: 1; }
+  .book-card-delete:hover { background: var(--danger); border-color: var(--danger); transform: scale(1.1); }
+
+  /* Cover styling */
+  .book-cover-wrapper {
+    position: relative; width: 100%; max-width: 110px; aspect-ratio: 2 / 3;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: -4px 0 8px rgba(0,0,0,0.2) inset, 4px 10px 20px rgba(0,0,0,0.15);
+    margin-bottom: 1.2rem; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 1rem; text-align: center; overflow: hidden; transition: transform 0.4s ease;
+  }
+  .book-card:hover .book-cover-wrapper { transform: scale(1.04) rotate(2deg); }
+  .book-cover-wrapper::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
+    background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0.1) 20%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.2));
+    z-index: 5;
+  }
+  .cover-title { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 700; color: #FFF; text-shadow: 1px 2px 4px rgba(0,0,0,0.8); margin: 0 0 6px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; z-index: 2;}
+  .cover-author { font-size: 0.65rem; color: rgba(255,255,255,0.9); z-index: 2;}
+  .book-cover-img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 1; }
+
+  /* Card Info */
+  .card-info { width: 100%; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+  .info-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem; color: var(--text-dark); margin: 0 0 4px 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .info-author { color: var(--text-light); font-size: 0.8rem; margin: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* Action Buttons */
+  .card-actions { display: flex; gap: 6px; margin-top: 10px; width: 100%; }
+  .btn-action {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px;
+    padding: 8px 0; border-radius: 8px; font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem;
+    cursor: pointer; text-decoration: none; border: 1px solid transparent; transition: all 0.2s ease;
+  }
+  .btn-download { background: var(--accent-glow); color: var(--accent); }
+  .btn-download:hover { background: var(--accent); color: #FFF; }
+  .btn-read { background: transparent; border-color: var(--border-color); color: var(--text-dark); }
+  .btn-read:hover { border-color: var(--text-dark); background: var(--text-dark); color: var(--bg-main); }
+  .empty-state { grid-column: 1 / -1; padding: 6rem 1rem; text-align: center; color: var(--text-light); font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: 1rem;}
+  .empty-state i { font-size: 3rem; color: var(--border-color); }
+
+  /* --- PREMIUM READER INTERFACE --- */
+  #app { height: 100vh; display: flex; flex-direction: column; }
+  
+  /* App/Reader Header Navigation */
+  .header {
+    height: var(--header-h);
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex; align-items: center;
+    padding: 0 16px; gap: 12px;
+    position: relative; z-index: 100;
+    flex-shrink: 0;
+  }
+  .header-logo { display: flex; align-items: center; gap: 8px; cursor: pointer; flex-shrink: 0; }
+  .header-logo-icon {
+    width: 34px; height: 34px;
+    background: var(--accent);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: white;
+  }
+  .header-logo-name { font-family: var(--font-serif); font-size: 1.2rem; color: var(--accent); font-weight: 700; }
+  .header-divider { width: 1px; height: 24px; background: var(--border-color); }
+  .header-book-info { flex: 1; min-width: 0; }
+  .header-book-title { font-family: var(--font-serif); font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .header-book-author { font-size: 11px; color: var(--text-light); }
+  .header-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+  /* Main Immersive Layout */
+  .main-layout { flex: 1; display: flex; overflow: hidden; position: relative; }
+
+  /* --- READER SIDEBAR --- */
+  .sidebar {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex; flex-direction: column;
+    transition: width var(--transition), transform var(--transition);
+    overflow: hidden; z-index: 150;
+  }
+  .sidebar.collapsed { width: 0; }
+  .sidebar-tabs { display: flex; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+  .sidebar-tab {
+    flex: 1; padding: 12px 6px; border: none; background: transparent;
+    color: var(--text-light); cursor: pointer; font-size: 11px;
+    font-family: var(--font-sans); font-weight: 600;
+    transition: all var(--transition); display: flex; flex-direction: column;
+    align-items: center; gap: 4px; white-space: nowrap;
+  }
+  .sidebar-tab i { font-size: 1.2rem; }
+  .sidebar-tab:hover { color: var(--text-dark); background: var(--bg-main); }
+  .sidebar-tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+  .sidebar-panel { flex: 1; overflow-y: auto; display: none; padding: 12px; }
+  .sidebar-panel.active { display: block; }
+
+  /* Table of Contents List Styling */
+  .toc-item {
+    padding: 8px 10px; border-radius: 8px; cursor: pointer;
+    font-size: 13px; color: var(--text-dark); font-weight: 500;
+    transition: all var(--transition); display: flex; align-items: center; gap: 8px;
+    line-height: 1.4;
+  }
+  .toc-item:hover { background: var(--bg-main); color: var(--accent); }
+  .toc-item.active { background: var(--accent-glow); color: var(--accent); font-weight: 600; }
+  .toc-item.level-2 { padding-left: 20px; font-size: 12.5px; opacity: 0.9; }
+  .toc-item.level-3 { padding-left: 30px; font-size: 11.5px; opacity: 0.8; }
+
+  /* Marks panel bookmark item style */
+  .bookmark-item {
+    padding: 10px; border-radius: 8px; background: var(--bg-main);
+    border: 1px solid var(--border-color); margin-bottom: 8px; cursor: pointer;
+    transition: all var(--transition); position: relative;
+  }
+  .bookmark-item:hover { border-color: var(--accent); }
+  .bookmark-text { font-size: 13px; color: var(--text-dark); font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
+  .bookmark-meta { font-size: 11px; color: var(--text-light); }
+  .bookmark-del {
+    position: absolute; top: 8px; right: 8px; background: none; border: none;
+    color: var(--text-light); cursor: pointer; font-size: 14px; padding: 2px;
+    border-radius: 4px; transition: color var(--transition);
+  }
+  .bookmark-del:hover { color: var(--danger); }
+
+  /* Highlights & Notes Item Style */
+  .highlight-item {
+    padding: 10px; border-radius: 8px; margin-bottom: 8px; cursor: pointer;
+    border-left: 3px solid; background: var(--bg-main); transition: all var(--transition);
+  }
+  .highlight-item:hover { opacity: 0.85; }
+  .highlight-item-text { font-size: 13px; color: var(--text-dark); line-height: 1.4; margin-bottom: 4px; font-style: italic; }
+  .highlight-item-note { font-size: 12px; color: var(--accent); margin-top: 4px; font-weight: 600; }
+  .highlight-item-meta { font-size: 11px; color: var(--text-light); }
+
+  /* Search Panel */
+  .search-box { display: flex; gap: 8px; margin-bottom: 12px; }
+  .search-btn {
+    padding: 8px 14px; border-radius: 8px;
+    background: var(--accent); border: none; color: #FFF;
+    cursor: pointer; font-weight: 600; font-size: 13px;
+    transition: opacity var(--transition);
+  }
+  .search-btn:hover { opacity: 0.85; }
+
+  /* ─── READER VIEWPORT & TOOLBAR ─── */
+  .reader-area {
+    flex: 1; display: flex; flex-direction: column; overflow: hidden;
+    background: var(--reader-bg);
+  }
+
+  .reader-toolbar {
+    height: var(--bar-h); flex-shrink: 0;
+    background: var(--card-bg); border-bottom: 1px solid var(--border-color);
+    display: flex; align-items: center; gap: 6px; padding: 0 12px;
+  }
+  .toolbar-group { display: flex; align-items: center; gap: 4px; }
+  .toolbar-sep { width: 1px; height: 24px; background: var(--border-color); margin: 0 6px; }
+  .toolbar-select {
+    padding: 4px 8px; border-radius: 6px;
+    background: var(--bg-main); border: 1px solid var(--border-color);
+    color: var(--text-dark); font-family: var(--font-sans); font-size: 13px;
+    cursor: pointer; outline: none; transition: border-color var(--transition);
+  }
+  .toolbar-select:focus { border-color: var(--accent); }
+  .font-size-ctrl { display: flex; align-items: center; gap: 4px; font-size: 13px; }
+  .font-size-num { min-width: 32px; text-align: center; font-weight: 600; color: var(--accent); font-size: 13px; }
+  .page-nav { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+  .page-num { font-size: 13px; color: var(--text-light); min-width: 100px; text-align: center; }
+  .nav-btn {
+    padding: 6px 14px; border-radius: 7px;
+    background: var(--bg-main); border: 1px solid var(--border-color);
+    color: var(--text-dark); cursor: pointer; font-size: 13px;
+    transition: all var(--transition); font-family: var(--font-sans); font-weight: 600;
+  }
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* Readers Window Views */
+  .reader-viewport { flex: 1; overflow: hidden; position: relative; display: flex; align-items: stretch; }
+
+  /* EPUB Render Engine */
+  #epub-reader { flex: 1; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; }
+  .epub-stage { width: 100%; height: 100%; overflow: hidden; position: relative; }
+  .epub-flow { display: block; height: 100%; column-fill: auto; transition: transform var(--transition); }
+  .epub-flow.layout-double { column-count: 2; column-gap: 40px; }
+  .epub-flow.layout-single { column-count: 1; column-gap: 0px; }
+
+  /* EPUB Document Formatting Inject styles */
+  .epub-flow {
+    font-family: var(--reader-font);
+    font-size: var(--reader-size);
+    line-height: var(--reader-line);
+    color: var(--reader-text);
+    user-select: text;
+  }
+  .epub-flow * { max-width: 100% !important; box-sizing: border-box !important; }
+  .epub-flow h1, .epub-flow h2, .epub-flow h3 {
+    font-family: var(--font-serif); color: var(--accent); margin: 24px 0 12px; line-height: 1.3;
+    page-break-after: avoid; break-after: avoid; text-align: center;
+  }
+  .epub-flow h1 { font-size: 1.8em; }
+  .epub-flow h2 { font-size: 1.4em; }
+  .epub-flow p { margin-bottom: 1.1em; text-align: justify; }
+  .epub-flow img { max-height: 60vh !important; object-fit: contain !important; height: auto !important; display: block; margin: 16px auto; page-break-inside: avoid; break-inside: avoid; border-radius: 6px; }
+  .epub-flow a { color: var(--accent); text-decoration: none; }
+  .epub-flow.no-dropcaps p:first-of-type::first-letter { float: none; font-size: 1em; line-height: inherit; margin: 0; color: inherit; }
+
+  /* Scrollview layout wrapper */
+  .epub-scroll-wrap { flex: 1; overflow-y: auto; padding: 40px 80px; user-select: text; }
+  .epub-scroll-wrap::-webkit-scrollbar { width: 6px; }
+  .epub-scroll-wrap::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+  /* PDF Render Engine */
+  #pdf-reader {
+    flex: 1; overflow-y: auto; overflow-x: hidden;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 24px; gap: 20px; scroll-behavior: smooth;
+  }
+  .pdf-canvas-wrap {
+    position: relative; box-shadow: var(--card-shadow);
+    border-radius: 4px; overflow: hidden; background: #FFF;
+    border: 1px solid var(--border-color);
+  }
+  .pdf-canvas-wrap canvas { display: block; max-width: 100%; }
+
+  /* Tap zones navigation overlay */
+  .tap-prev, .tap-next {
+    position: absolute; top: 0; bottom: 0; width: 10%; cursor: pointer; z-index: 10;
+    opacity: 0; transition: opacity var(--transition), background-color var(--transition);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: var(--accent);
+    background: linear-gradient(to right, rgba(0,0,0,0.05), transparent);
+  }
+  .tap-next { right: 0; background: linear-gradient(to left, rgba(0,0,0,0.05), transparent); }
+  .tap-prev:hover, .tap-next:hover { opacity: 1; }
+  .tap-prev { left: 0; cursor: w-resize; }
+  .tap-next { right: 0; cursor: e-resize; }
+
+  /* Reading Progress Trackers */
+  .progress-bar-wrap { height: 4px; background: var(--bg-main); flex-shrink: 0; position: relative; cursor: pointer; }
+  .progress-bar-fill { height: 100%; background: var(--accent); transition: width 0.3s; position: relative; }
+  .progress-bar-fill::after {
+    content: ''; position: absolute; right: -4px; top: -3px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 8px var(--accent);
+  }
+
+  /* Status Bar */
+  .status-bar {
+    height: 32px; flex-shrink: 0; background: var(--card-bg); border-top: 1px solid var(--border-color);
+    display: flex; align-items: center; gap: 16px; padding: 0 16px; font-size: 12px; color: var(--text-light);
+  }
+  .status-item { display: flex; align-items: center; gap: 6px; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+
+  /* Floating progress tracker circle */
+  .reading-ring {
+    position: fixed; bottom: 48px; right: 20px; width: 52px; height: 52px; z-index: 80;
+    cursor: pointer; display: none;
+  }
+  .reading-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: var(--border-color); stroke-width: 4; }
+  .ring-fill { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.5s; }
+  .ring-text {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--accent);
+  }
+
+  /* --- MODAL OVERLAYS --- */
+  .overlay-panel {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity var(--transition);
+  }
+  .overlay-panel.open { opacity: 1; pointer-events: all; }
+  .panel-box {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border-color);
+    padding: 28px; width: min(480px, 92vw); max-height: 80vh; overflow-y: auto;
+    transform: translateY(12px); transition: transform var(--transition); box-shadow: var(--hover-shadow);
+    position: relative;
+  }
+  .overlay-panel.open .panel-box { transform: translateY(0); }
+  .panel-title { font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 20px; color: var(--accent); font-weight: 700; }
+
+  /* Theme Swatch Controls inside reader modal */
+  .theme-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .theme-swatch {
+    flex: 1; min-width: 80px; padding: 10px 6px; border-radius: 10px;
+    border: 2px solid transparent; cursor: pointer; text-align: center;
+    font-size: 11px; font-weight: 600; transition: all var(--transition);
+  }
+  .theme-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+  .swatch-dark { background: #0D0F11; color: #F3F4F6; }
+  .swatch-day { background: #FCFAF2; color: #2B2118; }
+  .swatch-sepia { background: #160F09; color: #EAD0B2; }
+  .swatch-amoled { background: #000; color: #FFF; }
+
+  /* Annotations Highlight Palette */
+  .hl-colors { display: flex; gap: 8px; }
+  .hl-color {
+    width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+    border: 3px solid transparent; transition: all var(--transition);
+  }
+  .hl-color.active { border-color: var(--text-dark); }
+
+  /* Context Menu selection */
+  #ctx-menu {
+    position: fixed; z-index: 500; background: var(--card-bg); border: 1px solid var(--border-color);
+    border-radius: 10px; padding: 6px; box-shadow: var(--hover-shadow); min-width: 170px; display: none;
+  }
+
+  /* --- RESPONSIVES --- */
+  @media (max-width: 768px) {
+    .container { padding-top: 10rem; }
+    .top-nav { padding: 1rem; flex-wrap: wrap; gap: 1rem; }
+    .brand-area { flex: 1 1 auto; order: 1; margin-right: 0; }
+    .icon-btn { order: 2; margin-left: auto; }
+    .controls-group { flex: 1 1 100%; order: 3; margin-top: 0.2rem; }
+    .search-wrapper { flex: 1; max-width: none; }
+    
+    .sidebar {
+      position: fixed; top: var(--header-h); left: 0;
+      height: calc(100% - var(--header-h)); z-index: 2100;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+    }
+    .sidebar.collapsed { transform: translateX(-100%); width: var(--sidebar-w); }
+    .epub-flow.layout-double { column-count: 1 !important; column-gap: 0px !important; }
+    .books-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  }
+
+  @media (max-width: 640px) {
+    .header-logo-name { display: none; }
+    .header-book-title { font-size: 12px; max-width: 120px; }
+    .header-actions { gap: 2px; }
+    .reader-toolbar .toolbar-sep,
+    .reader-toolbar .toolbar-select:not(#layoutSelect),
+    .reader-toolbar .icon-btn[onclick*="changeLineHeight"] {
+      display: none !important;
+    }
+    .reader-toolbar { justify-content: space-between; }
+    .page-nav { margin-left: 0; }
+    .page-num { min-width: 70px; font-size: 11px; }
+    .epub-scroll-wrap { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- DASHBOARD & SPLASH SCREEN CONTAINER -->
+<div id="dashboard">
+  <div class="top-nav-wrapper">
+    <header class="top-nav">
+      <div class="brand-area" onclick="goHome()">
+        <h1 class="main-heading">HM 16 LIBRARY</h1>
+        <span class="sub-heading">ডিজিটাল লাইব্রেরী ও রিডার</span>
+      </div>
+      
+      <div class="controls-group">
+        <div class="search-wrapper">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" id="searchBox" class="search-input" placeholder="বই, লেখক বা কি-ওয়ার্ড খুঁজুন..." oninput="handleSearchAndSort()">
+        </div>
+      </div>
+
+      <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="ph ph-moon" id="themeIcon"></i></button>
+    </header>
+  </div>
+
+  <div class="container">
+    <!-- Drag & Drop upload card -->
+    <div class="upload-shelf-card" id="dropZone">
+      <input type="file" id="fileInput" accept=".epub,.pdf" style="display:none">
+      <div class="upload-icon">☁️</div>
+      <div class="upload-title">আপনার নিজস্ব বই যুক্ত করুন (EPUB / PDF)</div>
+      <div class="upload-sub">ফাইলটি এখানে ড্র্যাগ করুন অথবা ক্লিক করে আপনার মেমোরি থেকে নির্বাচন করুন</div>
+    </div>
+
+    <div class="section-header">
+      <h3 class="section-title">বইয়ের তালিকা <span class="book-count" id="bookCount">0</span></h3>
+      <div class="sort-wrapper">
+        <span class="sort-label">সাজান:</span>
+        <select id="sortBox" class="sort-select" onchange="handleSearchAndSort()">
+          <option value="title">বই অনুযায়ী</option>
+          <option value="author">লেখক অনুযায়ী</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="books-grid" id="grid">
+      <div class="empty-state">
+        <i class="ph ph-spinner-gap ph-spin"></i>
+        বই লোড হচ্ছে...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN IMMERSIVE READER WORKSPACE -->
+<div id="app" style="display:none">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-logo" onclick="goHome()">
+      <div class="header-logo-icon">📖</div>
+      <div class="header-logo-name">HM 16</div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-book-info">
+      <div class="header-book-title" id="hdrTitle">বই খোলা হচ্ছে...</div>
+      <div class="header-book-author" id="hdrAuthor"></div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="toggleSidebar()" id="sidebarToggleBtn" title="নেভিগেশন মেনু">
+        <i class="ph ph-list"></i>
+      </button>
+      <button class="icon-btn" onclick="openPanel('searchPanel')" title="খুঁজুন">
+        <i class="ph ph-magnifying-glass"></i>
+      </button>
+      <button class="icon-btn" onclick="addBookmark()" title="বুকমার্ক">
+        <i class="ph ph-bookmark-simple"></i>
+      </button>
+      <button class="icon-btn" onclick="openPanel('settingsPanel')" title="সেটিংস">
+        <i class="ph ph-sliders"></i>
+      </button>
+      <button class="icon-btn" onclick="toggleTTS()" id="ttsBtn" title="অডিও রিডার">
+        <i class="ph ph-speaker-high"></i>
+      </button>
+      <button class="icon-btn" onclick="toggleFullscreen()" title="ফুলস্ক্রিন">
+        <i class="ph ph-corners-out"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Collapsible Responsive Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-tabs">
+        <button class="sidebar-tab active" onclick="switchSideTab(this,'toc')">
+          <i class="ph ph-list-numbers"></i>সূচীপত্র
+        </button>
+        <button class="sidebar-tab" onclick="switchSideTab(this,'bookmarks')">
+          <i class="ph ph-bookmark"></i>বুকমার্ক
+        </button>
+        <button class="sidebar-tab" onclick="switchSideTab(this,'highlights')">
+          <i class="ph ph-note-pencil"></i>নোট
+        </button>
+        <button class="sidebar-tab" onclick="switchSideTab(this,'stats')">
+          <i class="ph ph-chart-bar"></i>পরিসংখ্যান
+        </button>
+      </div>
+      
+      <div class="sidebar-panel active" id="toc-panel">
+        <div id="tocList" style="font-size:13px;color:var(--text-light)">সূচীপত্র লোড করা হচ্ছে...</div>
+      </div>
+      <div class="sidebar-panel" id="bookmarks-panel">
+        <div id="bookmarkList" style="font-size:13px;color:var(--text-light)">কোনো বুকমার্ক নেই। বুকমার্ক করতে 🔖 আইকন চাপুন।</div>
+      </div>
+      <div class="sidebar-panel" id="highlights-panel">
+        <div id="highlightList" style="font-size:13px;color:var(--text-light)">টেক্সট সিলেক্ট করে আপনার হাইলাইট বা নোট এখানে সংরক্ষণ করুন।</div>
+      </div>
+      <div class="sidebar-panel" id="stats-panel">
+        <div id="statsContent"></div>
+      </div>
+    </div>
+
+    <!-- Immersive Reading Area -->
+    <div class="reader-area">
+      <!-- Typography Toolbar -->
+      <div class="reader-toolbar">
+        <div class="toolbar-group font-size-ctrl">
+          <button class="icon-btn" onclick="changeFontSize(-1)" title="ফন্ট কমান">অ−</button>
+          <span class="font-size-num" id="fontSizeNum">19</span>
+          <button class="icon-btn" onclick="changeFontSize(1)" title="ফন্ট বাড়ান">অ+</button>
+        </div>
+        <div class="toolbar-sep"></div>
+        <select class="toolbar-select" onchange="changeFontFamily(this.value)" id="fontFamilySelect">
+          <option value="'July Regular', 'Noto Serif Bengali', serif">জুলাই রেগুলার (ডিফল্ট)</option>
+          <option value="'Noto Serif Bengali', serif">নোটো শেরিফ</option>
+          <option value="'Noto Sans Bengali', sans-serif">নোটো সান্স</option>
+          <option value="'Inter', sans-serif">Inter Sans</option>
+        </select>
+        <div class="toolbar-sep"></div>
+        <select class="toolbar-select" onchange="changeLayout(this.value)" id="layoutSelect">
+          <option value="scroll">স্ক্রল মোড</option>
+          <option value="single">এক পৃষ্ঠা</option>
+          <option value="double" selected>দুই পৃষ্ঠা</option>
+        </select>
+        <div class="toolbar-sep"></div>
+        <button class="icon-btn" onclick="changeLineHeight(-0.1)" title="লাইনের ফাঁকা কমান">↕−</button>
+        <button class="icon-btn" onclick="changeLineHeight(0.1)" title="লাইনের ফাঁকা বাড়ান">↕+</button>
+        
+        <div class="toolbar-sep"></div>
+        <button class="icon-btn" id="pdfZoomOut" onclick="zoomPDF(-0.2)" title="জুম কমান" style="display:none">🔍−</button>
+        <span id="pdfZoomLevel" style="font-size:12px;color:var(--text-light);display:none;min-width:40px;text-align:center">120%</span>
+        <button class="icon-btn" id="pdfZoomIn" onclick="zoomPDF(0.2)" title="জুম বাড়ান" style="display:none">🔍+</button>
+        
+        <div class="page-nav" id="pageNav">
+          <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹ পূর্ববর্তী</button>
+          <span class="page-num" id="pageNum">— / —</span>
+          <button class="nav-btn" id="nextBtn" onclick="nextPage()">পরবর্তী ›</button>
+        </div>
+      </div>
+
+      <!-- Linear progress bar -->
+      <div class="progress-bar-wrap" id="progressBarWrap" onclick="seekProgress(event)">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+
+      <!-- Core display viewport -->
+      <div class="reader-viewport" id="readerViewport">
+        <div class="empty-state" id="emptyState">
+          <i class="ph ph-book-open"></i>
+          <div class="empty-text">বইটি লোড করা হচ্ছে...</div>
+        </div>
+        <div id="epub-reader" style="display:none"></div>
+        <div id="pdf-reader" style="display:none"></div>
+      </div>
+
+      <!-- Reader Status Bar -->
+      <div class="status-bar">
+        <div class="status-item"><div class="status-dot"></div><span id="statusText">সক্রিয়</span></div>
+        <div class="status-item">⏱ <span id="readTime">০ মিনিট</span></div>
+        <div class="status-item">📍 <span id="progressText">০%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating progress circle -->
+<div class="reading-ring" id="readingRing" title="পড়ার অগ্রগতি" onclick="toggleSidebar()">
+  <svg viewBox="0 0 52 52">
+    <circle class="ring-bg" cx="26" cy="26" r="22"/>
+    <circle class="ring-fill" id="ringFill" cx="26" cy="26" r="22" stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+  </svg>
+  <div class="ring-text" id="ringText">0%</div>
+</div>
+
+<!-- Selection markup overlay popover -->
+<div id="ctx-menu">
+  <div class="ctx-item" onclick="highlightSelection('yellow')">🟡 হলুদ হাইলাইট</div>
+  <div class="ctx-item" onclick="highlightSelection('green')">🟢 সবুজ হাইলাইট</div>
+  <div class="ctx-item" onclick="highlightSelection('blue')">🔵 নীল হাইলাইট</div>
+  <div class="ctx-item" onclick="highlightSelection('red')">🔴 লাল হাইলাইট</div>
+  <div class="ctx-item" onclick="addNoteToSelection()">📝 নোট যুক্ত করুন</div>
+  <div class="ctx-item" onclick="copySelection()">📋 কপি করুন</div>
+  <div class="ctx-item" onclick="speakSelection()">🔊 পড়ে শুনুন</div>
+</div>
+
+<!-- OVERLAY SETTINGS MODAL -->
+<div class="overlay-panel" id="settingsPanel">
+  <div class="panel-box">
+    <button class="close-btn" onclick="closePanel('settingsPanel')">✕</button>
+    <div class="panel-title">⚙️ সেটিংস ও কনফিগারেশন</div>
+
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);margin-bottom:10px">Interactive Themes</div>
+      <div class="theme-swatches">
+        <div class="theme-swatch swatch-dark active" onclick="setTheme('dark',this)">🌙 ডার্ক</div>
+        <div class="theme-swatch swatch-day" onclick="setTheme('day',this)">☀️ লাইট</div>
+        <div class="theme-swatch swatch-sepia" onclick="setTheme('sepia',this)">📜 সেপিয়া</div>
+        <div class="theme-swatch swatch-amoled" onclick="setTheme('amoled',this)">⬛ অ্যামোলেড</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);margin-bottom:10px">Default Marker Color</div>
+      <div class="hl-colors">
+        <div class="hl-color active" style="background:rgba(255,220,0,0.4)" onclick="setHlColor('yellow',this)"></div>
+        <div class="hl-color" style="background:rgba(80,200,120,0.4)" onclick="setHlColor('green',this)"></div>
+        <div class="hl-color" style="background:rgba(80,140,255,0.4)" onclick="setHlColor('blue',this)"></div>
+        <div class="hl-color" style="background:rgba(255,90,90,0.4)" onclick="setHlColor('red',this)"></div>
+        <div class="hl-color" style="background:rgba(200,80,255,0.4)" onclick="setHlColor('purple',this)"></div>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div><div class="setting-label">উভয়পাশে সমান মার্জিন (Justify Text)</div><div class="setting-sub">প্যারাগ্রাফের উভয় পাশে সমান ফাকা রাখা</div></div>
+      <div class="toggle on" id="justifyToggle" onclick="toggleSetting('justify',this)"></div>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-label">প্রথম বড় অক্ষর (Drop Caps)</div><div class="setting-sub">চ্যাপ্টারের শুরুর অক্ষরটি বড় আকারে দেখানো</div></div>
+      <div class="toggle on" id="dropCapToggle" onclick="toggleSetting('dropCap',this)"></div>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-label">স্ক্রিন স্লিপ প্রতিরোধ (Wake Lock)</div><div class="setting-sub">পড়ার সময় ফোন স্ক্রিন অটো অফ হওয়া বন্ধ রাখুন</div></div>
+      <div class="toggle" id="wakeToggle" onclick="toggleSetting('wake',this)"></div>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-label">অটো-সেভ অগ্রগতি (Auto-save)</div><div class="setting-sub">পড়ার অগ্রগতি স্বয়ংক্রিয়ভাবে ব্রাউজারে ক্যাশ করা</div></div>
+      <div class="toggle on" id="autosaveToggle" onclick="toggleSetting('autosave',this)"></div>
+    </div>
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">পাশের মার্জিন পেডিং</div>
+        <div class="setting-sub">স্ক্রিনের দুই পাশের মার্জিন পেডিং নির্ধারণ</div>
+      </div>
+      <select class="toolbar-select" onchange="changeMargin(this.value)">
+        <option value="16">সংকীর্ণ</option>
+        <option value="40">সাধারণ</option>
+        <option value="70" selected>প্রশস্ত</option>
+        <option value="100">অতিরিক্ত প্রশস্ত</option>
+      </select>
+    </div>
+    <div class="setting-row">
+      <div><div class="setting-label">ভয়েস রিডার স্পিড</div><div class="setting-sub">অডিও রিডারের পড়ার গতি</div></div>
+      <select class="toolbar-select" id="ttsSpeedSelect" onchange="setTTSSpeed(this.value)">
+        <option value="0.75">ধীর</option>
+        <option value="1.0" selected>স্বাভাবিক</option>
+        <option value="1.2">দ্রুত</option>
+        <option value="1.5">খুব দ্রুত</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- TEXT SEARCH DIALOG PANEL -->
+<div class="overlay-panel" id="searchPanel">
+  <div class="panel-box">
+    <button class="close-btn" onclick="closePanel('searchPanel')">✕</button>
+    <div class="panel-title">🔍 টেক্সট খুঁজুন</div>
+    <div class="search-box">
+      <input class="search-input" id="searchInput" placeholder="চ্যাপ্টারে কোনো কি-ওয়ার্ড খুঁজুন..." oninput="doSearch(this.value)" style="border-radius: 8px; padding-left: 1rem;">
+      <button class="search-btn" onclick="doSearch(document.getElementById('searchInput').value)">অনুসন্ধান</button>
+    </div>
+    <div id="searchResults" style="max-height:380px;overflow-y:auto; margin-top: 15px;"></div>
+  </div>
+</div>
+
+<!-- Note Modal Prompt -->
+<div class="overlay-panel" id="notePanel">
+  <div class="panel-box" style="max-width:400px">
+    <button class="close-btn" onclick="closePanel('notePanel')">✕</button>
+    <div class="panel-title">📝 নোট যুক্ত করুন</div>
+    <div id="notePanelQuote" style="font-size:13px;color:var(--text-light);font-style:italic;margin-bottom:12px;padding:10px;background:var(--bg-main);border-radius:8px;line-height:1.5"></div>
+    <textarea class="note-input" id="noteInput" placeholder="আপনার প্রয়োজনীয় তথ্য এখানে টাইপ করুন..."></textarea>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closePanel('notePanel')">বাতিল</button>
+      <button class="btn btn-primary" onclick="saveNote()">সংরক্ষণ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOM ALERTS CONFIRM MODAL OVERRIDE -->
+<div class="overlay-panel" id="customConfirmPanel">
+  <div class="panel-box" style="max-width: 380px; text-align: center;">
+    <div class="panel-title" id="confirmTitle" style="font-size: 18px; margin-bottom: 12px;">নিশ্চিত করুন</div>
+    <p id="confirmMessage" style="font-size: 14px; color: var(--text-light); line-height: 1.5; margin-bottom: 20px;">আপনি কি নিশ্চিত?</p>
+    <div class="btn-row" style="justify-content: center; gap: 12px;">
+      <button class="btn btn-ghost" id="confirmCancelBtn">বাতিল</button>
+      <button class="btn btn-primary" id="confirmOkBtn" style="background: var(--accent); color: white;">ঠিক আছে</button>
+    </div>
+  </div>
+</div>
+
+<div class="gesture-hint" id="gestureHint"></div>
+
+<!-- MAIN PERSISTENT APPLICATION JS ENGINE -->
+<script>
+// --- PDFJS Worker Path Initialization ---
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// --- PERSISTENT DB STORE (IndexedDB Wrapper) ---
+const LibraryDB = {
+  db: null,
+  init() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open('HM16LibraryDB', 4);
+      request.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('books')) {
+          db.createObjectStore('books', { keyPath: 'id' });
+        }
+      };
+      request.onsuccess = (e) => {
+        this.db = e.target.result;
+        resolve(this.db);
+      };
+      request.onerror = (e) => reject(e.target.error);
+    });
+  },
+  async saveBook(book) {
+    if (!this.db) await this.init();
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction('books', 'readwrite');
+      const store = transaction.objectStore('books');
+      const request = store.put(book);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  },
+  async getBook(id) {
+    if (!this.db) await this.init();
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction('books', 'readonly');
+      const store = transaction.objectStore('books');
+      const request = store.get(id);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  },
+  async getAllBooks() {
+    if (!this.db) await this.init();
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction('books', 'readonly');
+      const store = transaction.objectStore('books');
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  },
+  async deleteBook(id) {
+    if (!this.db) await this.init();
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction('books', 'readwrite');
+      const store = transaction.objectStore('books');
+      const request = store.delete(id);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
+};
+
+// --- CORE SYSTEM STATE ---
+const S = {
+  type: null, // 'epub' | 'pdf'
+  activeBookId: null,
+  epub: { zip: null, manifest: {}, spine: [], toc: [], currentItem: 0, content: [] },
+  pdf: { doc: null, totalPages: 0, currentPage: 1, scale: 1.2 },
+  bookmarks: [],
+  highlights: [],
+  settings: { justify: true, dropCap: true, hyphen: false, wake: false, autosave: true, hlColor: 'yellow', fontSize: 19, fontFamily: "'July Regular', 'Noto Serif Bengali', serif", lineHeight: 1.8, layout: 'double', margin: 70, theme: 'light', ttsSpeed: 1.0 },
+  bookTitle: '', bookAuthor: '',
+  readingStart: null, totalReadSecs: 0,
+  tts: { active: false, utterance: null },
+  selection: { text: '', range: null },
+  wakeLock: null,
+  lastProgress: 0
+};
+
+let currentEpubPage = 0;
+let totalEpubPages = 1;
+let activeRenderTasks = [];
+let activeSecs = 0;
+let sidebarOpen = window.innerWidth > 768;
+
+let apiBooks = []; // Loaded dynamically from ./api/books.json
+let customBooks = []; // Loaded dynamically from IndexedDB local uploads
+const coverGradients = [
+  'linear-gradient(135deg, #2b5876 0%, #4e4376 100%)', 
+  'linear-gradient(135deg, #1f4037 0%, #439a86 100%)', 
+  'linear-gradient(135deg, #f12711 0%, #f5af19 100%)', 
+  'linear-gradient(135deg, #654ea3 0%, #eaafc8 100%)', 
+  'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)', 
+  'linear-gradient(135deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%)', 
+  'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)'
+];
+
+// --- APP & THEME MANAGEMENT ---
+function loadSettings() {
+  try {
+    const local = JSON.parse(localStorage.getItem('lunareadsettings') || '{}');
+    Object.assign(S.settings, local);
+    document.getElementById('fontSizeNum').textContent = S.settings.fontSize;
+    document.getElementById('fontFamilySelect').value = S.settings.fontFamily;
+    document.getElementById('layoutSelect').value = S.settings.layout;
+    
+    const configMap = { justify: 'justifyToggle', dropCap: 'dropCapToggle', wake: 'wakeToggle', autosave: 'autosaveToggle' };
+    for (const [key, id] of Object.entries(configMap)) {
+      const target = document.getElementById(id);
+      if (target) target.className = 'toggle' + (S.settings[key] ? ' on' : '');
+    }
+    setTheme(S.settings.theme);
+  } catch(e) {
+    console.warn('Startup configuration sync skipped');
+  }
+}
+
+function saveSettings() {
+  localStorage.setItem('lunareadsettings', JSON.stringify(S.settings));
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  setTheme(next);
+}
+
+function setTheme(name, el) {
+  S.settings.theme = name === 'day' ? 'light' : (name === 'dark' ? 'dark' : name);
+  const matchedTheme = S.settings.theme === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', matchedTheme);
+  
+  // Clean classes
+  document.body.className = '';
+  if (name !== 'dark' && name !== 'light') {
+    document.body.className = 'theme-' + name;
+  }
+  
+  // Update icons and visual active toggles
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.className = matchedTheme === 'dark' ? 'ph ph-sun' : 'ph ph-moon';
+
+  document.querySelectorAll('.theme-swatch').forEach(sw => sw.classList.remove('active'));
+  if (el) {
+    el.classList.add('active');
+  } else {
+    const activeClassMap = { light: 'swatch-day', dark: 'swatch-dark', sepia: 'swatch-sepia', amoled: 'swatch-amoled' };
+    const matchedClass = activeClassMap[name] || activeClassMap[S.settings.theme];
+    const sw = document.querySelector('.' + matchedClass);
+    if (sw) sw.classList.add('active');
+  }
+  saveSettings();
+}
+
+// --- CONFIRMATION DIALOG MODAL OVERRIDES ---
+function showCustomConfirm(title, message, onOk, onCancel, okText = "ঠিক আছে", isDanger = false) {
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmMessage').textContent = message;
+  
+  const okBtn = document.getElementById('confirmOkBtn');
+  okBtn.textContent = okText;
+  
+  if (isDanger) {
+    okBtn.style.background = 'var(--danger)';
+    okBtn.style.color = '#FFF';
+  } else {
+    okBtn.style.background = 'var(--accent)';
+    okBtn.style.color = '#FFF';
+  }
+  
+  const panel = document.getElementById('customConfirmPanel');
+  panel.classList.add('open');
+  
+  okBtn.onclick = () => {
+    panel.classList.remove('open');
+    if (onOk) onOk();
+  };
+  
+  document.getElementById('confirmCancelBtn').onclick = () => {
+    panel.classList.remove('open');
+    if (onCancel) onCancel();
+  };
+}
+
+function showCustomAlert(title, message) {
+  showCustomConfirm(title, message, null, null, "ঠিক আছে", false);
+  document.getElementById('confirmCancelBtn').style.display = 'none';
+  
+  const panel = document.getElementById('customConfirmPanel');
+  const observer = new MutationObserver(() => {
+    if (!panel.classList.contains('open')) {
+      document.getElementById('confirmCancelBtn').style.display = 'block';
+      observer.disconnect();
+    }
+  });
+  observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
+}
+
+// --- FETCH BOOKS FROM LOCAL DATABASE & API JSON ---
+async function fetchBooks() {
+  try {
+    // 1. Fetch Remote api/books.json 
+    const res = await fetch('./api/books.json');
+    if (res.ok) {
+      apiBooks = await res.json();
+      apiBooks.forEach(b => {
+        b.id = b.id || b.download_link;
+        b.title = b.title.trim();
+        b.author = b.author.trim();
+        b.source = 'api';
+      });
+    }
+  } catch (err) {
+    console.warn('API shelf fetch skipped. Using local custom library only.', err);
+  }
+
+  // 2. Fetch Cached Custom and Read state entries from DB Store
+  try {
+    const list = await LibraryDB.getAllBooks();
+    customBooks = list.filter(b => b.source !== 'api');
+    
+    // Merge real-time read and progress state from DB back to apiBooks
+    apiBooks.forEach(b => {
+      const match = list.find(saved => saved.id === b.id);
+      if (match) {
+        b.progress = match.progress || 0;
+        b.currentItem = match.currentItem;
+        b.currentEpubPage = match.currentEpubPage;
+        b.currentPage = match.currentPage;
+      }
+    });
+  } catch(err) {
+    console.error('Local IndexedDB load failed', err);
+  }
+
+  handleSearchAndSort();
+}
+
+function handleSearchAndSort() {
+  const term = document.getElementById('searchBox').value.toLowerCase();
+  const sortVal = document.getElementById('sortBox').value;
+
+  // Merge full catalogs
+  let combined = [...apiBooks, ...customBooks];
+
+  // Filter items matching term
+  let filtered = combined.filter(b => 
+    b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term)
+  );
+
+  // Sorting utilizing Bengali native localeCompare
+  filtered.sort((a, b) => {
+    if (sortVal === 'title') return a.title.localeCompare(b.title, 'bn-BD');
+    if (sortVal === 'author') return a.author.localeCompare(b.author, 'bn-BD');
+    return 0;
+  });
+
+  renderGrid(filtered);
+}
+
+function renderGrid(books) {
+  const grid = document.getElementById('grid');
+  document.getElementById('bookCount').textContent = books.length;
+  grid.innerHTML = '';
+
+  if (books.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <i class="ph ph-magnifying-glass"></i>
+        <span>আপনার খোঁজা বইটি পাওয়া যায়নি।</span>
+      </div>`;
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  books.forEach((book, index) => {
+    const gradient = coverGradients[(index * 5 + 3) % coverGradients.length];
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.onclick = () => readBookDirectly(book);
+
+    const progressHtml = book.progress
+      ? `<div class="book-progress-wrapper"><div class="book-progress-fill" style="width: ${book.progress}%"></div></div>
+         <div class="book-progress-text">পঠিত: ${book.progress}%</div>`
+      : '';
+
+    const coverHtml = book.cover
+      ? `<div class="book-cover-wrapper"><img class="book-cover-img" src="${book.cover}">${progressHtml}</div>`
+      : `<div class="book-cover-wrapper" style="background: ${gradient};">
+          <div class="cover-title">${book.title}</div>
+          <div class="cover-author">${book.author}</div>
+         </div>`;
+
+    const deleteBtn = book.source !== 'api'
+      ? `<div class="book-card-delete" onclick="event.stopPropagation(); deleteBookLocal('${esc(book.id)}')">✕</div>`
+      : '';
+
+    card.innerHTML = `
+      ${deleteBtn}
+      ${coverHtml}
+      <div class="card-info">
+        <div>
+          <h3 class="info-title" title="${book.title}">${book.title}</h3>
+          <p class="info-author">${book.author}</p>
+          ${progressHtml}
+        </div>
+        <div class="card-actions">
+          ${book.download_link ? `
+            <a href="${book.download_link}" download class="btn-action btn-download" onclick="event.stopPropagation()" title="ডাউনলোড করুন">
+              <i class="ph ph-download-simple"></i> ডাউনলোড
+            </a>` : `
+            <span class="btn-action btn-download" style="opacity: 0.5" title="লোকাল বুক">
+              <i class="ph ph-hard-drive"></i> লোকাল
+            </span>`
+          }
+          <button class="btn-action btn-read" title="পড়ুন">
+            <i class="ph ph-book-open"></i> পড়ুন
+          </button>
+        </div>
+      </div>
+    `;
+    fragment.appendChild(card);
+  });
+
+  grid.appendChild(fragment);
+}
+
+// --- INGEST LOCAL CUSTOM FILES ---
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('dragover');
+  const files = Array.from(e.dataTransfer.files);
+  if (files.length) openFile(files[0]);
+});
+fileInput.addEventListener('change', e => { if (e.target.files[0]) openFile(e.target.files[0]); });
+
+async function openFile(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (ext !== 'epub' && ext !== 'pdf') {
+    showCustomAlert('ভুল ফাইল ফরম্যাট', 'HM 16 রিডার শুধুমাত্র .epub এবং .pdf ফাইল সাপোর্ট করে।');
+    return;
+  }
+
+  showLoading('ফাইলটি ক্যাশ করা হচ্ছে...');
+  try {
+    let title = file.name.replace(/\.\w+$/, '');
+    let author = 'অজানা লেখক';
+    let coverUrl = '';
+
+    if (ext === 'epub') {
+      const zip = await JSZip.loadAsync(file);
+      const containerXML = await zip.file('META-INF/container.xml').async('string');
+      const parser = new DOMParser();
+      const containerDoc = parser.parseFromString(containerXML, 'application/xml');
+      const rootfilePath = containerDoc.querySelector('rootfile').getAttribute('full-path');
+      const baseDir = rootfilePath.includes('/') ? rootfilePath.substring(0, rootfilePath.lastIndexOf('/')+1) : '';
+
+      const opfText = await zip.file(rootfilePath).async('string');
+      const opfDoc = parser.parseFromString(opfText, 'application/xml');
+
+      const titleEl = opfDoc.querySelector('title');
+      const creatorEl = opfDoc.querySelector('creator');
+      if (titleEl) title = titleEl.textContent.trim();
+      if (creatorEl) author = creatorEl.textContent.trim();
+
+      coverUrl = await extractEPUBCover(zip, opfDoc, baseDir);
+    } else {
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const meta = await pdf.getMetadata().catch(() => null);
+        if (meta?.info?.Title) title = meta.info.Title;
+        if (meta?.info?.Author) author = meta.info.Author;
+      } catch(pdfErr) {
+        console.warn('PDF metadata parsing bypassed', pdfErr);
+      }
+    }
+
+    const record = {
+      id: file.name,
+      name: file.name,
+      type: ext,
+      data: file, // Store binary blob directly
+      title: title,
+      author: author,
+      cover: coverUrl,
+      progress: 0,
+      currentItem: 0,
+      currentEpubPage: 0,
+      currentPage: 1,
+      bookmarks: [],
+      highlights: [],
+      addedAt: Date.now(),
+      lastReadAt: Date.now(),
+      source: 'custom'
+    };
+
+    await LibraryDB.saveBook(record);
+    showHint('বইটি ব্রাউজারের বুকশেলফে সংরক্ষিত হয়েছে!', 2000);
+    await fetchBooks();
+    await readBookDirectly(record);
+  } catch (err) {
+    hideLoading();
+    showCustomAlert('ফাইল ইনজেশন ব্যর্থ', 'সংরক্ষণ ব্যর্থ হয়েছে: ' + err.message);
+  }
+}
+
+async function extractEPUBCover(zip, opfDoc, baseDir) {
+  let coverDataUrl = '';
+  try {
+    let coverHref = '';
+    const coverMeta = opfDoc.querySelector('meta[name="cover"]');
+    if (coverMeta) {
+      const coverId = coverMeta.getAttribute('content');
+      const item = opfDoc.querySelector(`item[id="${coverId}"]`);
+      if (item) coverHref = item.getAttribute('href');
+    }
+    if (!coverHref) {
+      const items = Array.from(opfDoc.querySelectorAll('manifest item'));
+      const coverItem = items.find(item => 
+        item.getAttribute('properties')?.includes('cover-image') || 
+        item.getAttribute('id')?.toLowerCase().includes('cover') ||
+        item.getAttribute('href')?.toLowerCase().includes('cover')
+      );
+      if (coverItem) coverHref = coverItem.getAttribute('href');
+    }
+
+    if (coverHref) {
+      const fullPath = baseDir + coverHref;
+      const file = zip.file(fullPath) || zip.file(decodeURIComponent(fullPath));
+      if (file) {
+        const base64 = await file.async('base64');
+        coverDataUrl = `data:image/jpeg;base64,${base64}`;
+      }
+    }
+  } catch(e) { console.warn('Cover generation failed:', e); }
+  return coverDataUrl;
+}
+
+// --- SECURE REMOTE DOWNLOAD & BUFFER CACHING ---
+async function readBookDirectly(book) {
+  // Check if book exists in IndexedDB first
+  const cached = await LibraryDB.getBook(book.id);
+  if (cached) {
+    openBookFromRecord(cached);
+    return;
+  }
+
+  // If remote and not cached, download, cache, then open
+  if (book.source === 'api' && book.download_link) {
+    showLoading('অনলাইন লাইব্রেরী থেকে বইটি ব্রাউজারে ক্যাশ করা হচ্ছে...');
+    try {
+      const res = await fetch(book.download_link);
+      if (!res.ok) throw new Error('Network issue downloading source.');
+      const blob = await res.blob();
+      
+      const ext = book.download_link.split('.').pop().toLowerCase() === 'pdf' ? 'pdf' : 'epub';
+
+      const record = {
+        id: book.id,
+        name: book.title,
+        type: ext,
+        data: blob,
+        title: book.title,
+        author: book.author,
+        cover: book.cover || '',
+        progress: 0,
+        currentItem: 0,
+        currentEpubPage: 0,
+        currentPage: 1,
+        bookmarks: [],
+        highlights: [],
+        addedAt: Date.now(),
+        lastReadAt: Date.now(),
+        source: 'api'
+      };
+
+      await LibraryDB.saveBook(record);
+      openBookFromRecord(record);
+    } catch(err) {
+      hideLoading();
+      showCustomAlert('ডাউনলোড ব্যর্থ', 'অনলাইন ফাইলটি লোড করা যায়নি: ' + err.message);
+    }
+    return;
+  }
+
+  showCustomAlert('ত্রুটি', 'বইটির লিংক খুঁজে পাওয়া যায়নি।');
+}
+
+// --- OPEN CORE DATABASE ENTRY ---
+async function openBookFromRecord(book) {
+  showLoading('বইয়ের ফাইল রিডারে লোড করা হচ্ছে...');
+  try {
+    S.activeBookId = book.id;
+    S.bookTitle = book.title;
+    S.bookAuthor = book.author;
+    S.type = book.type;
+    S.bookmarks = book.bookmarks || [];
+    S.highlights = book.highlights || [];
+    S.lastProgress = book.progress || 0;
+
+    document.getElementById('hdrTitle').textContent = S.bookTitle;
+    document.getElementById('hdrAuthor').textContent = S.bookAuthor;
+
+    renderBookmarks();
+    renderHighlights();
+    
+    // Toggle Viewports
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+
+    if (book.type === 'epub') {
+      await loadEPUBFromBlob(book.data, book.currentItem || 0, book.currentEpubPage || 0);
+    } else {
+      await loadPDFFromBlob(book.data, book.currentPage || 1);
+    }
+
+    book.lastReadAt = Date.now();
+    await LibraryDB.saveBook(book);
+
+    S.readingStart = Date.now();
+    activeSecs = 0;
+    document.getElementById('readingRing').style.display = 'block';
+    updateStats();
+    closeSidebarOnMobile();
+  } catch(e) {
+    hideLoading();
+    showCustomAlert('লোড ব্যর্থ', 'রিডার ফাইল রান করতে ব্যর্থ হয়েছে: ' + e.message);
+  }
+}
+
+async function deleteBookLocal(id) {
+  showCustomConfirm(
+    'ফাইল মুছে ফেলুন',
+    'আপনি কি বুকশেলফ থেকে বইটি এবং এর সাথে সংরক্ষিত সমস্ত নোট মুছে ফেলতে চান?',
+    async () => {
+      await LibraryDB.deleteBook(id);
+      showHint('বইটি বুকশেলফ থেকে সরানো হয়েছে', 1500);
+      await fetchBooks();
+    },
+    null,
+    'মুছে ফেলুন',
+    true
+  );
+}
+
+// --- EPUB PROCESSING ---
+async function loadEPUBFromBlob(blob, itemIdx = 0, pageIdx = 0) {
+  try {
+    const zip = await JSZip.loadAsync(blob);
+    S.epub.zip = zip;
+    S.type = 'epub';
+
+    const containerXML = await zip.file('META-INF/container.xml').async('string');
+    const parser = new DOMParser();
+    const containerDoc = parser.parseFromString(containerXML, 'application/xml');
+    const rootfilePath = containerDoc.querySelector('rootfile').getAttribute('full-path');
+    const baseDir = rootfilePath.includes('/') ? rootfilePath.substring(0, rootfilePath.lastIndexOf('/')+1) : '';
+
+    const opfText = await zip.file(rootfilePath).async('string');
+    const opfDoc = parser.parseFromString(opfText, 'application/xml');
+
+    S.epub.manifest = {};
+    opfDoc.querySelectorAll('manifest item').forEach(item => {
+      S.epub.manifest[item.getAttribute('id')] = {
+        href: baseDir + item.getAttribute('href'),
+        type: item.getAttribute('media-type')
+      };
+    });
+
+    S.epub.spine = [];
+    opfDoc.querySelectorAll('spine itemref').forEach(ref => {
+      const id = ref.getAttribute('idref');
+      if (S.epub.manifest[id]) S.epub.spine.push(S.epub.manifest[id]);
+    });
+
+    await parseEPUBTOC(zip, baseDir, opfDoc, parser);
+    await loadEPUBContent();
+    renderTOC();
+
+    S.epub.currentItem = itemIdx;
+    currentEpubPage = pageIdx;
+
+    showEPUBPage();
+    hideLoading();
+  } catch(e) {
+    hideLoading();
+    showCustomAlert('EPUB ত্রুটি', 'EPUB ফাইলটি পার্স করা যায়নি: ' + e.message);
+  }
+}
+
+async function parseEPUBTOC(zip, baseDir, opfDoc, parser) {
+  S.epub.toc = [];
+  try {
+    const navItem = opfDoc.querySelector('[properties~="nav"]');
+    if (navItem) {
+      const navHref = baseDir + navItem.getAttribute('href');
+      const navFile = zip.file(navHref) || zip.file(decodeURIComponent(navHref));
+      if (navFile) {
+        const navText = await navFile.async('string');
+        const navDoc = parser.parseFromString(navText, 'text/html');
+        navDoc.querySelectorAll('nav[epub\\:type="toc"] a, nav a').forEach((a, i) => {
+          if (i > 120) return;
+          S.epub.toc.push({ label: a.textContent.trim(), href: a.getAttribute('href'), level: 1 });
+        });
+        return;
+      }
+    }
+    const ncxItem = opfDoc.querySelector('[media-type="application/x-dtbncx+xml"]');
+    if (ncxItem) {
+      const ncxHref = baseDir + ncxItem.getAttribute('href');
+      const ncxFile = zip.file(ncxHref);
+      if (ncxFile) {
+        const ncxText = await ncxFile.async('string');
+        const ncxDoc = parser.parseFromString(ncxText, 'application/xml');
+        ncxDoc.querySelectorAll('navPoint').forEach((np, i) => {
+          if (i > 120) return;
+          const label = np.querySelector('navLabel text')?.textContent?.trim() || '';
+          const src = np.querySelector('content')?.getAttribute('src') || '';
+          const level = np.closest('navMap') ? 1 : 2;
+          S.epub.toc.push({ label, href: src, level });
+        });
+      }
+    }
+  } catch(e) { console.warn('TOC skipped', e); }
+}
+
+async function loadEPUBContent() {
+  S.epub.content = [];
+  const parser = new DOMParser();
+  for (const item of S.epub.spine) {
+    try {
+      const file = S.epub.zip.file(item.href) || S.epub.zip.file(decodeURIComponent(item.href));
+      if (!file) { S.epub.content.push(''); continue; }
+      let text = await file.async('string');
+      const doc = parser.parseFromString(text, 'text/html');
+
+      // Image hooks resolution
+      const imagePromises = Array.from(doc.querySelectorAll('img')).map(async img => {
+        const src = img.getAttribute('src');
+        if (src && !src.startsWith('data:') && !src.startsWith('http')) {
+          const imgPath = resolveEPUBPath(item.href, src);
+          const imgFile = S.epub.zip.file(imgPath) || S.epub.zip.file(decodeURIComponent(imgPath));
+          if (imgFile) {
+            const blob = await imgFile.async('blob');
+            img.src = URL.createObjectURL(blob);
+          }
+        }
+      });
+      await Promise.all(imagePromises);
+
+      doc.querySelectorAll('script,style,link').forEach(el => el.remove());
+      const body = doc.querySelector('body') || doc.documentElement;
+      S.epub.content.push(body.innerHTML);
+    } catch(e) { S.epub.content.push(''); }
+  }
+}
+
+function resolveEPUBPath(base, rel) {
+  const baseParts = base.split('/'); baseParts.pop();
+  const relParts = rel.split('/');
+  for (const p of relParts) {
+    if (p === '..') baseParts.pop();
+    else if (p !== '.') baseParts.push(p);
+  }
+  return baseParts.join('/');
+}
+
+// --- EPUB VIEWER RENDERING ---
+function showEPUBPage() {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('pdf-reader').style.display = 'none';
+  document.getElementById('epub-reader').style.display = 'flex';
+  document.querySelectorAll('#pdfZoomOut,#pdfZoomIn,#pdfZoomLevel').forEach(el => el.style.display = 'none');
+  renderEPUBCurrent();
+}
+
+function renderEPUBCurrent() {
+  const layout = S.settings.layout;
+  const reader = document.getElementById('epub-reader');
+  reader.innerHTML = '';
+
+  if (layout === 'scroll') {
+    renderEPUBScroll(reader);
+    return;
+  }
+
+  const stage = document.createElement('div');
+  stage.id = 'epub-stage';
+  stage.className = 'epub-stage';
+  
+  const isMobile = window.innerWidth <= 600;
+  const activeMargin = isMobile ? 16 : S.settings.margin;
+  stage.style.padding = `30px ${activeMargin}px`;
+
+  const flow = document.createElement('div');
+  flow.id = 'epub-flow';
+  flow.className = `epub-flow layout-${layout}`;
+  if (!S.settings.dropCap) flow.classList.add('no-dropcaps');
+  applyContentStyles(flow);
+
+  const idx = S.epub.currentItem || 0;
+  flow.innerHTML = S.epub.content[idx] || '<p style="color:var(--text-light)">End of content</p>';
+
+  stage.appendChild(flow);
+  reader.appendChild(stage);
+
+  applyHighlightsToElement(flow);
+  attachSelectionListener(flow);
+  attachTapZones(reader);
+
+  setTimeout(() => {
+    calculateEpubPagination(layout);
+  }, 60);
+}
+
+function calculateEpubPagination(layout) {
+  const stage = document.getElementById('epub-stage');
+  const flow = document.getElementById('epub-flow');
+  if (!stage || !flow) return;
+
+  const pageStep = stage.clientWidth;
+  const scrollWidth = flow.scrollWidth;
+  totalEpubPages = Math.max(1, Math.ceil(scrollWidth / pageStep));
+
+  if (currentEpubPage === -1) {
+    currentEpubPage = totalEpubPages - 1;
+  } else if (currentEpubPage >= totalEpubPages) {
+    currentEpubPage = totalEpubPages - 1;
+  } else if (currentEpubPage < 0) {
+    currentEpubPage = 0;
+  }
+
+  flow.style.transform = `translateX(-${currentEpubPage * pageStep}px)`;
+  updatePageUI();
+}
+
+function applyContentStyles(el) {
+  el.style.fontFamily = S.settings.fontFamily;
+  el.style.fontSize = S.settings.fontSize + 'px';
+  el.style.lineHeight = S.settings.lineHeight;
+  el.style.textAlign = S.settings.justify ? 'justify' : 'left';
+}
+
+function renderEPUBScroll(reader) {
+  const wrap = document.createElement('div');
+  wrap.className = 'epub-scroll-wrap';
+  
+  const isMobile = window.innerWidth <= 600;
+  const activeMargin = isMobile ? 16 : S.settings.margin;
+  wrap.style.padding = `40px ${activeMargin}px`;
+  
+  const content = document.createElement('div');
+  content.className = 'epub-flow';
+  applyContentStyles(content);
+
+  S.epub.content.forEach((html, i) => {
+    const section = document.createElement('div');
+    section.style.borderBottom = '1px solid var(--border-color)';
+    section.style.marginBottom = '40px';
+    section.style.paddingBottom = '40px';
+    section.innerHTML = html;
+    section.dataset.spine = i;
+    content.appendChild(section);
+  });
+
+  wrap.appendChild(content);
+  reader.appendChild(wrap);
+  
+  applyHighlightsToElement(content);
+  attachSelectionListener(content);
+
+  wrap.addEventListener('scroll', () => {
+    const pct = wrap.scrollTop / (wrap.scrollHeight - wrap.clientHeight) * 100;
+    updateProgress(pct);
+  });
+
+  const savedPct = S.lastProgress || 0;
+  wrap.scrollTop = (wrap.scrollHeight - wrap.clientHeight) * savedPct / 100;
+  updatePageUI();
+}
+
+function renderTOC() {
+  const el = document.getElementById('tocList');
+  if (!S.epub.toc.length) {
+    el.innerHTML = S.epub.spine.map((item, i) => `
+      <div class="toc-item ${i===S.epub.currentItem?'active':''}" onclick="jumpToSpine(${i})">
+        অধ্যায় ${i+1}
+      </div>`).join('');
+    return;
+  }
+  el.innerHTML = S.epub.toc.map((item, i) => {
+    const href = item.href.split('#')[0].split('/').pop();
+    const isActive = S.epub.spine[S.epub.currentItem]?.href.includes(href);
+    return `
+      <div class="toc-item level-${item.level} ${isActive?'active':''}" onclick="jumpToTOC(${i})">
+        ${esc(item.label)}
+      </div>`;
+  }).join('');
+}
+
+function jumpToSpine(idx) {
+  S.epub.currentItem = idx;
+  currentEpubPage = 0;
+  renderEPUBCurrent();
+  closeSidebarOnMobile();
+}
+
+function jumpToTOC(idx) {
+  const item = S.epub.toc[idx];
+  if (!item) return;
+  const href = item.href.split('#')[0].split('/').pop();
+  const spineIdx = S.epub.spine.findIndex(s => s.href.includes(href) || s.href.endsWith(href));
+  if (spineIdx >= 0) S.epub.currentItem = spineIdx;
+  currentEpubPage = 0;
+  renderEPUBCurrent();
+  document.querySelectorAll('#tocList .toc-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+  closeSidebarOnMobile();
+}
+
+// --- NAVIGATION SWITCH LOGIC ---
+function prevPage() {
+  if (S.type === 'epub') {
+    if (S.settings.layout === 'scroll') {
+      const wrap = document.querySelector('.epub-scroll-wrap');
+      if (wrap) wrap.scrollTop -= wrap.clientHeight * 0.9;
+      return;
+    }
+    if (currentEpubPage > 0) {
+      currentEpubPage--;
+      const stage = document.getElementById('epub-stage');
+      const flow = document.getElementById('epub-flow');
+      if (stage && flow) {
+        flow.style.transform = `translateX(-${currentEpubPage * stage.clientWidth}px)`;
+        updatePageUI();
+      }
+    } else {
+      if (S.epub.currentItem > 0) {
+        S.epub.currentItem--;
+        currentEpubPage = -1;
+        renderEPUBCurrent();
+      }
+    }
+  } else if (S.type === 'pdf') {
+    if (S.pdf.currentPage > 1) { S.pdf.currentPage--; renderPDFPage(); }
+  }
+}
+
+function nextPage() {
+  if (S.type === 'epub') {
+    if (S.settings.layout === 'scroll') {
+      const wrap = document.querySelector('.epub-scroll-wrap');
+      if (wrap) wrap.scrollTop += wrap.clientHeight * 0.9;
+      return;
+    }
+    if (currentEpubPage < totalEpubPages - 1) {
+      currentEpubPage++;
+      const stage = document.getElementById('epub-stage');
+      const flow = document.getElementById('epub-flow');
+      if (stage && flow) {
+        flow.style.transform = `translateX(-${currentEpubPage * stage.clientWidth}px)`;
+        updatePageUI();
+      }
+    } else {
+      if (S.epub.currentItem < S.epub.spine.length - 1) {
+        S.epub.currentItem++;
+        currentEpubPage = 0;
+        renderEPUBCurrent();
+      }
+    }
+  } else if (S.type === 'pdf') {
+    if (S.pdf.currentPage < S.pdf.totalPages) { S.pdf.currentPage++; renderPDFPage(); }
+  }
+}
+
+function updatePageUI() {
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
+  const num = document.getElementById('pageNum');
+
+  if (S.type === 'epub') {
+    const cur = S.epub.currentItem + 1;
+    const tot = S.epub.spine.length;
+    num.textContent = `অধ্যায় ${cur}/${tot} (P. ${currentEpubPage+1}/${totalEpubPages})`;
+    prev.disabled = cur <= 1 && currentEpubPage === 0;
+    next.disabled = cur >= tot && currentEpubPage === totalEpubPages - 1;
+    
+    const accurateLocation = S.epub.currentItem + (currentEpubPage / totalEpubPages);
+    const progressPct = Math.round((accurateLocation / tot) * 100);
+    updateProgress(progressPct);
+  } else if (S.type === 'pdf') {
+    const cur = S.pdf.currentPage;
+    const tot = S.pdf.totalPages;
+    num.textContent = `পৃষ্ঠা ${cur}/${tot}`;
+    prev.disabled = cur <= 1;
+    next.disabled = cur >= tot;
+    
+    const progressPct = Math.round(((cur - 1) / (tot - 1 || 1)) * 100);
+    updateProgress(progressPct);
+  }
+}
+
+function updateProgress(pct) {
+  pct = Math.max(0, Math.min(100, Math.round(pct)));
+  S.lastProgress = pct;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + '%';
+  document.getElementById('ringText').textContent = pct + '%';
+
+  const circ = 138.2;
+  document.getElementById('ringFill').style.strokeDashoffset = circ - (circ * pct / 100);
+  document.getElementById('statusText').textContent = S.bookTitle;
+
+  if (S.settings.autosave) {
+    saveCurrentBookState();
+  }
+}
+
+async function saveCurrentBookState() {
+  if (!S.activeBookId) return;
+  try {
+    const record = await LibraryDB.getBook(S.activeBookId);
+    if (record) {
+      record.progress = S.lastProgress;
+      if (S.type === 'epub') {
+        record.currentItem = S.epub.currentItem;
+        record.currentEpubPage = currentEpubPage;
+      } else {
+        record.currentPage = S.pdf.currentPage;
+      }
+      record.bookmarks = S.bookmarks;
+      record.highlights = S.highlights;
+      record.lastReadAt = Date.now();
+      await LibraryDB.saveBook(record);
+    }
+  } catch(e) { console.warn('Persistence save bypassed', e); }
+}
+
+function seekProgress(e) {
+  const rect = document.getElementById('progressBarWrap').getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width * 100;
+  if (S.type === 'epub') {
+    S.epub.currentItem = Math.round(pct / 100 * (S.epub.spine.length - 1));
+    currentEpubPage = 0;
+    renderEPUBCurrent();
+  } else if (S.type === 'pdf') {
+    S.pdf.currentPage = Math.max(1, Math.round(pct / 100 * (S.pdf.totalPages - 1)) + 1);
+    renderPDFPage();
+  }
+}
+
+// --- HIGH-DPI SHARP PDF RENDERING ---
+async function loadPDFFromBlob(blob, pageNum = 1) {
+  showLoading('পিডিএফ পেজ রেন্ডার করা হচ্ছে...');
+  try {
+    const data = await blob.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data }).promise;
+    S.pdf.doc = pdf;
+    S.pdf.totalPages = pdf.numPages;
+    S.pdf.currentPage = pageNum;
+    S.type = 'pdf';
+
+    const outline = await pdf.getOutline().catch(() => null);
+    if (outline) renderPDFTOC(outline);
+
+    showPDFPage();
+    await renderPDFPage();
+    hideLoading();
+  } catch(e) {
+    hideLoading();
+    showCustomAlert('PDF লোড ব্যর্থ', 'পিডিএফ ফাইলটি রিডার ওপেন করতে পারেনি: ' + e.message);
+  }
+}
+
+function showPDFPage() {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('epub-reader').style.display = 'none';
+  document.getElementById('pdf-reader').style.display = 'flex';
+  document.querySelectorAll('#pdfZoomOut,#pdfZoomIn,#pdfZoomLevel').forEach(el => el.style.display = 'block');
+}
+
+async function renderPDFPage() {
+  if (!S.pdf.doc) return;
+  const container = document.getElementById('pdf-reader');
+  container.innerHTML = '';
+
+  activeRenderTasks.forEach(task => { try { task.cancel(); } catch(err) {} });
+  activeRenderTasks = [];
+
+  const pageNum = S.pdf.currentPage;
+  const page = await S.pdf.doc.getPage(pageNum);
+
+  const dpr = window.devicePixelRatio || 1;
+  const viewport = page.getViewport({ scale: S.pdf.scale });
+
+  const wrap = document.createElement('div');
+  wrap.className = 'pdf-canvas-wrap';
+
+  const canvas = document.createElement('canvas');
+  canvas.width = viewport.width * dpr;
+  canvas.height = viewport.height * dpr;
+  canvas.style.width = `${viewport.width}px`;
+  canvas.style.height = `${viewport.height}px`;
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  wrap.appendChild(canvas);
+  container.appendChild(wrap);
+
+  const renderContext = { canvasContext: ctx, viewport: viewport };
+  const renderTask = page.render(renderContext);
+  activeRenderTasks.push(renderTask);
+
+  try {
+    await renderTask.promise;
+    updatePageUI();
+    attachTapZones(container);
+  } catch(err) {
+    if (err.name !== 'RenderingCancelledException') {
+      console.error('PDF Draw Error', err);
+    }
+  }
+}
+
+function zoomPDF(delta) {
+  S.pdf.scale = Math.max(0.6, Math.min(2.5, S.pdf.scale + delta));
+  document.getElementById('pdfZoomLevel').textContent = Math.round(S.pdf.scale * 100) + '%';
+  renderPDFPage();
+}
+
+window.addEventListener('resize', () => {
+  if (S.type === 'epub' && S.settings.layout !== 'scroll') {
+    calculateEpubPagination(S.settings.layout);
+  }
+});
+
+// --- SIDEBAR TAB CONTROLS ---
+function toggleSidebar() {
+  sidebarOpen = !sidebarOpen;
+  document.getElementById('sidebar').classList.toggle('collapsed', !sidebarOpen);
+  document.getElementById('sidebarToggleBtn').classList.toggle('active', sidebarOpen);
+  
+  if (window.innerWidth <= 768) {
+    let backdrop = document.getElementById('sidebarBackdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'sidebarBackdrop';
+      backdrop.style.position = 'fixed';
+      backdrop.style.inset = '0';
+      backdrop.style.background = 'rgba(0,0,0,0.5)';
+      backdrop.style.zIndex = '1100';
+      backdrop.onclick = toggleSidebar;
+      document.body.appendChild(backdrop);
+    }
+    backdrop.style.display = sidebarOpen ? 'block' : 'none';
+  }
+}
+
+function closeSidebarOnMobile() {
+  if (window.innerWidth <= 768) {
+    sidebarOpen = false;
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('sidebarToggleBtn').classList.remove('active');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    if (backdrop) backdrop.style.display = 'none';
+  }
+}
+
+function switchSideTab(btn, tab) {
+  document.querySelectorAll('.sidebar-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.sidebar-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(tab + '-panel').classList.add('active');
+  if (tab === 'stats') updateStats();
+}
+
+// --- BOOKMARKS CONTROLLER ---
+function addBookmark() {
+  if (!S.type) return;
+  const page = S.type === 'epub' ? (S.epub.currentItem + 1) : S.pdf.currentPage;
+  const total = S.type === 'epub' ? S.epub.spine.length : S.pdf.totalPages;
+  const pct = S.lastProgress;
+  const bm = { id: Date.now(), page, total, pct, date: new Date().toLocaleDateString() };
+  S.bookmarks.unshift(bm);
+  saveCurrentBookState();
+  renderBookmarks();
+  showHint('🔖 বুকমার্ক করা হয়েছে', 1500);
+}
+
+function renderBookmarks() {
+  const el = document.getElementById('bookmarkList');
+  if (!S.bookmarks.length) { el.innerHTML = '<div style="font-size:13px;color:var(--text-light)">কোনো বুকমার্ক সংরক্ষিত নেই।</div>'; return; }
+  el.innerHTML = S.bookmarks.map((bm, i) => `
+    <div class="bookmark-item" onclick="goToBookmark(${i})">
+      <button class="bookmark-del" onclick="event.stopPropagation();delBookmark(${i})">✕</button>
+      <div class="bookmark-text">${bm.pct}% সম্পন্ন</div>
+      <div class="bookmark-meta">📅 ${bm.date} · অবস্থান ${bm.page}/${bm.total}</div>
+    </div>`).join('');
+}
+
+function goToBookmark(i) {
+  const bm = S.bookmarks[i];
+  if (!bm) return;
+  if (S.type === 'epub') { S.epub.currentItem = bm.page - 1; currentEpubPage = 0; renderEPUBCurrent(); }
+  else if (S.type === 'pdf') { S.pdf.currentPage = bm.page; renderPDFPage(); }
+  closeSidebarOnMobile();
+}
+
+function delBookmark(i) { S.bookmarks.splice(i, 1); saveCurrentBookState(); renderBookmarks(); }
+
+// --- ACCENT HIGHLIGHTS AND ANNOTATIONS ---
+const HL_COLORS = {
+  yellow: 'rgba(255,220,0,0.4)', green: 'rgba(80,200,120,0.4)',
+  blue: 'rgba(80,140,255,0.4)', red: 'rgba(255,90,90,0.4)', purple: 'rgba(200,80,255,0.4)',
+};
+const HL_BORDER = {
+  yellow: '#FFDD00', green: '#50C878', blue: '#508CFF', red: '#FF5A5A', purple: '#C850FF',
+};
+
+function highlightSelection(color) {
+  if (!S.selection.text) return;
+  const hl = {
+    id: Date.now(), text: S.selection.text.trim(),
+    color: color || S.settings.hlColor,
+    note: '', page: S.type==='epub' ? S.epub.currentItem+1 : S.pdf.currentPage,
+    date: new Date().toLocaleDateString(),
+  };
+  S.highlights.unshift(hl);
+  saveCurrentBookState();
+  renderHighlights();
+  if (S.type === 'epub') renderEPUBCurrent();
+  hideCtxMenu();
+  showHint('টেক্সট হাইলাইট করা হয়েছে', 1200);
+}
+
+function addNoteToSelection() {
+  if (!S.selection.text) return;
+  document.getElementById('notePanelQuote').textContent = '"' + S.selection.text.trim().substring(0, 150) + '"';
+  document.getElementById('noteInput').value = '';
+  openPanel('notePanel');
+  hideCtxMenu();
+  window._noteForSelection = true;
+}
+
+function saveNote() {
+  if (window._noteForSelection && S.selection.text) {
+    const hl = {
+      id: Date.now(), text: S.selection.text.trim(),
+      color: S.settings.hlColor,
+      note: document.getElementById('noteInput').value,
+      page: S.type==='epub' ? S.epub.currentItem+1 : S.pdf.currentPage,
+      date: new Date().toLocaleDateString(),
+    };
+    S.highlights.unshift(hl);
+    saveCurrentBookState();
+    renderHighlights();
+    if (S.type === 'epub') renderEPUBCurrent();
+    window._noteForSelection = false;
+  }
+  closePanel('notePanel');
+}
+
+function renderHighlights() {
+  const el = document.getElementById('highlightList');
+  if (!S.highlights.length) { el.innerHTML = '<div style="font-size:13px;color:var(--text-light)">কোনো নোট বা হাইলাইট নেই।</div>'; return; }
+  el.innerHTML = S.highlights.map((hl, i) => `
+    <div class="highlight-item" style="border-color:${HL_BORDER[hl.color]||'#E0532B'}" onclick="goToHighlight(${i})">
+      <div style="position:absolute;top:8px;right:8px">
+        <button style="background:none;border:none;color:var(--text-light);cursor:pointer;font-size:12px" onclick="event.stopPropagation();delHighlight(${i})">✕</button>
+      </div>
+      <div class="highlight-item-text">"${esc(hl.text.substring(0,100))}${hl.text.length>100?'…':''}"</div>
+      ${hl.note ? `<div class="highlight-item-note">📝 ${esc(hl.note)}</div>` : ''}
+      <div class="highlight-item-meta">অবস্থান ${hl.page} · ${hl.date}</div>
+    </div>`).join('');
+}
+
+function goToHighlight(i) {
+  const hl = S.highlights[i];
+  if (!hl) return;
+  if (S.type === 'epub') { S.epub.currentItem = hl.page - 1; currentEpubPage = 0; renderEPUBCurrent(); }
+  else if (S.type === 'pdf') { S.pdf.currentPage = hl.page; renderPDFPage(); }
+  closeSidebarOnMobile();
+}
+
+function delHighlight(i) {
+  S.highlights.splice(i, 1);
+  saveCurrentBookState();
+  renderHighlights();
+  if (S.type === 'epub') renderEPUBCurrent();
+}
+
+function applyHighlightsToElement(el) {
+  if (!el) return;
+  const curPage = S.type === 'epub' ? S.epub.currentItem + 1 : S.pdf.currentPage;
+  const pageHls = S.highlights.filter(h => h.page === curPage);
+  pageHls.forEach(hl => {
+    if (!hl.text) return;
+    try {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        const idx = node.textContent.toLowerCase().indexOf(hl.text.toLowerCase());
+        if (idx >= 0) {
+          const range = document.createRange();
+          range.setStart(node, idx);
+          range.setEnd(node, idx + hl.text.length);
+          const span = document.createElement('mark');
+          span.className = 'reader-hl';
+          span.style.background = HL_COLORS[hl.color] || HL_COLORS.yellow;
+          span.style.borderBottom = '2px solid ' + (HL_BORDER[hl.color] || HL_BORDER.yellow);
+          range.surroundContents(span);
+          break;
+        }
+      }
+    } catch(e) {}
+  });
+}
+
+// --- CONTEXT MENUS ---
+function attachSelectionListener(el) {
+  el.addEventListener('mouseup', handleSelection);
+  el.addEventListener('touchend', handleSelection);
+}
+
+function handleSelection() {
+  setTimeout(() => {
+    const sel = window.getSelection();
+    if (sel && sel.toString().trim().length > 2) {
+      S.selection.text = sel.toString();
+      S.selection.range = sel.getRangeAt(0);
+      showCtxMenuAtSelection();
+    } else {
+      S.selection.text = '';
+      hideCtxMenu();
+    }
+  }, 50);
+}
+
+function showCtxMenuAtSelection() {
+  const sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  const rect = sel.getRangeAt(0).getBoundingClientRect();
+  const menu = document.getElementById('ctx-menu');
+  menu.style.display = 'block';
+  let x = rect.left + rect.width / 2 - 85;
+  let y = rect.top - 10 - menu.offsetHeight;
+  if (y < 10) y = rect.bottom + 10;
+  x = Math.max(8, Math.min(window.innerWidth - 175, x));
+  menu.style.left = x + 'px';
+  menu.style.top = y + 'px';
+}
+
+function hideCtxMenu() {
+  const el = document.getElementById('ctx-menu');
+  if (el) el.style.display = 'none';
+}
+
+document.addEventListener('mousedown', e => {
+  if (!e.target.closest('#ctx-menu')) hideCtxMenu();
+});
+
+function copySelection() {
+  if (S.selection.text) {
+    const el = document.createElement('textarea');
+    el.value = S.selection.text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showHint('কপি করা হয়েছে ✓', 1200);
+  }
+  hideCtxMenu();
+}
+
+function speakSelection() {
+  if (S.selection.text) speakText(S.selection.text);
+  hideCtxMenu();
+}
+
+function attachTapZones(container) {
+  container.querySelectorAll('.tap-prev, .tap-next').forEach(el => el.remove());
+  
+  const left = document.createElement('div');
+  left.className = 'tap-prev';
+  left.innerHTML = '‹';
+  left.addEventListener('click', prevPage);
+  
+  const right = document.createElement('div');
+  right.className = 'tap-next';
+  right.innerHTML = '›';
+  right.addEventListener('click', nextPage);
+  
+  container.style.position = 'relative';
+  container.appendChild(left);
+  container.appendChild(right);
+}
+
+// --- CONTROLS ACTION HANDLERS ---
+function changeFontSize(delta) {
+  S.settings.fontSize = Math.max(12, Math.min(32, S.settings.fontSize + delta));
+  document.getElementById('fontSizeNum').textContent = S.settings.fontSize;
+  document.documentElement.style.setProperty('--reader-size', S.settings.fontSize + 'px');
+  if (S.type === 'epub') renderEPUBCurrent();
+  saveSettings();
+}
+
+function changeFontFamily(val) {
+  S.settings.fontFamily = val;
+  document.documentElement.style.setProperty('--reader-font', val);
+  if (S.type === 'epub') renderEPUBCurrent();
+  saveSettings();
+}
+
+function changeLayout(val) {
+  S.settings.layout = val;
+  currentEpubPage = 0;
+  if (S.type === 'epub') renderEPUBCurrent();
+  saveSettings();
+}
+
+function changeLineHeight(delta) {
+  S.settings.lineHeight = Math.max(1.1, Math.min(2.8, +(S.settings.lineHeight + delta).toFixed(1)));
+  document.documentElement.style.setProperty('--reader-line', S.settings.lineHeight);
+  if (S.type === 'epub') renderEPUBCurrent();
+  saveSettings();
+}
+
+function changeMargin(val) {
+  S.settings.margin = +val;
+  if (S.type === 'epub') renderEPUBCurrent();
+  saveSettings();
+}
+
+function setHlColor(color, el) {
+  S.settings.hlColor = color;
+  document.querySelectorAll('.hl-color').forEach(e => e.classList.remove('active'));
+  if (el) el.classList.add('active');
+  saveSettings();
+}
+
+function toggleSetting(key, el) {
+  S.settings[key] = !S.settings[key];
+  el.classList.toggle('on', S.settings[key]);
+  if (key === 'wake') { if (S.settings.wake) requestWakeLock(); else releaseWakeLock(); }
+  if (key === 'justify' || key === 'dropCap') { if (S.type==='epub') renderEPUBCurrent(); }
+  saveSettings();
+}
+
+async function requestWakeLock() {
+  try { if ('wakeLock' in navigator) { S.wakeLock = await navigator.wakeLock.request('screen'); } } catch(e) {}
+}
+async function releaseWakeLock() {
+  if (S.wakeLock) { await S.wakeLock.release(); S.wakeLock = null; }
+}
+
+function setTTSSpeed(val) {
+  S.settings.ttsSpeed = +val;
+  saveSettings();
+}
+
+// --- TEXT-TO-SPEECH (AUDIO BOOK) ---
+function toggleTTS() {
+  if (S.tts.active) stopTTS(); else startTTS();
+}
+
+function startTTS() {
+  if (!S.type) return;
+  stopTTS();
+  
+  let targetText = '';
+  if (S.type === 'epub') {
+    const flow = document.getElementById('epub-flow');
+    if (flow) targetText = flow.innerText || flow.textContent || '';
+  } else {
+    targetText = "পিডিএফ টেক্সট শুনতে অংশবিশেষ সিলেক্ট করে 'পড়ে শুনুন' চাপুন।";
+  }
+
+  if (!targetText.trim()) {
+    showHint('পড়ার উপযোগী কোনো টেক্সট পাওয়া যায়নি।', 2000);
+    return;
+  }
+
+  speakText(targetText.replace(/\s+/g, ' ').trim());
+  S.tts.active = true;
+  document.getElementById('ttsBtn').classList.add('active');
+  document.getElementById('ttsBtn').title = 'অডিও বন্ধ করুন';
+}
+
+function speakText(text) {
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'bn-BD'; // Support Bengali Synthesis
+  utterance.rate = S.settings.ttsSpeed;
+  utterance.onend = () => { stopTTS(); };
+  utterance.onerror = () => { stopTTS(); };
+  window.speechSynthesis.speak(utterance);
+  S.tts.utterance = utterance;
+}
+
+function stopTTS() {
+  window.speechSynthesis.cancel();
+  S.tts.active = false;
+  const btn = document.getElementById('ttsBtn');
+  if (btn) {
+    btn.classList.remove('active');
+    btn.title = 'পড়ে শুনুন';
+  }
+}
+
+// --- STATS LOGGING ENGINE ---
+function updateStats() {
+  if (!S.type) return;
+  const mins = Math.round(activeSecs / 60);
+  const pct = S.lastProgress;
+  const totalItems = S.type === 'epub' ? S.epub.spine.length : S.pdf.totalPages;
+  const remaining = pct > 0 ? Math.round((100 - pct) / pct * mins) : '—';
+
+  document.getElementById('statsContent').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">অগ্রগতি</div>
+      <div class="stat-value">${pct}%</div>
+      <div class="stat-sub">${S.type==='epub'?'অধ্যায়':'পৃষ্ঠা'} ${S.type==='epub'?S.epub.currentItem+1:S.pdf.currentPage} of ${totalItems}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">পড়ার মোট সময়</div>
+      <div class="stat-value">${mins < 60 ? mins + 'মি.' : Math.floor(mins/60) + 'ঘ. ' + (mins%60) + 'মি.'}</div>
+      <div class="stat-sub">এই সেশনে সচল সময়</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">প্রয়োজনীয় আনুমানিক সময়</div>
+      <div class="stat-value">${typeof remaining === 'number' && remaining < 9999 ? (remaining < 60 ? remaining + 'মি.' : Math.floor(remaining/60) + 'ঘ. ' + (remaining%60) + 'মি.') : '—'}</div>
+      <div class="stat-sub">বাকি অংশ পড়ার গতি হিসাব</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">বইয়ের বিবরণ</div>
+      <div class="stat-value" style="font-size:14px;line-height:1.4">${esc(S.bookTitle)}</div>
+      <div class="stat-sub">${esc(S.bookAuthor)}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">আপনার মার্ক ও বুকমার্ক</div>
+      <div class="stat-value">${S.highlights.length} হাইলাইট</div>
+      <div class="stat-sub">${S.bookmarks.length} টি সংরক্ষিত বুকমার্ক</div>
+    </div>`;
+
+  document.getElementById('readTime').textContent = (mins || 0) + ' মিনিট';
+}
+
+// Active tracking loop
+setInterval(() => {
+  if (S.type && !document.hidden && !S.tts.active) {
+    activeSecs++;
+    if (activeSecs % 15 === 0) {
+      updateStats();
+      saveCurrentBookState();
+    }
+  }
+}, 1000);
+
+// --- SEARCH ENGINE TEXT SEARCH ---
+function doSearch(query) {
+  const results = document.getElementById('searchResults');
+  if (!query || query.length < 2) { results.innerHTML = ''; return; }
+  const q = query.toLowerCase();
+  const matches = [];
+
+  if (S.type === 'epub') {
+    S.epub.content.forEach((html, index) => {
+      const parsedText = html.replace(/<[^>]+>/g, ' ');
+      let position = 0;
+      while ((position = parsedText.toLowerCase().indexOf(q, position)) >= 0 && matches.length < 30) {
+        const snippet = parsedText.substring(Math.max(0, position - 45), position + 75).trim();
+        matches.push({ spineIdx: index, snippet });
+        position += q.length;
+      }
+    });
+    results.innerHTML = matches.length ? matches.map((match) => `
+      <div class="search-result" onclick="jumpToSearchResult(${match.spineIdx})">
+        <strong>অধ্যায় ${match.spineIdx + 1}</strong>: …${esc(match.snippet).replace(new RegExp(esc(query),'gi'), m => `<span class="search-highlight" style="background:#FFD700; color:#000; padding:1px 3px; border-radius:2px;">${esc(m)}</span>`)}…
+      </div>`).join('') : '<div style="color:var(--text-light);font-size:13px;padding:12px">কোনো ম্যাচিং তথ্য পাওয়া যায়নি।</div>';
+  } else {
+    results.innerHTML = '<div style="color:var(--text-light);font-size:13px;padding:12px">পিডিএফ কন্টেন্ট স্ক্রল করে সরাসরি পৃষ্ঠা নেভিগেট করুন।</div>';
+  }
+}
+
+function jumpToSearchResult(spineIdx) {
+  S.epub.currentItem = spineIdx;
+  currentEpubPage = 0;
+  renderEPUBCurrent();
+  closePanel('searchPanel');
+}
+
+// --- APP REDIRECTS ---
+function goHome() {
+  stopTTS();
+  saveCurrentBookState();
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('epub-reader').style.display = 'none';
+  document.getElementById('pdf-reader').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'flex';
+  document.getElementById('readingRing').style.display = 'none';
+  
+  const backdrop = document.getElementById('sidebarBackdrop');
+  if (backdrop) backdrop.style.display = 'none';
+  
+  fetchBooks();
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.getElementById('app').requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+
+// Panel Control
+function openPanel(id) {
+  document.getElementById(id).classList.add('open');
+  if (id === 'searchPanel') setTimeout(() => document.getElementById('searchInput')?.focus(), 200);
+}
+function closePanel(id) { document.getElementById(id).classList.remove('open'); }
+function closeAllPanels() { document.querySelectorAll('.overlay-panel').forEach(p => p.classList.remove('open')); }
+
+// Load Overlay
+let loadingEl = null;
+function showLoading(msg) {
+  hideLoading();
+  const viewport = document.getElementById('readerViewport');
+  const overlay = document.createElement('div');
+  overlay.className = 'loading-overlay';
+  overlay.innerHTML = `<div class="spinner"></div><div class="loading-text">${msg}</div>`;
+  viewport.appendChild(overlay);
+  loadingEl = overlay;
+  document.getElementById('emptyState').style.display = 'none';
+}
+function hideLoading() { if (loadingEl) { loadingEl.remove(); loadingEl = null; } }
+
+// Banner Hint
+let hintTimer = null;
+function showHint(msg, duration = 2000) {
+  const el = document.getElementById('gestureHint');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(hintTimer);
+  hintTimer = setTimeout(() => el.classList.remove('show'), duration);
+}
+
+function esc(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// --- INIT APP RUNNER ---
+document.addEventListener('DOMContentLoaded', async () => {
+  loadSettings();
+  await LibraryDB.init();
+  await fetchBooks();
+
+  // Load sidebar configuration matching current resolution
+  document.getElementById('sidebar').classList.toggle('collapsed', !sidebarOpen);
+  document.getElementById('sidebarToggleBtn').classList.toggle('active', sidebarOpen);
+});
+</script>
+
+</body>
+</html>
