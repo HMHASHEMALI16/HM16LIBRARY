@@ -2835,6 +2835,9 @@ extractEPUBCover = async function(zip, opfDoc, baseDir) {
   .epub-section:last-child { border-bottom:none; margin-bottom:0; }
   .pdf-page-holder { display:flex; justify-content:center; margin:0 auto 16px; }
   .pdf-page-holder canvas { border-radius:4px; box-shadow:var(--card-shadow); background:#fff; }
+  /* scroll container must stretch, not center, or it grows with content and never scrolls */
+  #epub-reader { align-items:stretch !important; justify-content:flex-start !important; }
+  .epub-scroll-wrap { min-height:0; width:100%; }
 </style>
 <script>
 'use strict';
