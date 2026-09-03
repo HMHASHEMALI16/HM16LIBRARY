@@ -1,0 +1,45 @@
+name: Build library catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.epub"
+      - "**.pdf"
+      - "generate_*.py"
+      - "library_config.py"
+      - ".github/workflows/build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate API + OPDS
+        run: |
+          python generate_api.py
+          python generate_opds.py
+
+      - name: Validate outputs
+        run: |
+          python -c "import json; d=json.load(open('api/books.json',encoding='utf-8')); print(f'books.json: {len(d)} books'); assert isinstance(d,list)"
+          python -c "import xml.etree.ElementTree as ET; ET.parse('catalog.xml'); print('catalog.xml: valid XML')"
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add api/books.json catalog.xml
+          git diff --cached --quiet || git commit -m "Rebuild catalog + API [skip ci]"
+          git push
