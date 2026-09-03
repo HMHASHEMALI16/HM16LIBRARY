@@ -2,40 +2,71 @@ import json
 import os
 import urllib.parse
 
+from library_config import (
+    BASE_URL,
+    BOOK_DIR,
+    SUPPORTED_EXTS,
+    UNKNOWN_AUTHOR_API,
+    iter_book_files,
+    parse_filename,
+)
+
 print("Starting JSON API generation...")
 books_api_data = []
+seen_files = set()
+seen_books = set()
 
-# ফোল্ডারের সব .epub ফাইল খুঁজে বের করা
-for filename in os.listdir('.'):
-    if filename.endswith('.epub'):
-        # নাম থেকে .epub এক্সটেনশন বাদ দেওয়া
-        name_without_ext = filename.replace('.epub', '')
-        
-        # _-_ দিয়ে বইয়ের নাম এবং লেখকের নাম আলাদা করা
-        parts = name_without_ext.split('_-_')
-        title = parts[0].replace('_', ' ')
-        author = parts[1].replace('_', ' ') if len(parts) > 1 else "অজানা"
-        
-        # বাংলা নামের কারণে লিংক যেন ভেঙে না যায়, তাই URL Encode করা
-        encoded_filename = urllib.parse.quote(filename)
-        
-        # OPDS এর বদলে HM16LIBRARY ব্যবহার করা হয়েছে
-        download_url = f"https://hmhashemali16.github.io/HM16LIBRARY/{encoded_filename}"
-        
-        book_info = {
+for filename in iter_book_files(BOOK_DIR):
+    key = filename.lower()
+    if key in seen_files:
+        print(f"Warning: duplicate file skipped: {filename}")
+        continue
+    seen_files.add(key)
+
+    title, author, fmt = parse_filename(filename)
+    if not author:
+        author = UNKNOWN_AUTHOR_API
+
+    book_key = (title.lower(), author.lower())
+    if book_key in seen_books:
+        print(f"Warning: duplicate book skipped: {title} - {author}")
+        continue
+    seen_books.add(book_key)
+
+    # URL-encode Bengali filenames so links don't break
+    encoded_filename = urllib.parse.quote(filename)
+    download_url = f"{BASE_URL}/{encoded_filename}"
+
+    _, ext = os.path.splitext(filename)
+    mime = SUPPORTED_EXTS.get(ext.lower(), "application/octet-stream")
+
+    books_api_data.append(
+        {
             "title": title,
             "author": author,
             "file_name": filename,
-            "format": "epub",
-            "download_link": download_url
+            "format": fmt,
+            "mime_type": mime,
+            "download_link": download_url,
         }
-        books_api_data.append(book_info)
+    )
 
-# api ফোল্ডার তৈরি করা
-os.makedirs('api', exist_ok=True)
+# Deterministic order: sort by title (OPDS does the same)
+books_api_data.sort(key=lambda b: b["title"])
 
-# books.json ফাইলে ডেটা সেভ করা
-with open('api/books.json', 'w', encoding='utf-8') as json_file:
-    json.dump(books_api_data, json_file, ensure_ascii=False, indent=4)
+os.makedirs("api", exist_ok=True)
+out_path = os.path.join("api", "books.json")
+new_content = json.dumps(books_api_data, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
 
-print("Success: JSON API created at api/books.json")
+# Avoid empty churn commits: only write when content changed
+old_content = None
+if os.path.exists(out_path):
+    with open(out_path, "r", encoding="utf-8") as f:
+        old_content = f.read()
+
+if old_content != new_content:
+    with open(out_path, "w", encoding="utf-8") as json_file:
+        json_file.write(new_content)
+    print(f"Success: JSON API updated at {out_path} ({len(books_api_data)} books)")
+else:
+    print(f"No changes: {out_path} already up to date ({len(books_api_data)} books)")
