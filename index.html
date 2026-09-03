@@ -10,10 +10,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&family=Inter:wght@300;400;500;600&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
+<script defer src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script>
   // Initialize Theme on startup to prevent flash
@@ -615,10 +615,12 @@
     </div>
 
     <div class="books-grid" id="grid">
-      <div class="empty-state">
-        <i class="ph ph-spinner-gap ph-spin"></i>
-        বই লোড হচ্ছে...
-      </div>
+      <div class="skel-card"><div class="skel-cover"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skel-card"><div class="skel-cover"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skel-card"><div class="skel-cover"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skel-card"><div class="skel-cover"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skel-card"><div class="skel-cover"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
+      <div class="skel-card"><div class="skel-cover"></div><div class="skel-line"></div><div class="skel-line short"></div></div>
     </div>
   </div>
 </div>
@@ -637,23 +639,11 @@
       <div class="header-book-author" id="hdrAuthor"></div>
     </div>
     <div class="header-actions">
-      <button class="icon-btn" onclick="toggleSidebar()" id="sidebarToggleBtn" title="নেভিগেশন মেনু">
+      <button class="icon-btn" onclick="toggleTheme()" title="লাইট / ডার্ক">
+        <i class="ph ph-moon" id="readerThemeIcon"></i>
+      </button>
+      <button class="icon-btn" onclick="toggleSidebar()" id="sidebarToggleBtn" title="সূচীপত্র">
         <i class="ph ph-list"></i>
-      </button>
-      <button class="icon-btn" onclick="openPanel('searchPanel')" title="খুঁজুন">
-        <i class="ph ph-magnifying-glass"></i>
-      </button>
-      <button class="icon-btn" onclick="addBookmark()" title="বুকমার্ক">
-        <i class="ph ph-bookmark-simple"></i>
-      </button>
-      <button class="icon-btn" onclick="openPanel('settingsPanel')" title="সেটিংস">
-        <i class="ph ph-sliders"></i>
-      </button>
-      <button class="icon-btn" onclick="toggleTTS()" id="ttsBtn" title="অডিও রিডার">
-        <i class="ph ph-speaker-high"></i>
-      </button>
-      <button class="icon-btn" onclick="toggleFullscreen()" title="ফুলস্ক্রিন">
-        <i class="ph ph-corners-out"></i>
       </button>
     </div>
   </div>
@@ -661,77 +651,29 @@
   <div class="main-layout">
     <!-- Collapsible Responsive Sidebar -->
     <div class="sidebar" id="sidebar">
-      <div class="sidebar-tabs">
-        <button class="sidebar-tab active" onclick="switchSideTab(this,'toc')">
-          <i class="ph ph-list-numbers"></i>সূচীপত্র
-        </button>
-        <button class="sidebar-tab" onclick="switchSideTab(this,'bookmarks')">
-          <i class="ph ph-bookmark"></i>বুকমার্ক
-        </button>
-        <button class="sidebar-tab" onclick="switchSideTab(this,'highlights')">
-          <i class="ph ph-note-pencil"></i>নোট
-        </button>
-        <button class="sidebar-tab" onclick="switchSideTab(this,'stats')">
-          <i class="ph ph-chart-bar"></i>পরিসংখ্যান
-        </button>
-      </div>
-      
+      <div class="sidebar-title">সূচীপত্র</div>
       <div class="sidebar-panel active" id="toc-panel">
         <div id="tocList" style="font-size:13px;color:var(--text-light)">সূচীপত্র লোড করা হচ্ছে...</div>
-      </div>
-      <div class="sidebar-panel" id="bookmarks-panel">
-        <div id="bookmarkList" style="font-size:13px;color:var(--text-light)">কোনো বুকমার্ক নেই। বুকমার্ক করতে 🔖 আইকন চাপুন।</div>
-      </div>
-      <div class="sidebar-panel" id="highlights-panel">
-        <div id="highlightList" style="font-size:13px;color:var(--text-light)">টেক্সট সিলেক্ট করে আপনার হাইলাইট বা নোট এখানে সংরক্ষণ করুন।</div>
-      </div>
-      <div class="sidebar-panel" id="stats-panel">
-        <div id="statsContent"></div>
       </div>
     </div>
 
     <!-- Immersive Reading Area -->
     <div class="reader-area">
       <!-- Typography Toolbar -->
-      <div class="reader-toolbar">
+      <div class="reader-toolbar reader-toolbar-slim">
         <div class="toolbar-group font-size-ctrl">
-          <button class="icon-btn" onclick="changeFontSize(-1)" title="ফন্ট কমান">অ−</button>
+          <button class="icon-btn" onclick="changeFontSize(-1)" title="ফন্ট কমান" aria-label="ফন্ট কমান">অ−</button>
           <span class="font-size-num" id="fontSizeNum">19</span>
-          <button class="icon-btn" onclick="changeFontSize(1)" title="ফন্ট বাড়ান">অ+</button>
+          <button class="icon-btn" onclick="changeFontSize(1)" title="ফন্ট বাড়ান" aria-label="ফন্ট বাড়ান">অ+</button>
         </div>
-        <div class="toolbar-sep"></div>
-        <select class="toolbar-select" onchange="changeFontFamily(this.value)" id="fontFamilySelect">
-          <option value="'July Regular', 'Noto Serif Bengali', serif">জুলাই রেগুলার (ডিফল্ট)</option>
-          <option value="'Noto Serif Bengali', serif">নোটো শেরিফ</option>
-          <option value="'Noto Sans Bengali', sans-serif">নোটো সান্স</option>
-          <option value="'Inter', sans-serif">Inter Sans</option>
-        </select>
-        <div class="toolbar-sep"></div>
-        <select class="toolbar-select" onchange="changeLayout(this.value)" id="layoutSelect">
-          <option value="scroll">স্ক্রল মোড</option>
-          <option value="single">এক পৃষ্ঠা</option>
-          <option value="double" selected>দুই পৃষ্ঠা</option>
-        </select>
-        <div class="toolbar-sep"></div>
-        <button class="icon-btn" onclick="changeLineHeight(-0.1)" title="লাইনের ফাঁকা কমান">↕−</button>
-        <button class="icon-btn" onclick="changeLineHeight(0.1)" title="লাইনের ফাঁকা বাড়ান">↕+</button>
-        
-        <div class="toolbar-sep"></div>
-        <button class="icon-btn" id="pdfZoomOut" onclick="zoomPDF(-0.2)" title="জুম কমান" style="display:none">🔍−</button>
-        <span id="pdfZoomLevel" style="font-size:12px;color:var(--text-light);display:none;min-width:40px;text-align:center">120%</span>
-        <button class="icon-btn" id="pdfZoomIn" onclick="zoomPDF(0.2)" title="জুম বাড়ান" style="display:none">🔍+</button>
-        
-        <div class="page-nav" id="pageNav">
-          <button class="nav-btn" id="prevBtn" onclick="prevPage()">‹ পূর্ববর্তী</button>
-          <span class="page-num" id="pageNum">— / —</span>
-          <button class="nav-btn" id="nextBtn" onclick="nextPage()">পরবর্তী ›</button>
-        </div>
+        <span class="toolbar-progress" id="progressText">0%</span>
       </div>
 
       <!-- Linear progress bar -->
       <div class="progress-bar-wrap" id="progressBarWrap" onclick="seekProgress(event)">
         <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
       </div>
+      <div class="chapter-pill" id="chapterPill" style="display:none"></div>
 
       <!-- Core display viewport -->
       <div class="reader-viewport" id="readerViewport">
@@ -742,130 +684,11 @@
         <div id="epub-reader" style="display:none"></div>
         <div id="pdf-reader" style="display:none"></div>
       </div>
-
-      <!-- Reader Status Bar -->
-      <div class="status-bar">
-        <div class="status-item"><div class="status-dot"></div><span id="statusText">সক্রিয়</span></div>
-        <div class="status-item">⏱ <span id="readTime">০ মিনিট</span></div>
-        <div class="status-item">📍 <span id="progressText">০%</span></div>
-      </div>
     </div>
   </div>
 </div>
 
-<!-- Floating progress circle -->
-<div class="reading-ring" id="readingRing" title="পড়ার অগ্রগতি" onclick="toggleSidebar()">
-  <svg viewBox="0 0 52 52">
-    <circle class="ring-bg" cx="26" cy="26" r="22"/>
-    <circle class="ring-fill" id="ringFill" cx="26" cy="26" r="22" stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
-  </svg>
-  <div class="ring-text" id="ringText">0%</div>
-</div>
-
-<!-- Selection markup overlay popover -->
-<div id="ctx-menu">
-  <div class="ctx-item" onclick="highlightSelection('yellow')">🟡 হলুদ হাইলাইট</div>
-  <div class="ctx-item" onclick="highlightSelection('green')">🟢 সবুজ হাইলাইট</div>
-  <div class="ctx-item" onclick="highlightSelection('blue')">🔵 নীল হাইলাইট</div>
-  <div class="ctx-item" onclick="highlightSelection('red')">🔴 লাল হাইলাইট</div>
-  <div class="ctx-item" onclick="addNoteToSelection()">📝 নোট যুক্ত করুন</div>
-  <div class="ctx-item" onclick="copySelection()">📋 কপি করুন</div>
-  <div class="ctx-item" onclick="speakSelection()">🔊 পড়ে শুনুন</div>
-</div>
-
-<!-- OVERLAY SETTINGS MODAL -->
-<div class="overlay-panel" id="settingsPanel">
-  <div class="panel-box">
-    <button class="close-btn" onclick="closePanel('settingsPanel')">✕</button>
-    <div class="panel-title">⚙️ সেটিংস ও কনফিগারেশন</div>
-
-    <div style="margin-bottom:16px">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);margin-bottom:10px">Interactive Themes</div>
-      <div class="theme-swatches">
-        <div class="theme-swatch swatch-dark active" onclick="setTheme('dark',this)">🌙 ডার্ক</div>
-        <div class="theme-swatch swatch-day" onclick="setTheme('day',this)">☀️ লাইট</div>
-        <div class="theme-swatch swatch-sepia" onclick="setTheme('sepia',this)">📜 সেপিয়া</div>
-        <div class="theme-swatch swatch-amoled" onclick="setTheme('amoled',this)">⬛ অ্যামোলেড</div>
-      </div>
-    </div>
-
-    <div style="margin-bottom:16px">
-      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);margin-bottom:10px">Default Marker Color</div>
-      <div class="hl-colors">
-        <div class="hl-color active" style="background:rgba(255,220,0,0.4)" onclick="setHlColor('yellow',this)"></div>
-        <div class="hl-color" style="background:rgba(80,200,120,0.4)" onclick="setHlColor('green',this)"></div>
-        <div class="hl-color" style="background:rgba(80,140,255,0.4)" onclick="setHlColor('blue',this)"></div>
-        <div class="hl-color" style="background:rgba(255,90,90,0.4)" onclick="setHlColor('red',this)"></div>
-        <div class="hl-color" style="background:rgba(200,80,255,0.4)" onclick="setHlColor('purple',this)"></div>
-      </div>
-    </div>
-
-    <div class="setting-row">
-      <div><div class="setting-label">উভয়পাশে সমান মার্জিন (Justify Text)</div><div class="setting-sub">প্যারাগ্রাফের উভয় পাশে সমান ফাকা রাখা</div></div>
-      <div class="toggle on" id="justifyToggle" onclick="toggleSetting('justify',this)"></div>
-    </div>
-    <div class="setting-row">
-      <div><div class="setting-label">প্রথম বড় অক্ষর (Drop Caps)</div><div class="setting-sub">চ্যাপ্টারের শুরুর অক্ষরটি বড় আকারে দেখানো</div></div>
-      <div class="toggle on" id="dropCapToggle" onclick="toggleSetting('dropCap',this)"></div>
-    </div>
-    <div class="setting-row">
-      <div><div class="setting-label">স্ক্রিন স্লিপ প্রতিরোধ (Wake Lock)</div><div class="setting-sub">পড়ার সময় ফোন স্ক্রিন অটো অফ হওয়া বন্ধ রাখুন</div></div>
-      <div class="toggle" id="wakeToggle" onclick="toggleSetting('wake',this)"></div>
-    </div>
-    <div class="setting-row">
-      <div><div class="setting-label">অটো-সেভ অগ্রগতি (Auto-save)</div><div class="setting-sub">পড়ার অগ্রগতি স্বয়ংক্রিয়ভাবে ব্রাউজারে ক্যাশ করা</div></div>
-      <div class="toggle on" id="autosaveToggle" onclick="toggleSetting('autosave',this)"></div>
-    </div>
-    <div class="setting-row">
-      <div>
-        <div class="setting-label">পাশের মার্জিন পেডিং</div>
-        <div class="setting-sub">স্ক্রিনের দুই পাশের মার্জিন পেডিং নির্ধারণ</div>
-      </div>
-      <select class="toolbar-select" onchange="changeMargin(this.value)">
-        <option value="16">সংকীর্ণ</option>
-        <option value="40">সাধারণ</option>
-        <option value="70" selected>প্রশস্ত</option>
-        <option value="100">অতিরিক্ত প্রশস্ত</option>
-      </select>
-    </div>
-    <div class="setting-row">
-      <div><div class="setting-label">ভয়েস রিডার স্পিড</div><div class="setting-sub">অডিও রিডারের পড়ার গতি</div></div>
-      <select class="toolbar-select" id="ttsSpeedSelect" onchange="setTTSSpeed(this.value)">
-        <option value="0.75">ধীর</option>
-        <option value="1.0" selected>স্বাভাবিক</option>
-        <option value="1.2">দ্রুত</option>
-        <option value="1.5">খুব দ্রুত</option>
-      </select>
-    </div>
-  </div>
-</div>
-
-<!-- TEXT SEARCH DIALOG PANEL -->
-<div class="overlay-panel" id="searchPanel">
-  <div class="panel-box">
-    <button class="close-btn" onclick="closePanel('searchPanel')">✕</button>
-    <div class="panel-title">🔍 টেক্সট খুঁজুন</div>
-    <div class="search-box">
-      <input class="search-input" id="searchInput" placeholder="চ্যাপ্টারে কোনো কি-ওয়ার্ড খুঁজুন..." oninput="doSearch(this.value)" style="border-radius: 8px; padding-left: 1rem;">
-      <button class="search-btn" onclick="doSearch(document.getElementById('searchInput').value)">অনুসন্ধান</button>
-    </div>
-    <div id="searchResults" style="max-height:380px;overflow-y:auto; margin-top: 15px;"></div>
-  </div>
-</div>
-
-<!-- Note Modal Prompt -->
-<div class="overlay-panel" id="notePanel">
-  <div class="panel-box" style="max-width:400px">
-    <button class="close-btn" onclick="closePanel('notePanel')">✕</button>
-    <div class="panel-title">📝 নোট যুক্ত করুন</div>
-    <div id="notePanelQuote" style="font-size:13px;color:var(--text-light);font-style:italic;margin-bottom:12px;padding:10px;background:var(--bg-main);border-radius:8px;line-height:1.5"></div>
-    <textarea class="note-input" id="noteInput" placeholder="আপনার প্রয়োজনীয় তথ্য এখানে টাইপ করুন..."></textarea>
-    <div class="btn-row">
-      <button class="btn btn-ghost" onclick="closePanel('notePanel')">বাতিল</button>
-      <button class="btn btn-primary" onclick="saveNote()">সংরক্ষণ করুন</button>
-    </div>
-  </div>
-</div>
+<!-- Reader keeps no floating widgets in scroll mode -->
 
 <!-- CUSTOM ALERTS CONFIRM MODAL OVERRIDE -->
 <div class="overlay-panel" id="customConfirmPanel">
@@ -883,8 +706,14 @@
 
 <!-- MAIN PERSISTENT APPLICATION JS ENGINE -->
 <script>
-// --- PDFJS Worker Path Initialization ---
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+// --- PDFJS Worker Path Initialization (CDN scripts are deferred) ---
+if (typeof pdfjsLib !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+} else {
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof pdfjsLib !== 'undefined') pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  });
+}
 
 // --- PERSISTENT DB STORE (IndexedDB Wrapper) ---
 const LibraryDB = {
@@ -2994,6 +2823,425 @@ extractEPUBCover = async function(zip, opfDoc, baseDir) {
     return 'data:' + mime + ';base64,' + b64;
   } catch(e) { console.warn('cover failed', e); return ''; }
 };
+</script>
+
+<!-- HM16 SCROLL-ONLY READER: minimal chrome, continuous scroll, lazy PDF -->
+<style>
+  .sidebar-title { padding:14px 14px 10px; font-family:var(--font-serif); font-weight:700;
+    font-size:14px; color:var(--accent); border-bottom:1px solid var(--border-color); }
+  .reader-toolbar-slim { justify-content:space-between; }
+  .toolbar-progress { font-size:13px; font-weight:700; color:var(--accent); min-width:44px; text-align:right; }
+  .epub-section { margin-bottom:40px; padding-bottom:40px; border-bottom:1px solid var(--border-color); }
+  .epub-section:last-child { border-bottom:none; margin-bottom:0; }
+  .pdf-page-holder { display:flex; justify-content:center; margin:0 auto 16px; }
+  .pdf-page-holder canvas { border-radius:4px; box-shadow:var(--card-shadow); background:#fff; }
+</style>
+<script>
+'use strict';
+/* Scroll-only mode: single continuous scroll for EPUB + PDF. Page modes, TTS,
+   highlights, bookmarks, notes, in-book search and tap zones are disabled. */
+S.settings.layout = 'scroll';
+
+/* Reader header theme icon follows the same theme state */
+const _scrollSetTheme = setTheme;
+setTheme = function(name, el) {
+  _scrollSetTheme(name, el);
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const rb = document.getElementById('readerThemeIcon');
+  if (rb) rb.className = isDark ? 'ph ph-sun' : 'ph ph-moon';
+};
+
+/* Disabled features become safe no-ops */
+attachSelectionListener = function() {};
+attachTapZones = function() {};
+renderBookmarks = function() {};
+renderHighlights = function() {};
+updateStats = function() {};
+changeLayout = function() { S.settings.layout = 'scroll'; };
+toggleTTS = function() {};
+startTTS = function() {};
+doSearch = function() {};
+
+let _scrollSaveT = null;
+function scrollScheduleSave() {
+  if (S.settings && S.settings.autosave === false) return;
+  clearTimeout(_scrollSaveT);
+  _scrollSaveT = setTimeout(() => { try { saveCurrentBookState(); } catch(e) {} }, 1500);
+}
+function scrollFractionOf(el) {
+  if (!el) return 0;
+  const max = el.scrollHeight - el.clientHeight;
+  if (max <= 0) return 0;
+  return Math.max(0, Math.min(100, el.scrollTop / max * 100));
+}
+function scrollToFraction(el, pct, smooth) {
+  if (!el) return;
+  const max = el.scrollHeight - el.clientHeight;
+  if (max <= 0) return;
+  el.scrollTo({ top: max * Math.max(0, Math.min(100, pct)) / 100, behavior: smooth ? 'smooth' : 'auto' });
+}
+
+/* ---------- EPUB: one continuous scroll ---------- */
+showEPUBPage = function() {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('pdf-reader').style.display = 'none';
+  const r = document.getElementById('epub-reader');
+  r.style.display = 'flex';
+  renderEPUBCurrent();
+};
+renderEPUBCurrent = function() {
+  S.settings.layout = 'scroll';
+  const reader = document.getElementById('epub-reader');
+  if (!reader) return;
+  try { reader.querySelectorAll('img[src^="blob:"]').forEach(img => { try { URL.revokeObjectURL(img.getAttribute('src')); } catch(e) {} }); } catch(e) {}
+  reader.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'epub-scroll-wrap';
+  const isMobile = window.innerWidth <= 600;
+  wrap.style.padding = '40px ' + (isMobile ? 16 : S.settings.margin) + 'px';
+  const content = document.createElement('div');
+  content.className = 'epub-flow';
+  content.style.fontFamily = S.settings.fontFamily;
+  content.style.fontSize = S.settings.fontSize + 'px';
+  content.style.lineHeight = S.settings.lineHeight;
+  content.style.textAlign = S.settings.justify ? 'justify' : 'left';
+  S.epub.content.forEach((html, i) => {
+    const sec = document.createElement('div');
+    sec.className = 'epub-section';
+    sec.id = 'spine-' + i;
+    sec.dataset.spine = i;
+    sec.innerHTML = html || '';
+    content.appendChild(sec);
+  });
+  wrap.appendChild(content);
+  reader.appendChild(wrap);
+  let tick = false;
+  wrap.addEventListener('scroll', () => {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(() => { tick = false; onEpubScroll(wrap); });
+  }, { passive: true });
+  requestAnimationFrame(() => {
+    scrollToFraction(wrap, S.lastProgress || 0, false);
+    updateProgress(S.lastProgress || 0);
+  });
+};
+function onEpubScroll(wrap) {
+  const pct = scrollFractionOf(wrap);
+  const wTop = wrap.getBoundingClientRect().top;
+  let cur = 0;
+  const secs = wrap.querySelectorAll('.epub-section');
+  for (let i = 0; i < secs.length; i++) {
+    if (secs[i].getBoundingClientRect().top - wTop < 120) cur = i;
+    else break;
+  }
+  // sections are in document order so early break is valid once top exceeds threshold
+  S.epub.currentItem = cur;
+  currentEpubPage = 0;
+  updateProgress(pct);
+}
+jumpToSpine = function(idx) {
+  S.epub.currentItem = idx;
+  currentEpubPage = 0;
+  scrollToSpine(idx, null);
+  closeSidebarOnMobile();
+};
+jumpToTOC = function(idx) {
+  const item = S.epub.toc[idx];
+  if (!item) return;
+  const href = String(item.href || '').split('#')[0].split('/').pop();
+  const frag = String(item.href || '').split('#')[1] || null;
+  const spineIdx = S.epub.spine.findIndex(s => s.href.includes(href) || s.href.endsWith(href));
+  if (spineIdx >= 0) S.epub.currentItem = spineIdx;
+  currentEpubPage = 0;
+  scrollToSpine(Math.max(0, spineIdx), frag);
+  document.querySelectorAll('#tocList .toc-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+  closeSidebarOnMobile();
+};
+function scrollToSpine(idx, frag) {
+  const wrap = document.querySelector('.epub-scroll-wrap');
+  if (!wrap) return;
+  const wTop = wrap.getBoundingClientRect().top;
+  let target = document.getElementById('spine-' + idx);
+  if (target && frag) {
+    try {
+      const inner = target.querySelector('#' + CSS.escape(frag) + ', [id="' + frag.replace(/"/g, '') + '"]');
+      if (inner) target = inner;
+    } catch(e) {}
+  }
+  if (!target) return;
+  const y = wrap.scrollTop + (target.getBoundingClientRect().top - wTop) - 12;
+  wrap.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
+
+/* ---------- progress: null-safe + throttled save ---------- */
+updatePageUI = function() {};
+updateProgress = function(pct) {
+  pct = Math.max(0, Math.min(100, Math.round(Number(pct) || 0)));
+  S.lastProgress = pct;
+  const f = document.getElementById('progressFill');
+  if (f) f.style.width = pct + '%';
+  const t = document.getElementById('progressText');
+  if (t) t.textContent = pct + '%';
+  scrollScheduleSave();
+};
+seekProgress = function(e) {
+  const bar = document.getElementById('progressBarWrap');
+  if (!bar) return;
+  const r = bar.getBoundingClientRect();
+  const pct = Math.max(0, Math.min(100, (e.clientX - r.left) / r.width * 100));
+  S.lastProgress = pct;
+  if (S.type === 'epub') scrollToFraction(document.querySelector('.epub-scroll-wrap'), pct, true);
+  else if (S.type === 'pdf') scrollToFraction(document.getElementById('pdf-reader'), pct, true);
+  updateProgress(pct);
+};
+prevPage = function() {
+  const el = S.type === 'pdf' ? document.getElementById('pdf-reader') : document.querySelector('.epub-scroll-wrap');
+  if (el) el.scrollBy({ top: -el.clientHeight * 0.9, behavior: 'smooth' });
+};
+nextPage = function() {
+  const el = S.type === 'pdf' ? document.getElementById('pdf-reader') : document.querySelector('.epub-scroll-wrap');
+  if (el) el.scrollBy({ top: el.clientHeight * 0.9, behavior: 'smooth' });
+};
+
+/* ---------- PDF: continuous pages, lazy render, fit-width ---------- */
+let _pdfPages = [];
+let _pdfObserver = null;
+loadPDFFromBlob = async function(blob, pageNum) {
+  showLoading('পিডিএফ লোড হচ্ছে...');
+  try {
+    const data = await blob.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data }).promise;
+    S.pdf.doc = pdf;
+    S.pdf.totalPages = pdf.numPages;
+    S.pdf.currentPage = Math.max(1, Math.min(pageNum || 1, pdf.numPages));
+    S.type = 'pdf';
+    const outline = await pdf.getOutline().catch(() => null);
+    showPDFPage();
+    if (outline) renderPDFTOC(outline);
+    await renderAllPDFPages();
+    hideLoading();
+  } catch(e) {
+    hideLoading();
+    showCustomAlert('PDF লোড ব্যর্থ', 'পিডিএফ ফাইলটি রিডার ওপেন করতে পারেনি: ' + e.message);
+  }
+};
+showPDFPage = function() {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('epub-reader').style.display = 'none';
+  document.getElementById('pdf-reader').style.display = 'flex';
+};
+renderPDFPage = async function() { await renderAllPDFPages(); };
+async function renderAllPDFPages() {
+  const c = document.getElementById('pdf-reader');
+  if (!S.pdf.doc || !c) return;
+  try { activeRenderTasks.forEach(t => { try { t.cancel(); } catch(e) {} }); } catch(e) {}
+  activeRenderTasks = [];
+  if (_pdfObserver) { _pdfObserver.disconnect(); _pdfObserver = null; }
+  c.onscroll = null;
+  c.innerHTML = '';
+  _pdfPages = [];
+  for (let n = 1; n <= S.pdf.totalPages; n++) {
+    const holder = document.createElement('div');
+    holder.className = 'pdf-page-holder';
+    holder.dataset.page = n;
+    holder.style.minHeight = '200px';
+    const cv = document.createElement('canvas');
+    holder.appendChild(cv);
+    c.appendChild(holder);
+    _pdfPages.push({ n, holder, canvas: cv, rendered: false, rendering: false });
+  }
+  _pdfObserver = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      const p = _pdfPages.find(x => x.holder === en.target);
+      if (p && !p.rendered && !p.rendering) { p.rendering = true; renderPdfPageInto(p); }
+    }
+  }, { root: c, rootMargin: '800px 0px' });
+  _pdfPages.forEach(p => _pdfObserver.observe(p.holder));
+  const startFrac = S.pdf.totalPages > 1 ? (S.pdf.currentPage - 1) / (S.pdf.totalPages - 1) : 0;
+  const startPct = Math.round(startFrac * 100);
+  requestAnimationFrame(() => {
+    scrollToFraction(c, startPct, false);
+    updateProgress(S.lastProgress || startPct);
+  });
+  let tick = false;
+  c.onscroll = () => {
+    if (tick) return;
+    tick = true;
+    requestAnimationFrame(() => {
+      tick = false;
+      const pct = scrollFractionOf(c);
+      S.pdf.currentPage = Math.max(1, Math.min(S.pdf.totalPages, Math.round(pct / 100 * (S.pdf.totalPages - 1)) + 1));
+      updateProgress(pct);
+    });
+  };
+}
+async function renderPdfPageInto(p) {
+  try {
+    if (!S.pdf.doc) return;
+    const page = await S.pdf.doc.getPage(p.n);
+    const c = document.getElementById('pdf-reader');
+    const avail = Math.max(200, (c ? c.clientWidth : 800) - 48);
+    const base = page.getViewport({ scale: 1 });
+    const scale = Math.min(2.5, avail / base.width);
+    const vp = page.getViewport({ scale });
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    p.canvas.width = Math.floor(vp.width * dpr);
+    p.canvas.height = Math.floor(vp.height * dpr);
+    p.canvas.style.width = vp.width + 'px';
+    p.canvas.style.height = vp.height + 'px';
+    const ctx = p.canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    const task = page.render({ canvasContext: ctx, viewport: vp });
+    activeRenderTasks.push(task);
+    await task.promise;
+    p.rendered = true;
+    try { page.cleanup(); } catch(e) {}
+  } catch(e) {
+    if (e && e.name !== 'RenderingCancelledException') console.warn('pdf page render failed', p.n, e);
+  } finally {
+    p.rendering = false;
+  }
+}
+
+/* ---------- open/close without removed widgets ---------- */
+openBookFromRecord = async function(book) {
+  showLoading('বই লোড হচ্ছে...');
+  try {
+    closeBookCleanup();
+    if (_pdfObserver) { _pdfObserver.disconnect(); _pdfObserver = null; }
+    _pdfPages = [];
+    S.activeBookId = book.id;
+    S.bookTitle = book.title;
+    S.bookAuthor = book.author;
+    S.type = book.type;
+    S.bookmarks = book.bookmarks || [];
+    S.highlights = book.highlights || [];
+    S.lastProgress = book.progress || 0;
+    document.getElementById('hdrTitle').textContent = S.bookTitle;
+    document.getElementById('hdrAuthor').textContent = S.bookAuthor;
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    if (book.type === 'epub') {
+      S.epub.currentItem = book.currentItem || 0;
+      currentEpubPage = 0;
+      await loadEPUBFromBlob(book.data, S.epub.currentItem, 0);
+    } else {
+      const tl = document.getElementById('tocList');
+      if (tl) tl.textContent = 'সূচীপত্র লোড করা হচ্ছে...';
+      await loadPDFFromBlob(book.data, book.currentPage || 1);
+    }
+    book.lastReadAt = Date.now();
+    await LibraryDB.saveBook(book);
+    S.readingStart = Date.now();
+    activeSecs = 0;
+    closeSidebarOnMobile();
+  } catch(e) {
+    hideLoading();
+    showCustomAlert('লোড ব্যর্থ', 'রিডার ফাইল রান করতে ব্যর্থ হয়েছে: ' + e.message);
+  }
+};
+goHome = function() {
+  try { stopTTS(); } catch(e) {}
+  try { saveCurrentBookState(); } catch(e) {}
+  closeBookCleanup();
+  if (_pdfObserver) { _pdfObserver.disconnect(); _pdfObserver = null; }
+  _pdfPages = [];
+  const d = document.getElementById('dashboard');
+  if (d) d.style.display = 'block';
+  const a = document.getElementById('app');
+  if (a) a.style.display = 'none';
+  const er = document.getElementById('epub-reader');
+  if (er) { er.style.display = 'none'; er.innerHTML = ''; }
+  const pr = document.getElementById('pdf-reader');
+  if (pr) { pr.style.display = 'none'; pr.innerHTML = ''; }
+  const es = document.getElementById('emptyState');
+  if (es) es.style.display = 'flex';
+  fetchBooks();
+};
+(function syncReaderIconNow() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const rb = document.getElementById('readerThemeIcon');
+  if (rb) rb.className = isDark ? 'ph ph-sun' : 'ph ph-moon';
+})();
+</script>
+
+<!-- HM16 UX PASS: skeleton, render hints, chapter pill -->
+<style>
+  .book-card { content-visibility:auto; contain-intrinsic-size:280px 340px; }
+  .skel-card { background:var(--card-bg); border:1px solid var(--border-color); border-radius:16px;
+    padding:1.25rem; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .skel-cover { width:110px; aspect-ratio:2/3; border-radius:4px 12px 12px 4px; }
+  .skel-line { width:80%; height:12px; border-radius:6px; }
+  .skel-line.short { width:55%; }
+  .skel-cover, .skel-line {
+    background:linear-gradient(90deg, var(--border-color) 25%, var(--bg-main) 50%, var(--border-color) 75%);
+    background-size:200% 100%; animation:hm16shimmer 1.2s linear infinite; }
+  @keyframes hm16shimmer { to { background-position:-200% 0; } }
+  .chapter-pill { align-self:center; margin-top:8px; max-width:92%;
+    font-size:12px; font-weight:600; color:var(--text-light);
+    background:var(--card-bg); border:1px solid var(--border-color); border-radius:20px;
+    padding:4px 14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+</style>
+<script>
+'use strict';
+/* Chapter position pill + font buttons double as PDF zoom */
+function setPill(t) {
+  const el = document.getElementById('chapterPill');
+  if (!el) return;
+  if (t) {
+    if (el.textContent !== t) el.textContent = t;
+    el.style.display = 'block';
+  } else el.style.display = 'none';
+}
+const _uxOnEpubScroll = onEpubScroll;
+onEpubScroll = function(wrap) {
+  _uxOnEpubScroll(wrap);
+  const tot = S.epub.spine.length || 0;
+  const cur = (S.epub.currentItem || 0) + 1;
+  setPill(tot > 1 ? ('অধ্যায় ' + cur + ' / ' + tot) : '');
+};
+const _uxSeek = seekProgress;
+seekProgress = function(e) {
+  _uxSeek(e);
+  if (S.type === 'pdf') {
+    setPill('পৃষ্ঠা ' + S.pdf.currentPage + ' / ' + S.pdf.totalPages);
+  }
+};
+const _uxChangeFontSize = changeFontSize;
+changeFontSize = function(delta) {
+  if (S.type === 'pdf' && S.pdf.doc) {
+    S.pdf.scale = Math.max(0.6, Math.min(2.5, Math.round((S.pdf.scale + delta * 0.15) * 100) / 100));
+    for (const p of _pdfPages) {
+      if (p.rendered && !p.rendering) { p.rendered = false; p.rendering = true; renderPdfPageInto(p); }
+    }
+    const zl = document.getElementById('fontSizeNum');
+    if (zl) zl.textContent = Math.round(S.pdf.scale / 1.2 * 19);
+    return;
+  }
+  _uxChangeFontSize(delta);
+};
+const _uxOpenBook = openBookFromRecord;
+openBookFromRecord = async function(book) {
+  setPill('');
+  if (book && book.type === 'pdf') {
+    const zl = document.getElementById('fontSizeNum');
+    if (zl) zl.textContent = '19';
+  }
+  return _uxOpenBook(book);
+};
+const _uxUpdateProgress = updateProgress;
+updateProgress = function(pct) {
+  _uxUpdateProgress(pct);
+  if (S.type === 'pdf' && S.pdf.totalPages) {
+    setPill('পৃষ্ঠা ' + S.pdf.currentPage + ' / ' + S.pdf.totalPages);
+  } else if (S.type === 'epub' && (S.epub.spine.length || 0) > 1) {
+    setPill('অধ্যায় ' + ((S.epub.currentItem || 0) + 1) + ' / ' + S.epub.spine.length);
+  }
+};
+const _uxGoHome = goHome;
+goHome = function() { setPill(''); return _uxGoHome(); };
 </script>
 
 </body>
