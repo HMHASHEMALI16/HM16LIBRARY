@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#E0532B">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./HM16LIB_192.png">
 <title>HM 16 LIBRARY — ডিজিটাল লাইব্রেরী ও রিডার</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&family=Inter:wght@300;400;500;600&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
@@ -2453,6 +2456,544 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('sidebar').classList.toggle('collapsed', !sidebarOpen);
   document.getElementById('sidebarToggleBtn').classList.toggle('active', sidebarOpen);
 });
+</script>
+
+<!-- HM16 FIX PACK: missing classes, real sepia/amoled themes, a11y, loader -->
+<style>
+  body.theme-sepia { --bg-main:#F5ECD7; --card-bg:#FFF9EC; --text-dark:#433422; --text-light:#8A7A5F;
+    --accent:#B45309; --accent-hover:#92400E; --accent-glow:rgba(180,83,9,.14); --border-color:#E7DCC3;
+    --nav-bg:rgba(255,249,236,.88); --reader-bg:#F7EFDC; --reader-text:#433422; }
+  body.theme-amoled { --bg-main:#000; --card-bg:#0A0A0A; --text-dark:#F5F5F5; --text-light:#A1A1A1;
+    --accent:#FF6B4A; --accent-hover:#FF8562; --accent-glow:rgba(255,107,74,.16); --border-color:#262626;
+    --card-shadow:none; --hover-shadow:none; --nav-bg:rgba(0,0,0,.9); --reader-bg:#000; --reader-text:#EDEDED; }
+  body { user-select:auto; }
+  .top-nav, .header, .reader-toolbar, .status-bar, .sidebar-tabs { user-select:none; }
+  .close-btn { position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%;
+    border:1px solid var(--border-color); background:var(--bg-main); color:var(--text-dark);
+    cursor:pointer; font-size:14px; }
+  .close-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .toggle { width:44px; height:24px; border-radius:20px; background:var(--border-color);
+    position:relative; cursor:pointer; transition:background .2s; flex-shrink:0; }
+  .toggle::after { content:''; position:absolute; top:3px; left:3px; width:18px; height:18px;
+    border-radius:50%; background:#fff; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.3); }
+  .toggle.on { background:var(--accent); } .toggle.on::after { left:23px; }
+  .setting-row { display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:12px 0; border-bottom:1px solid var(--border-color); }
+  .setting-label { font-size:14px; font-weight:600; } .setting-sub { font-size:12px; color:var(--text-light); }
+  .ctx-item { padding:9px 12px; border-radius:7px; cursor:pointer; font-size:13px; }
+  .ctx-item:hover { background:var(--bg-main); color:var(--accent); }
+  .btn { padding:10px 16px; border-radius:9px; font-weight:600; font-size:13px; cursor:pointer; border:1px solid transparent; }
+  .btn-ghost { background:transparent; border-color:var(--border-color); color:var(--text-dark); }
+  .btn-primary { background:var(--accent); color:#fff; border:none; }
+  .btn-primary:hover { background:var(--accent-hover); }
+  .btn-row { display:flex; justify-content:flex-end; gap:10px; margin-top:16px; }
+  .note-input { width:100%; min-height:90px; padding:10px 12px; border-radius:9px;
+    border:1px solid var(--border-color); background:var(--bg-main); color:var(--text-dark);
+    font-family:inherit; font-size:14px; resize:vertical; outline:none; }
+  .note-input:focus { border-color:var(--accent); }
+  .search-result { padding:10px 12px; border-radius:9px; background:var(--bg-main);
+    border:1px solid var(--border-color); margin-bottom:8px; cursor:pointer; font-size:13px; line-height:1.5; }
+  .search-result:hover { border-color:var(--accent); }
+  .loading-overlay { position:absolute; inset:0; display:flex; flex-direction:column; gap:14px;
+    align-items:center; justify-content:center; background:var(--reader-bg); z-index:50; }
+  .spinner { width:38px; height:38px; border-radius:50%; border:3px solid var(--border-color);
+    border-top-color:var(--accent); animation:hm16spin 0.8s linear infinite; }
+  @keyframes hm16spin { to { transform:rotate(360deg); } }
+  .loading-text { color:var(--text-light); font-size:14px; }
+  .upload-shelf-card.dragover { border-color:var(--accent); background:var(--accent-glow); transform:scale(1.01); }
+  .gesture-hint { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--text-dark); color:var(--bg-main); padding:10px 18px; border-radius:24px;
+    font-size:13px; opacity:0; pointer-events:none; transition:all .3s; z-index:3000; }
+  .gesture-hint.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .pager { display:flex; align-items:center; justify-content:center; gap:12px; padding:1.6rem 0 .4rem;
+    grid-column:1/-1; font-size:13px; color:var(--text-light); }
+  .pager button { padding:7px 16px; border-radius:8px; border:1px solid var(--border-color);
+    background:var(--card-bg); color:var(--text-dark); font-weight:600; cursor:pointer; }
+  .pager button:disabled { opacity:.35; cursor:not-allowed; }
+  .pager button:not(:disabled):hover { border-color:var(--accent); color:var(--accent); }
+  #ctx-menu .ctx-item:focus, .book-card:focus { outline:2px solid var(--accent); outline-offset:2px; }
+</style>
+
+
+<!-- HM16 FIX PACK JS: security + correctness + perf overrides (loaded after original script) -->
+<script>
+'use strict';
+/* ---------- helpers ---------- */
+function esc(str) {
+  return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/`/g,'&#96;');
+}
+function escapeRegExp(s) { return String(s||'').replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function isSafeHttpUrl(u) {
+  try { const x = new URL(u, location.href); return x.protocol === 'http:' || x.protocol === 'https:'; }
+  catch(e) { return false; }
+}
+const SETTINGS_KEY = 'hm16_settings_v1';
+const MAX_UPLOAD_BYTES = 150 * 1024 * 1024;
+const PAGE_SIZE = 48;
+let gridPage = 0, lastFiltered = [];
+
+/* ---------- settings: migrate key, apply ALL vars ---------- */
+function applyReaderVars() {
+  const r = document.documentElement.style;
+  r.setProperty('--reader-size', S.settings.fontSize + 'px');
+  r.setProperty('--reader-font', S.settings.fontFamily);
+  r.setProperty('--reader-line', S.settings.lineHeight);
+  document.body.style.textAlign = '';
+}
+function saveSettings() {
+  try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(S.settings)); } catch(e) {}
+  try { localStorage.setItem('theme', S.settings.theme === 'sepia' ? 'sepia' : (S.settings.theme === 'amoled' ? 'amoled' : (document.documentElement.getAttribute('data-theme') || 'light'))); } catch(e) {}
+}
+function loadSettings() {
+  try {
+    let local = {};
+    try { local = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'); } catch(e) {}
+    if (!Object.keys(local).length) { // migrate legacy keys once
+      try { Object.assign(local, JSON.parse(localStorage.getItem('lunareadsettings') || '{}')); } catch(e) {}
+      const legacyTheme = localStorage.getItem('theme');
+      if (legacyTheme && !local.theme) local.theme = legacyTheme;
+    }
+    Object.assign(S.settings, local);
+    const fs = document.getElementById('fontSizeNum'); if (fs) fs.textContent = S.settings.fontSize;
+    const ff = document.getElementById('fontFamilySelect'); if (ff) ff.value = S.settings.fontFamily;
+    const ls = document.getElementById('layoutSelect'); if (ls) ls.value = S.settings.layout;
+    const tts = document.getElementById('ttsSpeedSelect'); if (tts) tts.value = String(S.settings.ttsSpeed);
+    const map = { justify:'justifyToggle', dropCap:'dropCapToggle', wake:'wakeToggle', autosave:'autosaveToggle' };
+    for (const [k,id] of Object.entries(map)) {
+      const t = document.getElementById(id); if (t) t.className = 'toggle' + (S.settings[k] ? ' on' : '');
+    }
+    applyReaderVars();
+    setTheme(S.settings.theme || 'light');
+  } catch(e) { console.warn('settings load skipped', e); }
+}
+function setTheme(name, el) {
+  const norm = name === 'day' ? 'light' : (name || 'light');
+  S.settings.theme = norm;
+  const isDark = norm === 'dark' || norm === 'amoled';
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.body.classList.remove('theme-sepia','theme-amoled');
+  if (norm === 'sepia' || norm === 'amoled') document.body.classList.add('theme-' + norm);
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.className = isDark ? 'ph ph-sun' : 'ph ph-moon';
+  document.querySelectorAll('.theme-swatch').forEach(sw => sw.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else {
+    const m = { light:'swatch-day', dark:'swatch-dark', sepia:'swatch-sepia', amoled:'swatch-amoled' };
+    const sw = document.querySelector('.' + (m[norm] || 'swatch-day'));
+    if (sw) sw.classList.add('active');
+  }
+  applyReaderVars();
+  saveSettings();
+}
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  setTheme(cur === 'dark' ? 'light' : 'dark');
+}
+
+/* ---------- loader: no innerHTML XSS ---------- */
+function showLoading(msg) {
+  hideLoading();
+  const viewport = document.getElementById('readerViewport');
+  const overlay = document.createElement('div');
+  overlay.className = 'loading-overlay';
+  const sp = document.createElement('div'); sp.className = 'spinner';
+  const tx = document.createElement('div'); tx.className = 'loading-text';
+  tx.textContent = String(msg || 'লোড হচ্ছে...');
+  overlay.appendChild(sp); overlay.appendChild(tx);
+  viewport.appendChild(overlay);
+  loadingEl = overlay;
+  const es = document.getElementById('emptyState'); if (es) es.style.display = 'none';
+}
+
+/* ---------- catalog: null-safe ---------- */
+async function fetchBooks() {
+  try {
+    const res = await fetch('./api/books.json');
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        apiBooks = data.map(b => ({
+          ...b,
+          id: b.id || b.download_link || b.file_name || Math.random().toString(36).slice(2),
+          title: String(b.title ?? 'অজানা বই').trim() || 'অজানা বই',
+          author: String(b.author ?? 'অজানা').trim() || 'অজানা',
+          source: 'api'
+        }));
+      } else { console.warn('books.json shape invalid'); apiBooks = []; }
+    }
+  } catch (err) { console.warn('API shelf fetch skipped.', err); }
+  try {
+    const list = await LibraryDB.getAllBooks();
+    customBooks = (Array.isArray(list) ? list : []).filter(b => b && b.source !== 'api');
+    apiBooks.forEach(b => {
+      const m = list.find(s => s && s.id === b.id);
+      if (m) { b.progress = m.progress || 0; b.currentItem = m.currentItem; b.currentEpubPage = m.currentEpubPage; b.currentPage = m.currentPage; }
+    });
+  } catch(err) { console.error('Local IndexedDB load failed', err); }
+  gridPage = 0;
+  handleSearchAndSort();
+}
+
+/* ---------- search + paginated grid (XSS-safe, debounced) ---------- */
+let _searchT = null;
+function handleSearchAndSort() {
+  clearTimeout(_searchT);
+  _searchT = setTimeout(() => {
+    const sb = document.getElementById('searchBox');
+    const term = (sb ? sb.value : '').toLowerCase();
+    const sortVal = document.getElementById('sortBox').value;
+    const combined = [...apiBooks, ...customBooks];
+    lastFiltered = combined.filter(b => {
+      const t = String(b.title || '').toLowerCase(), a = String(b.author || '').toLowerCase();
+      return t.includes(term) || a.includes(term);
+    });
+    lastFiltered.sort((a,b) => {
+      try {
+        if (sortVal === 'title') return String(a.title).localeCompare(String(b.title), 'bn-BD');
+        if (sortVal === 'author') return String(a.author).localeCompare(String(b.author), 'bn-BD');
+      } catch(e) {}
+      return 0;
+    });
+    gridPage = 0;
+    renderGrid(lastFiltered);
+  }, 180);
+}
+function renderGrid(books) {
+  lastFiltered = books || lastFiltered;
+  const grid = document.getElementById('grid');
+  document.getElementById('bookCount').textContent = lastFiltered.length;
+  grid.innerHTML = '';
+  if (!lastFiltered.length) {
+    grid.innerHTML = '<div class="empty-state"><i class="ph ph-magnifying-glass"></i><span>আপনার খোঁজা বইটি পাওয়া যায়নি।</span></div>';
+    return;
+  }
+  const pages = Math.max(1, Math.ceil(lastFiltered.length / PAGE_SIZE));
+  gridPage = Math.min(gridPage, pages - 1);
+  const slice = lastFiltered.slice(gridPage * PAGE_SIZE, gridPage * PAGE_SIZE + PAGE_SIZE);
+  const frag = document.createDocumentFragment();
+  slice.forEach((book, i) => {
+    const idx = gridPage * PAGE_SIZE + i;
+    const gradient = coverGradients[(idx * 5 + 3) % coverGradients.length];
+    const card = document.createElement('div');
+    card.className = 'book-card'; card.tabIndex = 0;
+    card.setAttribute('role','button');
+    card.setAttribute('aria-label', String(book.title || '') + ' - ' + String(book.author || ''));
+    card.onclick = () => readBookDirectly(book);
+    card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); readBookDirectly(book); } };
+    const pct = Math.max(0, Math.min(100, Number(book.progress) || 0));
+    const prog = pct ? '<div class="book-progress-wrapper"><div class="book-progress-fill" style="width:' + pct + '%"></div></div><div class="book-progress-text">পঠিত: ' + pct + '%</div>' : '';
+    let cover = '';
+    if (book.cover && isSafeHttpUrl(book.cover)) {
+      cover = '<div class="book-cover-wrapper"><img class="book-cover-img" loading="lazy" alt="' + esc(book.title) + '" src="' + esc(book.cover) + '">' + prog + '</div>';
+    } else {
+      cover = '<div class="book-cover-wrapper" style="background:' + gradient + ';"><div class="cover-title">' + esc(book.title) + '</div><div class="cover-author">' + esc(book.author) + '</div></div>';
+    }
+    let inner = cover + '<div class="card-info"><div><h3 class="info-title" title="' + esc(book.title) + '">' + esc(book.title) + '</h3><p class="info-author">' + esc(book.author) + '</p>' + prog + '</div><div class="card-actions">';
+    if (book.download_link && isSafeHttpUrl(book.download_link)) {
+      inner += '<a href="' + esc(book.download_link) + '" download rel="noopener" class="btn-action btn-download" onclick="event.stopPropagation()" title="ডাউনলোড করুন"><i class="ph ph-download-simple"></i> ডাউনলোড</a>';
+    } else {
+      inner += '<span class="btn-action btn-download" style="opacity:.5" title="লোকাল বুক"><i class="ph ph-hard-drive"></i> লোকাল</span>';
+    }
+    inner += '<button class="btn-action btn-read" title="পড়ুন"><i class="ph ph-book-open"></i> পড়ুন</button></div></div>';
+    card.innerHTML = inner;
+    if (book.source !== 'api') {
+      const del = document.createElement('div');
+      del.className = 'book-card-delete'; del.textContent = '✕';
+      del.setAttribute('aria-label','মুছে ফেলুন'); del.setAttribute('role','button'); del.tabIndex = 0;
+      del.onclick = (e) => { e.stopPropagation(); deleteBookLocal(book.id); };
+      del.onkeydown = (e) => { if (e.key==='Enter'||e.key===' '){ e.preventDefault(); e.stopPropagation(); deleteBookLocal(book.id); } };
+      card.appendChild(del);
+    }
+    frag.appendChild(card);
+  });
+  grid.appendChild(frag);
+  if (pages > 1) {
+    const pager = document.createElement('div');
+    pager.className = 'pager';
+    const prev = document.createElement('button'); prev.textContent = '‹ আগের';
+    prev.disabled = gridPage === 0; prev.onclick = () => { gridPage--; renderGrid(); };
+    const info = document.createElement('span');
+    info.textContent = 'পৃষ্ঠা ' + (gridPage+1) + ' / ' + pages + ' (' + lastFiltered.length + ' বই)';
+    const next = document.createElement('button'); next.textContent = 'পরের ›';
+    next.disabled = gridPage >= pages-1; next.onclick = () => { gridPage++; renderGrid(); };
+    pager.appendChild(prev); pager.appendChild(info); pager.appendChild(next);
+    grid.appendChild(pager);
+  }
+}
+
+/* ---------- upload + download guards ---------- */
+const _origOpenFile = openFile;
+openFile = async function(file) {
+  if (!file) return;
+  const ext = String(file.name.split('.').pop() || '').toLowerCase();
+  const okType = (file.type === 'application/epub+zip' || file.type === 'application/pdf' || file.type === '' || file.type === 'application/octet-stream');
+  if ((ext !== 'epub' && ext !== 'pdf') || !okType) {
+    showCustomAlert('ভুল ফাইল ফরম্যাট', 'HM 16 রিডার শুধুমাত্র .epub এবং .pdf ফাইল সাপোর্ট করে।');
+    return;
+  }
+  if (file.size > MAX_UPLOAD_BYTES) { showCustomAlert('ফাইল অনেক বড়', 'সর্বোচ্চ 150MB পর্যন্ত ফাইল আপলোড করা যাবে।'); return; }
+  if (file.size === 0) { showCustomAlert('খালি ফাইল', 'ফাইলটি খালি, অন্য ফাইল চেষ্টা করুন।'); return; }
+  return _origOpenFile(file);
+};
+const _origReadDirect = readBookDirectly;
+readBookDirectly = async function(book) {
+  if (book && book.source === 'api') {
+    if (!book.download_link || !isSafeHttpUrl(book.download_link)) {
+      showCustomAlert('ত্রুটি', 'বইটির ডাউনলোড লিংক নিরাপদ নয়।'); return;
+    }
+    let ext = 'epub';
+    try { const u = new URL(book.download_link, location.href); ext = u.pathname.split('.').pop().toLowerCase() === 'pdf' ? 'pdf' : 'epub'; }
+    catch(e) { ext = String(book.download_link.split('.').pop()||'').toLowerCase().split('?')[0] === 'pdf' ? 'pdf' : 'epub'; }
+    book._safeExt = ext;
+  }
+  return _origReadDirect(book);
+};
+
+/* ---------- EPUB: null-safe + sanitize + revoke ---------- */
+function sanitizeEPUBHtml(htmlStr) {
+  const doc = new DOMParser().parseFromString(String(htmlStr||''), 'text/html');
+  doc.querySelectorAll('script,style,link,iframe,object,embed,form,base,meta,noscript').forEach(el => el.remove());
+  doc.querySelectorAll('*').forEach(el => {
+    [...el.attributes].forEach(a => {
+      const n = a.name.toLowerCase(), v = String(a.value||'').trim().toLowerCase();
+      if (n.startsWith('on')) el.removeAttribute(a.name);
+      else if ((n==='href'||n==='src'||n==='xlink:href') && (v.startsWith('javascript:')||v.startsWith('data:text/html')||v.startsWith('vbscript:'))) el.removeAttribute(a.name);
+    });
+  });
+  const body = doc.querySelector('body') || doc.documentElement;
+  return body.innerHTML;
+}
+function resolveEPUBPath(base, rel) {
+  rel = String(rel || '');
+  if (/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(rel) || rel.startsWith('data:') || rel.startsWith('blob:')) return rel;
+  const clean = rel.split('#')[0].split('?')[0];
+  const bp = String(base||'').split('/'); bp.pop();
+  for (const p of clean.split('/')) {
+    if (!p || p === '.') continue;
+    if (p === '..') { if (bp.length) bp.pop(); }
+    else bp.push(p);
+  }
+  return bp.join('/');
+}
+function revokeEpubObjectURLs() {
+  try {
+    document.querySelectorAll('#epub-reader img[src^="blob:"]').forEach(img => {
+      try { URL.revokeObjectURL(img.src); } catch(e) {}
+    });
+  } catch(e) {}
+}
+function destroyPDF() {
+  try { activeRenderTasks.forEach(t => { try{t.cancel();}catch(e){} }); } catch(e) {}
+  activeRenderTasks = [];
+  try { if (S.pdf.doc) { S.pdf.doc.destroy(); } } catch(e) {}
+  S.pdf.doc = null;
+}
+function closeBookCleanup() {
+  revokeEpubObjectURLs();
+  destroyPDF();
+  try { if (S.epub) { S.epub.zip = null; S.epub.content = []; } } catch(e) {}
+}
+
+/* ---------- PDF: outline TOC + DPR cap ---------- */
+function renderPDFTOC(outline) {
+  const list = document.getElementById('tocList');
+  if (!list) return;
+  list.innerHTML = '';
+  const add = (items, depth) => {
+    (items||[]).slice(0,200).forEach(it => {
+      const d = document.createElement('div');
+      d.className = 'toc-item level-' + Math.min(3, depth);
+      d.textContent = it.title || 'শিরোনামহীন';
+      d.style.paddingLeft = (8 + (depth-1)*12) + 'px';
+      d.onclick = async () => {
+        try {
+          const dest = it.dest;
+          let n = null;
+          if (Array.isArray(dest)) n = await S.pdf.doc.getPageIndex(dest[0]).then(i=>i+1).catch(()=>null);
+          else if (dest) n = await S.pdf.doc.getDestination(dest).then(dd => dd ? S.pdf.doc.getPageIndex(dd[0]).then(i=>i+1) : null).catch(()=>null);
+          if (n) { S.pdf.currentPage = n; await renderPDFPage(); }
+        } catch(e) { console.warn('TOC jump failed', e); }
+      };
+      list.appendChild(d);
+      if (it.items && it.items.length) add(it.items, depth+1);
+    });
+  };
+  add(outline, 1);
+}
+const _origRenderPDF = renderPDFPage;
+renderPDFPage = async function() {
+  if (!S.pdf.doc) return;
+  const container = document.getElementById('pdf-reader');
+  container.innerHTML = '';
+  try { activeRenderTasks.forEach(t => { try{t.cancel();}catch(e){} }); } catch(e) {}
+  activeRenderTasks = [];
+  const pageNum = S.pdf.currentPage;
+  const page = await S.pdf.doc.getPage(pageNum);
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const viewport = page.getViewport({ scale: S.pdf.scale });
+  const wrap = document.createElement('div'); wrap.className = 'pdf-canvas-wrap';
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.floor(viewport.width * dpr);
+  canvas.height = Math.floor(viewport.height * dpr);
+  canvas.style.width = viewport.width + 'px'; canvas.style.height = viewport.height + 'px';
+  const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+  wrap.appendChild(canvas); container.appendChild(wrap);
+  const task = page.render({ canvasContext: ctx, viewport });
+  activeRenderTasks.push(task);
+  try { await task.promise; updatePageUI(); attachTapZones(container); }
+  catch(err) { if (err && err.name !== 'RenderingCancelledException') console.error('PDF Draw Error', err); }
+  finally { try { page.cleanup(); } catch(e) {} }
+};
+
+/* ---------- search highlight: regex-safe ---------- */
+function doSearch(query) {
+  const results = document.getElementById('searchResults');
+  if (!query || query.length < 2) { results.innerHTML = ''; return; }
+  const q = query.toLowerCase();
+  const matches = [];
+  if (S.type === 'epub') {
+    S.epub.content.forEach((html, index) => {
+      const parsedText = String(html||'').replace(/<[^>]+>/g, ' ');
+      let pos = 0;
+      while ((pos = parsedText.toLowerCase().indexOf(q, pos)) >= 0 && matches.length < 30) {
+        matches.push({ spineIdx: index, snippet: parsedText.substring(Math.max(0,pos-45), pos+75).trim() });
+        pos += q.length;
+      }
+    });
+    if (!matches.length) { results.innerHTML = '<div style="color:var(--text-light);font-size:13px;padding:12px">কোনো ম্যাচিং তথ্য পাওয়া যায়নি।</div>'; return; }
+    results.innerHTML = '';
+    const rx = new RegExp(escapeRegExp(query), 'gi');
+    matches.forEach(m => {
+      const row = document.createElement('div');
+      row.className = 'search-result';
+      const head = document.createElement('strong'); head.textContent = 'অধ্যায় ' + (m.spineIdx+1);
+      row.appendChild(head);
+      row.appendChild(document.createTextNode(': …'));
+      let last = 0; rx.lastIndex = 0;
+      const sn = m.snippet; let mm;
+      while ((mm = rx.exec(sn)) && last < sn.length) {
+        row.appendChild(document.createTextNode(sn.slice(last, mm.index)));
+        const hl = document.createElement('span');
+        hl.style.cssText = 'background:#FFD700;color:#000;padding:1px 3px;border-radius:2px;';
+        hl.textContent = mm[0];
+        row.appendChild(hl);
+        last = mm.index + mm[0].length;
+        if (mm[0].length === 0) rx.lastIndex++;
+      }
+      row.appendChild(document.createTextNode(sn.slice(last) + '…'));
+      row.onclick = () => jumpToSearchResult(m.spineIdx);
+      results.appendChild(row);
+    });
+  } else {
+    results.innerHTML = '<div style="color:var(--text-light);font-size:13px;padding:12px">পিডিএফ কন্টেন্ট স্ক্রল করে সরাসরি পৃষ্ঠা নেভিগেট করুন।</div>';
+  }
+}
+
+/* ---------- nav cleanup + a11y + PWA + CDN guard ---------- */
+const _origGoHome = goHome;
+goHome = function() {
+  try { stopTTS(); } catch(e) {}
+  try { saveCurrentBookState(); } catch(e) {}
+  closeBookCleanup();
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('epub-reader').style.display = 'none';
+  document.getElementById('pdf-reader').style.display = 'none';
+  const es = document.getElementById('emptyState'); if (es) es.style.display = 'flex';
+  document.getElementById('readingRing').style.display = 'none';
+  const bd = document.getElementById('sidebarBackdrop'); if (bd) bd.style.display = 'none';
+  fetchBooks();
+};
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeAllPanels();
+});
+window.addEventListener('DOMContentLoaded', () => {
+  if (typeof JSZip === 'undefined' || typeof pdfjsLib === 'undefined') {
+    console.error('CDN libs missing');
+    const g = document.getElementById('grid');
+    if (g && !g.children.length) g.innerHTML = '<div class="empty-state"><span>লাইব্রেরি লোড হয়নি — ইন্টারনেট সংযোগ চেক করে রিলোড করুন।</span></div>';
+  }
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  }
+});
+
+/* ---------- EPUB content pipeline override: null-safe + sanitized ---------- */
+const _origLoadEPUBContent = loadEPUBContent;
+loadEPUBContent = async function() {
+  closeBookCleanupLite();
+  S.epub.content = [];
+  const parser = new DOMParser();
+  for (const item of S.epub.spine) {
+    try {
+      const file = S.epub.zip.file(item.href) || S.epub.zip.file(decodeURIComponent(item.href));
+      if (!file) { S.epub.content.push(''); continue; }
+      const text = await file.async('string');
+      const doc = parser.parseFromString(text, 'text/html');
+      const imgs = Array.from(doc.querySelectorAll('img'));
+      await Promise.all(imgs.map(async img => {
+        const s = img.getAttribute('src');
+        if (s && !/^(data:|blob:|https?:|file:|\/\/)/i.test(s)) {
+          try {
+            const p = resolveEPUBPath(item.href, s);
+            const f = S.epub.zip.file(p) || S.epub.zip.file(decodeURIComponent(p));
+            if (f) { const b = await f.async('blob'); img.setAttribute('src', URL.createObjectURL(b)); }
+            else img.removeAttribute('src');
+          } catch(e) { img.removeAttribute('src'); }
+        }
+      }));
+      doc.querySelectorAll('script,style,link,iframe,object,embed,form,base,meta,noscript').forEach(el => el.remove());
+      doc.querySelectorAll('*').forEach(el => {
+        [...el.attributes].forEach(a => {
+          const n = a.name.toLowerCase(), v = String(a.value||'').trim().toLowerCase();
+          if (n.startsWith('on')) el.removeAttribute(a.name);
+          else if ((n==='href'||n==='src'||n==='xlink:href') && (v.startsWith('javascript:')||v.startsWith('data:text/html')||v.startsWith('vbscript:'))) el.removeAttribute(a.name);
+        });
+      });
+      const body = doc.querySelector('body') || doc.documentElement;
+      S.epub.content.push(body.innerHTML);
+    } catch(e) { S.epub.content.push(''); }
+  }
+};
+function closeBookCleanupLite() {
+  try {
+    document.querySelectorAll('#epub-reader img[src^="blob:"]').forEach(img => { try { URL.revokeObjectURL(img.src); } catch(e) {} });
+  } catch(e) {}
+}
+const _origExtractCover = extractEPUBCover;
+extractEPUBCover = async function(zip, opfDoc, baseDir) {
+  try {
+    let href = '';
+    const meta = opfDoc.querySelector('meta[name="cover"]');
+    if (meta) {
+      const cid = meta.getAttribute('content');
+      if (cid && typeof CSS !== 'undefined' && CSS.escape) {
+        const it = opfDoc.querySelector('item[id="' + CSS.escape(cid) + '"]');
+        if (it) href = it.getAttribute('href');
+      } else if (cid) {
+        const it = Array.from(opfDoc.querySelectorAll('manifest item')).find(x => x.getAttribute('id') === cid);
+        if (it) href = it.getAttribute('href');
+      }
+    }
+    if (!href) {
+      const items = Array.from(opfDoc.querySelectorAll('manifest item'));
+      const hit = items.find(x =>
+        (x.getAttribute('properties')||'').includes('cover-image') ||
+        (x.getAttribute('id')||'').toLowerCase().includes('cover') ||
+        (x.getAttribute('href')||'').toLowerCase().includes('cover'));
+      if (hit) href = hit.getAttribute('href');
+    }
+    if (!href) return '';
+    const full = baseDir + href;
+    const f = zip.file(full) || zip.file(decodeURIComponent(full));
+    if (!f) return '';
+    const b64 = await f.async('base64');
+    const ext = href.split('.').pop().toLowerCase().split('?')[0];
+    const mime = ext === 'png' ? 'image/png' : ext === 'gif' ? 'image/gif' : ext === 'svg' ? 'image/svg+xml' : ext === 'webp' ? 'image/webp' : 'image/jpeg';
+    return 'data:' + mime + ';base64,' + b64;
+  } catch(e) { console.warn('cover failed', e); return ''; }
+};
 </script>
 
 </body>
