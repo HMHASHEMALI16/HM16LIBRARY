@@ -1,5 +1,5 @@
 /* HM16 Library Service Worker - app-shell + JSON cache, EPUB/PDF network-first */
-const CACHE = 'hm16-v1';
+const CACHE = 'hm16-v2';
 const APP_SHELL = [
   './',
   './index.html',
