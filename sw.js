@@ -1,18 +1,27 @@
-/* HM16 Library Service Worker - app-shell + JSON cache, EPUB/PDF network-first */
-const CACHE = 'hm16-v3';
+/* HM16 Library Service Worker - v4: tolerant install so updates never get stuck */
+const CACHE = 'hm16-v4';
+// Only cache files that are guaranteed to exist. Missing PNGs must NOT
+// fail install (c.addAll is atomic — one 404 used to block v3 forever).
 const APP_SHELL = [
   './',
   './index.html',
-  './manifest.json',
-  './HM16LIB_192.png',
-  './HM16LIB_512.png',
-  './Bookicon.png',
-  './api/books.json'
+  './manifest.json'
 ];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(APP_SHELL)).then(() => self.skipWaiting())
+    caches.open(CACHE).then(async (c) => {
+      await Promise.all(
+        APP_SHELL.map((u) => c.add(u).catch(() => null))
+      );
+      // Best-effort: cache icons / catalog if they exist, ignore if not.
+      await Promise.all([
+        './HM16LIB_192.png',
+        './HM16LIB_512.png',
+        './Bookicon.png',
+        './api/books.json'
+      ].map((u) => c.add(u).catch(() => null)));
+    }).then(() => self.skipWaiting())
   );
 });
 
