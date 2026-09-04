@@ -2779,6 +2779,7 @@ loadEPUBContent = async function() {
       }));
       doc.querySelectorAll('script,style,link,iframe,object,embed,form,base,meta,noscript').forEach(el => el.remove());
       doc.querySelectorAll('*').forEach(el => {
+        if (el.hasAttribute('style')) el.removeAttribute('style');
         [...el.attributes].forEach(a => {
           const n = a.name.toLowerCase(), v = String(a.value||'').trim().toLowerCase();
           if (n.startsWith('on')) el.removeAttribute(a.name);
@@ -2843,6 +2844,8 @@ extractEPUBCover = async function(zip, opfDoc, baseDir) {
   /* scroll container must stretch, not center, or it grows with content and never scrolls */
   #epub-reader { align-items:stretch !important; justify-content:flex-start !important; }
   .epub-scroll-wrap { min-height:0; width:100%; }
+  .epub-flow { width:100%; max-width:100%; }
+  .epub-section { max-width:100%; overflow-wrap:break-word; }
 </style>
 <script>
 'use strict';
@@ -2923,6 +2926,7 @@ renderEPUBCurrent = function() {
   });
   wrap.appendChild(content);
   reader.appendChild(wrap);
+  content.addEventListener('click', onEpubLinkClick);
   let tick = false;
   wrap.addEventListener('scroll', () => {
     if (tick) return;
@@ -2966,6 +2970,40 @@ jumpToTOC = function(idx) {
   document.querySelectorAll('#tocList .toc-item').forEach((el, i) => el.classList.toggle('active', i === idx));
   closeSidebarOnMobile();
 };
+/* Internal EPUB links: scroll inside the book, externals open in a new tab */
+function onEpubLinkClick(e) {
+  const a = e.target && e.target.closest ? e.target.closest('a') : null;
+  if (!a) return;
+  const href = a.getAttribute('href');
+  if (!href || href.charAt(0) === '#') {
+    if (href && href.length > 1) {
+      e.preventDefault();
+      scrollToSpine(S.epub.currentItem || 0, href.slice(1));
+    } else e.preventDefault();
+    return;
+  }
+  if (/^(https?:|mailto:|tel:)/i.test(href)) {
+    e.preventDefault();
+    try { window.open(href, '_blank', 'noopener'); } catch(err) {}
+    return;
+  }
+  if (/^([a-z][a-z0-9+.-]*:|\/\/)/i.test(href)) { e.preventDefault(); return; }
+  e.preventDefault();
+  const parts = href.split('#');
+  const file = parts[0].split('/').pop().split('?')[0];
+  const frag = parts[1] || null;
+  if (!file) { if (frag) scrollToSpine(S.epub.currentItem || 0, frag); return; }
+  const si = S.epub.spine.findIndex(s => {
+    const base = String(s.href || '').split('/').pop().split('?')[0];
+    return base === file || String(s.href || '').endsWith('/' + file);
+  });
+  if (si < 0) return;
+  S.epub.currentItem = si;
+  currentEpubPage = 0;
+  scrollToSpine(si, frag);
+  document.querySelectorAll('#tocList .toc-item').forEach(el => el.classList.remove('active'));
+  closeSidebarOnMobile();
+}
 function scrollToSpine(idx, frag) {
   const wrap = document.querySelector('.epub-scroll-wrap');
   if (!wrap) return;
@@ -3299,6 +3337,110 @@ renderPDFTOC = function(outline) {
     })();
     list.appendChild(d);
   }
+};
+</script>
+
+<!-- HM16 TOC FIX: real nesting depth, no item cap, heading fallback, exact jumps -->
+<script>
+'use strict';
+function tocSpineIndex(href) {
+  const base = String(href || '').split('#')[0].split('/').pop().split('?')[0];
+  if (!base) return -1;
+  return S.epub.spine.findIndex(s => {
+    const sb = String(s.href || '').split('/').pop().split('?')[0];
+    return sb === base || String(s.href || '').endsWith('/' + base);
+  });
+}
+parseEPUBTOC = async function(zip, baseDir, opfDoc, parser) {
+  S.epub.toc = [];
+  try {
+    const navItem = opfDoc.querySelector('[properties~="nav"]');
+    if (navItem) {
+      const navHref = baseDir + navItem.getAttribute('href');
+      const navFile = zip.file(navHref) || zip.file(decodeURIComponent(navHref));
+      if (navFile) {
+        const navDoc = parser.parseFromString(await navFile.async('string'), 'text/html');
+        const nav = navDoc.querySelector('nav[epub\\:type="toc"], nav');
+        if (nav) {
+          nav.querySelectorAll('a').forEach(a => {
+            if (S.epub.toc.length >= 500) return;
+            let d = 0, el = a.parentElement;
+            while (el && el !== nav) { if (el.tagName === 'OL' || el.tagName === 'UL') d++; el = el.parentElement; }
+            S.epub.toc.push({
+              label: (a.textContent || '').trim() || 'শিরোনামহীন',
+              href: a.getAttribute('href') || '',
+              level: Math.min(3, Math.max(1, d)),
+              spine: -1
+            });
+          });
+        }
+        if (S.epub.toc.length) { tocResolveSpines(); return; }
+      }
+    }
+    const ncxItem = opfDoc.querySelector('[media-type="application/x-dtbncx+xml"]');
+    if (ncxItem) {
+      const ncxHref = baseDir + ncxItem.getAttribute('href');
+      const ncxFile = zip.file(ncxHref) || zip.file(decodeURIComponent(ncxHref));
+      if (ncxFile) {
+        const ncxDoc = parser.parseFromString(await ncxFile.async('string'), 'application/xml');
+        ncxDoc.querySelectorAll('navPoint').forEach(np => {
+          if (S.epub.toc.length >= 500) return;
+          let depth = 1, p = np.parentElement;
+          while (p) {
+            if (p.tagName && p.tagName.toLowerCase() === 'navpoint') depth++;
+            p = p.parentElement;
+          }
+          const labelEl = np.querySelector('navLabel text, navLabel');
+          const srcEl = np.querySelector('content');
+          S.epub.toc.push({
+            label: ((labelEl && labelEl.textContent) || '').trim() || 'শিরোনামহীন',
+            href: (srcEl && srcEl.getAttribute('src')) || '',
+            level: Math.min(3, depth),
+            spine: -1
+          });
+        });
+        if (S.epub.toc.length) { tocResolveSpines(); return; }
+      }
+    }
+  } catch(e) { console.warn('TOC parse skipped', e); }
+  // Fallback: first heading of every chapter
+  for (let i = 0; i < S.epub.spine.length; i++) {
+    let label = 'অধ্যায় ' + (i + 1);
+    try {
+      const f = S.epub.zip.file(S.epub.spine[i].href) || S.epub.zip.file(decodeURIComponent(S.epub.spine[i].href));
+      if (f) {
+        const t = await f.async('string');
+        const m = t.match(/<h[1-3][^>]*>([\s\S]{1,160}?)<\/h[1-3]>/i);
+        if (m) {
+          const clean = m[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80);
+          if (clean) label = clean;
+        }
+      }
+    } catch(e) {}
+    S.epub.toc.push({ label, href: S.epub.spine[i].href, level: 1, spine: i });
+  }
+};
+function tocResolveSpines() {
+  S.epub.toc.forEach(it => { it.spine = tocSpineIndex(it.href); });
+}
+jumpToTOC = function(idx) {
+  const item = S.epub.toc[idx];
+  if (!item) return;
+  let si = (typeof item.spine === 'number') ? item.spine : -1;
+  if (si < 0) si = tocSpineIndex(item.href);
+  if (si < 0) return;
+  S.epub.currentItem = si;
+  currentEpubPage = 0;
+  const frag = String(item.href || '').split('#')[1] || null;
+  scrollToSpine(si, frag);
+  document.querySelectorAll('#tocList .toc-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+  closeSidebarOnMobile();
+};
+jumpToSpine = function(idx) {
+  S.epub.currentItem = idx;
+  currentEpubPage = 0;
+  scrollToSpine(idx, null);
+  closeSidebarOnMobile();
 };
 </script>
 
