@@ -649,7 +649,7 @@
   <!-- Header: [logo] HM 16 LIBRARY | ≡ [TOC open/close] | বইয়ের নাম / লেখক ... ⚙ -->
   <div class="header">
     <div class="header-logo" onclick="goHome()" title="HM 16 LIBRARY">
-      <span class="header-logo-icon"><i class="ph-bold ph-book-open-text"></i></span>
+      <span class="header-logo-icon"><i class="ph-bold ph-book-open-text"></i><img class="header-logo-img" src="./HM16LIB_192.png" alt="HM 16 LIBRARY" onerror="this.style.display='none'"></span>
       <div class="header-logo-name">HM 16 LIBRARY</div>
     </div>
     <div class="header-divider"></div>
@@ -3628,7 +3628,12 @@ renderGrid = function(books) {
   .rm-row { display:flex; align-items:center; gap:8px; padding:8px 6px;
     border-bottom:1px solid var(--border-color); }
   .rm-row:last-child { border-bottom:none; }
-  .rm-label { flex:1; font-size:13px; font-weight:600; }
+  .rm-label { flex:1; font-size:13px; font-weight:600; color:var(--text-dark); }
+  /* gear menu sits inside black header (color #e8e8e8) — force dark text so labels never render white-on-white */
+  .reader-menu, .reader-menu .rm-label, .reader-menu .font-size-num { color: var(--text-dark); }
+  /* default site logo over phosphor fallback (fallback shows only if PNG missing) */
+  .header-logo-icon { position: relative; }
+  .header-logo-img { position:absolute; inset:0; width:100% !important; height:100% !important; object-fit:contain !important; border-radius:6px; background:#0f0f10; }
   .rm-btn { width:36px; height:36px; font-size:14px; }
   .rm-wide { flex:1; padding:8px 10px; border-radius:9px; border:1px solid var(--border-color);
     background:var(--bg-main); color:var(--text-dark); font-weight:600; font-size:13px;
