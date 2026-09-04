@@ -2858,9 +2858,11 @@ extractEPUBCover = async function(zip, opfDoc, baseDir) {
     font-size:14px; color:var(--accent); border-bottom:1px solid var(--border-color); }
   .reader-toolbar-slim { justify-content:space-between; }
   .toolbar-progress { font-size:13px; font-weight:700; color:var(--accent); min-width:44px; text-align:right; }
-  .epub-section { margin-bottom:40px; padding-bottom:40px; border-bottom:1px solid var(--border-color); }
+  .epub-section { margin-bottom:40px; padding-bottom:40px; border-bottom:1px solid var(--border-color);
+    content-visibility:auto; contain-intrinsic-size:auto 900px; }
   .epub-section:last-child { border-bottom:none; margin-bottom:0; }
-  .pdf-page-holder { display:flex; justify-content:center; margin:0 auto 16px; }
+  .pdf-page-holder { display:flex; justify-content:center; margin:0 auto 16px;
+    content-visibility:auto; contain-intrinsic-size:auto 280px; }
   .pdf-page-holder canvas { border-radius:4px; box-shadow:var(--card-shadow); background:#fff; }
   /* scroll container must stretch, not center, or it grows with content and never scrolls */
   #epub-reader { align-items:stretch !important; justify-content:flex-start !important; }
@@ -2956,21 +2958,49 @@ renderEPUBCurrent = function() {
   }, { passive: true });
   requestAnimationFrame(() => {
     scrollToFraction(wrap, S.lastProgress || 0, false);
-    updateProgress(S.lastProgress || 0);
+    cacheSecTops(wrap);
+    // second pass: offscreen sections skip rendering (content-visibility),
+    // so sizes settle after first paint — re-apply restore once
+    requestAnimationFrame(() => {
+      scrollToFraction(wrap, S.lastProgress || 0, false);
+      cacheSecTops(wrap);
+      updateProgress(S.lastProgress || 0);
+    });
   });
 };
+/* Cached section offsets: the old per-frame getBoundingClientRect loop
+   forced a reflow per chapter on every scroll frame (lag on big books).
+   Offsets are cached numbers; rebuilt only when layout height changes. */
+let _secTops = [], _secWrapH = -1, _secLastScan = 0;
+function cacheSecTops(wrap) {
+  _secTops = [];
+  if (!wrap) return;
+  try {
+    const wrect = wrap.getBoundingClientRect(), stop = wrap.scrollTop;
+    const secs = wrap.querySelectorAll('.epub-section');
+    for (let i = 0; i < secs.length; i++) {
+      _secTops.push(secs[i].getBoundingClientRect().top - wrect.top + stop);
+    }
+    _secWrapH = wrap.scrollHeight;
+  } catch(e) {}
+}
 function onEpubScroll(wrap) {
   const pct = scrollFractionOf(wrap);
-  const wTop = wrap.getBoundingClientRect().top;
-  let cur = 0;
-  const secs = wrap.querySelectorAll('.epub-section');
-  for (let i = 0; i < secs.length; i++) {
-    if (secs[i].getBoundingClientRect().top - wTop < 120) cur = i;
-    else break;
+  if (!wrap) return;
+  if (wrap.scrollHeight !== _secWrapH) cacheSecTops(wrap);
+  const now = (window.performance && performance.now()) || Date.now();
+  if (!_secTops.length || now - _secLastScan > 150) {
+    _secLastScan = now;
+    const y = wrap.scrollTop + 120;
+    let cur = 0;
+    // sections are in document order so early break is valid once top exceeds threshold
+    for (let i = 0; i < _secTops.length; i++) {
+      if (_secTops[i] < y) cur = i;
+      else break;
+    }
+    S.epub.currentItem = cur;
+    currentEpubPage = 0;
   }
-  // sections are in document order so early break is valid once top exceeds threshold
-  S.epub.currentItem = cur;
-  currentEpubPage = 0;
   updateProgress(pct);
 }
 jumpToSpine = function(idx) {
@@ -3339,7 +3369,9 @@ renderPDFTOC = function(outline) {
   if (titled.length >= Math.max(3, flat.length * 0.3)) { _titledTOC(outline); return; }
   list.innerHTML = '';
   const tot = S.pdf.totalPages || 0;
-  for (let n = 1; n <= tot; n++) {
+  // huge PDFs: one row per page = thousands of sidebar nodes (lag) — sample evenly
+  const step = Math.max(1, Math.ceil(tot / 200));
+  for (let n = 1; n <= tot; n += step) {
     const d = document.createElement('div');
     d.className = 'toc-item';
     d.textContent = 'পৃষ্ঠা ' + n;
@@ -3649,16 +3681,24 @@ const bohoLayouts = [
       + bohoFern(4, 6, 46, 28 + s, P, 1.4, 7) + bohoEuca(90 + s, 142, 72, -8, 6, 4, P, 1.4)
       + bohoBloom(24 + s, 142, 24, 6, P, 1.3) + bohoDots(72 + s, 30, 5, 1.5, P.leaf, 6, 9); }
 ];
+const _coverMemo = new Map();
 function coverDesign(idx) {
   const combo = (idx * 37) % 96;
-  const P = bohoPalettes[Math.floor(combo / 12) % 8];
-  const base = P.dark ? '#39412F' : bohoBases[(idx * 13 + combo) % bohoBases.length];
+  const baseI = (idx * 13 + combo) % bohoBases.length;
   const v = (idx * 7 + combo) % 3;
-  return {
+  const key = combo + ':' + baseI + ':' + v;
+  let hit = _coverMemo.get(key);
+  if (hit) return hit;
+  const P = bohoPalettes[Math.floor(combo / 12) % 8];
+  const base = P.dark ? '#39412F' : bohoBases[baseI];
+  hit = {
     bg: base,
     fg: P.fg,
     svg: '<svg class="cover-art" viewBox="0 0 100 150" preserveAspectRatio="xMidYMid slice">' + bohoLayouts[combo % 12](P, v) + '</svg>'
   };
+  if (_coverMemo.size > 400) _coverMemo.clear();
+  _coverMemo.set(key, hit);
+  return hit;
 }
 let gridPageSize = parseInt(localStorage.getItem('hm16_pagesize') || '48', 10);
 if ([48, 100, 200, 500, 1000, 2000, 5000].indexOf(gridPageSize) < 0) gridPageSize = 48;
