@@ -1,5 +1,5 @@
 /* HM16 Library Service Worker - app-shell + JSON cache, EPUB/PDF network-first */
-const CACHE = 'hm16-v2';
+const CACHE = 'hm16-v3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -50,7 +50,20 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // App shell: cache-first
+  // App shell: network-first for pages (so updates show immediately),
+  // cache-first for static assets, network fallback when offline
+  if (req.mode === 'navigate' || req.destination === 'document') {
+    e.respondWith(
+      fetch(req).then((res) => {
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(req, copy));
+        }
+        return res;
+      }).catch(() => caches.match(req).then((hit) => hit || caches.match('./index.html')))
+    );
+    return;
+  }
   e.respondWith(
     caches.match(req).then((hit) => hit || fetch(req).then((res) => {
       if (res.ok && url.origin === self.location.origin) {
