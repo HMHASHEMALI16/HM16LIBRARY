@@ -639,7 +639,10 @@
 
 <!-- HM16 BROWSE PANEL: theme + lekhok index -->
 <style>
-  .author-box { width: min(1100px, 96vw); max-height: 88vh; }
+  .author-box { width: min(1200px, 96vw); max-height: 88vh; }
+  .browse-top { display: flex; gap: 18px; }
+  .browse-col { flex: 1; min-width: 0; }
+  @media (max-width: 640px) { .browse-top { flex-direction: column; gap: 0; } }
   .author-letters { display: flex; gap: 2px; overflow-x: auto; padding: 10px 2px; margin-bottom: 6px;
     border-bottom: 1px solid var(--border-color); }
   .author-letter { flex: none; min-width: 30px; height: 30px; padding: 0 6px; border-radius: 8px;
@@ -675,15 +678,21 @@
 <div class="overlay-panel" id="authorPanel" onclick="if(event.target===this)closePanel('authorPanel')">
   <div class="panel-box author-box">
     <button class="close-btn" onclick="closePanel('authorPanel')" aria-label="বন্ধ করুন">✕</button>
-    <div class="panel-title">ব্রাউজ করুন</div>
-    <div class="setting-row">
-      <div><div class="setting-label">থিম</div><div class="setting-sub" id="authorThemeSub">লাইট</div></div>
-      <button class="rm-wide rm-icon" style="max-width:120px" onclick="toggleTheme();refreshMenuLabels();syncAuthorTheme();" aria-label="থিম বদলান"><i class="ph ph-sun" id="themeIcon"></i></button>
-    </div>
-    <div class="panel-title" style="margin-top:18px">নিজস্ব বই</div>
-    <div class="upload-mini" id="panelDrop" role="button" tabindex="0" title="EPUB / PDF যুক্ত করুন">
-      <span class="upload-mini-icon">☁️</span>
-      <span class="upload-mini-text"><b>আপনার মোবাইলের বই পড়ুন PDF/EPUB</b><small>ক্লিক বা ফাইল টেনে আনুন</small></span>
+    <div class="browse-top">
+      <div class="browse-col">
+        <div class="panel-title">থিম</div>
+        <div class="setting-row">
+          <div><div class="setting-label">day / dark</div><div class="setting-sub" id="authorThemeSub">লাইট</div></div>
+          <button class="rm-wide rm-icon" style="max-width:120px" onclick="toggleTheme();refreshMenuLabels();syncAuthorTheme();" aria-label="থিম বদলান"><i class="ph ph-sun" id="themeIcon"></i></button>
+        </div>
+      </div>
+      <div class="browse-col">
+        <div class="panel-title">নিজস্ব বই</div>
+        <div class="upload-mini" id="panelDrop" role="button" tabindex="0" title="EPUB / PDF যুক্ত করুন">
+          <span class="upload-mini-icon">☁️</span>
+          <span class="upload-mini-text"><b>আপনার মোবাইলের বই পড়ুন PDF/EPUB</b><small>ক্লিক বা ফাইল টেনে আনুন</small></span>
+        </div>
+      </div>
     </div>
     <div class="panel-title" style="margin-top:18px">লেখক সূচি</div>
     <div class="author-letters" id="authorLetters"></div>
@@ -3157,7 +3166,7 @@ nextPage = function() {
 let _pdfPages = [];
 let _pdfObserver = null;
 loadPDFFromBlob = async function(blob, pageNum) {
-  showLoading('পিডিএফ লোড হচ্ছে...');
+  showLoading('পিডিএফ লোড হচ্ছে, অপেক্ষা করুন' + (S._loadSize || '') + '...');
   try {
     const data = await blob.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data }).promise;
@@ -3255,8 +3264,17 @@ async function renderPdfPageInto(p) {
 }
 
 /* ---------- open/close without removed widgets ---------- */
+/* File size in Bengali digits, e.g. ১২.৫ MB */
+function fmtSize(b) {
+  if (!b || b <= 0) return '';
+  const s = b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : (b >= 1024 ? Math.round(b / 1024) + ' KB' : b + ' B');
+  return String(s).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[+d]);
+}
 openBookFromRecord = async function(book) {
-  showLoading('বই লোড হচ্ছে...');
+  const fsize = book && book.data && typeof book.data.size === 'number' ? book.data.size : 0;
+  S._loadSize = fsize ? ' (' + fmtSize(fsize) + ')' : '';
+  showLoading('বই লোড হচ্ছে, অপেক্ষা করুন' + S._loadSize + '...');
+  showHint('বড় ফাইল খুলতে কিছু সময় লাগতে পারে…', 2500);
   try {
     closeBookCleanup();
     if (_pdfObserver) { _pdfObserver.disconnect(); _pdfObserver = null; }
