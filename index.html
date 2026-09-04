@@ -599,8 +599,10 @@
     <div class="upload-shelf-card" id="dropZone">
       <input type="file" id="fileInput" accept=".epub,.pdf" style="display:none">
       <div class="upload-icon">☁️</div>
-      <div class="upload-title">আপনার নিজস্ব বই যুক্ত করুন (EPUB / PDF)</div>
-      <div class="upload-sub">ফাইলটি এখানে ড্র্যাগ করুন অথবা ক্লিক করে আপনার মেমোরি থেকে নির্বাচন করুন</div>
+      <div class="upload-text">
+        <div class="upload-title">আপনার নিজস্ব বই যুক্ত করুন (EPUB / PDF)</div>
+        <div class="upload-sub">ড্র্যাগ করুন বা ক্লিক করে নির্বাচন করুন</div>
+      </div>
     </div>
 
     <div class="section-header">
@@ -3186,6 +3188,13 @@ goHome = function() {
     font-size:12px; font-weight:600; color:var(--text-light);
     background:var(--card-bg); border:1px solid var(--border-color); border-radius:20px;
     padding:4px 14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  /* compact single-row upload bar */
+  .upload-shelf-card { padding:.6rem 1rem; margin-bottom:1.25rem; border-radius:12px;
+    flex-direction:row; justify-content:center; align-items:center; gap:10px; text-align:left; }
+  .upload-icon { font-size:1.3rem; }
+  .upload-title { font-size:.92rem; }
+  .upload-sub { font-size:.72rem; }
+  @media (max-width:640px){ .upload-sub { display:none; } }
 </style>
 <script>
 'use strict';
