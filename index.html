@@ -3806,11 +3806,11 @@ renderGrid = function(books) {
     }
     let inner = cover + '<div class="card-info"><div><h3 class="info-title" title="' + esc(book.title) + '">' + esc(book.title) + '</h3><p class="info-author">' + esc(book.author) + '</p>' + prog + '</div><div class="card-actions">';
     if (book.download_link && isSafeHttpUrl(book.download_link)) {
-      inner += '<a href="' + esc(book.download_link) + '" download rel="noopener" class="btn-action btn-download" onclick="event.stopPropagation()" title="ডাউনলোড করুন"><i class="ph ph-download-simple"></i> ডাউনলোড</a>';
+      inner += '<a href="' + esc(book.download_link) + '" download rel="noopener" class="btn-action btn-download" onclick="event.stopPropagation()" title="ডাউনলোড করুন">ডাউনলোড</a>';
     } else {
-      inner += '<span class="btn-action btn-download" style="opacity:.5" title="লোকাল বুক"><i class="ph ph-hard-drive"></i> লোকাল</span>';
+      inner += '<span class="btn-action btn-download" style="opacity:.5" title="লোকাল বুক">লোকাল</span>';
     }
-    inner += '<button class="btn-action btn-read" title="পড়ুন"><i class="ph ph-book-open"></i> পড়ুন</button></div></div>';
+    inner += '<button class="btn-action btn-read" title="পড়ুন">পড়ুন</button></div></div>';
     card.innerHTML = inner;
     if (book.source !== 'api') {
       const del = document.createElement('div');
