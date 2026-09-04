@@ -612,15 +612,7 @@
   </div>
 
   <div class="container">
-    <!-- Drag & Drop upload card -->
-    <div class="upload-shelf-card" id="dropZone">
-      <input type="file" id="fileInput" accept=".epub,.pdf" style="display:none">
-      <div class="upload-icon">☁️</div>
-      <div class="upload-text">
-        <div class="upload-title">আপনার নিজস্ব বই যুক্ত করুন (EPUB / PDF)</div>
-        <div class="upload-sub">ড্র্যাগ করুন বা ক্লিক করে নির্বাচন করুন</div>
-      </div>
-    </div>
+    <input type="file" id="fileInput" accept=".epub,.pdf" style="display:none">
 
     <div class="section-header">
       <h3 class="section-title">বইয়ের তালিকা <span class="book-count" id="bookCount">0</span></h3>
@@ -648,8 +640,6 @@
 <!-- HM16 BROWSE PANEL: theme + lekhok index -->
 <style>
   .author-box { width: min(1100px, 96vw); max-height: 88vh; }
-  /* home upload card moved into + panel — keep node for the shared engine */
-  #dropZone { display: none; }
   .author-letters { display: flex; gap: 2px; overflow-x: auto; padding: 10px 2px; margin-bottom: 6px;
     border-bottom: 1px solid var(--border-color); }
   .author-letter { flex: none; min-width: 30px; height: 30px; padding: 0 6px; border-radius: 8px;
@@ -1127,19 +1117,21 @@ function renderGrid(books) {
   grid.appendChild(fragment);
 }
 
-// --- INGEST LOCAL CUSTOM FILES ---
+// --- INGEST LOCAL CUSTOM FILES (home card removed; + panel shares fileInput) ---
 const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
 
-dropZone.addEventListener('click', () => fileInput.click());
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-dropZone.addEventListener('drop', e => {
-  e.preventDefault(); dropZone.classList.remove('dragover');
-  const files = Array.from(e.dataTransfer.files);
-  if (files.length) openFile(files[0]);
-});
-fileInput.addEventListener('change', e => { if (e.target.files[0]) openFile(e.target.files[0]); });
+if (dropZone && fileInput) {
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('dragover');
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length) openFile(files[0]);
+  });
+}
+if (fileInput) fileInput.addEventListener('change', e => { if (e.target.files[0]) openFile(e.target.files[0]); });
 
 async function openFile(file) {
   const ext = file.name.split('.').pop().toLowerCase();
