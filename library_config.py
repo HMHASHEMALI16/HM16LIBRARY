@@ -10,7 +10,7 @@ BASE_URL = "https://hmhashemali16.github.io/HM16LIBRARY"
 ICON_URL = f"{BASE_URL}/Bookicon.png"
 
 BOOK_DIR = "."
-SKIP_DIRS = {".git", ".github", "api", ".opencode"}
+SKIP_DIRS = {".git", ".github", "api", ".opencode", "node_modules"}
 
 SUPPORTED_EXTS = {
     ".epub": "application/epub+zip",
@@ -22,30 +22,34 @@ UNKNOWN_AUTHOR_OPDS = "অজানা লেখক"
 
 
 def iter_book_files(book_dir=BOOK_DIR):
-    """Yield book filenames sorted, case-insensitive ext, skip dirs."""
-    try:
-        names = sorted(os.listdir(book_dir))
-    except OSError:
-        return
-    for name in names:
-        if name in SKIP_DIRS:
-            continue
-        path = os.path.join(book_dir, name)
-        try:
-            if not os.path.isfile(path):
+    """Yield book paths (relative, sorted) from BOOK_DIR and subfolders.
+
+    Books live in Book1/, Book2/, ... Skips tooling dirs. Case-insensitive ext.
+    """
+    for root, dirs, files in os.walk(book_dir):
+        dirs[:] = sorted(
+            d for d in dirs if d not in SKIP_DIRS and not d.startswith(".")
+        )
+        for name in sorted(files):
+            _, ext = os.path.splitext(name)
+            if ext.lower() not in SUPPORTED_EXTS:
                 continue
-        except OSError:
-            continue
-        _, ext = os.path.splitext(name)
-        if ext.lower() in SUPPORTED_EXTS:
-            yield name
+            full = os.path.join(root, name)
+            try:
+                if not os.path.isfile(full):
+                    continue
+            except OSError:
+                continue
+            yield os.path.relpath(full, book_dir).replace(os.sep, "/")
 
 
-def parse_filename(filename):
+def parse_filename(path):
     """Parse 'Title_-_Author.ext' -> (title, author, format).
 
+    Accepts subfolder paths (Book1/Title_-_Author.epub); parses the basename.
     Uses partition (first separator only) so titles containing _-_ don't diverge.
     """
+    filename = os.path.basename(path)
     stem, _ = os.path.splitext(filename)
     _, ext = os.path.splitext(filename)
     title_part, sep, author_part = stem.partition("_-_")
