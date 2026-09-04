@@ -640,16 +640,28 @@
     </div>
     <div class="header-divider"></div>
     <div class="header-book-info">
+      <div class="header-chapter" id="hdrChapter"></div>
       <div class="header-book-title" id="hdrTitle">বই খোলা হচ্ছে...</div>
       <div class="header-book-author" id="hdrAuthor"></div>
     </div>
     <div class="header-actions">
-      <button class="icon-btn" onclick="toggleTheme()" title="লাইট / ডার্ক">
-        <i class="ph ph-moon" id="readerThemeIcon"></i>
-      </button>
-      <button class="icon-btn" onclick="toggleSidebar()" id="sidebarToggleBtn" title="সূচীপত্র">
+      <button class="icon-btn" id="sidebarToggleBtn" onclick="toggleReaderMenu(event)" title="মেনু" aria-label="মেনু">
         <i class="ph ph-list"></i>
       </button>
+      <div class="reader-menu" id="readerMenu" style="display:none" onclick="event.stopPropagation()">
+        <div class="rm-row"><span class="rm-label">অক্ষর</span>
+          <button class="icon-btn rm-btn" onclick="changeFontSize(-1)" aria-label="ফন্ট কমান">অ−</button>
+          <span class="font-size-num" id="fontSizeNum">19</span>
+          <button class="icon-btn rm-btn" onclick="changeFontSize(1)" aria-label="ফন্ট বাড়ান">অ+</button>
+        </div>
+        <div class="rm-row"><span class="rm-label">প্রস্থ</span>
+          <button class="rm-wide" id="widthBtn" onclick="toggleReaderWidth()">প্রশস্ত</button>
+        </div>
+        <div class="rm-row"><span class="rm-label">থিম</span>
+          <button class="rm-wide" id="themeBtn" onclick="toggleTheme();refreshMenuLabels();">রাত</button>
+        </div>
+        <div class="rm-row"><button class="rm-wide" onclick="hideReaderMenu();toggleSidebar();">সূচীপত্র</button></div>
+      </div>
     </div>
   </div>
 
@@ -665,15 +677,6 @@
     <!-- Immersive Reading Area -->
     <div class="reader-area">
       <!-- Typography Toolbar -->
-      <div class="reader-toolbar reader-toolbar-slim">
-        <div class="toolbar-group font-size-ctrl">
-          <button class="icon-btn" onclick="changeFontSize(-1)" title="ফন্ট কমান" aria-label="ফন্ট কমান">অ−</button>
-          <span class="font-size-num" id="fontSizeNum">19</span>
-          <button class="icon-btn" onclick="changeFontSize(1)" title="ফন্ট বাড়ান" aria-label="ফন্ট বাড়ান">অ+</button>
-        </div>
-        <span class="toolbar-progress" id="progressText">0%</span>
-      </div>
-
       <!-- Linear progress bar -->
       <div class="progress-bar-wrap" id="progressBarWrap" onclick="seekProgress(event)">
         <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
@@ -694,6 +697,7 @@
 </div>
 
 <!-- Reader keeps no floating widgets in scroll mode -->
+<div class="progress-badge" id="progressBadge">0%</div>
 
 <!-- CUSTOM ALERTS CONFIRM MODAL OVERRIDE -->
 <div class="overlay-panel" id="customConfirmPanel">
@@ -3589,6 +3593,150 @@ renderGrid = function(books) {
     pager.appendChild(jump); pager.appendChild(go);
   }
   grid.appendChild(pager);
+};
+</script>
+
+<!-- HM16 READER CHROME: hamburger menu, width modes, corner progress, PDF TOC fix -->
+<style>
+  .header-book-title { font-size:13px; }
+  .header-book-author { font-size:10px; }
+  .header-chapter { font-size:11px; font-weight:700; color:var(--accent);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.3; min-height:14px; }
+  .reader-menu { position:fixed; top:64px; right:12px; z-index:3000; min-width:220px;
+    background:var(--card-bg); border:1px solid var(--border-color); border-radius:14px;
+    box-shadow:var(--hover-shadow); padding:10px; }
+  .rm-row { display:flex; align-items:center; gap:8px; padding:8px 6px;
+    border-bottom:1px solid var(--border-color); }
+  .rm-row:last-child { border-bottom:none; }
+  .rm-label { flex:1; font-size:13px; font-weight:600; }
+  .rm-btn { width:36px; height:36px; font-size:14px; }
+  .rm-wide { flex:1; padding:8px 10px; border-radius:9px; border:1px solid var(--border-color);
+    background:var(--bg-main); color:var(--text-dark); font-weight:600; font-size:13px;
+    cursor:pointer; font-family:inherit; }
+  .rm-wide:hover { border-color:var(--accent); color:var(--accent); }
+  .progress-badge { position:fixed; right:14px; bottom:14px; z-index:90; display:none;
+    font-size:12px; font-weight:700; color:var(--accent);
+    background:var(--card-bg); border:1px solid var(--border-color); border-radius:20px;
+    padding:5px 12px; box-shadow:var(--card-shadow); }
+  /* standard mode: centered 50% reading column */
+  #readerViewport[data-width="standard"] .epub-flow { max-width:660px; margin-left:auto; margin-right:auto; }
+  #readerViewport[data-width="standard"] .pdf-page-holder { max-width:640px; }
+</style>
+<script>
+'use strict';
+/* Hamburger menu */
+function toggleReaderMenu(e) {
+  if (e) e.stopPropagation();
+  const m = document.getElementById('readerMenu');
+  if (!m) return;
+  const open = m.style.display !== 'block';
+  m.style.display = open ? 'block' : 'none';
+  if (open) refreshMenuLabels();
+}
+function hideReaderMenu() {
+  const m = document.getElementById('readerMenu');
+  if (m) m.style.display = 'none';
+}
+document.addEventListener('click', () => hideReaderMenu());
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideReaderMenu(); });
+
+/* Wide / standard reading width */
+function applyReaderWidth() {
+  const v = document.getElementById('readerViewport');
+  const w = (S.settings && S.settings.width === 'standard') ? 'standard' : 'wide';
+  if (S.settings) S.settings.width = w;
+  if (v) v.setAttribute('data-width', w);
+}
+function toggleReaderWidth() {
+  S.settings.width = (S.settings.width === 'standard') ? 'wide' : 'standard';
+  applyReaderWidth();
+  saveSettings();
+  refreshMenuLabels();
+}
+function refreshMenuLabels() {
+  const wb = document.getElementById('widthBtn');
+  if (wb) wb.textContent = (S.settings.width === 'standard') ? 'সাধারণ' : 'প্রশস্ত';
+  const tb = document.getElementById('themeBtn');
+  if (tb) tb.textContent = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'দিন' : 'রাত';
+}
+const _chromeLoadSettings = loadSettings;
+loadSettings = function() {
+  _chromeLoadSettings();
+  if (!S.settings.width) S.settings.width = 'wide';
+  applyReaderWidth();
+};
+
+/* Progress badge + header chapter line follow the chapter pill */
+const _chromeUpdateProgress = updateProgress;
+updateProgress = function(pct) {
+  _chromeUpdateProgress(pct);
+  const b = document.getElementById('progressBadge');
+  const inReader = document.getElementById('app') && document.getElementById('app').style.display !== 'none';
+  if (b) {
+    b.textContent = (S.lastProgress || 0) + '%';
+    b.style.display = (inReader && S.activeBookId) ? 'block' : 'none';
+  }
+  const pill = document.getElementById('chapterPill');
+  const hc = document.getElementById('hdrChapter');
+  if (hc) hc.textContent = (pill && pill.style.display !== 'none') ? pill.textContent : '';
+};
+
+/* PDF TOC: resolve any destination shape, then scroll (no re-render) */
+async function pdfOutlinePage(it) {
+  try {
+    if (!S.pdf.doc || !it) return null;
+    let d = it.dest;
+    if (d == null) return null;
+    if (typeof d === 'string') {
+      try { d = await S.pdf.doc.getDestination(d); } catch(e) { return null; }
+      if (!d) return null;
+    }
+    if (typeof d === 'number') return Math.max(1, d + 1);
+    if (Array.isArray(d)) {
+      const first = d[0];
+      if (typeof first === 'number') return Math.max(1, first + 1);
+      if (first && typeof first === 'object') {
+        try { return await S.pdf.doc.getPageIndex(first).then(i => i + 1); } catch(e) { return null; }
+      }
+      return null;
+    }
+    if (d && typeof d === 'object') {
+      try { return await S.pdf.doc.getPageIndex(d).then(i => i + 1); } catch(e) { return null; }
+    }
+  } catch(e) {}
+  return null;
+}
+function scrollPdfToPage(n) {
+  const tot = S.pdf.totalPages || n;
+  S.pdf.currentPage = Math.max(1, Math.min(tot, n));
+  const c = document.getElementById('pdf-reader');
+  const p = _pdfPages.find(x => x.n === S.pdf.currentPage);
+  if (c && p) {
+    const y = c.scrollTop + (p.holder.getBoundingClientRect().top - c.getBoundingClientRect().top) - 8;
+    c.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+  updateProgress(tot > 1 ? Math.round((S.pdf.currentPage - 1) / (tot - 1) * 100) : 0);
+}
+renderPDFTOC = function(outline) {
+  const list = document.getElementById('tocList');
+  if (!list) return;
+  list.innerHTML = '';
+  const add = (items, depth) => {
+    (items || []).slice(0, 200).forEach(it => {
+      const dd = document.createElement('div');
+      dd.className = 'toc-item level-' + Math.min(3, depth);
+      dd.textContent = it.title || 'শিরোনামহীন';
+      dd.style.paddingLeft = (8 + (depth - 1) * 12) + 'px';
+      dd.onclick = async () => {
+        const n = await pdfOutlinePage(it);
+        if (n) scrollPdfToPage(n);
+        closeSidebarOnMobile();
+      };
+      list.appendChild(dd);
+      if (it.items && it.items.length) add(it.items, depth + 1);
+    });
+  };
+  add(outline, 1);
 };
 </script>
 
