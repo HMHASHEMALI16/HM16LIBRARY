@@ -3315,6 +3315,8 @@ goHome = function() {
   closeBookCleanup();
   if (_pdfObserver) { _pdfObserver.disconnect(); _pdfObserver = null; }
   _pdfPages = [];
+  const pb = document.getElementById('progressBadge');
+  if (pb) pb.style.display = 'none'; // % badge lives only in the reader
   const d = document.getElementById('dashboard');
   if (d) d.style.display = 'block';
   const a = document.getElementById('app');
@@ -3796,7 +3798,7 @@ renderGrid = function(books) {
     card.onclick = () => readBookDirectly(book);
     card.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); readBookDirectly(book); } };
     const pct = Math.max(0, Math.min(100, Number(book.progress) || 0));
-    const prog = pct ? '<div class="book-progress-wrapper"><div class="book-progress-fill" style="width:' + pct + '%"></div></div><div class="book-progress-text">পঠিত: ' + pct + '%</div>' : '';
+    const prog = ''; // shelf shows no % — progress lives only in the reader
     let cover = '';
     if (book.cover && isSafeHttpUrl(book.cover)) {
       cover = '<div class="book-cover-wrapper"><img class="book-cover-img" loading="lazy" alt="' + esc(book.title) + '" src="' + esc(book.cover) + '">' + prog + '</div>';
