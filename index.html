@@ -638,6 +638,9 @@
       <img class="header-logo-img" src="./HM16LIB_192.png" alt="HM 16 LIBRARY">
       <div class="header-logo-name">HM 16 LIBRARY</div>
     </div>
+    <button class="icon-btn" id="sidebarToggleBtn" onclick="toggleSidebar()" title="সূচীপত্র" aria-label="সূচীপত্র" style="flex-shrink:0">
+      <i class="ph ph-list"></i>
+    </button>
     <div class="header-divider"></div>
     <div class="header-book-info">
       <div class="header-chapter" id="hdrChapter"></div>
@@ -645,11 +648,11 @@
       <div class="header-book-author" id="hdrAuthor"></div>
     </div>
     <div class="header-actions">
-      <button class="icon-btn" id="sidebarToggleBtn" onclick="toggleReaderMenu(event)" title="মেনু" aria-label="মেনু">
-        <i class="ph ph-list"></i>
+      <button class="icon-btn" onclick="toggleReaderMenu(event)" title="সেটিংস" aria-label="সেটিংস">
+        <i class="ph ph-gear"></i>
       </button>
       <div class="reader-menu" id="readerMenu" style="display:none" onclick="event.stopPropagation()">
-        <div class="rm-row"><span class="rm-label">অক্ষর</span>
+        <div class="rm-row"><span class="rm-label">font size</span>
           <button class="icon-btn rm-btn" onclick="changeFontSize(-1)" aria-label="ফন্ট কমান">অ−</button>
           <span class="font-size-num" id="fontSizeNum">19</span>
           <button class="icon-btn rm-btn" onclick="changeFontSize(1)" aria-label="ফন্ট বাড়ান">অ+</button>
@@ -658,9 +661,8 @@
           <button class="rm-wide" id="widthBtn" onclick="toggleReaderWidth()">প্রশস্ত</button>
         </div>
         <div class="rm-row"><span class="rm-label">থিম</span>
-          <button class="rm-wide" id="themeBtn" onclick="toggleTheme();refreshMenuLabels();">রাত</button>
+          <button class="rm-wide rm-icon" id="themeBtn" onclick="toggleTheme();refreshMenuLabels();"><i class="ph ph-sun" id="themeMenuIcon"></i></button>
         </div>
-        <div class="rm-row"><button class="rm-wide" onclick="hideReaderMenu();toggleSidebar();">সূচীপত্র</button></div>
       </div>
     </div>
   </div>
@@ -3614,6 +3616,7 @@ renderGrid = function(books) {
     background:var(--bg-main); color:var(--text-dark); font-weight:600; font-size:13px;
     cursor:pointer; font-family:inherit; }
   .rm-wide:hover { border-color:var(--accent); color:var(--accent); }
+  .rm-icon { display:flex; align-items:center; justify-content:center; font-size:18px; }
   .progress-badge { position:fixed; right:14px; bottom:14px; z-index:90; display:none;
     font-size:12px; font-weight:700; color:var(--accent);
     background:var(--card-bg); border:1px solid var(--border-color); border-radius:20px;
@@ -3656,8 +3659,8 @@ function toggleReaderWidth() {
 function refreshMenuLabels() {
   const wb = document.getElementById('widthBtn');
   if (wb) wb.textContent = (S.settings.width === 'standard') ? 'সাধারণ' : 'প্রশস্ত';
-  const tb = document.getElementById('themeBtn');
-  if (tb) tb.textContent = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'দিন' : 'রাত';
+  const tb = document.getElementById('themeMenuIcon');
+  if (tb) tb.className = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'ph ph-sun' : 'ph ph-moon';
 }
 const _chromeLoadSettings = loadSettings;
 loadSettings = function() {
