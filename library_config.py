@@ -1,13 +1,12 @@
-"""Shared config for HM16_LIBRARY generators.
+"""Shared config for HM16LIBRARY generators.
 
 Single source of truth for base URL, parsing, and file discovery
 so generate_api.py and generate_opds.py stay consistent.
 """
 import os
 
-# IMPORTANT: repo is HM16_LIBRARY (with underscore).
-# Old code used HM16LIBRARY (no underscore) -> every download_link 404'd.
-BASE_URL = "https://hmhashemali16.github.io/HM16_LIBRARY"
+# Repo was renamed HM16_LIBRARY -> HM16LIBRARY, so Pages URL has no underscore.
+BASE_URL = "https://hmhashemali16.github.io/HM16LIBRARY"
 ICON_URL = f"{BASE_URL}/Bookicon.png"
 
 BOOK_DIR = "."
