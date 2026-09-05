@@ -3311,10 +3311,34 @@ openBookFromRecord = async function(book) {
     showCustomAlert('লোড ব্যর্থ', 'রিডার ফাইল রান করতে ব্যর্থ হয়েছে: ' + e.message);
   }
 };
+// Logo+name click on the HOME shelf => back to initial landing view
+// (clears search/sort/author/page + scrolls to top). Reader-exit keeps shelf state.
+function resetShelfToLanding() {
+  try {
+    const sb = document.getElementById('searchBox');
+    if (sb) sb.value = '';
+    const st = document.getElementById('sortBox');
+    if (st) st.value = 'title';
+    activeAuthor = '';
+    if (typeof syncAuthorChip === 'function') syncAuthorChip();
+    else { const chip = document.getElementById('authorChip'); if (chip) chip.style.display = 'none'; }
+    gridPage = 0;
+    if (typeof handleSearchAndSort === 'function') handleSearchAndSort();
+    const d = document.getElementById('dashboard');
+    if (d && typeof d.scrollTo === 'function') d.scrollTo({ top: 0, behavior: 'smooth' });
+    else if (d) d.scrollTop = 0;
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { window.scrollTo(0, 0); }
+  } catch(e) {}
+}
 goHome = function() {
   try { stopTTS(); } catch(e) {}
   try { saveCurrentBookState(); } catch(e) {}
   closeBookCleanup();
+  let alreadyHome = false;
+  try {
+    const av = document.getElementById('app');
+    alreadyHome = av && getComputedStyle(av).display === 'none';
+  } catch(e) {}
   if (_pdfObserver) { _pdfObserver.disconnect(); _pdfObserver = null; }
   _pdfPages = [];
   const pb = document.getElementById('progressBadge');
@@ -3330,6 +3354,7 @@ goHome = function() {
   const es = document.getElementById('emptyState');
   if (es) es.style.display = 'flex';
   fetchBooks();
+  if (alreadyHome) resetShelfToLanding();
 };
 (function syncReaderIconNow() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
