@@ -1,5 +1,5 @@
-/* HM16 Library Service Worker - v4: tolerant install so updates never get stuck */
-const CACHE = 'hm16-v4';
+/* HM16 Library Service Worker - v5: icon + splash fix (HM 16 Library) */
+const CACHE = 'hm16-v5';
 // Only cache files that are guaranteed to exist. Missing PNGs must NOT
 // fail install (c.addAll is atomic — one 404 used to block v3 forever).
 const APP_SHELL = [
@@ -18,6 +18,7 @@ self.addEventListener('install', (e) => {
       await Promise.all([
         './HM16LIB_192.png',
         './HM16LIB_512.png',
+        './HM16LIB_maskable_512.png',
         './Bookicon.png',
         './api/books.json'
       ].map((u) => c.add(u).catch(() => null)));
