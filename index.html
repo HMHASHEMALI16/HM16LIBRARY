@@ -10,6 +10,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600&family=Noto+Serif+Bengali:wght@600;700&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -2601,7 +2603,7 @@ function renderGrid(books) {
     const prog = pct ? '<div class="book-progress-wrapper"><div class="book-progress-fill" style="width:' + pct + '%"></div></div><div class="book-progress-text">পঠিত: ' + pct + '%</div>' : '';
     let cover = '';
     if (book.cover && isSafeHttpUrl(book.cover)) {
-      cover = '<div class="book-cover-wrapper"><img class="book-cover-img" loading="lazy" alt="' + esc(book.title) + '" src="' + esc(book.cover) + '">' + prog + '</div>';
+      cover = '<div class="book-cover-wrapper"><img class="book-cover-img" loading="lazy" decoding="async" alt="' + esc(book.title) + '" src="' + esc(book.cover) + '">' + prog + '</div>';
     } else {
       cover = '<div class="book-cover-wrapper" style="background:' + gradient + ';"><div class="cover-title">' + esc(book.title) + '</div><div class="cover-author">' + esc(book.author) + '</div></div>';
     }
@@ -3801,7 +3803,7 @@ renderGrid = function(books) {
     const prog = ''; // shelf shows no % — progress lives only in the reader
     let cover = '';
     if (book.cover && isSafeHttpUrl(book.cover)) {
-      cover = '<div class="book-cover-wrapper"><img class="book-cover-img" loading="lazy" alt="' + esc(book.title) + '" src="' + esc(book.cover) + '">' + prog + '</div>';
+      cover = '<div class="book-cover-wrapper"><img class="book-cover-img" loading="lazy" decoding="async" alt="' + esc(book.title) + '" src="' + esc(book.cover) + '">' + prog + '</div>';
     } else {
       cover = '<div class="book-cover-wrapper" style="background:' + design.bg + ';--cover-fg:' + design.fg + ';">' + design.svg +
         '<div class="cover-title">' + esc(book.title) + '</div><div class="cover-author">' + esc(book.author) + '</div></div>';
