@@ -1,5 +1,5 @@
-/* HM16 Library Service Worker - v8: external style.css + script.js */
-const CACHE = 'hm16-v8';
+/* HM16 Library Service Worker - v9: single app-window title */
+const CACHE = 'hm16-v9';
 // Only cache files that are guaranteed to exist. Missing PNGs must NOT
 // fail install (c.addAll is atomic — one 404 used to block v3 forever).
 const APP_SHELL = [
