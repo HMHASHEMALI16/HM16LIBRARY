@@ -1,5 +1,5 @@
-/* HM16 Library Service Worker - v6: 192 icon everywhere, 512 splash only */
-const CACHE = 'hm16-v6';
+/* HM16 Library Service Worker - v7: refresh tab + header icon cache */
+const CACHE = 'hm16-v7';
 // Only cache files that are guaranteed to exist. Missing PNGs must NOT
 // fail install (c.addAll is atomic — one 404 used to block v3 forever).
 const APP_SHELL = [
