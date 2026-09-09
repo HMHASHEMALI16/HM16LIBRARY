@@ -1,7 +1,7 @@
 {
   "name": "HM 16 LIBRARY",
   "short_name": "HM 16 Library",
-  "description": "ডিজিটাল লাইব্রেরী ও রিডার - EPUB/PDF",
+  "description": "ডিজিটাল লাইব্রেরি - EPUB/PDF",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
