@@ -468,7 +468,7 @@ async function readBookDirectly(book) {
 
   // If remote and not cached, download, cache, then open
   if (book.source === 'api' && book.download_link) {
-    showLoading('অনলাইন লাইব্রেরী থেকে বইটি ব্রাউজারে ক্যাশ করা হচ্ছে...');
+    showLoading('অনলাইন লাইব্রেরি থেকে বইটি ব্রাউজারে ক্যাশ করা হচ্ছে...');
     try {
       const res = await fetch(book.download_link);
       if (!res.ok) throw new Error('Network issue downloading source.');
